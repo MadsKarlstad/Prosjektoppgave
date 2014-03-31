@@ -1,7 +1,7 @@
 package prosjektoppgave;
 /**
- * HEI ERLEND!!
- * @author madsmkarlstad hei bby du er zøt
+ *yoyo
+ * @author madsmkarlstad hei
  */
 public class Bolig 
 {
