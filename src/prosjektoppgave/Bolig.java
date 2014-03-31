@@ -1,6 +1,6 @@
 package prosjektoppgave;
 /**
- *
+ *yoyo
  * @author madsmkarlstad hei
  */
 public class Bolig 
