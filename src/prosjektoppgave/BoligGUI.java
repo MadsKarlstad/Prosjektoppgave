@@ -8,7 +8,7 @@ import java.io.*;
  *
  * @author madsmkarlstad
  */
-public class BoligGUI extends JFrame
+public class BoligGUI extends JFrameblofblofblof
 {
     private JTextField personNummer, navn, adresse, email, telefonNummer, firma,
                     sivilstatus, yrke, bAdresse, boAreal, antallRom, byggeÅr,
