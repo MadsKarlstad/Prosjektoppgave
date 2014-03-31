@@ -1,5 +1,4 @@
 package prosjektoppgave;
-
 /**
  *
  * @author madsmkarlstad hei
@@ -18,7 +17,7 @@ public class Bolig
     Bolig neste;
     
     public Bolig(String nr, String adr, String m2, String rom,
-            String år, String beskriv, String pris, String d)
+                String år, String beskriv, String pris, String d)
     {
         bolignr = nr;
         adresse = adr;
@@ -30,17 +29,14 @@ public class Bolig
         utleiepris = pris;
         dato = d;
     }
-    
     public String getAdr()
     {
         return adresse;
-    }
-    
+    } 
     public String getNr()
     {
         return bolignr;
     }
-    
     public String toString()
     {
         String s = "Bolignummer " + bolignr;
