@@ -1,7 +1,7 @@
 package prosjektoppgave;
 /**
  *
- * @author madsmkarlstad
+ * @author madsmkarlstad (grid layout, grid bag layout, boxlayout - lokerheims forslag)
  */
 import java.awt.event.*;
 
