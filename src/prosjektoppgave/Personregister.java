@@ -14,6 +14,8 @@ public class Personregister
     {
         return personregister.containsKey(nr);
     }
+
+
     public boolean settInn(Person ny)
     {
         if(!personFinnes(ny.getNr()))
@@ -23,6 +25,7 @@ public class Personregister
         }
         return false;
     }
+
     public Person getPerson(String nr)
     {
         if(personFinnes(nr))
@@ -31,6 +34,7 @@ public class Personregister
         }
         return null;
     }
+
     public boolean fjernPerson(String nr)
     {
         if(personFinnes(nr))
@@ -40,6 +44,7 @@ public class Personregister
         }
         return false;
     }
+
     public String skrivListe()
     {
         String s = "";
