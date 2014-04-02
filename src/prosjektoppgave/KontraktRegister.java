@@ -23,9 +23,9 @@ public class KontraktRegister {
 
     public boolean settInn(Kontrakt ny){
 
-        if(!kontrakFinnes(ny.getNr/*kontraktNr er ikke fikset enda*/)){
+        if(!kontrakFinnes(ny.getKontraktNr())){
 
-            kontraktReg.put(ny.getNr/*KEY*/, ny);
+            kontraktReg.put(ny.getKontraktNr()/*KEY*/, ny);
 
             return true;
 

@@ -8,9 +8,19 @@ package prosjektoppgave;
  * Dette skal være et objekt som kan generere en god string for å lage en leie/utleiekontrakt for brukerene våre
  * på lik linje med sio sin ordning ref:  http://i.imgur.com/97ekn5B.jpg
  */
-public class Kontrakt extends person {
+public class Kontrakt{
 
-    //Kontrakt skal inneholde
+
+    String kontraktNr;
+
+
+
+    public String getKontraktNr(){
+
+        return kontraktNr;
+
+
+    }
 
 
 }
