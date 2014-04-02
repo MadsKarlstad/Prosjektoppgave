@@ -45,7 +45,7 @@ public class KontraktRegister {
 
         }
 
-        else return null;
+        return null;
     }
 
 
