@@ -10,7 +10,7 @@ import java.util.*;
  * at leieavtale er opphørt, man kan ikke slette en bruker før kontrakter er oppløst osv. Alle kontrakter må være
  * knyttet til en utleier/leietaker
  */
-public class KontarktRegister {
+public class KontraktRegister {
 
     private TreeMap kontraktReg = new TreeMap();
 
