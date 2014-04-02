@@ -36,6 +36,19 @@ public class KontraktRegister {
     }
 
 
+    public Kontrakt getKontrakt(String nr){
+
+        if(kontrakFinnes(nr)){
+
+            return (Kontrakt) kontraktReg.get(nr);
+
+
+        }
+
+        else return null;
+    }
+
+
     //key er kontraktnummer
 
     //Første klasse bør undersøke om personen finnes så vi kjører samme test som i PersReg
