@@ -25,9 +25,7 @@ public class Kontrakt{
 
     public String pdfPrinter(Person inn){
 
-        String pnr = inn.getNr();
-        String tlf =
-
+        return null;//midlertidig
 
     }
 
