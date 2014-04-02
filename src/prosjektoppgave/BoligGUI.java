@@ -201,8 +201,10 @@ public class BoligGUI extends JFrame
                 person.settInnBolig(
                     new Enebolig(bnr,adr,m2,antrom,bår,b,pris,d,e,k,tomt));
                 Bolig enebolig = bregister.getBolig(bnr);
-                JOptionPane.showMessageDialog(null,"Bolig registrert");
+                //JOptionPane.showMessageDialog(null,"Bolig registrert");
+                finnBolig();
                 slettFelter();
+                
             }
         }
         catch(NullPointerException NPE)
@@ -220,7 +222,7 @@ public class BoligGUI extends JFrame
         if(bnr.length()!=0)
         {
             Bolig bolig = bregister.getBolig(bnr);
-            JOptionPane.showMessageDialog(null,bolig);
+            utskriftsområde.setText(bolig.toString());       
         }
     }
     public void visBoligRegister()
@@ -255,7 +257,7 @@ public class BoligGUI extends JFrame
                 finnBolig();
             else if(e.getSource() == visPerson)
                 visPersRegister();
-            else if(e.getSource()==visBolig)
+            else if(e.getSource() == visBolig)
                 visBoligRegister();
         }
     }
