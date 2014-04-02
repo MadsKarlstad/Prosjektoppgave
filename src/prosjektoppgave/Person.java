@@ -40,7 +40,7 @@ public class Person
 
     public String getEmail(){return email;}
 
-    public String getTlfnummer(){return tlfnummer}
+    public String getTlfnummer(){return tlfnummer;}
     
     public void settInnBolig(Bolig ny)
     {
