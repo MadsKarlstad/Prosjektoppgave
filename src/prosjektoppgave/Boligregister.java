@@ -40,15 +40,7 @@ public class Boligregister
     }
     public String skrivListe()
     {
-        String s = "";
-        for(Iterator it = boligregister.keySet().iterator(); it.hasNext();)
-        {
-            String key = (String) it.next();
-            Person value = (Person) boligregister.get(key);
-            s += value;
-            return s;
-        }
-        s = "Kom du hit, fungerte nok ikke metoden din, Mads";
+        String s = ""+boligregister;
         return s;
     }
 }
