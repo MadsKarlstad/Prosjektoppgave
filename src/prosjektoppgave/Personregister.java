@@ -46,14 +46,7 @@ public class Personregister
     }
     public String skrivListe()
     {
-        String s = "";
-        for(Iterator it = personregister.keySet().iterator(); it.hasNext();)
-        {
-            String key = (String) it.next();
-            Person value = (Person) personregister.get(key);
-            s += value;
-            return s;
-        }
+        String s = ""+personregister;
         return s;
     }
 }
