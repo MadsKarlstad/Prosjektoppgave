@@ -44,7 +44,6 @@ public class Personregister
         }
         return false;
     }
-
     public String skrivListe()
     {
         String s = "";
