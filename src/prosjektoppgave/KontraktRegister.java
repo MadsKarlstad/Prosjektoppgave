@@ -14,6 +14,30 @@ public class KontraktRegister {
 
     private TreeMap kontraktReg = new TreeMap();
 
+    public boolean kontrakFinnes(String nr){
+
+        return kontraktReg.containsKey(nr);
+
+
+    }
+
+    public boolean settInn(Kontrakt ny){
+
+        if(!kontrakFinnes(ny.getNr/*kontraktNr er ikke fikset enda*/)){
+
+            kontraktReg.put(ny.getNr/*KEY*/, ny);
+
+            return true
+
+
+        }
+
+        else return false;
+    }
+
+
+    //key er kontraktnummer
+
     //Første klasse bør undersøke om personen finnes så vi kjører samme test som i PersReg
 
 
