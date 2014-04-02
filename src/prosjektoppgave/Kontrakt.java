@@ -12,12 +12,21 @@ public class Kontrakt{
 
 
     String kontraktNr;
+    String pnr;
 
 
 
     public String getKontraktNr(){
 
         return kontraktNr;
+
+
+    }
+
+    public String pdfPrinter(Person inn){
+
+        String pnr = inn.getNr();
+        String tlf =
 
 
     }

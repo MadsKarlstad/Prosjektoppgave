@@ -13,6 +13,9 @@ public class Person
     private Personregister pregister;
     private Boligregister bregister;
     Person neste;
+
+    /* For å slippe to lister for leietaker og utleier kan vi vurdere en boolean variable for å teste
+    * utleier true/false*/
     
     public Person(String pnr,String n,String adr,String mail,String tlf)
     {
