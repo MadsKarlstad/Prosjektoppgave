@@ -27,7 +27,7 @@ public class KontraktRegister {
 
             kontraktReg.put(ny.getNr/*KEY*/, ny);
 
-            return true
+            return true;
 
 
         }
