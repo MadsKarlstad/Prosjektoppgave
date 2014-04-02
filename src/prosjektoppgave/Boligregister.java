@@ -29,6 +29,12 @@ public class Boligregister
         }
         return null;
     }
+    public String finnBolig(String nr){
+        if(boligFinnes(nr)){
+            return (String) boligregister.get(nr).toString();
+        }
+        return "FINNES IKKE";
+    }
     public boolean fjernBolig(String nr)
     {
         if(boligFinnes(nr))
@@ -40,7 +46,8 @@ public class Boligregister
     }
     public String skrivListe()
     {
-        String s = ""+ boligregister;
+        
+        String s = "" + boligregister;
         return s;
     }
 }

@@ -194,21 +194,23 @@ public class BoligGUI extends JFrame
            || pris.length() != 0 || e.length() != 0
            || antrom.length() != 0 || k.length()!=0
            || b.length()!=0 || d.length()!=0 || tomt.length()!=0)
+            
+            
         try{
             Person person = pregister.getPerson(pnr);
             if(bregister.getBolig(bnr)==null);
             {
-                person.settInnBolig(
-                    new Enebolig(bnr,adr,m2,antrom,bår,b,pris,d,e,k,tomt));
+                Bolig nyBolig = new Enebolig(bnr,adr,m2,antrom,bår,b,pris,d,e,k,tomt);
+                person.settInnBolig(nyBolig);
+                bregister.settInn(nyBolig);
                 Bolig enebolig = bregister.getBolig(bnr);
                 //JOptionPane.showMessageDialog(null,"Bolig registrert");
-                finnBolig();
                 slettFelter();
                 
             }
         }
         catch(NullPointerException NPE)
-        {
+        {   
             visMelding("NullPointer!");
         } 
     }
@@ -221,8 +223,8 @@ public class BoligGUI extends JFrame
         String bnr = boligNr.getText();
         if(bnr.length()!=0)
         {
-            Bolig bolig = bregister.getBolig(bnr);
-            utskriftsområde.setText(bolig.toString());       
+            //Bolig bolig = bregister.getBolig(bnr);
+            utskriftsområde.setText(bregister.finnBolig(bnr));       
         }
     }
     public void visBoligRegister()

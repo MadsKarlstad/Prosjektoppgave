@@ -47,7 +47,7 @@ public class Bolig
         s+="\nUtleiepris: " + utleiepris;
         s+="\nUtleiedato: " + dato;
         s+="\nBeskrivelse: " + beskrivelse;
-        s+="\n-------------------------";
+        s+="\n-------------------------\n";
         return s;
     }
 }
