@@ -35,18 +35,6 @@ public class Person
     {
         return personnummer;
     }
-    public void settInnBolig(Bolig ny)
-    {
-        try
-        {
-            bregister.settInn(ny);
-        }
-        catch(NullPointerException NPE)
-        {
-            bregister = new Boligregister();
-            bregister.settInn(ny);
-        }
-    }
     public Bolig finnBolig(String bolignr)
     {
         if(bregister==null)

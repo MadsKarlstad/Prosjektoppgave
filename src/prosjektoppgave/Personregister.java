@@ -15,7 +15,6 @@ public class Personregister
         return personregister.containsKey(nr);
     }
 
-
     public boolean settInn(Person ny)
     {
         if(!personFinnes(ny.getNr()))
