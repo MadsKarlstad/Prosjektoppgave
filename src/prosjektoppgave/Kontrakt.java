@@ -25,6 +25,12 @@ public class Kontrakt{
 
     public String pdfPrinter(Person inn){
 
+
+
+
+
+
+
         return null;//midlertidig
 
     }

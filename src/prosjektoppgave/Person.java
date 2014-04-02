@@ -35,6 +35,12 @@ public class Person
     {
         return personnummer;
     }
+
+    public String getAdresse(){return adresse;}
+
+    public String getEmail(){return email;}
+
+    public String getTlfnummer(){return tlfnummer}
     
     public void settInnBolig(Bolig ny)
     {
