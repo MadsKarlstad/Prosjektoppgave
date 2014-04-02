@@ -39,7 +39,7 @@ public class Bolig
     }
     public String toString()
     {
-        String s = "Bolignummer " + bolignr;
+        String s = "\n\nBolignummer " + bolignr;
         s+="\nAdresse: " + adresse;
         s+="\nBoareal: " + boareal;
         s+="\nAntall rom: " + antallRom;
@@ -47,6 +47,7 @@ public class Bolig
         s+="\nUtleiepris: " + utleiepris;
         s+="\nUtleiedato: " + dato;
         s+="\nBeskrivelse: " + beskrivelse;
+        s+="\n-------------------------";
         return s;
     }
 }

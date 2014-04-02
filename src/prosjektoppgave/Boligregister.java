@@ -40,7 +40,7 @@ public class Boligregister
     }
     public String skrivListe()
     {
-        String s = ""+boligregister;
+        String s = ""+ boligregister;
         return s;
     }
 }

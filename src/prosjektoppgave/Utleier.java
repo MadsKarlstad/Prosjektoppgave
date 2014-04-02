@@ -16,17 +16,6 @@ public class Utleier extends Person
         firma = firm;
     }
     
-    public void settInnBolig(Bolig ny)
-    {
-        try
-        {
-            bregister.settInn(ny);
-        }
-        catch(NullPointerException NPE)
-        {
-            bregister = new Boligregister();
-            bregister.settInn(ny);
-        }
-    }
+
 
 }

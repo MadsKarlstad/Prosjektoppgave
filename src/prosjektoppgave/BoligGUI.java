@@ -173,11 +173,7 @@ public class BoligGUI extends JFrame
             pregister.fjernPerson(pnr);
         }
     }
-    public void visPersRegister()
-    {
-        String liste = pregister.skrivListe();
-        utskriftsområde.setText(liste);
-    }
+
     public void nyEnebolig()
     {
         String pnr = personNummer.getText();
@@ -229,7 +225,13 @@ public class BoligGUI extends JFrame
     }
     public void visBoligRegister()
     {
-        visMelding("Not supported yet");
+        String boligliste = bregister.skrivListe();
+        utskriftsområde.setText(boligliste);
+    }
+        public void visPersRegister()
+    {
+        String liste = pregister.skrivListe();
+        utskriftsområde.setText(liste);
     }
     private void visMelding(String melding)
     {
@@ -253,6 +255,8 @@ public class BoligGUI extends JFrame
                 finnBolig();
             else if(e.getSource() == visPerson)
                 visPersRegister();
+            else if(e.getSource()==visBolig)
+                visBoligRegister();
         }
     }
     private void slettFelter()
