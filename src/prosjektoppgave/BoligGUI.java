@@ -141,7 +141,7 @@ public class BoligGUI extends JFrame
             pregister.settInn(
                 new Utleier(pnr,n,a,mail,tlf,f));
             Person utleier = pregister.getPerson(pnr);
-            //JOptionPane.showMessageDialog(null,"Utleier registrert");
+            visMelding("Utleier registrert");
             slettFelter();
         }
     }
@@ -204,14 +204,14 @@ public class BoligGUI extends JFrame
                 person.settInnBolig(nyBolig);
                 bregister.settInn(nyBolig);
                 Bolig enebolig = bregister.getBolig(bnr);
-                //JOptionPane.showMessageDialog(null,"Bolig registrert");
+                visMelding("Bolig registrert");
                 slettFelter();
                 
             }
         }
         catch(NullPointerException NPE)
         {   
-            visMelding("NullPointer!");
+            visMelding("NullPointer! Bolig ble ikke registrert.");
         } 
     }
     public void nyLeilighet()
@@ -223,8 +223,8 @@ public class BoligGUI extends JFrame
         String bnr = boligNr.getText();
         if(bnr.length()!=0)
         {
-            //Bolig bolig = bregister.getBolig(bnr);
-            utskriftsområde.setText(bregister.finnBolig(bnr));       
+            Bolig bolig = bregister.getBolig(bnr);
+            utskriftsområde.setText("" + bolig);       
         }
     }
     public void visBoligRegister()
@@ -239,7 +239,7 @@ public class BoligGUI extends JFrame
     }
     private void visMelding(String melding)
     {
-        JOptionPane.showMessageDialog(this,melding);
+        utskriftsområde.setText(melding);
     }
     private class Lytter implements ActionListener
     {
@@ -260,7 +260,7 @@ public class BoligGUI extends JFrame
             else if(e.getSource() == visPerson)
                 visPersRegister();
             else if(e.getSource() == visBolig)
-                visBoligRegister();
+                visBoligRegister();           
         }
     }
     private void slettFelter()
