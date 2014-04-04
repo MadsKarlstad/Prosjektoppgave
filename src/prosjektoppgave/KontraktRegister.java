@@ -47,6 +47,11 @@ public class KontraktRegister {
 
         return null;
     }
+    public String skrivListe()
+    {
+        String s = ""+kontraktReg;
+        return s;
+    }
     /*public Kontrakt getKontraktByPNr(String nr)
 
     {

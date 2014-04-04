@@ -12,13 +12,14 @@ public class BoligGUI extends JFrame
 {
     private JTextField personNummer, navn, adresse, email, telefonNummer, firma,
                     sivilstatus, yrke, bAdresse, boAreal, antallRom, byggeÅr,
-                    utleiePris, boligNr,etg,leiedato,beskrivelse,kjeller,tm2;
+                    utleiePris, boligNr,etg,leiedato,beskrivelse,kjeller,tm2, kontraktnr;
     private JButton regUtleier,regBoligsøker, regEnebolig,regLeil, visBolig, 
                     visPerson, finnBolig, finnPerson,
-                    slettBolig, slettPerson;
+                    slettBolig, slettPerson, regKontrakt, visKontrakter;
     private JTextArea utskriftsområde;
     private Boligregister bregister = new Boligregister();
     private Personregister pregister = new Personregister();
+    private KontraktRegister kregister = new KontraktRegister();
     
     public BoligGUI()
     {
@@ -43,12 +44,15 @@ public class BoligGUI extends JFrame
         utleiePris = new JTextField(18);
         boligNr = new JTextField(18);
         etg = new JTextField(18);
+        kontraktnr = new JTextField(18);
         regUtleier = new JButton("Registrer utleier");
         regBoligsøker = new JButton("Registrer boligsøker");
 
 
         regEnebolig = new JButton("Registrer enebolig");
         regLeil = new JButton("Registrer leilighet");
+        regKontrakt = new JButton("Registrer kontrakt");
+        visKontrakter = new JButton("Vis kontrakter");
 
 
 
@@ -108,6 +112,8 @@ public class BoligGUI extends JFrame
         c.add(boligNr);
         c.add(new JLabel("Kort beskrivelse: "));
         c.add(beskrivelse);
+        c.add(new JLabel("Kontraktnummer: "));
+        c.add(kontraktnr);
         c.add(regUtleier);
         c.add(regBoligsøker);
         c.add(regEnebolig);
@@ -118,6 +124,8 @@ public class BoligGUI extends JFrame
         c.add(finnPerson);
         c.add(slettBolig);
         c.add(slettPerson);
+        c.add(regKontrakt);
+        c.add(visKontrakter);
         c.add(new JScrollPane(utskriftsområde));
         
         Lytter lytter = new Lytter();
@@ -233,8 +241,7 @@ public class BoligGUI extends JFrame
                 bregister.settInn(nyBolig);
                 Bolig enebolig = bregister.getBolig(bnr);
                 visMelding("Bolig registrert");
-                slettFelter();
-                
+                slettFelter(); 
             }
         }
         catch(NullPointerException NPE)
@@ -255,14 +262,40 @@ public class BoligGUI extends JFrame
             utskriftsområde.setText("" + bolig);       
         }
     }
+    public void nyKontrakt()
+    {
+        String nr = kontraktnr.getText();
+        String utleier = personNummer.getText();
+        
+        if(nr.length()!=0 || utleier.length()!=0)
+        try{
+            Person person = pregister.getPerson(utleier);
+            if(kregister.getKontrakt(nr)==null){
+                Kontrakt ny = new Kontrakt(nr);
+                kregister.settInn(ny);
+                visMelding("Kontrakt registrert!");
+                slettFelter();
+            }
+                
+        }
+        catch(NullPointerException npe){
+            visMelding("Nullpointer! Kontrakt ikke registrert");
+        }
+        
+    }
     public void visBoligRegister()
     {
         String boligliste = bregister.skrivListe();
         utskriftsområde.setText(boligliste);
     }
-        public void visPersRegister()
+    public void visPersRegister()
     {
         String liste = pregister.skrivListe();
+        utskriftsområde.setText(liste);
+    }
+    public void visKontraktRegister()
+    {
+        String liste = kregister.skrivListe();
         utskriftsområde.setText(liste);
     }
     private void visMelding(String melding)
@@ -288,7 +321,11 @@ public class BoligGUI extends JFrame
             else if(e.getSource() == visPerson)
                 visPersRegister();
             else if(e.getSource() == visBolig)
-                visBoligRegister();           
+                visBoligRegister();
+            else if(e.getSource() == regKontrakt)
+                nyKontrakt();
+            else if(e.getSource() == visKontrakter)
+                visKontraktRegister();
         }
     }
     private void slettFelter()
