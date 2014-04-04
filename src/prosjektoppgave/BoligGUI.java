@@ -45,9 +45,25 @@ public class BoligGUI extends JFrame
         etg = new JTextField(18);
         regUtleier = new JButton("Registrer utleier");
         regBoligsøker = new JButton("Registrer boligsøker");
+
+
         regEnebolig = new JButton("Registrer enebolig");
         regLeil = new JButton("Registrer leilighet");
-        visBolig = new JButton("Vis boliger");
+
+
+
+        //visBolig = new JButton("Vis boliger");
+
+        try{
+
+            visBolig = lagBildeknapp("Bilder/bilde.png");
+        }catch(NullPointerException npe){
+            visBolig = new JButton("Vis boliger");
+        }
+
+
+
+
         visPerson = new JButton("Vis personer");
         finnBolig = new JButton("Finn bolig");
         finnPerson = new JButton("Finn person");
@@ -119,6 +135,18 @@ public class BoligGUI extends JFrame
         setSize(700,600);
         setVisible(true);
     }
+
+    /*Metode for å erstatte jbuttons med egene ikoner*/
+
+    private JButton lagBildeknapp(String path) {
+        JButton knapp = new JButton();
+        knapp.setContentAreaFilled(false);
+        knapp.setBorderPainted(false);
+        knapp.setIcon(new ImageIcon(getClass().getResource(path)));
+
+        return knapp;
+    }
+
     public void nyUtleier()
     {
         String pnr = personNummer.getText();
