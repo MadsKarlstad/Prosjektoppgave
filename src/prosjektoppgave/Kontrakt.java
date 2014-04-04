@@ -35,10 +35,6 @@ public class Kontrakt{
 
         String midlertidigkontrakt = "Dette er kontrakt for" + inn.getNavn() + " personummer: " + inn.getNr() + " kontraktnummer: " + kontraktNr;
 
-
-
-
-
         return midlertidigkontrakt;
 
     }
