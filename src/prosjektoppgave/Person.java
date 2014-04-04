@@ -33,18 +33,22 @@ public class Person
     
     public String getNr()
     {
+
         return personnummer;
     }
 
     public String getAdresse(){
+
         return adresse;
     }
 
     public String getEmail(){
+
         return email;
     }
 
     public String getTlfnummer(){
+
         return tlfnummer;
     }
     

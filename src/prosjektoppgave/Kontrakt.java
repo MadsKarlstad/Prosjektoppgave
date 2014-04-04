@@ -13,7 +13,7 @@ package prosjektoppgave;
 public class Kontrakt{
 
 
-    String kontraktNr;
+    String kontraktNr; Kontrakt.pdfPrinter(Personregister.getPerson(Person.getNr()));
 
 
 
