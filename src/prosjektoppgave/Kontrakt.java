@@ -36,6 +36,4 @@ public class Kontrakt{
         return midlertidigkontrakt;
 
     }
-
-
 }
