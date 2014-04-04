@@ -16,30 +16,15 @@ public class Kontrakt{
     String kontraktNr; //Kontrakt.pdfPrinter(Personregister.getPerson(Person.getNr()));
 
     public Kontrakt(String nr){
-
         kontraktNr = nr;
-
-
     }
 
-
     public String getKontraktNr(){
-
         return kontraktNr;
-
-
     }
 
     public String pdfPrinter(Person inn){
-
-
         String midlertidigkontrakt = "Dette er kontrakt for" + inn.getNavn() + " personummer: " + inn.getNr() + " kontraktnummer: " + kontraktNr;
-
-
-
-
-
         return midlertidigkontrakt;
-
     }
 }
