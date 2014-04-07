@@ -21,10 +21,13 @@ public class Kontrakt{
 
     public String getKontraktNr(){
         return kontraktNr;
+
     }
 
     public String pdfPrinter(Person inn){
+
         String midlertidigkontrakt = "Dette er kontrakt for" + inn.getNavn() + " personummer: " + inn.getNr() + " kontraktnummer: " + kontraktNr;
+
         return midlertidigkontrakt;
     }
 }
