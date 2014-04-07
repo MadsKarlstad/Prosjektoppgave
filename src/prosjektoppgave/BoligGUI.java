@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 /**
- *
+ * HEHIEHIEHEIHEIH
  * @author madsmkarlstad
  */
 public class BoligGUI extends JFrame
@@ -276,7 +276,8 @@ public class BoligGUI extends JFrame
             if(kregister.getKontrakt(utleier)==null){
                 Kontrakt ny = new Kontrakt(n,pnr,nr);
                 kregister.settInn(ny);
-                visMelding("Kontrakt registrert!");
+                String print = kregister.toString();
+                visMelding(print);
                 slettFelter();
             }
                 
@@ -299,6 +300,7 @@ public class BoligGUI extends JFrame
     public void visKontraktRegister()
     {
         String liste = kregister.skrivListe();
+        
         utskriftsområde.setText(liste);
     }
     private void visMelding(String melding)
