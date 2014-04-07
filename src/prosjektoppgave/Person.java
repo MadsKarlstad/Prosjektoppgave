@@ -1,6 +1,6 @@
 package prosjektoppgave;
 /**
- *
+ * TEST HEIHEI
  * @author madsmkarlstad
  */
 public class Person 
