@@ -13,6 +13,10 @@ package prosjektoppgave;
  BoligBrowse
  vis Kontrakter
  Statistikk
+
+ ref: http://i.imgur.com/uYbOZHV.png
+
+
  */
 public class BoligGUI2 {
 }
