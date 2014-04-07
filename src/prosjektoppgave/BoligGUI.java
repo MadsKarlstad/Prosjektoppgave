@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 /**
- * HEIHEIHEIEHIEHIEHIEH
+ * HEHIEHIEHEIHEIH
  * @author madsmkarlstad
  */
 public class BoligGUI extends JFrame
