@@ -13,27 +13,32 @@ package prosjektoppgave;
 public class Kontrakt{
 
 
-    String kontraktNr; //Kontrakt.pdfPrinter(Personregister.getPerson(Person.getNr()));
+    //datashit for dette objektet førsøk på å printe kontarktstring
 
-    public Kontrakt(String nr){
+    private String navn;
+    private String pnr;
+    private String kontraktNr;
 
-        kontraktNr = nr;
+    public Kontrakt(String navn, String pnr, String kontraktNr){
 
+        this.navn = navn;
+        this.pnr = pnr;
+        this.kontraktNr = kontraktNr;
+        }
+
+
+    public String printKontrakt(){
+
+
+        String kontrakt = "Dette er kontrakt for " + navn + " persnr er "  + pnr;
+
+        return kontrakt;
 
     }
-
 
     public String getKontraktNr(){
 
         return kontraktNr;
-
-    }
-
-    public String pdfPrinter(Person inn){
-
-        String midlertidigkontrakt = "Dette er kontrakt for" + inn.getNavn() + " personummer: " + inn.getNr() + " kontraktnummer: " + kontraktNr;
-
-        return midlertidigkontrakt;
 
     }
 }

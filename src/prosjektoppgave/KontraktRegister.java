@@ -52,6 +52,9 @@ public class KontraktRegister {
         String s = ""+kontraktReg;
         return s;
     }
+
+
+
     /*public Kontrakt getKontraktByPNr(String nr)
 
     {

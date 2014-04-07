@@ -262,16 +262,19 @@ public class BoligGUI extends JFrame
             utskriftsområde.setText("" + bolig);       
         }
     }
+
     public void nyKontrakt()
     {
+        String n = navn.getText();
+        String pnr = personNummer.getText();
         String nr = kontraktnr.getText();
         String utleier = personNummer.getText();
         
         if(nr.length()!=0 || utleier.length()!=0)
         try{
-            Person person = pregister.getPerson(utleier);
-            if(kregister.getKontrakt(nr)==null){
-                Kontrakt ny = new Kontrakt(nr);
+            Person person = pregister.getPerson(nr);
+            if(kregister.getKontrakt(utleier)==null){
+                Kontrakt ny = new Kontrakt(n,pnr,nr);
                 kregister.settInn(ny);
                 visMelding("Kontrakt registrert!");
                 slettFelter();
