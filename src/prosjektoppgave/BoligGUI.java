@@ -140,6 +140,7 @@ public class BoligGUI extends JFrame
         finnPerson.addActionListener(lytter);
         slettBolig.addActionListener(lytter);
         slettPerson.addActionListener(lytter);
+        regKontrakt.addActionListener(lytter);
         setSize(700,600);
         setVisible(true);
     }
@@ -270,13 +271,13 @@ public class BoligGUI extends JFrame
         String nr = kontraktnr.getText();
         String utleier = personNummer.getText();
         
-        if(nr.length()!=0 || utleier.length()!=0)
+        if(nr.length() > 0 && utleier.length() > 0)
         try{
             Person person = pregister.getPerson(nr);
             if(kregister.getKontrakt(utleier)==null){
                 Kontrakt ny = new Kontrakt(n,pnr,nr);
                 kregister.settInn(ny);
-                String print = kregister.toString();
+                String print = kregister.skrivListe();
                 visMelding(print);
                 slettFelter();
             }

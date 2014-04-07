@@ -14,10 +14,13 @@ public class Kontrakt{
 
 
     String kontraktNr; //Kontrakt.pdfPrinter(Personregister.getPerson(Person.getNr()));
-
-    public Kontrakt(String nr){
+    private String navn;
+    private String fødselsnummer;
+    public Kontrakt(String navn, String fødselsnummer, String nr){
 
         kontraktNr = nr;
+        this.navn = navn;
+        this.fødselsnummer = fødselsnummer;
 
 
     }
@@ -29,11 +32,13 @@ public class Kontrakt{
 
     }
 
-    public String pdfPrinter(Person inn){
-
-        String midlertidigkontrakt = "Dette er kontrakt for" + inn.getNavn() + " personummer: " + inn.getNr() + " kontraktnummer: " + kontraktNr;
-
-        return midlertidigkontrakt;
-
+    @Override
+    public String toString() {
+        return "Kontrakt{" +
+                "kontraktNr='" + kontraktNr + '\'' +
+                ", navn='" + navn + '\'' +
+                ", fødselsnummer='" + fødselsnummer + '\'' +
+                '}';
     }
+
 }
