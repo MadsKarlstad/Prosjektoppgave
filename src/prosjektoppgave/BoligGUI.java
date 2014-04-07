@@ -66,7 +66,7 @@ public class BoligGUI extends JFrame
         }
 
 
-,
+
 
         visPerson = new JButton("Vis personer");
         finnBolig = new JButton("Finn bolig");
