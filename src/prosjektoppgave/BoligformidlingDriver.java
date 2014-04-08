@@ -9,7 +9,10 @@ public class BoligformidlingDriver
 {
     public static void main(String[]args)
     {
-        final BoligGUI2 vindu = new BoligGUI2();
+        BoligGUI2 vindu = new BoligGUI2();
+
+
+
         /*vindu.addWindowListener(
         new WindowAdapter()
         {
