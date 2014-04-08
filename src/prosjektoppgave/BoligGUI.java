@@ -11,14 +11,16 @@ public class BoligGUI extends JFrame
 {
     private JTextField personNummer, navn, adresse, email, telefonNummer, firma,
                     sivilstatus, yrke, bAdresse, boAreal, antallRom, byggeÅr,
-                    utleiePris, boligNr,etg,leiedato,beskrivelse,kjeller,tm2, kontraktnr;
+                    utleiePris, boligNr,etg,leiedato,beskrivelse,tm2, kontraktnr;
     private JButton regUtleier,regBoligsøker, regEnebolig,regLeil, visBolig, 
                     visPerson, finnBolig, finnPerson,
                     slettBolig, slettPerson, regKontrakt, visKontrakter;
+    private JCheckBox kjeller;
     private JTextArea utskriftsområde;
     private Boligregister bregister = new Boligregister();
     private Personregister pregister = new Personregister();
     private KontraktRegister kregister = new KontraktRegister();
+    private CheckboxListener avkryssingslytter;
     
     public BoligGUI()
     {
@@ -38,12 +40,14 @@ public class BoligGUI extends JFrame
         byggeÅr = new JTextField(18);
         beskrivelse = new JTextField(18);
         leiedato = new JTextField(18);
-        kjeller = new JTextField(18);
+        //kjeller = new JTextField(18);
         tm2 = new JTextField(18);
         utleiePris = new JTextField(18);
         boligNr = new JTextField(18);
         etg = new JTextField(18);
         kontraktnr = new JTextField(18);
+        kjeller = new JCheckBox("Kjeller");
+        kjeller.addItemListener(avkryssingslytter);
         regUtleier = new JButton("Registrer utleier");
         regBoligsøker = new JButton("Registrer boligsøker");
 
@@ -112,6 +116,7 @@ public class BoligGUI extends JFrame
         c.add(new JLabel("Kort beskrivelse: "));
         c.add(beskrivelse);
         c.add(new JLabel("Kontraktnummer: "));
+        c.add(new JCheckBox("Kjeller"));
         c.add(kontraktnr);
         c.add(regUtleier);
         c.add(regBoligsøker);
@@ -220,7 +225,6 @@ public class BoligGUI extends JFrame
         String bår = byggeÅr.getText();
         String pris = utleiePris.getText();
         String e = etg.getText();
-        String k = kjeller.getText();
         String b = beskrivelse.getText();
         String d = leiedato.getText();
         String tomt = tm2.getText();
@@ -251,6 +255,7 @@ public class BoligGUI extends JFrame
     }
     public void nyLeilighet()
     {
+
         visMelding("Not supported yet");
     }
     public void finnBolig()
@@ -331,6 +336,16 @@ public class BoligGUI extends JFrame
                 nyKontrakt();
             else if(e.getSource() == visKontrakter)
                 visKontraktRegister();
+            else if( kjeller.isSelected())
+                kjeller = true;
+
+        }
+    }
+    private class CheckboxListener implements ItemListener{
+        public void itemStateChanged(ItemEvent e){
+            if(kjeller.isSelected())
+                kjeller = (true);
+
         }
     }
     private void slettFelter()
