@@ -37,6 +37,12 @@ public class BoligGUI2 extends JFrame implements ActionListener{
 
         super("BoligBrowse(tm)");
 
+        try{
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        }catch(Exception e){
+
+        }
+
         c = new JPanel();
 
         hovedpanel = new JPanel(new GridLayout(3,3,10,10));
