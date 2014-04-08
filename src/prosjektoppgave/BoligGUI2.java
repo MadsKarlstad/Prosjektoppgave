@@ -98,6 +98,41 @@ public class BoligGUI2 extends JFrame implements ActionListener{
 
     }
 
+    public void regBolig(){
+
+
+    }
+
+    public void visBoligliste(){
+
+
+    }
+
+    public void visUtleire(){
+
+
+    }
+
+    public void visSoker(){
+
+
+    }
+
+    public void BoligBrowse(){
+
+
+    }
+
+    public void visKontrakt(){
+
+
+    }
+
+    public void visStats(){
+
+
+    }
+
     public void tilbake(){
         container.remove(tilbake);
         revalidate();
@@ -124,6 +159,12 @@ public class BoligGUI2 extends JFrame implements ActionListener{
             else if(e.getSource() == knappene[REG_SOKER]){
 
                 regSoker();
+
+            }
+
+            else if(e.getSource() == knappene[VIS_BOLIGLISTE]){
+
+
 
             }
 
