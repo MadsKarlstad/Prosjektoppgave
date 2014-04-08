@@ -14,16 +14,15 @@ public class BoligGUI2 extends JFrame implements ActionListener{
             "vis utleiere","vis søkere","BoligBrowse","vis kontrakt","stats","reg enebolig"};
     private Container c;
     private GridLayout layout; //her åner vi for å legge inn de 9 layoutene ve trenger til vinduene våre
-    private BoligGUI boliggui;
+    private FlowLayout boliggui;
 
     public BoligGUI2(){
 
         super("BoligBrowse(tm)");
-        layout = new GridLayout();
-        boliggui = new BoligGUI();
+        layout = new GridLayout(3,3,10,10);
+        boliggui = new FlowLayout();
         c = getContentPane();
         c.setLayout(layout);
-        layout = new GridLayout(3,3,10,10);
         knappene = new JButton[navnarray.length];
 
         for(int i = 0; i < navnarray.length; i++){
