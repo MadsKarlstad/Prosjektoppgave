@@ -17,7 +17,7 @@ public class BoligGUI2 extends JFrame implements ActionListener{
 
         super("dette er syn");
 
-        layout = new GridLayout(3,3,15,15);
+        layout = new GridLayout(3,3,10,10);
         c = getContentPane();
         c.setLayout(layout);
         knappene = new JButton[navnarray.length];
@@ -35,10 +35,7 @@ public class BoligGUI2 extends JFrame implements ActionListener{
 
         public void actionPerformed( ActionEvent e )
         {
-            if ( e.getSource() == regUtleier )
-                nyUtleier();
+
 
         }
     }
-
-}
