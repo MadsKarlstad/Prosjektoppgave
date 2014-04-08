@@ -17,8 +17,9 @@ public class BoligGUI2 extends JFrame implements ActionListener{
     public BoligGUI2(){
 
         super("BoligBrowse(tm)");
-
+        BoligGUI u = new BoligGUI();
         layout = new GridLayout(3,3,10,10);
+
         c = getContentPane();
         c.setLayout(layout);
         knappene = new JButton[navnarray.length];
@@ -36,7 +37,8 @@ public class BoligGUI2 extends JFrame implements ActionListener{
 
         public void actionPerformed( ActionEvent e )
         {
-
+            if(toggle)
+                c.setLayout();
 
         }
     }
