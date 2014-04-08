@@ -22,15 +22,18 @@ import java.awt.event.ActionListener;
 
  */
 
-public class BoligGUI2 extends JFrame implements ActionListener{
+public class BoligGUI2{
 
     //vi trenger et vindu som har lik størrelse heile tiden!!!!!!!
 
-    public class vinduEn{
+
+
+    public void vinduEn(){
 
     JFrame ramme = new JFrame("Grid layout start");
     ramme.setVisible(true);
     ramme.setSize(300,400);
+
 
 
     }
