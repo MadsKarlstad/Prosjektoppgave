@@ -9,7 +9,8 @@ public class BoligGUI2 extends JFrame implements ActionListener{
 
     //datafelt for layoutshit
     private JButton knappene[];
-    private String navnarray[]= {"1","2","3","4","5","6","7","8","9"};
+    private String navnarray[]= {"reg utleier","reg søker","vis boliger",
+            "vis utleiere","vis søkere","BoligBrowse","vis kontrakt","stats","reg enebolig"};
     private Container c;
     private GridLayout layout; //her åner vi for å legge inn de 9 layoutene ve trenger til vinduene våre
 
