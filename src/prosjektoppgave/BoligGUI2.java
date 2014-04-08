@@ -1,6 +1,6 @@
 package prosjektoppgave;
 
-import prosjektoppgave.Bilder.RegistrerUtleier;
+import prosjektoppgave.RegistrerUtleier;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
