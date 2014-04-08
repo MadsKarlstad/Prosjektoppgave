@@ -5,23 +5,23 @@ package prosjektoppgave;
  */
 import java.awt.event.*;
 
-public class BoligformidlingDriver 
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+
+//Testing GridLayoutFrame.
+public class BoligformidlingDriver
 {
-    public static void main(String[]args)
+    public static void main( String args[] )
     {
-        BoligGUI2 vindu = new BoligGUI2();
-
-
-
-        /*vindu.addWindowListener(
-        new WindowAdapter()
+        EventQueue.invokeLater(new Runnable()
         {
-            public void windowClosing(WindowEvent e)
+            public void run()
             {
-                System.exit(0);
+                BoligGUI2 gridLayoutFrame = new BoligGUI2();
+                gridLayoutFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                gridLayoutFrame.setSize( 300, 200 );
+                gridLayoutFrame.setVisible( true );
             }
-        });*/
-        
-    }
-
-}
+        });
+    } // end main
+} // end class GridLayoutDemo

@@ -1,51 +1,44 @@
 package prosjektoppgave;
 
-import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 
-/**
- * Created by madsmkarlstad on 07/04/14.
- *
- Vinduer vi må prooge;
+public class BoligGUI2 extends JFrame implements ActionListener{
 
- Registrer utleier
- Registrer søker
- vis boligliste
- vis utleier
- vis Søker
- BoligBrowse
- vis Kontrakter
- Statistikk
+    //datafelt for layoutshit
+    private JButton knappene[];
+    private String navnarray[]= {"1","2","3","4","5","6","7","8","9"};
+    private Container c;
+    private GridLayout layout; //her åner vi for å legge inn de 9 layoutene ve trenger til vinduene våre
 
- ref: http://i.imgur.com/uYbOZHV.png
+    public BoligGUI2(){
 
+        super("dette er syn");
 
- */
+        layout = new GridLayout(3,3,15,15);
+        c = getContentPane();
+        c.setLayout(layout);
+        knappene = new JButton[navnarray.length];
 
-public class BoligGUI2
-{
+        for(int i = 0; i < navnarray.length; i++){
 
-    //vi trenger et vindu som har lik størrelse heile tiden!!!!!!!
+            knappene[i] = new JButton(navnarray[i]);
+            c.add(knappene[i]);
 
-    public Grid(){
-
-
-
-
-
-
+        }
 
 
     }
 
 
+        public void actionPerformed( ActionEvent e )
+        {
+            if ( e.getSource() == regUtleier )
+                nyUtleier();
 
-
-
-
-
-
-
+        }
+    }
 
 }
