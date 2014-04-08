@@ -16,7 +16,7 @@ public class BoligGUI2 extends JFrame implements ActionListener{
 
     public BoligGUI2(){
 
-        super("dette er syn");
+        super("BoligBrowse(tm)");
 
         layout = new GridLayout(3,3,10,10);
         c = getContentPane();
