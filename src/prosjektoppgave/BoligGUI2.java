@@ -1,6 +1,7 @@
 package prosjektoppgave;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
@@ -33,6 +34,7 @@ public class BoligGUI2{
     JFrame ramme = new JFrame("Grid layout start");
     ramme.setVisible(true);
     ramme.setSize(300,400);
+    ramme.setLayout(new GridLayout(3,3,15,15));
 
 
 
