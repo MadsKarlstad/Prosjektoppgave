@@ -18,6 +18,16 @@ public class BoligGUI2 extends JFrame implements ActionListener{
             "vis utleiere","vis søkere","BoligBrowse","vis kontrakt","stats","reg enebolig"};
 
     private static final int REG_UTLEIER = 0;
+    private static final int REG_SOKER = 1;
+    private static final int VIS_BOLIGLISTE = 2;
+    private static final int VIS_UTLEIERE = 3;
+    private static final int VIS_SOKER = 4;
+    private static final int BOLIGBROWSE = 5;
+    private static final int VIS_KONTRAKT = 6;
+    private static final int STATS = 7;
+    private static final int REGISTRER_BOLIG = 8;
+
+
 
     public static final String REGISTRER_ENEBOLIG = "registrer enebolig";
     public static final String HOVEDPANEL = "hovedpanel";
@@ -51,8 +61,6 @@ public class BoligGUI2 extends JFrame implements ActionListener{
         tilbake.addActionListener(this);
 
 
-       // layout = new GridLayout(3,3,10,10);
-        layout2 = new FlowLayout();
         container = getContentPane();
         c.setLayout(new CardLayout());
         c.add(HOVEDPANEL,hovedpanel);
@@ -82,6 +90,14 @@ public class BoligGUI2 extends JFrame implements ActionListener{
         visPanel("Vindu");
 
     }
+
+    public void regSoker(){
+        container.add(tilbake, BorderLayout.SOUTH);
+        c.add("Vindu", new RegistrerSoker(this));
+        visPanel("Vindu");
+
+    }
+
     public void tilbake(){
         container.remove(tilbake);
         revalidate();
@@ -103,7 +119,15 @@ public class BoligGUI2 extends JFrame implements ActionListener{
 
             if(e.getSource() == knappene[REG_UTLEIER]){
                 registrerUtleier();
-            }else if (e.getSource() == tilbake){
+            }
+
+            else if(e.getSource() == knappene[REG_SOKER]){
+
+                regSoker();
+
+            }
+
+            else if(e.getSource() == tilbake){
                 tilbake();
             }
 
