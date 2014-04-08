@@ -9,15 +9,15 @@ public class BoligformidlingDriver
 {
     public static void main(String[]args)
     {
-        final BoligGUI vindu = new BoligGUI();
-        vindu.addWindowListener(
+        final BoligGUI2 vindu = new BoligGUI2();
+        /*vindu.addWindowListener(
         new WindowAdapter()
         {
             public void windowClosing(WindowEvent e)
             {
                 System.exit(0);
             }
-        });
+        });*/
         
     }
 
