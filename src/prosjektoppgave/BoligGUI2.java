@@ -24,8 +24,13 @@ public class BoligGUI2 {
 
     //vi trenger et vindu som har lik størrelse heile tiden!!!!!!!
 
+    public class vinduEn(){
+    JFrame ramme = new JFrame("Grid layout start");
+    ramme.setVisible(true);
+    ramme.setSize(300,400);
 
-    JFrame ramme = new JFrame();
+
+    }
 
 
 
