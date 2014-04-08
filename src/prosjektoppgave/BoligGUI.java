@@ -20,7 +20,7 @@ public class BoligGUI extends JFrame
     private Boligregister bregister = new Boligregister();
     private Personregister pregister = new Personregister();
     private KontraktRegister kregister = new KontraktRegister();
-    private CheckboxListener avkryssingslytter;
+    //private CheckboxListener avkryssingslytter;
     
     public BoligGUI()
     {
@@ -46,8 +46,8 @@ public class BoligGUI extends JFrame
         boligNr = new JTextField(18);
         etg = new JTextField(18);
         kontraktnr = new JTextField(18);
-        kjeller = new JCheckBox("Kjeller");
-        kjeller.addItemListener(avkryssingslytter);
+        //kjeller = new JCheckBox("Kjeller");
+        //kjeller.addItemListener(avkryssingslytter);
         regUtleier = new JButton("Registrer utleier");
         regBoligsøker = new JButton("Registrer boligsøker");
 
@@ -115,8 +115,10 @@ public class BoligGUI extends JFrame
         c.add(boligNr);
         c.add(new JLabel("Kort beskrivelse: "));
         c.add(beskrivelse);
-        c.add(new JLabel("Kontraktnummer: "));
-        c.add(new JCheckBox("Kjeller"));
+        c.add(new JLabel("Kjeller:"));
+        c.add(kjeller);
+        //c.add(new JLabel("Kontraktnummer: "));
+        //c.add(new JCheckBox("Kjeller"));
         c.add(kontraktnr);
         c.add(regUtleier);
         c.add(regBoligsøker);
@@ -228,6 +230,7 @@ public class BoligGUI extends JFrame
         String b = beskrivelse.getText();
         String d = leiedato.getText();
         String tomt = tm2.getText();
+        String k = kjeller.getText();
         
         if(pnr.length()!=0 || bnr.length() != 0 || adr.length() != 0
            || m2.length() != 0 || bår.length() != 0
@@ -336,18 +339,18 @@ public class BoligGUI extends JFrame
                 nyKontrakt();
             else if(e.getSource() == visKontrakter)
                 visKontraktRegister();
-            else if( kjeller.isSelected())
-                kjeller = true;
+            /*else if( kjeller.isSelected())
+                kjeller = true;*/
 
         }
     }
-    private class CheckboxListener implements ItemListener{
+    /*private class CheckboxListener implements ItemListener{
         public void itemStateChanged(ItemEvent e){
             if(kjeller.isSelected())
                 kjeller = (true);
 
         }
-    }
+    }*/
     private void slettFelter()
     {
         personNummer.setText("");
