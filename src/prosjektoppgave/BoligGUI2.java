@@ -19,4 +19,17 @@ package prosjektoppgave;
 
  */
 public class BoligGUI2 {
+
+    //vi trenger et vindu som har lik størrelse heile tiden!!!!!!!
+
+
+
+
+
+
+
+
+
+
+
 }
