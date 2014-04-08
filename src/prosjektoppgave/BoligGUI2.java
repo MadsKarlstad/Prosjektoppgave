@@ -1,5 +1,7 @@
 package prosjektoppgave;
 
+import javax.swing.*;
+
 /**
  * Created by madsmkarlstad on 07/04/14.
  *
@@ -22,6 +24,8 @@ public class BoligGUI2 {
 
     //vi trenger et vindu som har lik størrelse heile tiden!!!!!!!
 
+
+    JFrame ramme = new JFrame();
 
 
 
