@@ -23,5 +23,5 @@ public class BoligformidlingDriver
                 gridLayoutFrame.setVisible( true );
             }
         });
-    } // end main
-} // end class GridLayoutDemo
+    }
+}
