@@ -1,13 +1,10 @@
 package prosjektoppgave;
 
-import prosjektoppgave.RegistrerUtleier;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.nio.ByteOrder;
 import javax.swing.*;
-import javax.xml.crypto.dsig.keyinfo.KeyName;
+
 
 public class BoligGUI2 extends JFrame implements ActionListener{
 
