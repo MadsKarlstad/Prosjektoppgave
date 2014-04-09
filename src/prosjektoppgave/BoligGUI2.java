@@ -10,7 +10,6 @@ public class BoligGUI2 extends JFrame implements ActionListener{
 
     //datafelt for layoutshit
     private JButton knappene[];
-    private boolean toggle = true;
     private String navnarray[]= {"reg utleier","reg søker","vis boliger",
             "vis utleiere","vis søkere","BoligBrowse","vis kontrakt","stats","reg enebolig"};
 
