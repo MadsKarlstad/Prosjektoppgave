@@ -12,12 +12,12 @@ public class Boligsøker extends Person
     private String sivilstatus;
     private String yrke;
     private String arbeidsforhold;
-    private String boligtype;
+    private String boligtype; //Chris skal mekke dropdown på dette datafeltet
     private String areal;
     private String antallRom;
     private boolean balkong;
     private boolean hage;
-    private String beliggenhet;
+    private String beliggenhet; //Chris skal mekke dropdown på dette datafeltet
     private boolean heis;
     private boolean parkering;
     private int utleiepris;

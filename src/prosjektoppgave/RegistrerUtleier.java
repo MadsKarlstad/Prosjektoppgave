@@ -15,42 +15,53 @@ public class RegistrerUtleier extends JPanel {
 
     private BoligGUI2 parent;
     private JButton reg;
-    private JPanel utleiepanel;
-    private JTextField[] field;
-    private String[] fieldnavn = {"pnr","navn","adr","mail","tlf","firma"};
+
+    private JTextField persnr,navn,adresse,email,tlfnr,firma;
     private Personregister pregister = new Personregister();
     private JTextArea utskriftsområde;
+    public static final String HOVEDPANEL = "hovedpanel";
 
-    private final int HENT_PNR = 0;
-    private final int HENT_NAVN = 1;
-    private final int HENT_ADR = 2;
-    private final int HENT_MAIL = 3;
-    private final int HENT_TLF = 4;
-    private final int HENT_FIRMA = 5;
+    private JPanel utleiepanel;
+    private JPanel c;
+
+    private Container container;
+    private BoxLayout layout;
+    private FlowLayout layout2;
 
     public RegistrerUtleier(BoligGUI2 parent){
 
         super(new BorderLayout());
         this.parent = parent;
+        utleiepanel = new JPanel();
+        c = new JPanel();
+        //container = getContentPane();
+        c.setLayout(new CardLayout());
+        c.add(HOVEDPANEL,utleiepanel);
+        persnr = new JTextField(18);
+        navn = new JTextField(18);
+        adresse = new JTextField(18);
+        email = new JTextField(18);
+        tlfnr = new JTextField(18);
+        firma = new JTextField(18);
 
-        for(int i = 0; i < fieldnavn.length; i++){
-
-            field[i] = new JTextField(fieldnavn[i]);
-            utleiepanel.add(field[i]);
-        }
-
-
-
+        utleiepanel.setLayout(new BoxLayout(utleiepanel, BoxLayout.X_AXIS));
+        utleiepanel.add(persnr);
+        utleiepanel.add(navn);
+        utleiepanel.add(adresse);
+        utleiepanel.add(email);
+        utleiepanel.add(tlfnr);
+        utleiepanel.add(firma);
+        utleiepanel.add(reg);
     }
 
     private void slettFelter()
     {
-        field[HENT_PNR].setText("");
-        field[HENT_NAVN].setText("");
-        field[HENT_ADR].setText("");
-        field[HENT_MAIL].setText("");
-        field[HENT_TLF].setText("");
-        field[HENT_FIRMA].setText("");
+        persnr.setText("");
+        navn.setText("");
+        adresse.setText("");
+        email.setText("");
+        tlfnr.setText("");
+        firma.setText("");
 
     }
 
@@ -62,12 +73,13 @@ public class RegistrerUtleier extends JPanel {
 
     public void nyUtleier()
     {
-        String pnr = field[HENT_PNR].getText();
-        String n = field[HENT_NAVN].getText();
-        String a = field[HENT_ADR].getText();
-        String mail = field[HENT_MAIL].getText();
-        String tlf = field[HENT_TLF].getText();
-        String f = field[HENT_FIRMA].getText();
+        String pnr = persnr.getText();
+        String n = navn.getText();
+        String a = adresse.getText();
+        String mail = email.getText();
+        String tlf = tlfnr.getText();
+        String f = firma.getText();
+
 
         if(pnr.length() == 0 || n.length() == 0
                 || a.length() == 0 || mail.length() == 0
@@ -87,15 +99,14 @@ public class RegistrerUtleier extends JPanel {
         }
     }
 
-}
-
-
-/*    private class Knapplytter implements ActionListener{
+    private class Knapplytter implements ActionListener{
         public void actionPerformed(ActionEvent e){
+            if ( e.getSource() == reg )
+                nyUtleier();
 
             }
         }
-    }*/
+    }
 
 
 
