@@ -42,6 +42,22 @@ public class BoligGUI2 extends JFrame implements ActionListener{
     public BoligGUI2(){
 
         super("BoligBrowse(tm)");
+        
+        Toolkit verktøykasse = Toolkit.getDefaultToolkit();
+        Dimension skjermdimensjon = verktøykasse.getScreenSize();
+        int bredde = skjermdimensjon.width;
+        int høyde = skjermdimensjon.height;
+        
+        setSize( bredde / 4, høyde / 4 );
+        setLocationByPlatform(true);
+        String bildefil = "logoliten2.png";
+        URL kilde = BoligGUI.class.getResource(bildefil);
+        if (kilde != null)
+        {
+            ImageIcon bilde = new ImageIcon(kilde);
+            Image ikon = bilde.getImage();    
+            setIconImage(ikon);
+        }
 
         try{
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
