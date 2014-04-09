@@ -99,37 +99,51 @@ public class BoligGUI2 extends JFrame implements ActionListener{
     }
 
     public void regBolig(){
-
+        container.add(tilbake, BorderLayout.SOUTH);
+        c.add("Vindu", new RegistrerSoker(this));
+        visPanel("Vindu");
 
     }
 
     public void visBoligliste(){
-
+        container.add(tilbake, BorderLayout.SOUTH);
+        c.add("Vindu", new RegistrerSoker(this));
+        visPanel("Vindu");
 
     }
 
     public void visUtleire(){
-
+        container.add(tilbake, BorderLayout.SOUTH);
+        c.add("Vindu", new RegistrerSoker(this));
+        visPanel("Vindu");
 
     }
 
     public void visSoker(){
-
+        container.add(tilbake, BorderLayout.SOUTH);
+        c.add("Vindu", new RegistrerSoker(this));
+        visPanel("Vindu");
 
     }
 
     public void BoligBrowse(){
-
+        container.add(tilbake, BorderLayout.SOUTH);
+        c.add("Vindu", new RegistrerSoker(this));
+        visPanel("Vindu");
 
     }
 
     public void visKontrakt(){
-
+        container.add(tilbake, BorderLayout.SOUTH);
+        c.add("Vindu", new RegistrerSoker(this));
+        visPanel("Vindu");
 
     }
 
     public void visStats(){
-
+        container.add(tilbake, BorderLayout.SOUTH);
+        c.add("Vindu", new RegistrerSoker(this));
+        visPanel("Vindu");
 
     }
 
@@ -143,14 +157,7 @@ public class BoligGUI2 extends JFrame implements ActionListener{
 
         public void actionPerformed( ActionEvent e )
         {
-            /*
-            if( toggle )
-                c.setLayout(layout2);
-            else
-                c.setLayout(layout);
 
-            toggle = !toggle;
-            c.validate();*/
 
             if(e.getSource() == knappene[REG_UTLEIER]){
                 registrerUtleier();
@@ -164,7 +171,42 @@ public class BoligGUI2 extends JFrame implements ActionListener{
 
             else if(e.getSource() == knappene[VIS_BOLIGLISTE]){
 
+                visBoligliste();
 
+
+            }
+
+            else if(e.getSource() == knappene[VIS_UTLEIERE]){
+
+                visUtleire();
+
+            }
+
+            else if(e.getSource() == knappene[VIS_SOKER]){
+
+                visSoker();
+
+            }
+
+            else if(e.getSource()== knappene[BOLIGBROWSE]){
+
+                BoligBrowse();
+            }
+
+            else if(e.getSource() == knappene[STATS]){
+
+                visStats();
+            }
+
+            else if(e.getSource() == knappene[REGISTRER_BOLIG]){
+
+                regBolig();
+
+            }
+
+            else if(e.getSource() == knappene[VIS_KONTRAKT]){
+
+                visKontrakt();
 
             }
 
