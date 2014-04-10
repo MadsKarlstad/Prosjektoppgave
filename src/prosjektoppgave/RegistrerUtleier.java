@@ -35,23 +35,25 @@ public class RegistrerUtleier extends JPanel {
         utleiepanel = new JPanel();
         c = new JPanel();
         //container = getContentPane();
-        c.setLayout(new CardLayout());
-        c.add(HOVEDPANEL,utleiepanel);
         persnr = new JTextField(18);
         navn = new JTextField(18);
         adresse = new JTextField(18);
         email = new JTextField(18);
         tlfnr = new JTextField(18);
         firma = new JTextField(18);
-
-        utleiepanel.setLayout(new BoxLayout(utleiepanel, BoxLayout.X_AXIS));
+        c.setLayout(new CardLayout());
+        c.add(HOVEDPANEL, utleiepanel);
+        utleiepanel.setLayout(new BorderLayout());
+        //utleiepanel.setVisible(true);
+        c.setVisible(true);
+        c.add(utleiepanel);
         utleiepanel.add(persnr);
         utleiepanel.add(navn);
         utleiepanel.add(adresse);
         utleiepanel.add(email);
         utleiepanel.add(tlfnr);
         utleiepanel.add(firma);
-        utleiepanel.add(reg);
+        //utleiepanel.add(reg);
     }
 
     private void slettFelter()

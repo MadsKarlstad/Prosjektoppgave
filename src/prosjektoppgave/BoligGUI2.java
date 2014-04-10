@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import java.net.URL;
 
 
 public class BoligGUI2 extends JFrame implements ActionListener{
@@ -41,7 +42,7 @@ public class BoligGUI2 extends JFrame implements ActionListener{
 
     public BoligGUI2(){
 
-        super("BoligBrowse(tm)");
+        super("BoligBrowse™");
         
         Toolkit verktøykasse = Toolkit.getDefaultToolkit();
         Dimension skjermdimensjon = verktøykasse.getScreenSize();
@@ -50,7 +51,7 @@ public class BoligGUI2 extends JFrame implements ActionListener{
         
         setSize( bredde / 4, høyde / 4 );
         setLocationByPlatform(true);
-        String bildefil = "logoliten2.png";
+        String bildefil = "Bilder/logoliten2.png";
         URL kilde = BoligGUI.class.getResource(bildefil);
         if (kilde != null)
         {
@@ -165,7 +166,6 @@ public class BoligGUI2 extends JFrame implements ActionListener{
         repaint();
         visPanel(HOVEDPANEL);
     }
-
 
         public void actionPerformed( ActionEvent e )
         {
