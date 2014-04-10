@@ -55,15 +55,15 @@ public class BoligGUI2 {
     private JTextField[] feltene;
     private String[] feltnavn = {"PNR","Navn","Adr", "mail", "Tlf", "firma", "reg"};
 
-    //Lager et instance av cardlayout
+    //Lager et instance av cardlayout og gridlayout
     CardLayout cl = new CardLayout();
-    GridLayout gl = new GridLayout(3,3,5,5);
+    GridLayout gl = new GridLayout(3,3,5,5);//kan gjøres lokalt
 
     public BoligGUI2(){
 
         panelKontinuelig.setLayout(cl);//passer cardlayoutet vårt inn i det kontunielige panelet
 
-        //regler for underpanelen kan settes her
+
 
         //komponenter for hovedpanelet legges til her
         panelKontinuelig.add(første, "1");
@@ -155,35 +155,30 @@ public class BoligGUI2 {
                 Pnr.setText("");
             }
         });
-
         Navn.addMouseListener(new MouseAdapter() {
 
             public void mouseClicked(MouseEvent e) {
                 Navn.setText("");
             }
         });
-
         Adr.addMouseListener(new MouseAdapter() {
 
             public void mouseClicked(MouseEvent e) {
                 Adr.setText("");
             }
         });
-
         Mail.addMouseListener(new MouseAdapter() {
 
             public void mouseClicked(MouseEvent e) {
                 Mail.setText("");
             }
         });
-
         Tlf.addMouseListener(new MouseAdapter() {
 
             public void mouseClicked(MouseEvent e) {
                 Tlf.setText("");
             }
         });
-
         Firma.addMouseListener(new MouseAdapter() {
 
             public void mouseClicked(MouseEvent e) {
