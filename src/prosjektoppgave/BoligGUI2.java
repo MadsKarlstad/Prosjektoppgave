@@ -37,6 +37,7 @@ public class BoligGUI2 {
 
     //JTextAreas
     JTextArea utskriftsområde = new JTextArea(15,15);
+    JTextArea utskriftsområde2 = new JTextArea(15,15);
 
     //JTextFields
     JTextField Pnr = new JTextField(18);
@@ -197,8 +198,30 @@ public class BoligGUI2 {
 
 
         //panel 3 (vis Utleiere)
-        tredje.setLayout(gl);
-        tredje.setBackground(Color.yellow);
+        tredje.setLayout(new BorderLayout());
+        tredje.add(utskriftsområde2, BorderLayout.PAGE_START);
+        knapperneders.setLayout(new GridLayout(2,1));
+        knapperneders.setLayout(new GridLayout(2,1));
+        JButton tilbake2 = new JButton("Tilbake");
+        JButton vis = new JButton("Vis utleiere");
+        tredje.add(tilbake2, BorderLayout.BEFORE_LINE_BEGINS);
+        tredje.add(vis);
+
+        vis.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                visPersRegister();
+            }
+        });
+
+        tilbake2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //panelKontinuelig.add(første,"1");
+                cl.show(panelKontinuelig,"1");
+            }
+        });
+        /*tredje.setBackground(Color.yellow);
         for(int i = 0; i < knappenavnpanel1.length; i++){
             knapperpanel1[i] = new JButton(knappenavnpanel1[i]);
             tredje.add(knapperpanel1[i]);
@@ -211,7 +234,7 @@ public class BoligGUI2 {
 
                 }
             });
-        }
+        }*/
 
         //panel4
         fjerde.setLayout(gl);
@@ -375,7 +398,7 @@ public class BoligGUI2 {
     public void visPersRegister()
     {
         String liste = pregister.skrivListe();
-        utskriftsområde.setText(liste);
+        utskriftsområde2.setText(liste);
     }
 
     public void visMelding(String melding){
