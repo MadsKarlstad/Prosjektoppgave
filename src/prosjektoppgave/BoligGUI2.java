@@ -50,15 +50,15 @@ public class BoligGUI2 {
 
     //Faste arrayer for å legge til komponenter via array.length
     private JButton knapperpanel1[];
-    private String[] knappenavnpanel1 = { "en","Registrer utleier","Vis utleiere",
-            "fire","fem", "seks",
-            "syv","åtte", "ni"};
+    private String[] knappenavnpanel1 = { "Registrer utleier","Vis Utleiere","Register Søker",
+            "Vis Søkere","Registrer Bolig", "Vis Boliger",
+            "vis kontrakter","Statistikk","BoligBrowse"};
     private JTextField[] feltene;
     private String[] feltnavn = {"PNR","Navn","Adr", "mail", "Tlf", "firma", "reg"};
 
     //Lager et instance av cardlayout og gridlayout
     CardLayout cl = new CardLayout();
-    GridLayout gl = new GridLayout(3,3,5,5);//kan gjøres loka   lt
+    GridLayout gl = new GridLayout(3,3,5,5);//kan gjøres loklt
 
     public BoligGUI2(){
 
@@ -85,7 +85,7 @@ public class BoligGUI2 {
         frame.add(new JScrollPane(utskriftsområde));
 
 
-        //panel 0
+        //panel 0 standarrdpanel
         knapperpanel1 = new JButton[knappenavnpanel1.length];
         standard.setLayout(gl);
 
@@ -191,8 +191,8 @@ public class BoligGUI2 {
         });
 
 
-        første.add(tekstinput,BorderLayout.CENTER);
-        første.add(knapperneders,BorderLayout.PAGE_END);
+        første.add(tekstinput, BorderLayout.CENTER);
+        første.add(knapperneders, BorderLayout.PAGE_END);
 
 
 
@@ -220,26 +220,15 @@ public class BoligGUI2 {
                 cl.show(panelKontinuelig,"0");
             }
         });
+        //endow pnal 2
+
+
+        //panel3
+
+
 
 
         //panel4
-        fjerde.setLayout(gl);
-        fjerde.setBackground(Color.cyan);
-        for(int i = 0; i < knappenavnpanel1.length; i++){
-            knapperpanel1[i] = new JButton(knappenavnpanel1[i]);
-            fjerde.add(knapperpanel1[i]);
-            final String nr = String.valueOf(i+1);
-            knapperpanel1[i].addActionListener(new ActionListener() {
-
-                public void actionPerformed(ActionEvent e) {
-
-                    cl.show(panelKontinuelig,nr);
-
-                }
-            });
-        }
-
-        //panel5
         femte.setLayout(gl);
         femte.setBackground(Color.BLUE);
         for(int i = 0; i < knappenavnpanel1.length; i++){
@@ -255,7 +244,7 @@ public class BoligGUI2 {
                 }
             });
         }
-        //panel6
+        //panel5
         sjette.setLayout(gl);
         sjette.setBackground(Color.DARK_GRAY);
         for(int i = 0; i < knappenavnpanel1.length; i++){
@@ -271,7 +260,7 @@ public class BoligGUI2 {
                 }
             });
         }
-        //panel7
+        //panel6
         syvende.setLayout(gl);
         syvende.setBackground(Color.green);
         for(int i = 0; i < knappenavnpanel1.length; i++){
@@ -287,7 +276,7 @@ public class BoligGUI2 {
                 }
             });
         }
-        //panel8
+        //panel7
         åttende.setLayout(gl);
         åttende.setBackground(Color.pink);
         for(int i = 0; i < knappenavnpanel1.length; i++){
@@ -303,7 +292,7 @@ public class BoligGUI2 {
                 }
             });
         }
-        //panel9
+        //panel8
         niende.setLayout(gl);
         niende.setBackground(Color.gray);
         for(int i = 0; i < knappenavnpanel1.length; i++){
@@ -319,7 +308,7 @@ public class BoligGUI2 {
                 }
             });
         }
-        //panel10
+        //panel9
         tiende.setLayout(gl);
         tiende.setBackground(Color.red);
         for(int i = 0; i < knappenavnpanel1.length; i++){
@@ -342,7 +331,7 @@ public class BoligGUI2 {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        frame.setSize(600,600);
+        frame.setSize(500,650);
 
 
     }
