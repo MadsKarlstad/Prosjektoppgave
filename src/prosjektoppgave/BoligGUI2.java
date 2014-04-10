@@ -111,7 +111,10 @@ public class BoligGUI2 {
         JButton tilbake = new JButton("Tilbake");
 
         JPanel tekstinput = new JPanel();
+        JPanel knapperneders = new JPanel();
         tekstinput.setLayout(new GridLayout(3,2));
+        knapperneders.setLayout(new GridLayout(2,1));
+
         Pnr.setText("Personnummer");
         Navn.setText("Navn");
         Adr.setText("Adresse");
@@ -125,6 +128,9 @@ public class BoligGUI2 {
         tekstinput.add(Mail);
         tekstinput.add(Tlf);
         tekstinput.add(Firma);
+
+        knapperneders.add(reg);
+        knapperneders.add(tilbake);
 
 
         reg.addActionListener(new ActionListener() {
@@ -186,8 +192,7 @@ public class BoligGUI2 {
 
 
         andre.add(tekstinput,BorderLayout.CENTER);
-        andre.add(reg,BorderLayout.PAGE_END);
-        andre.add(tilbake,BorderLayout.BEFORE_LINE_BEGINS);
+        andre.add(knapperneders,BorderLayout.PAGE_END);
 
 
 
