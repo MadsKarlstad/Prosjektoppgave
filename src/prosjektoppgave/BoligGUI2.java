@@ -1,4 +1,11 @@
+package prosjektoppgave;
 import org.omg.CORBA.MARSHAL;
+
+
+import prosjektoppgave.KontraktRegister;
+import prosjektoppgave.Personregister;
+
+
 
 import javax.swing.*;
 import java.awt.*;

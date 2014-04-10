@@ -18,9 +18,9 @@ public class BoligformidlingDriver
             public void run()
             {
                 BoligGUI2 gridLayoutFrame = new BoligGUI2();
-                gridLayoutFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                /*gridLayoutFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 gridLayoutFrame.setSize( 400, 700 );
-                gridLayoutFrame.setVisible( true );
+                gridLayoutFrame.setVisible( true );*/
             }
         });
     }
