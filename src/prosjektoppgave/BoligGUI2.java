@@ -1,230 +1,389 @@
-package prosjektoppgave;
+import org.omg.CORBA.MARSHAL;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
-import java.net.URL;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+public class BoligGUI2 {
 
-public class BoligGUI2 extends JFrame implements ActionListener{
+    //Frame+kontinuelig panel SKAL IKKE RØRES
+    private JFrame frame = new JFrame("Bolig Browse™");
+    private JPanel panelKontinuelig = new JPanel();
 
-    //datafelt for layoutshit
-    private JButton knappene[];
-    private String navnarray[]= {"reg utleier","reg søker","vis boliger",
-            "vis utleiere","vis søkere","BoligBrowse","vis kontrakt","stats","reg enebolig"};
+    private Personregister pregister = new Personregister();
+    private KontraktRegister kregister = new KontraktRegister();
 
-    private static final int REG_UTLEIER = 0;
-    private static final int REG_SOKER = 1;
-    private static final int VIS_BOLIGLISTE = 2;
-    private static final int VIS_UTLEIERE = 3;
-    private static final int VIS_SOKER = 4;
-    private static final int BOLIGBROWSE = 5;
-    private static final int VIS_KONTRAKT = 6;
-    private static final int STATS = 7;
-    private static final int REGISTRER_BOLIG = 8;
+    //Paneler for alle klasser, gies navn etterhvert
+    private JPanel første = new JPanel();
+    private JPanel andre = new JPanel();
+    private JPanel tredje = new JPanel();
+    private JPanel fjerde = new JPanel();
+    private JPanel femte = new JPanel();
+    private JPanel sjette = new JPanel();
+    private JPanel syvende = new JPanel();
+    private JPanel åttende = new JPanel();
+    private JPanel niende = new JPanel();
+    private JPanel tiende = new JPanel();
 
+    //JTextAreas
+    JTextArea utskriftsområde = new JTextArea(15,15);
 
+    //JTextFields
+    JTextField Pnr = new JTextField(18);
+    JTextField Navn = new JTextField(18);
+    JTextField Adr = new JTextField(18);
+    JTextField Mail = new JTextField(18);
+    JTextField Tlf = new JTextField(18);
+    JTextField Firma = new JTextField(18);
 
-    public static final String REGISTRER_ENEBOLIG = "registrer enebolig";
-    public static final String HOVEDPANEL = "hovedpanel";
+    //Faste arrayer for å legge til komponenter via array.length
+    private JButton knapperpanel1[];
+    private String[] knappenavnpanel1 = { "en","Registrer utleier","Vis utleiere",
+            "fire","fem", "seks",
+            "syv","åtte", "ni"};
+    private JTextField[] feltene;
+    private String[] feltnavn = {"PNR","Navn","Adr", "mail", "Tlf", "firma", "reg"};
 
-
-    private JPanel hovedpanel;
-    private JPanel c;
-
-
-    private Container container;
-    private GridLayout layout; //her åner vi for å legge inn de 9 layoutene ve trenger til vinduene våre
-    private FlowLayout layout2;
-
-    private JButton tilbake;
+    //Lager et instance av cardlayout
+    CardLayout cl = new CardLayout();
+    GridLayout gl = new GridLayout(3,3,5,5);
 
     public BoligGUI2(){
 
-        super("BoligBrowse™");
-        
-        Toolkit verktøykasse = Toolkit.getDefaultToolkit();
-        Dimension skjermdimensjon = verktøykasse.getScreenSize();
-        int bredde = skjermdimensjon.width;
-        int høyde = skjermdimensjon.height;
-        
-        setSize( bredde / 4, høyde / 4 );
-        setLocationByPlatform(true);
-        String bildefil = "Bilder/logoliten2.png";
-        URL kilde = BoligGUI.class.getResource(bildefil);
-        if (kilde != null)
+        panelKontinuelig.setLayout(cl);//passer cardlayoutet vårt inn i det kontunielige panelet
+
+        //regler for underpanelen kan settes her
+
+        //komponenter for hovedpanelet legges til her
+        panelKontinuelig.add(første, "1");
+        panelKontinuelig.add(andre, "2");
+        panelKontinuelig.add(tredje, "3");
+        panelKontinuelig.add(fjerde, "4");
+        panelKontinuelig.add(femte, "5");
+        panelKontinuelig.add(sjette, "6");
+        panelKontinuelig.add(syvende, "7");
+        panelKontinuelig.add(åttende, "8");
+        panelKontinuelig.add(niende, "9");
+        panelKontinuelig.add(tiende,"10");
+
+        //komponenter for underpanelen kan legges inn her
+        frame.add(new JScrollPane(utskriftsområde));
+
+
+        //panel 1
+        knapperpanel1 = new JButton[knappenavnpanel1.length];
+        første.setLayout(gl);
+
+
+        for (int i = 0; i < knappenavnpanel1.length; i++) {
+            knapperpanel1[i] = new JButton(knappenavnpanel1[i]);
+            første.add(knapperpanel1[i]);
+            final String nr = String.valueOf(i + 1);
+            knapperpanel1[i].addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+
+                    cl.show(panelKontinuelig, nr);
+
+                }
+            });
+        }
+
+        //panel 2(Registrer utleier)
+
+
+
+        andre.setLayout(new BorderLayout());
+        andre.add(utskriftsområde, BorderLayout.PAGE_START);
+        utskriftsområde.setVisible(true);
+        utskriftsområde.setEditable(false);
+        JButton reg = new JButton("Registrer utleier");
+        JButton tilbake = new JButton("Tilbake");
+
+        JPanel tekstinput = new JPanel();
+        tekstinput.setLayout(new GridLayout(3,2));
+        Pnr.setText("Personnummer");
+        Navn.setText("Navn");
+        Adr.setText("Adresse");
+        Mail.setText("Mail");
+        Tlf.setText("Tlf");
+        Firma.setText("Firma");
+
+        tekstinput.add(Pnr);
+        tekstinput.add(Navn);
+        tekstinput.add(Adr);
+        tekstinput.add(Mail);
+        tekstinput.add(Tlf);
+        tekstinput.add(Firma);
+
+
+        reg.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                nyUtleier();
+            }
+        });
+
+        tilbake.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //panelKontinuelig.add(første,"1");
+                cl.show(panelKontinuelig,"1");
+            }
+        });
+
+        Pnr.addMouseListener(new MouseAdapter() {
+
+            public void mouseClicked(MouseEvent e) {
+                Pnr.setText("");
+            }
+        });
+
+        Navn.addMouseListener(new MouseAdapter() {
+
+            public void mouseClicked(MouseEvent e) {
+                Navn.setText("");
+            }
+        });
+
+        Adr.addMouseListener(new MouseAdapter() {
+
+            public void mouseClicked(MouseEvent e) {
+                Adr.setText("");
+            }
+        });
+
+        Mail.addMouseListener(new MouseAdapter() {
+
+            public void mouseClicked(MouseEvent e) {
+                Mail.setText("");
+            }
+        });
+
+        Tlf.addMouseListener(new MouseAdapter() {
+
+            public void mouseClicked(MouseEvent e) {
+                Tlf.setText("");
+            }
+        });
+
+        Firma.addMouseListener(new MouseAdapter() {
+
+            public void mouseClicked(MouseEvent e) {
+                Firma.setText("");
+            }
+        });
+
+
+        andre.add(tekstinput,BorderLayout.CENTER);
+        andre.add(reg,BorderLayout.PAGE_END);
+        andre.add(tilbake,BorderLayout.BEFORE_LINE_BEGINS);
+
+
+
+        //panel 3 (vis Utleiere)
+        tredje.setLayout(gl);
+        tredje.setBackground(Color.yellow);
+        for(int i = 0; i < knappenavnpanel1.length; i++){
+            knapperpanel1[i] = new JButton(knappenavnpanel1[i]);
+            tredje.add(knapperpanel1[i]);
+            final String nr = String.valueOf(i+1);
+            knapperpanel1[i].addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+
+                    cl.show(panelKontinuelig,nr);
+
+                }
+            });
+        }
+
+        //panel4
+        fjerde.setLayout(gl);
+        fjerde.setBackground(Color.cyan);
+        for(int i = 0; i < knappenavnpanel1.length; i++){
+            knapperpanel1[i] = new JButton(knappenavnpanel1[i]);
+            fjerde.add(knapperpanel1[i]);
+            final String nr = String.valueOf(i+1);
+            knapperpanel1[i].addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+
+                    cl.show(panelKontinuelig,nr);
+
+                }
+            });
+        }
+
+        //panel5
+        femte.setLayout(gl);
+        femte.setBackground(Color.BLUE);
+        for(int i = 0; i < knappenavnpanel1.length; i++){
+            knapperpanel1[i] = new JButton(knappenavnpanel1[i]);
+            femte.add(knapperpanel1[i]);
+            final String nr = String.valueOf(i+1);
+            knapperpanel1[i].addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+
+                    cl.show(panelKontinuelig,nr);
+
+                }
+            });
+        }
+        //panel6
+        sjette.setLayout(gl);
+        sjette.setBackground(Color.DARK_GRAY);
+        for(int i = 0; i < knappenavnpanel1.length; i++){
+            knapperpanel1[i] = new JButton(knappenavnpanel1[i]);
+            sjette.add(knapperpanel1[i]);
+            final String nr = String.valueOf(i+1);
+            knapperpanel1[i].addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+
+                    cl.show(panelKontinuelig,nr);
+
+                }
+            });
+        }
+        //panel7
+        syvende.setLayout(gl);
+        syvende.setBackground(Color.green);
+        for(int i = 0; i < knappenavnpanel1.length; i++){
+            knapperpanel1[i] = new JButton(knappenavnpanel1[i]);
+            syvende.add(knapperpanel1[i]);
+            final String nr = String.valueOf(i+1);
+            knapperpanel1[i].addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+
+                    cl.show(panelKontinuelig,nr);
+
+                }
+            });
+        }
+        //panel8
+        åttende.setLayout(gl);
+        åttende.setBackground(Color.pink);
+        for(int i = 0; i < knappenavnpanel1.length; i++){
+            knapperpanel1[i] = new JButton(knappenavnpanel1[i]);
+            åttende.add(knapperpanel1[i]);
+            final String nr = String.valueOf(i+1);
+            knapperpanel1[i].addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+
+                    cl.show(panelKontinuelig,nr);
+
+                }
+            });
+        }
+        //panel9
+        niende.setLayout(gl);
+        niende.setBackground(Color.gray);
+        for(int i = 0; i < knappenavnpanel1.length; i++){
+            knapperpanel1[i] = new JButton(knappenavnpanel1[i]);
+            niende.add(knapperpanel1[i]);
+            final String nr = String.valueOf(i+1);
+            knapperpanel1[i].addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+
+                    cl.show(panelKontinuelig,nr);
+
+                }
+            });
+        }
+        //panel10
+        tiende.setLayout(gl);
+        tiende.setBackground(Color.red);
+        for(int i = 0; i < knappenavnpanel1.length; i++){
+            knapperpanel1[i] = new JButton(knappenavnpanel1[i]);
+            tiende.add(knapperpanel1[i]);
+            final String nr = String.valueOf(i+1);
+            knapperpanel1[i].addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+
+                    cl.show(panelKontinuelig,nr);
+
+                }
+            });
+        }
+
+
+
+
+
+        //Sender ved defaultpanelt identifisrt av stringen
+        cl.show(panelKontinuelig,"1");
+
+
+        //regler for den kontinuelige rammen kan skiftes her!
+        frame.add(panelKontinuelig);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+        frame.setSize(600,600);
+
+
+    }
+
+    public void nyUtleier()
+    {
+        String pnr = Pnr.getText();
+        String n = Navn.getText();
+        String a = Adr.getText();
+        String mail = Mail.getText();
+        String tlf = Tlf.getText();
+        String f = Firma.getText();
+
+        if(pnr.length() == 0 || n.length() == 0
+                || a.length() == 0 || mail.length() == 0
+                || tlf.length() == 0)
         {
-            ImageIcon bilde = new ImageIcon(kilde);
-            Image ikon = bilde.getImage();    
-            setIconImage(ikon);
+            visMelding("Fyll ut all info pliz");
         }
-
-        try{
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        }catch(Exception e){
-
-        }
-
-        c = new JPanel();
-
-        hovedpanel = new JPanel(new GridLayout(3,3,10,10));
-
-        tilbake = new JButton("TILBAKE");
-        tilbake.addActionListener(this);
-
-
-        container = getContentPane();
-        c.setLayout(new CardLayout());
-        c.add(HOVEDPANEL,hovedpanel);
-        knappene = new JButton[navnarray.length];
-
-
-        for(int i = 0; i < navnarray.length; i++){
-
-            knappene[i] = new JButton(navnarray[i]);
-            knappene[i].addActionListener(this);
-            hovedpanel.add(knappene[i]);
-        }
-        container.setLayout(new BorderLayout());
-        container.add(c, BorderLayout.CENTER);
-
-    }
-
-    public void visPanel(String n){
-
-        CardLayout cl = (CardLayout)c.getLayout();
-        cl.show(c,n);
-
-    }
-    public void registrerUtleier(){
-        container.add(tilbake, BorderLayout.SOUTH);
-        c.add("Vindu", new RegistrerUtleier(this));
-        visPanel("Vindu");
-
-    }
-
-    public void regSoker(){
-        container.add(tilbake, BorderLayout.SOUTH);
-        c.add("Vindu", new RegistrerSoker(this));
-        visPanel("Vindu");
-
-    }
-
-    public void regBolig(){
-        container.add(tilbake, BorderLayout.SOUTH);
-        c.add("Vindu", new RegistrerSoker(this));
-        visPanel("Vindu");
-
-    }
-
-    public void visBoligliste(){
-        container.add(tilbake, BorderLayout.SOUTH);
-        c.add("Vindu", new RegistrerSoker(this));
-        visPanel("Vindu");
-
-    }
-
-    public void visUtleire(){
-        container.add(tilbake, BorderLayout.SOUTH);
-        c.add("Vindu", new RegistrerSoker(this));
-        visPanel("Vindu");
-
-    }
-
-    public void visSoker(){
-        container.add(tilbake, BorderLayout.SOUTH);
-        c.add("Vindu", new RegistrerSoker(this));
-        visPanel("Vindu");
-
-    }
-
-    public void BoligBrowse(){
-        container.add(tilbake, BorderLayout.SOUTH);
-        c.add("Vindu", new RegistrerSoker(this));
-        visPanel("Vindu");
-
-    }
-
-    public void visKontrakt(){
-        container.add(tilbake, BorderLayout.SOUTH);
-        c.add("Vindu", new RegistrerSoker(this));
-        visPanel("Vindu");
-
-    }
-
-    public void visStats(){
-        container.add(tilbake, BorderLayout.SOUTH);
-        c.add("Vindu", new RegistrerSoker(this));
-        visPanel("Vindu");
-
-    }
-
-    public void tilbake(){
-        container.remove(tilbake);
-        revalidate();
-        repaint();
-        visPanel(HOVEDPANEL);
-    }
-
-        public void actionPerformed( ActionEvent e )
+        if(pnr.length() != 0 || n.length() != 0
+                || a.length() != 0 || mail.length() != 0
+                || tlf.length() != 0)
         {
-
-
-            if(e.getSource() == knappene[REG_UTLEIER]){
-                registrerUtleier();
-            }
-
-            else if(e.getSource() == knappene[REG_SOKER]){
-
-                regSoker();
-
-            }
-
-            else if(e.getSource() == knappene[VIS_BOLIGLISTE]){
-
-                visBoligliste();
-
-
-            }
-
-            else if(e.getSource() == knappene[VIS_UTLEIERE]){
-
-                visUtleire();
-
-            }
-
-            else if(e.getSource() == knappene[VIS_SOKER]){
-
-                visSoker();
-
-            }
-
-            else if(e.getSource()== knappene[BOLIGBROWSE]){
-
-                BoligBrowse();
-            }
-
-            else if(e.getSource() == knappene[STATS]){
-
-                visStats();
-            }
-
-            else if(e.getSource() == knappene[REGISTRER_BOLIG]){
-
-                regBolig();
-
-            }
-
-            else if(e.getSource() == knappene[VIS_KONTRAKT]){
-
-                visKontrakt();
-
-            }
-
-            else if(e.getSource() == tilbake){
-                tilbake();
-            }
-
+            pregister.settInn(
+                    new Utleier(pnr,n,a,mail,tlf,f));
+            Person utleier = pregister.getPerson(pnr);
+            visMelding("Utleier registrert\n" + utleier);
+            slettFelter();
         }
     }
+
+    public void visPersRegister()
+    {
+        String liste = pregister.skrivListe();
+        utskriftsområde.setText(liste);
+    }
+
+    public void visMelding(String melding){
+        utskriftsområde.setText(melding);
+    }
+
+    public void slettFelter(){
+        Pnr.setText("Personnummer");
+        Navn.setText("Navn");
+        Adr.setText("Adresse");
+        Mail.setText("Email");
+        Tlf.setText("Telefonnummer");
+        Firma.setText("Firma");
+    }
+
+
+
+
+
+
+
+
+}
