@@ -1,4 +1,4 @@
-package prosjektoppgave;
+/*package prosjektoppgave;
 
 
 
@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Erlend on 08/04/14.
  */
-public class RegistrerSoker extends JPanel {
+/*public class RegistrerSoker extends JPanel {
 
     private BoligGUI2 parent;
     private JButton tilbake;
@@ -39,3 +39,4 @@ public class RegistrerSoker extends JPanel {
 
 }
 
+*/
