@@ -24,6 +24,7 @@ public class BoligGUI2 {
     private KontraktRegister kregister = new KontraktRegister();
 
     //Paneler for alle klasser, gies navn etterhvert
+    private JPanel standard = new JPanel();
     private JPanel første = new JPanel();
     private JPanel andre = new JPanel();
     private JPanel tredje = new JPanel();
@@ -57,15 +58,18 @@ public class BoligGUI2 {
 
     //Lager et instance av cardlayout og gridlayout
     CardLayout cl = new CardLayout();
-    GridLayout gl = new GridLayout(3,3,5,5);//kan gjøres lokalt
+    GridLayout gl = new GridLayout(3,3,5,5);//kan gjøres loka   lt
 
     public BoligGUI2(){
 
         panelKontinuelig.setLayout(cl);//passer cardlayoutet vårt inn i det kontunielige panelet
+        //Sender ved defaultpanelt identifisrt av stringen
+        cl.show(panelKontinuelig,"0");
 
 
 
         //komponenter for hovedpanelet legges til her
+        panelKontinuelig.add(standard,"0");
         panelKontinuelig.add(første, "1");
         panelKontinuelig.add(andre, "2");
         panelKontinuelig.add(tredje, "3");
@@ -81,15 +85,15 @@ public class BoligGUI2 {
         frame.add(new JScrollPane(utskriftsområde));
 
 
-        //panel 1
+        //panel 0
         knapperpanel1 = new JButton[knappenavnpanel1.length];
-        første.setLayout(gl);
+        standard.setLayout(gl);
 
 
         for (int i = 0; i < knappenavnpanel1.length; i++) {
             knapperpanel1[i] = new JButton(knappenavnpanel1[i]);
-            første.add(knapperpanel1[i]);
-            final String nr = String.valueOf(i + 1);
+            standard.add(knapperpanel1[i]);
+            final String nr = String.valueOf(i+1);
             knapperpanel1[i].addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent e) {
@@ -100,16 +104,16 @@ public class BoligGUI2 {
             });
         }
 
-        //panel 2(Registrer utleier)
+        //panel 1(Registrer utleier)
 
 
 
-        andre.setLayout(new BorderLayout());
-        andre.add(utskriftsområde, BorderLayout.PAGE_START);
+        første.setLayout(new BorderLayout());
+        første.add(utskriftsområde, BorderLayout.PAGE_START);
         utskriftsområde.setVisible(true);
         utskriftsområde.setEditable(false);
         JButton reg = new JButton("Registrer utleier");
-        JButton tilbake = new JButton("Tilbake");
+        JButton tilbake = new JButton("Tilbake");//burde settes på et mer synelig sted da den brukes flere ganger
 
         JPanel tekstinput = new JPanel();
         JPanel knapperneders = new JPanel();
@@ -145,7 +149,7 @@ public class BoligGUI2 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //panelKontinuelig.add(første,"1");
-                cl.show(panelKontinuelig,"1");
+                cl.show(panelKontinuelig,"0");
             }
         });
 
@@ -187,20 +191,20 @@ public class BoligGUI2 {
         });
 
 
-        andre.add(tekstinput,BorderLayout.CENTER);
-        andre.add(knapperneders,BorderLayout.PAGE_END);
+        første.add(tekstinput,BorderLayout.CENTER);
+        første.add(knapperneders,BorderLayout.PAGE_END);
 
 
 
-        //panel 3 (vis Utleiere)
-        tredje.setLayout(new BorderLayout());
-        tredje.add(utskriftsområde2, BorderLayout.PAGE_START);
+        //panel 2 (vis Utleiere)
+        andre.setLayout(new BorderLayout());
+        andre.add(utskriftsområde2, BorderLayout.PAGE_START);
         knapperneders.setLayout(new GridLayout(2,1));
         knapperneders.setLayout(new GridLayout(2,1));
         JButton tilbake2 = new JButton("Tilbake");
         JButton vis = new JButton("Vis utleiere");
-        tredje.add(tilbake2, BorderLayout.BEFORE_LINE_BEGINS);
-        tredje.add(vis);
+        andre.add(tilbake2, BorderLayout.BEFORE_LINE_BEGINS);
+        andre.add(vis);
 
         vis.addActionListener(new ActionListener() {
             @Override
@@ -213,23 +217,10 @@ public class BoligGUI2 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //panelKontinuelig.add(første,"1");
-                cl.show(panelKontinuelig,"1");
+                cl.show(panelKontinuelig,"0");
             }
         });
-        /*tredje.setBackground(Color.yellow);
-        for(int i = 0; i < knappenavnpanel1.length; i++){
-            knapperpanel1[i] = new JButton(knappenavnpanel1[i]);
-            tredje.add(knapperpanel1[i]);
-            final String nr = String.valueOf(i+1);
-            knapperpanel1[i].addActionListener(new ActionListener() {
 
-                public void actionPerformed(ActionEvent e) {
-
-                    cl.show(panelKontinuelig,nr);
-
-                }
-            });
-        }*/
 
         //panel4
         fjerde.setLayout(gl);
@@ -344,13 +335,6 @@ public class BoligGUI2 {
                 }
             });
         }
-
-
-
-
-
-        //Sender ved defaultpanelt identifisrt av stringen
-        cl.show(panelKontinuelig,"1");
 
 
         //regler for den kontinuelige rammen kan skiftes her!
