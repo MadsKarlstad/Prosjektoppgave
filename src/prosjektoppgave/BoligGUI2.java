@@ -136,6 +136,22 @@ public class BoligGUI2 {
 
         knapperneders.add(reg);
         knapperneders.add(tilbake);
+        
+        /*Toolkit verktøykasse = Toolkit.getDefaultToolkit();
+        Dimension skjermdimensjon = verktøykasse.getScreenSize();
+        int bredde = skjermdimensjon.width;
+        int høyde = skjermdimensjon.height;
+        
+        setSize( bredde / 4, høyde / 4 );
+        setLocationByPlatform(true);
+        String bildefil = "Bilder/logoliten2.png";
+        URL kilde = BoligGUI.class.getResource(bildefil);
+        if (kilde != null)
+        {
+            ImageIcon bilde = new ImageIcon(kilde);
+            Image ikon = bilde.getImage();    
+            setIconImage(ikon);
+        }*/
 
 
         reg.addActionListener(new ActionListener() {
