@@ -42,6 +42,7 @@ public class BoligGUI2 {
 
     //JTextFields
     JTextField Pnr = new JTextField(18);
+    JTextField Pnr2 = new JTextField(18);
     JTextField Navn = new JTextField(18);
     JTextField Adr = new JTextField(18);
     JTextField Mail = new JTextField(18);
@@ -54,7 +55,7 @@ public class BoligGUI2 {
             "Vis Søkere","Registrer Bolig", "Vis Boliger",
             "vis kontrakter","Statistikk","BoligBrowse"};
     private JTextField[] feltene;
-    private String[] feltnavn = {"PNR","Navn","Adr", "mail", "Tlf", "firma", "reg"};
+    private String[] feltnavn = {"PNR","PNR2","Navn","Adr", "mail", "Tlf", "firma", "reg"};
 
     //Lager et instance av cardlayout og gridlayout
     CardLayout cl = new CardLayout();
@@ -64,7 +65,7 @@ public class BoligGUI2 {
 
         panelKontinuelig.setLayout(cl);//passer cardlayoutet vårt inn i det kontunielige panelet
         //Sender ved defaultpanelt identifisrt av stringen
-        cl.show(panelKontinuelig,"0");
+        cl.show(panelKontinuelig, "0");
 
 
 
@@ -117,8 +118,8 @@ public class BoligGUI2 {
 
         JPanel tekstinput = new JPanel();
         JPanel knapperneders = new JPanel();
-        tekstinput.setLayout(new GridLayout(3,2));
-        knapperneders.setLayout(new GridLayout(2,1));
+        tekstinput.setLayout(new GridLayout(3, 2));
+        knapperneders.setLayout(new GridLayout(2, 1));
 
         Pnr.setText("Personnummer");
         Navn.setText("Navn");
@@ -149,7 +150,7 @@ public class BoligGUI2 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //panelKontinuelig.add(første,"1");
-                cl.show(panelKontinuelig,"0");
+                cl.show(panelKontinuelig, "0");
             }
         });
 
@@ -199,12 +200,34 @@ public class BoligGUI2 {
         //panel 2 (vis Utleiere)
         andre.setLayout(new BorderLayout());
         andre.add(utskriftsområde2, BorderLayout.PAGE_START);
-        knapperneders.setLayout(new GridLayout(2,1));
-        knapperneders.setLayout(new GridLayout(2,1));
+
         JButton tilbake2 = new JButton("Tilbake");
         JButton vis = new JButton("Vis utleiere");
+        JButton søk = new JButton("Søk etter utleier");
+        //JTextField Pnr2 = new JTextField("Personnummer");
+
+        JPanel tekstinput2 = new JPanel();
+        JPanel knapperneders2 = new JPanel();
+        knapperneders2.setLayout(new GridLayout(2,1));
+        tekstinput2.setLayout(new GridLayout(3, 2));
+        knapperneders2.setLayout(new GridLayout(2, 1));
+
+        knapperneders2.add(søk);
+        knapperneders2.add(vis);
+        tekstinput2.add(Pnr2);
+        Pnr2.setText("Personnummer");
+        andre.add(tekstinput2, BorderLayout.CENTER);
+        andre.add(knapperneders2, BorderLayout.PAGE_END);
         andre.add(tilbake2, BorderLayout.BEFORE_LINE_BEGINS);
-        andre.add(vis);
+        /*andre.add(vis);
+        andre.add(søk);*/
+
+        Pnr2.addMouseListener(new MouseAdapter() {
+
+            public void mouseClicked(MouseEvent e) {
+                Pnr2.setText("");
+            }
+        });
 
         vis.addActionListener(new ActionListener() {
             @Override
@@ -213,11 +236,18 @@ public class BoligGUI2 {
             }
         });
 
+        søk.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                finnPerson();
+            }
+        });
+
         tilbake2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //panelKontinuelig.add(første,"1");
-                cl.show(panelKontinuelig,"0");
+                cl.show(panelKontinuelig, "0");
             }
         });
         //endow pnal 2
@@ -367,6 +397,17 @@ public class BoligGUI2 {
     {
         String liste = pregister.skrivListe();
         utskriftsområde2.setText(liste);
+    }
+
+    public void finnPerson()
+    {
+        String pnr = Pnr2.getText();
+        if(pnr.length()!=0)
+        {
+            Person person = pregister.getPerson(pnr);
+            utskriftsområde2.setText(person.toString());
+            //JOptionPane.showMessageDialog(null, person);
+        }
     }
 
     public void visMelding(String melding){
