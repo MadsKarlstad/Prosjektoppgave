@@ -17,10 +17,6 @@ public class MainFrame extends JFrame implements ActionListener {
     private JButton visUtleierBrowse;
     private JButton visLeietakerBrowse;
 
-
-    //paneler for visning av leiligheter og eneboliger
-    //private JPanel boligvinduer;
-
     public static final String MAIN_BOARD = "-1";
 
     private JButton[] knapp;

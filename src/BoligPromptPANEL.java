@@ -10,6 +10,7 @@ public class BoligPromptPANEL extends JPanel implements ActionListener {
 
     private JPanel knappanel;
     private JPanel tilbakepanel;
+    private JPanel overskriftpanel;
     private JButton visLeil;
     private JButton visEnebolig;
     private JButton tilbake;
@@ -33,6 +34,7 @@ public class BoligPromptPANEL extends JPanel implements ActionListener {
 
         knappanel = new JPanel(new GridLayout(1,2,5,5));
         tilbakepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         visLeil = new JButton("Vis leiligheter");
         visEnebolig = new JButton("Vis eneboliger");
@@ -50,8 +52,12 @@ public class BoligPromptPANEL extends JPanel implements ActionListener {
 
         knappanel.add(visEnebolig);
         knappanel.add(visLeil);
+
         tilbakepanel.add(tilbake);
-        add(overskrift,BorderLayout.PAGE_START);
+
+        overskriftpanel.add(overskrift);
+
+        add(overskriftpanel,BorderLayout.PAGE_START);
         add(knappanel, BorderLayout.CENTER);
         add(tilbakepanel,BorderLayout.PAGE_END);
 
