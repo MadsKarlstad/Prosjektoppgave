@@ -71,10 +71,10 @@ public class BoligPromptPANEL extends JPanel implements ActionListener {
             parent.visPanel(MainFrame.MAIN_BOARD);
         }
         else if(e.getSource() == visEnebolig){
-            parent.doClick(1);
+            parent.doClick(2);
         }
         else if(e.getSource() == visLeil){
-            parent.doClick(2);
+            parent.doClick(1);
         }
     }
 }
