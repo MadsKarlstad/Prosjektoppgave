@@ -1,13 +1,10 @@
 
-
-import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Random;
 
 /**
  SLANGEDREAM COPYRIGHT
- TEST
  */
 public class BoligBrowse {
     public static void main(String[] args){
