@@ -3,9 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by Erlend on 16/04/14.
- */
+
 public class MainFrame extends JFrame implements ActionListener {
 
 
@@ -143,7 +141,7 @@ public class MainFrame extends JFrame implements ActionListener {
         visPanel("REG BOLIG");
         }
         else if(e.getSource()  == knapp[VIS_BOLIG]){
-        vinduer.add(new BoligPromptPANEL(bregister,legister,register, this), "VIS PROMPT");
+        vinduer.add(new BoligPromptPANEL(this), "VIS PROMPT");
         visPanel("VIS PROMPT");
         }
         else if(e.getSource()  == knapp[VIS_KONTRAKTER]){
