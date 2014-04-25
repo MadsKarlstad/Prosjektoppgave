@@ -7,6 +7,7 @@ import java.util.Random;
 
 /**
  SLANGEDREAM COPYRIGHT
+ TEST
  */
 public class BoligBrowse {
     public static void main(String[] args){
