@@ -79,7 +79,7 @@ public class MainFrame extends JFrame implements ActionListener {
         visEnebolig = new JButton();
 
         visUtleierBrowse = new JButton();
-        visUtleierBrowse = new JButton();
+        visLeietakerBrowse = new JButton();
 
         for(int i= 0 ; i < knappenavn.length;i++){
 
@@ -92,7 +92,7 @@ public class MainFrame extends JFrame implements ActionListener {
         visEnebolig.addActionListener(this);
 
         visUtleierBrowse.addActionListener(this);
-        visUtleierBrowse.addActionListener(this);
+        visLeietakerBrowse.addActionListener(this);
 
 
     }

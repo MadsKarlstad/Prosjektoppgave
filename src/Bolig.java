@@ -1,7 +1,7 @@
 import java.util.Date;
 
 /**
-SLANGEDREAM COPYRIGHTfuuuuuuck
+SLANGEDREAM COPYRIGHT
  */
 
 public abstract class Bolig implements Hjem {
