@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,18 +12,24 @@ public class BoligPromptPANEL extends JPanel implements ActionListener {
 
     private JPanel knappanel;
     private JPanel tilbakepanel;
-    private JPanel overskriftpanel;
     private JButton visLeil;
     private JButton visEnebolig;
     private JButton tilbake;
     private JLabel overskrift;
+    private Boligregister bregister;
+    private Leilighetregister legister;
+    private Personregister register;
     private MainFrame parent;
+    private Icon leilighetIkon, eneboligIkon;
 
-    private static final int VIS_ENEBOLIG = 2;
-    private static final int VIS_LEILIGHET = 1;
+    private static final int VIS_ENEBOLIG = 0;
+    private static final int VIS_LEIL = 1;
 
-    public BoligPromptPANEL(MainFrame parent){
+    public BoligPromptPANEL(Boligregister bregister,Leilighetregister legister,Personregister register, MainFrame parent){
         super(new BorderLayout());
+        this.bregister = bregister;
+        this.legister = legister;
+        this.register = register;
         this.parent = parent;
         initialiser();
         lagGUI();
@@ -32,12 +40,14 @@ public class BoligPromptPANEL extends JPanel implements ActionListener {
 
         setLayout(new BorderLayout());
 
+        leilighetIkon = new ImageIcon(getClass().getResource("Bilder/Leilighet.png"));
+        eneboligIkon = new ImageIcon(getClass().getResource("Bilder/Enebolig.png"));
+
         knappanel = new JPanel(new GridLayout(1,2,5,5));
         tilbakepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        visLeil = new JButton("Vis leiligheter");
-        visEnebolig = new JButton("Vis eneboliger");
+        visLeil = new JButton(leilighetIkon);
+        visEnebolig = new JButton(eneboligIkon);
         tilbake = new JButton("Tilbake");
 
         overskrift = new JLabel("Velg boligtype");
@@ -52,12 +62,8 @@ public class BoligPromptPANEL extends JPanel implements ActionListener {
 
         knappanel.add(visEnebolig);
         knappanel.add(visLeil);
-
         tilbakepanel.add(tilbake);
-
-        overskriftpanel.add(overskrift);
-
-        add(overskriftpanel,BorderLayout.PAGE_START);
+        add(overskrift,BorderLayout.PAGE_START);
         add(knappanel, BorderLayout.CENTER);
         add(tilbakepanel,BorderLayout.PAGE_END);
 
@@ -69,10 +75,10 @@ public class BoligPromptPANEL extends JPanel implements ActionListener {
             parent.visPanel(MainFrame.MAIN_BOARD);
         }
         else if(e.getSource() == visEnebolig){
-            parent.doClick(VIS_ENEBOLIG);
+            parent.doClick(2);
         }
         else if(e.getSource() == visLeil){
-            parent.doClick(VIS_LEILIGHET);
+            parent.doClick(1);
         }
     }
 }

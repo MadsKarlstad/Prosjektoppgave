@@ -3,6 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Created by madsmkarlstad on 24/04/14.
+ */
 public class BoligBrowsePromptPANEL extends JPanel implements ActionListener {
 
     public JPanel overskriftpanel;
@@ -19,7 +22,6 @@ public class BoligBrowsePromptPANEL extends JPanel implements ActionListener {
     private MainFrame parent;
 
     private Personregister pregister;
-    private Sokerregister sregister;
 
     public BoligBrowsePromptPANEL(Personregister pregister,MainFrame parent){
 
@@ -57,7 +59,7 @@ public class BoligBrowsePromptPANEL extends JPanel implements ActionListener {
         knappepanelpanel.add(finn);
         knappepanelpanel.add(tilbake);
 
-        add(overskriftpanel,BorderLayout.PAGE_START);
+        add(overskrift,BorderLayout.PAGE_START);
         add(feltpanel, BorderLayout.CENTER);
         add(knappepanelpanel, BorderLayout.PAGE_END);
 
@@ -71,11 +73,7 @@ public class BoligBrowsePromptPANEL extends JPanel implements ActionListener {
 
         else
             parent.doClick(4);
-    }
 
-    public String getFødselsnummer(){
-
-        return fødselsnummer.getText();
     }
 
 

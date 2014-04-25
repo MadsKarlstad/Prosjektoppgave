@@ -3,7 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * Created by Erlend on 16/04/14.
+ */
 public class MainFrame extends JFrame implements ActionListener {
 
 
@@ -13,16 +15,18 @@ public class MainFrame extends JFrame implements ActionListener {
 
     private JButton visLeilighet;
     private JButton visEnebolig;
-
     private JButton visUtleierBrowse;
     private JButton visLeietakerBrowse;
 
+
+    //paneler for visning av leiligheter og eneboliger
+    private JPanel boligvinduer;
+
     public static final String MAIN_BOARD = "-1";
 
-    private JButton[] knapp;
-    private String[] knappenavn = { "Registrer utleier","Vis Utleiere","Register Søker",
-            "Vis Søkere","Registrer Bolig", "Vis Boliger",
-            "vis kontrakter","Statistikk","BoligBrowse™"};
+    private JButton regUt, visUt, regSøk, visSøk, regBo, visBo, visKon, stat, boligBrowse;
+    private Icon regUtIkon, visUtIkon, regSøkIkon, visSøkIkon, regBoIkon,
+            visBoIkon, visKonIkon, statIkon, boligBrowseIkon;
 
     private static final int REG_UTLEIER = 0;
     private static final int VIS_UTLEIER = 1;
@@ -40,7 +44,6 @@ public class MainFrame extends JFrame implements ActionListener {
     private Sokerregister sregister;
     private Leilighetregister legister;
 
-    private BoligBrowsePromptPANEL child;
 
     public MainFrame(Personregister register,Boligregister bregister,Sokerregister sregister,Leilighetregister legister){
         super("Bolig Browse™");
@@ -66,30 +69,59 @@ public class MainFrame extends JFrame implements ActionListener {
 
         mainboard = new JPanel(new GridLayout(3,3,5,5));
 
+        
         /*visLeil = new JButton("Vis leilighet");
         visEne = new JButton("Vis enebolig");*/
-        knapp = new JButton[knappenavn.length];
+        regUtIkon = new ImageIcon(getClass().getResource("Bilder/Registrerutleier.png"));
+        visUtIkon = new ImageIcon(getClass().getResource("Bilder/Visutleier.png"));
+        regSøkIkon = new ImageIcon(getClass().getResource("Bilder/Registrersoker.png"));
+        visSøkIkon = new ImageIcon(getClass().getResource("Bilder/Vissoker.png"));
+        visKonIkon = new ImageIcon(getClass().getResource("Bilder/Viskontrakt.png"));
+        statIkon = new ImageIcon(getClass().getResource("Bilder/Statistikk.png"));
+        regBoIkon = new ImageIcon(getClass().getResource("Bilder/Registrerbolig.png"));
+        visBoIkon = new ImageIcon(getClass().getResource("Bilder/Visbolig.png"));
+        boligBrowseIkon = new ImageIcon(getClass().getResource("Bilder/Boligbrowse.png"));
 
         visLeilighet = new JButton();
         visEnebolig = new JButton();
-
         visUtleierBrowse = new JButton();
-        visLeietakerBrowse = new JButton();
 
-        for(int i= 0 ; i < knappenavn.length;i++){
+        regUt = new JButton (regUtIkon);
+        visUt = new JButton (visUtIkon);
+        regSøk = new JButton (regSøkIkon);
+        visSøk = new JButton (visSøkIkon);
+        regBo = new JButton (regBoIkon);
+        visBo = new JButton (visBoIkon);
+        visKon = new JButton (visKonIkon);
+        stat = new JButton (statIkon);
+        boligBrowse = new JButton (boligBrowseIkon);
 
-            knapp[i] = new JButton(knappenavn[i]);
-            mainboard.add(knapp[i]);
-            knapp[i].addActionListener(this);
-        }
+        mainboard.add(regUt);
+        mainboard.add(visUt);
+        mainboard.add(regSøk);
+        mainboard.add(visSøk);
+        mainboard.add(boligBrowse);
+        mainboard.add(regBo);
+        mainboard.add(visBo);
+        mainboard.add(visKon);
+        mainboard.add(stat);
+
+        regUt.addActionListener(this);
+        visUt.addActionListener(this);
+        regSøk.addActionListener(this);
+        visSøk.addActionListener(this);
+        regBo.addActionListener(this);
+        visBo.addActionListener(this);
+        visKon.addActionListener(this);
+        stat.addActionListener(this);
+        boligBrowse.addActionListener(this);
 
         visLeilighet.addActionListener(this);
         visEnebolig.addActionListener(this);
 
         visUtleierBrowse.addActionListener(this);
-        visLeietakerBrowse.addActionListener(this);
+        visUtleierBrowse.addActionListener(this);
 
-        child = new BoligBrowsePromptPANEL(register,this);
 
     }
 
@@ -109,7 +141,7 @@ public class MainFrame extends JFrame implements ActionListener {
                 break;
             case 4:  visLeietakerBrowse.doClick();
                 break;
-    }
+        }
 
     }
 
@@ -119,40 +151,40 @@ public class MainFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == knapp[REG_UTLEIER]){
+        if(e.getSource() == regUt){
             vinduer.add(new RegistrerUtleierPANEL(register, this), "REG UTLEIER");
             visPanel("REG UTLEIER");
-        }else if(e.getSource()  == knapp[VIS_UTLEIER]){
+        }else if(e.getSource()  == visUt){
             vinduer.add(new UtleierOversiktPANEL(register, this), "Oversikt");
             visPanel("Oversikt");
         }
-        else if(e.getSource()  == knapp[REG_SØKER]){
-        vinduer.add(new RegistrerSokerPANEL(sregister, this), "REG SØKER");
-        visPanel("REG SØKER");
+        else if(e.getSource()  == regSøk){
+            vinduer.add(new RegistrerSokerPANEL(sregister, this), "REG SØKER");
+            visPanel("REG SØKER");
         }
-        else if(e.getSource()  == knapp[VIS_SØKER]){
-        vinduer.add(new SokerOversiktPANEL(sregister, this), "OversiktSøker");
-        visPanel("OversiktSøker");
+        else if(e.getSource()  == visSøk){
+            vinduer.add(new SokerOversiktPANEL(sregister, this), "OversiktSøker");
+            visPanel("OversiktSøker");
         }
-        else if(e.getSource()  == knapp[REG_BOLIG]){
-        vinduer.add(new RegistrerBoligPANEL(register,bregister,legister, this), "REG BOLIG");
-        visPanel("REG BOLIG");
+        else if(e.getSource()  == regBo){
+            vinduer.add(new RegistrerBoligPANEL(register,bregister,legister, this), "REG BOLIG");
+            visPanel("REG BOLIG");
         }
-        else if(e.getSource()  == knapp[VIS_BOLIG]){
-        vinduer.add(new BoligPromptPANEL(this), "VIS PROMPT");
-        visPanel("VIS PROMPT");
+        else if(e.getSource()  == visBo){
+            vinduer.add(new BoligPromptPANEL(bregister,legister,register,this), "VIS PROMPT");
+            visPanel("VIS PROMPT");
         }
-        else if(e.getSource()  == knapp[VIS_KONTRAKTER]){
-        vinduer.add(new UtleierOversiktPANEL(register, this), "Oversikt");
-        visPanel("Oversikt");
+        else if(e.getSource()  == visKon){
+            vinduer.add(new UtleierOversiktPANEL(register, this), "Oversikt");
+            visPanel("Oversikt");
         }
-        else if(e.getSource()  == knapp[VIS_STATS]){
-        vinduer.add(new UtleierOversiktPANEL(register, this), "Oversikt");
-        visPanel("Oversikt");
+        else if(e.getSource()  == stat){
+            vinduer.add(new UtleierOversiktPANEL(register, this), "Oversikt");
+            visPanel("Oversikt");
         }
-        else if(e.getSource()  == knapp[VIS_BOLIGBROWSE]){
-        vinduer.add(new BoligBrowsePromptPANEL(register, this), "VIS BOLIGBROWSEPROMPT");
-        visPanel("VIS BOLIGBROWSEPROMPT");
+        else if(e.getSource()  == boligBrowse){
+            vinduer.add(new BoligBrowsePromptPANEL(register, this), "VIS BOLIGBROWSEPROMPT");
+            visPanel("VIS BOLIGBROWSEPROMPT");
         }
         else if(e.getSource()  == visEnebolig){
             vinduer.add(new BoligOversiktPANEL(bregister,register, this), "VIS BOLIG");
@@ -163,18 +195,6 @@ public class MainFrame extends JFrame implements ActionListener {
 
             vinduer.add(new LeilighetOversiktPANEL(legister,register,this), "VIS LEILIGHET");
             visPanel("VIS LEILIGHET");
-        }
-
-        else if(e.getSource()  == visLeietakerBrowse){
-
-            vinduer.add(new BoligBrowseSokerPANEL(sregister,bregister,legister,child, this),"VIS SØKERBROWSE");
-            visPanel("VIS SØKERBROWSE");
-            System.out.println("DU er nå i søkerbrowse!! CONGRATZ");
-        }
-
-        else if(e.getSource()  == visUtleierBrowse){
-
-            System.out.println("utleier not supported");
         }
 
 
