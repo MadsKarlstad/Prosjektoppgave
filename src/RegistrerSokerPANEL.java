@@ -175,6 +175,7 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
             registrer();
             parent.visPanel(MainFrame.MAIN_BOARD);
 
+
         }else if(e.getSource() == avbryt){
             parent.visPanel(MainFrame.MAIN_BOARD);
         }
