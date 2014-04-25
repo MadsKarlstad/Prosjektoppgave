@@ -1,6 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,19 +14,13 @@ public class BoligPromptPANEL extends JPanel implements ActionListener {
     private JButton visEnebolig;
     private JButton tilbake;
     private JLabel overskrift;
-    private Boligregister bregister;
-    private Leilighetregister legister;
-    private Personregister register;
     private MainFrame parent;
 
-    private static final int VIS_ENEBOLIG = 0;
-    private static final int VIS_LEIL = 1;
+    private static final int VIS_ENEBOLIG = 2;
+    private static final int VIS_LEILIGHET = 1;
 
-    public BoligPromptPANEL(Boligregister bregister,Leilighetregister legister,Personregister register, MainFrame parent){
+    public BoligPromptPANEL(MainFrame parent){
         super(new BorderLayout());
-        this.bregister = bregister;
-        this.legister = legister;
-        this.register = register;
         this.parent = parent;
         initialiser();
         lagGUI();
@@ -71,10 +63,10 @@ public class BoligPromptPANEL extends JPanel implements ActionListener {
             parent.visPanel(MainFrame.MAIN_BOARD);
         }
         else if(e.getSource() == visEnebolig){
-            parent.doClick(2);
+            parent.doClick(VIS_ENEBOLIG);
         }
         else if(e.getSource() == visLeil){
-            parent.doClick(1);//Her er endringene
+            parent.doClick(VIS_LEILIGHET);
         }
     }
 }
