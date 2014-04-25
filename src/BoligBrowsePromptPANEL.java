@@ -19,6 +19,7 @@ public class BoligBrowsePromptPANEL extends JPanel implements ActionListener {
     private MainFrame parent;
 
     private Personregister pregister;
+    private Sokerregister sregister;
 
     public BoligBrowsePromptPANEL(Personregister pregister,MainFrame parent){
 
@@ -66,11 +67,12 @@ public class BoligBrowsePromptPANEL extends JPanel implements ActionListener {
 
         if(pregister.finnes(pnr)){
             parent.doClick(3);
+            Utleier utleier = pregister.get(pnr);
+            System.out.println("Hei, " + utleier.getNavn());
         }
 
         else
             parent.doClick(4);
-
     }
 
     public String getFødselsnummer(){

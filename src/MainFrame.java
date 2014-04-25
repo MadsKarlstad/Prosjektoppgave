@@ -40,6 +40,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private Sokerregister sregister;
     private Leilighetregister legister;
 
+    private BoligBrowsePromptPANEL child;
 
     public MainFrame(Personregister register,Boligregister bregister,Sokerregister sregister,Leilighetregister legister){
         super("Bolig Browse™");
@@ -88,6 +89,7 @@ public class MainFrame extends JFrame implements ActionListener {
         visUtleierBrowse.addActionListener(this);
         visLeietakerBrowse.addActionListener(this);
 
+        child = new BoligBrowsePromptPANEL(register,this);
 
     }
 
@@ -165,7 +167,9 @@ public class MainFrame extends JFrame implements ActionListener {
 
         else if(e.getSource()  == visLeietakerBrowse){
 
-            System.out.println("leietaker not supported");
+            vinduer.add(new BoligBrowseSokerPANEL(sregister,bregister,legister,child),"VIS SØKERBROWSE");
+            visPanel("VIS SØKERBROWSE");
+            System.out.println("DU er nå i søkerbrowse!! CONGRATZ");
         }
 
         else if(e.getSource()  == visUtleierBrowse){

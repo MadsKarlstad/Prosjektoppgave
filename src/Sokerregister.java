@@ -1,7 +1,7 @@
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Sokerregister extends TreeMap<String, Person> implements Register{
+public class Sokerregister extends TreeMap<String, Soker> implements Register{
 
     @Override
     public boolean leggTil(Object object) {

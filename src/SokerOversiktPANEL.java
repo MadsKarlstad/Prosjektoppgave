@@ -65,7 +65,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
 
         søkerliste = new LinkedList<Soker>();
 
-        for(Map.Entry<String,Person> entry : pregister.entrySet()) {
+        for(Map.Entry<String,Soker> entry : pregister.entrySet()) {
             søkerliste.add((Soker) entry.getValue());
 
         }
