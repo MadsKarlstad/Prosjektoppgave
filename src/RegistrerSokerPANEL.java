@@ -62,8 +62,6 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
         this.parent = parent;
         initialiser();
         lagGUI();
-
-
     }
 
     public void initialiser() {
@@ -74,7 +72,6 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
         knapppanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         bokspanel = new JPanel(new GridLayout(2,5));
 
-
         felt = new JTextField[feltnavn.length];
         bokser = new JCheckBox[boksnavn.length];
 
@@ -82,7 +79,6 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
             felt[i] = new JTextField(10);
             felt[i].setText(feltnavn[i]);
             felt[i].setHorizontalAlignment(JTextField.CENTER);
-
         }
 
         for (int i = 0; i < boksnavn.length; i++) {
@@ -97,13 +93,9 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
 
         registrer.addActionListener(this);
         avbryt.addActionListener(this);
-
-
     }
 
     public void lagGUI() {
-
-
 
         for (int i = 0; i < felt.length; i++) {
             feltpanel.add(felt[i]);
@@ -112,15 +104,12 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
             bokspanel.add(bokser[i]);
         }
 
-
         knapppanel.add(registrer);
         knapppanel.add(avbryt);
 
         add(feltpanel, BorderLayout.PAGE_START);
         add(bokspanel,BorderLayout.CENTER);
         add(knapppanel, BorderLayout.PAGE_END);
-
-
     }
 
     public void registrer(){
@@ -151,20 +140,13 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
         boolean kjeller = bokser[KJELLER].isSelected();
         boolean heis = bokser[HEIS].isSelected();
 
-
         Person søker = new Soker(fødselsnummer,fornavn,etternavn,adresse, mail, telefonnummer, antpers, sivilstatus,yrke,
                 arbeidsforhold,minareal,maxareal,minpris,maxpris,røyke,dyr,balk,ter,tv,nett,strøm,parkering,kjeller,heis);
-
 
         if(register.leggTil(søker)){
             //gå tilbake til mainframe
             return;
         }
-        //vis feilmelding
-
-
-
-
     }
 
     @Override
@@ -173,9 +155,8 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
 
             registrer();
             parent.visPanel(MainFrame.MAIN_BOARD);
-
-
-        }else if(e.getSource() == avbryt){
+        }
+        else if(e.getSource() == avbryt){
             parent.visPanel(MainFrame.MAIN_BOARD);
         }
     }

@@ -37,12 +37,9 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     }
 
     public void initialiser(){
-
-
         setLayout(new BorderLayout());
 
         knappepanel = new JPanel(new GridLayout(1,3,1,1));
-
 
         neste = new JButton("neste");
         tilbake = new JButton("tilbake");
@@ -55,9 +52,6 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         neste.addActionListener(this);
         tilbake.addActionListener(this);
         avbryt.addActionListener(this);
-
-
-
     }
 
     public void lagGui(){
@@ -67,7 +61,6 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         knappepanel.add(tilbake);
 
         add(knappepanel, BorderLayout.CENTER);
-
     }
 
     public void matchProsent(){
@@ -76,16 +69,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         if(sregister.finnes(pnr)){
             System.out.println("funnet");
         }
-
-
-
-
     }
-
-
-
-
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -93,8 +77,6 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         if (e.getSource() == tilbake){
 
             grandfather.visPanel("VIS BOLIGBROWSEPROMPT");
-
         }
-
     }
 }
