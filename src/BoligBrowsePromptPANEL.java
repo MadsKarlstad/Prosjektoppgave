@@ -67,8 +67,6 @@ public class BoligBrowsePromptPANEL extends JPanel implements ActionListener {
 
         if(pregister.finnes(pnr)){
             parent.doClick(3);
-            Utleier utleier = pregister.get(pnr);
-            System.out.println("Hei, " + utleier.getNavn());
         }
 
         else
