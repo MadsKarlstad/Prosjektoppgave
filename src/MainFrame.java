@@ -21,7 +21,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
 
     //paneler for visning av leiligheter og eneboliger
-    private JPanel boligvinduer;
+    //private JPanel boligvinduer;
 
     public static final String MAIN_BOARD = "-1";
 
@@ -167,6 +167,16 @@ public class MainFrame extends JFrame implements ActionListener {
 
             vinduer.add(new LeilighetOversiktPANEL(legister,register,this), "VIS LEILIGHET");
             visPanel("VIS LEILIGHET");
+        }
+
+        else if(e.getSource()  == visLeietakerBrowse){
+
+            System.out.println("leietaker not supported");
+        }
+
+        else if(e.getSource()  == visUtleierBrowse){
+
+            System.out.println("utleier not supported");
         }
 
 
