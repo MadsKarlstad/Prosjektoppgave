@@ -74,7 +74,7 @@ public class BoligPromptPANEL extends JPanel implements ActionListener {
             parent.doClick(2);
         }
         else if(e.getSource() == visLeil){
-            parent.doClick(1);
+            parent.doClick(1);//Her er endringene
         }
     }
 }
