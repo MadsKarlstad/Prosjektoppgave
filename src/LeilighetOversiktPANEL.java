@@ -47,9 +47,6 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
 
         initialiser();
         lagGUI();
-
-
-
     }
 
     public void initialiser() {
@@ -66,21 +63,11 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
 
         Iterator it = register.entrySet().iterator();
 
-
         leilighetliste = new LinkedList<Leilighet>();
-
-
 
         for(Map.Entry<String,Leilighet> entry : register.entrySet()) {
             leilighetliste.add((Leilighet) entry.getValue());
-
         }
-
-
-
-
-
-
 
         modell = new Leilighetmodell(kolonner, leilighetliste);
 
@@ -97,16 +84,9 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
         endre.addActionListener(this);
         fjern.addActionListener(this);
         tilbake.addActionListener(this);
-
-
-
-
     }
 
     public void visAlle(){
-
-
-
         overskriftpanel.remove(overskrift);
         tabellpanel.remove(scroll);
         scroll.remove(tabell);
@@ -124,51 +104,31 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
 
         revalidate();
         repaint();
-
-
-
     }
-
 
     public void lagGUI(){
         overskriftpanel.add(overskrift);
 
         søkpanel.add(søkfelt);
 
-
-
-
-
-
         tabellpanel.add(søkpanel, BorderLayout.PAGE_START);
         tabellpanel.add(scroll, BorderLayout.CENTER);
-
 
         knapppanel.add(visInfo);
         knapppanel.add(fjern);
         knapppanel.add(tilbake);
         knapppanel.add(endre);
 
-
         add(overskriftpanel, BorderLayout.PAGE_START);
         add(tabellpanel, BorderLayout.CENTER);
         add(knapppanel, BorderLayout.PAGE_END);
-
-
-
-
-
-
-
     }
 
     public void søk(){
 
         temp = new LinkedList<Leilighet>();
 
-
         søkfelt.setBackground(Color.WHITE);
-
 
         String søk = søkfelt.getText().toUpperCase();
 
@@ -202,25 +162,17 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
                     repaint();
 
                     return;
-
                 }
-
-
             }
         }
 
         catch (IndexOutOfBoundsException x){
-
         }
-
-
 
         if(søk.length()== 0){
             visAlle();
             return;
         }
-
-
 
         Iterator it = leilighetliste.iterator();
 
@@ -245,12 +197,8 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
 
             if(adresse.startsWith(søk) || bolignr.startsWith(søk) || utleierfornavn.startsWith(søk) || utleieretternavn.startsWith(søk)
                     ){
-
                 temp.add(leilighet);
-
             }
-
-
         }
 
         if(temp.isEmpty()){
@@ -275,8 +223,6 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
 
         revalidate();
         repaint();
-
-
     }
 
     public void slettUtleier(){

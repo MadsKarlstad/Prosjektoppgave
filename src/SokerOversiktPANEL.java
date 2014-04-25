@@ -44,9 +44,6 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
 
         initialiser();
         lagGUI();
-
-
-
     }
 
     public void initialiser() {
@@ -67,14 +64,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
 
         for(Map.Entry<String,Soker> entry : pregister.entrySet()) {
             søkerliste.add((Soker) entry.getValue());
-
         }
-
-
-
-
-
-
 
         modell = new Sokermodell(kolonner, søkerliste);
 
@@ -91,16 +81,9 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         endre.addActionListener(this);
         fjern.addActionListener(this);
         tilbake.addActionListener(this);
-
-
-
-
     }
 
     public void visAlle(){
-
-
-
         overskriftpanel.remove(overskrift);
         tabellpanel.remove(scroll);
         scroll.remove(tabell);
@@ -118,51 +101,31 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
 
         revalidate();
         repaint();
-
-
-
     }
-
 
     public void lagGUI(){
         overskriftpanel.add(overskrift);
 
         søkpanel.add(søkfelt);
 
-
-
-
-
-
         tabellpanel.add(søkpanel, BorderLayout.PAGE_START);
         tabellpanel.add(scroll, BorderLayout.CENTER);
-
 
         knapppanel.add(visInfo);
         knapppanel.add(fjern);
         knapppanel.add(tilbake);
         knapppanel.add(endre);
 
-
         add(overskriftpanel, BorderLayout.PAGE_START);
         add(tabellpanel, BorderLayout.CENTER);
         add(knapppanel, BorderLayout.PAGE_END);
-
-
-
-
-
-
-
     }
 
     public void søk(){
 
         temp = new LinkedList<Soker>();
 
-
         søkfelt.setBackground(Color.WHITE);
-
 
         String søk = søkfelt.getText().toUpperCase();
 
@@ -196,10 +159,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
                     repaint();
 
                     return;
-
                 }
-
-
             }
         }
 
@@ -207,14 +167,10 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
 
         }
 
-
-
         if(søk.length()== 0){
             visAlle();
             return;
         }
-
-
 
         Iterator it = søkerliste.iterator();
 
@@ -235,7 +191,6 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
                      navn.startsWith(søk)){
 
                 temp.add(søker);
-
             }
         }
 
@@ -261,8 +216,6 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
 
         revalidate();
         repaint();
-
-
     }
 
     public void slettUtleier(){

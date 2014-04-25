@@ -47,9 +47,6 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
 
         initialiser();
         lagGUI();
-
-
-
     }
 
     public void initialiser() {
@@ -66,21 +63,11 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
 
         Iterator it = register.entrySet().iterator();
 
-
         eneboligliste = new LinkedList<Enebolig>();
-
-
 
         for(Map.Entry<String,Enebolig> entry : register.entrySet()) {
             eneboligliste.add((Enebolig) entry.getValue());
-
         }
-
-
-
-
-
-
 
         modell = new Eneboligmodell(kolonner, eneboligliste);
 
@@ -97,16 +84,9 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
         endre.addActionListener(this);
         fjern.addActionListener(this);
         tilbake.addActionListener(this);
-
-
-
-
     }
 
     public void visAlle(){
-
-
-
         overskriftpanel.remove(overskrift);
         tabellpanel.remove(scroll);
         scroll.remove(tabell);
@@ -124,9 +104,6 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
 
         revalidate();
         repaint();
-
-
-
     }
 
 
@@ -135,40 +112,24 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
 
         søkpanel.add(søkfelt);
 
-
-
-
-
-
         tabellpanel.add(søkpanel, BorderLayout.PAGE_START);
         tabellpanel.add(scroll, BorderLayout.CENTER);
-
 
         knapppanel.add(visInfo);
         knapppanel.add(fjern);
         knapppanel.add(tilbake);
         knapppanel.add(endre);
 
-
         add(overskriftpanel, BorderLayout.PAGE_START);
         add(tabellpanel, BorderLayout.CENTER);
         add(knapppanel, BorderLayout.PAGE_END);
-
-
-
-
-
-
-
     }
 
     public void søk(){
 
         temp = new LinkedList<Enebolig>();
 
-
         søkfelt.setBackground(Color.WHITE);
-
 
         String søk = søkfelt.getText().toUpperCase();
 
@@ -202,10 +163,7 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
                     repaint();
 
                     return;
-
                 }
-
-
             }
         }
 
@@ -213,14 +171,10 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
 
         }
 
-
-
         if(søk.length()== 0){
             visAlle();
             return;
         }
-
-
 
         Iterator it = eneboligliste.iterator();
 
@@ -247,10 +201,7 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
                     ){
 
                 temp.add(enebolig);
-
             }
-
-
         }
 
         if(temp.isEmpty()){
@@ -275,8 +226,6 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
 
         revalidate();
         repaint();
-
-
     }
 
     public void slettUtleier(){
