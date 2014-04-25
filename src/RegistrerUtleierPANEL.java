@@ -107,6 +107,7 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener {
         if(e.getSource() == registrer){
 
             registrer();
+            parent.visPanel(MainFrame.MAIN_BOARD);
 
         }else if(e.getSource() == avbryt){
             parent.visPanel(MainFrame.MAIN_BOARD);
