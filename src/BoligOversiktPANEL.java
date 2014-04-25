@@ -279,10 +279,31 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
 
     }
 
+    public void slettUtleier(){
+        JOptionPane.showMessageDialog(null,"Not yet supported");
+    }
+
+    public void endreUtleier(){
+        JOptionPane.showMessageDialog(null,"Not yet supported");
+    }
+
+    public void visInfo(){
+        JOptionPane.showMessageDialog(null,"Not yet supported");
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == tilbake){
             parent.visPanel("VIS PROMPT");
+        }
+        else if(e.getSource() == fjern){
+            slettUtleier();
+        }
+        else if(e.getSource() == endre){
+            endreUtleier();
+        }
+        else if(e.getSource() == visInfo){
+            visInfo();
         }
     }
 

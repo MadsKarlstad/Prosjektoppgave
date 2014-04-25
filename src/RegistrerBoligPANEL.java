@@ -29,7 +29,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
     private final String[]boksnavn = {"røyker","husdyr","balkong","terasse","TVinkludert","internetInkludert","strømInkludert","parkering","kjeller","heis"};
     private final int minusHeis = 1;
 
-//combobokser
+    //combobokser
     private JComboBox<String> beliggenhet;
     private JComboBox<String> boligtype;
 

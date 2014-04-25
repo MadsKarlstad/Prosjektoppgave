@@ -158,7 +158,6 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
 
         if(register.leggTil(søker)){
             //gå tilbake til mainframe
-            System.out.println("Lagt til!");
             return;
         }
         //vis feilmelding
