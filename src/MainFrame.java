@@ -179,8 +179,8 @@ public class MainFrame extends JFrame implements ActionListener {
             visPanel("Oversikt");
         }
         else if(e.getSource()  == stat){
-            vinduer.add(new UtleierOversiktPANEL(register, this), "Oversikt");
-            visPanel("Oversikt");
+            vinduer.add(new VisStatistikkPANEL(bregister,legister,register,sregister, this), "STATS");
+            visPanel("STATS");
         }
         else if(e.getSource()  == boligBrowse){
             vinduer.add(new BoligBrowsePromptPANEL(register, this), "VIS BOLIGBROWSEPROMPT");
