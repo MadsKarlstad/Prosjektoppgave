@@ -28,16 +28,6 @@ public class MainFrame extends JFrame implements ActionListener {
     private Icon regUtIkon, visUtIkon, regSøkIkon, visSøkIkon, regBoIkon,
             visBoIkon, visKonIkon, statIkon, boligBrowseIkon;
 
-    private static final int REG_UTLEIER = 0;
-    private static final int VIS_UTLEIER = 1;
-    private static final int REG_SØKER = 2;
-    private static final int VIS_SØKER = 3;
-    private static final int REG_BOLIG = 4;
-    private static final int VIS_BOLIG = 5;
-    private static final int VIS_KONTRAKTER = 6;
-    private static final int VIS_STATS = 7;
-    private static final int VIS_BOLIGBROWSE = 8;
-
 
     private Personregister register;
     private Boligregister bregister;
