@@ -131,6 +131,8 @@ class Sokermodell extends Tabellmodell<Soker> { //Tabellmodell for søker
     private final int TELEFONUMMER = 5;
     private final int RØYKER = 6;
     private final int HUSDYR = 7;
+    private final int MIN_PRIS = 8;
+    private final int MAKS_PRIS = 9;
     //private final int FIRMA =   sa
 
     public Sokermodell(String[] kolonnenavn, LinkedList<Soker> data) {
@@ -174,6 +176,10 @@ class Sokermodell extends Tabellmodell<Soker> { //Tabellmodell for søker
                     h="Nei";
                     return h;
                 }
+            case MIN_PRIS:
+                return søker.getMinPris();
+            case MAKS_PRIS:
+                return søker.getMaksPris();
             default:
                 return null;
         }

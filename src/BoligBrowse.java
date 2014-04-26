@@ -60,7 +60,7 @@ public class BoligBrowse {
         int minareal = 0;
         int maksareal = 100;
         int minpris = 0;
-        int makspris = 100000;
+        int[] makspris = {1000,2000,3000,4000,5000,6000,7000,8000,9000,10000,11000,12000,13000,14000,15000};
 
         Random r = new Random();
 
@@ -95,11 +95,9 @@ public class BoligBrowse {
             boolean parkeringinn = parkering[r.nextInt(parkering.length)];
             boolean kjellerinn = kjeller[r.nextInt(kjeller.length)];
             boolean heisinn = kjeller[r.nextInt(kjeller.length)];
+            int mpris = makspris[r.nextInt(makspris.length)];
 
-
-
-
-            Soker soker = new Soker(String.valueOf(i+1),fornavn,etternavn,adresse,mail,String.valueOf(i+100),antpersoner,sivstat,work,arbforhold,minareal,maksareal,minpris,makspris,røykeinn,husdyrinn,balkonginn,terasseinn,TVinn,internetinn,strøminn,parkeringinn,kjellerinn,heisinn);
+            Soker soker = new Soker(String.valueOf(i+1),fornavn,etternavn,adresse,mail,String.valueOf(i+100),antpersoner,sivstat,work,arbforhold,minareal,maksareal,minpris,mpris,røykeinn,husdyrinn,balkonginn,terasseinn,TVinn,internetinn,strøminn,parkeringinn,kjellerinn,heisinn);
             sregister.leggTil(soker);
         }
 
