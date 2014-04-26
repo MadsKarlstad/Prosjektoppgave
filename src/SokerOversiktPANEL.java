@@ -22,7 +22,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
     private JTable tabell;
     private JScrollPane scroll;
     private Sokermodell modell;
-    private final String[] kolonner = {"Fødselsnummer", "Fornavn", "Etternavn", "Adresse", "Mail", "Telefonnummer"};
+    private final String[] kolonner = {"Fødselsnummer", "Fornavn", "Etternavn", "Adresse", "Mail", "Telefonnummer","Røyker","Husdyr"};
 
     private JButton visInfo;
     private JButton endre;

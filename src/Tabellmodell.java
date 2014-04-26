@@ -116,10 +116,10 @@ class Utleiermodell extends Tabellmodell<Utleier> {
 
     }
 
-    /*public Utleier getValueAt(int rad) {
+    public Utleier getValueAt(int rad) {
         return (Utleier) super.getData().get(rad);
 
-    }*/
+    }
 }
 class Sokermodell extends Tabellmodell<Soker> { //Tabellmodell for søker
 
@@ -129,6 +129,8 @@ class Sokermodell extends Tabellmodell<Soker> { //Tabellmodell for søker
     private final int ADRESSE = 3;
     private final int MAIL = 4;
     private final int TELEFONUMMER = 5;
+    private final int RØYKER = 6;
+    private final int HUSDYR = 7;
     //private final int FIRMA =   sa
 
     public Sokermodell(String[] kolonnenavn, LinkedList<Soker> data) {
@@ -151,6 +153,27 @@ class Sokermodell extends Tabellmodell<Soker> { //Tabellmodell for søker
                 return søker.getMail();
             case TELEFONUMMER:
                 return søker.getTelefonnummer();
+            case RØYKER:
+                String s = "";
+                if(søker.isRøyk()==true){
+                    s = "Ja";
+                    return s;
+                }
+                else{
+                    s="Nei";
+                    return s;
+                }
+
+            case HUSDYR:
+                String h = "";
+                if(søker.isHusdyr()==true){
+                    h = "Ja";
+                    return h;
+                }
+                else{
+                    h="Nei";
+                    return h;
+                }
             default:
                 return null;
         }
@@ -254,7 +277,6 @@ class Leilighetmodell extends Tabellmodell<Leilighet> { //Tabellmodell for enebo
             default:
                 return null;
         }
-
     }
 
     public Leilighet getValueAt(int rad) {
