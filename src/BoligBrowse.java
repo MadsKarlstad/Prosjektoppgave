@@ -12,6 +12,7 @@ public class BoligBrowse {
         Sokerregister sregister = new Sokerregister();
         Boligregister bregister = new Boligregister();
         Leilighetregister legister = new Leilighetregister();
+        Kontraktregister kregister = new Kontraktregister();
 
         MainFrame frame;
 
@@ -33,6 +34,10 @@ public class BoligBrowse {
         String[] arbeidsforhold = {"UIO","HIOA","UIB","NTNU","Aker Solutions","Microsoft","Apple Inc.","Monstermasten","Illuminati"};
 
         String[] domene = {"hotmail.com","me.com","gmail.com","yahoo.com","live.no","hotmail.no"};
+
+        String[] fradato = {"01.06.14","01.07.14","01.08.14"};
+
+        String[] tildato = {"01.06.19","01.07.19","01.08.19"};
 
         int[] boareal = {20,30,40,50,60,70,80};
         int[] antrom = {1,2,3,4,5,6};
@@ -145,9 +150,6 @@ public class BoligBrowse {
             boolean internet = nett[r.nextInt(nett.length)];
             boolean s = strøm[r.nextInt(strøm.length)];
             boolean park = parkering[r.nextInt(parkering.length)];
-            boolean kj = kjeller[r.nextInt(kjeller.length)];
-            double tmt = tomt[r.nextInt(tomt.length)];
-            int bad = antbad[r.nextInt(antbad.length)];
             String ledig = ledigfra[r.nextInt(ledigfra.length)];
             String beskriv = beskrivLeil[r.nextInt(beskrivLeil.length)];
             int antboder = boder[r.nextInt(boder.length)];
@@ -157,6 +159,23 @@ public class BoligBrowse {
             Leilighet leilighet = new Leilighet(adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
                     TV,internet,s,park,antboder,etasje,elevator);
             legister.leggTil(leilighet);
+        }
+
+        for(int i = 0; i < 10; i++){
+            String eierpnr = String.valueOf(i+1);
+            String sokerpnr = String.valueOf(i+1000);
+            String bolignr = String.valueOf(i+1);
+            Utleier eier = register.get(eierpnr);
+            Soker soker = sregister.get(sokerpnr);
+            Bolig bolig = legister.get(bolignr);
+            String fornavn = fornavns[r.nextInt(fornavns.length)];
+            int p = pris[r.nextInt(pris.length)];
+            String fra = fradato[r.nextInt(fradato.length)];
+            String til = tildato[r.nextInt(tildato.length)];
+
+            Kontrakt kontrakt = new Kontrakt(String.valueOf(i+1), bolig, eier, soker,p,fra,til);
+
+            kregister.leggTil(kontrakt);
         }
 
         frame = new MainFrame(register,bregister,sregister,legister);

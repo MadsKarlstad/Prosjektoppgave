@@ -33,6 +33,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private Boligregister bregister;
     private Sokerregister sregister;
     private Leilighetregister legister;
+    private Kontraktregister kregister;
 
 
     public MainFrame(Personregister register,Boligregister bregister,Sokerregister sregister,Leilighetregister legister){
@@ -165,8 +166,8 @@ public class MainFrame extends JFrame implements ActionListener {
             visPanel("VIS PROMPT");
         }
         else if(e.getSource()  == visKon){
-            vinduer.add(new UtleierOversiktPANEL(register, this), "Oversikt");
-            visPanel("Oversikt");
+            vinduer.add(new KontraktOversiktPANEL(bregister,legister,sregister,register,kregister, this), "VIS KONTRAKTER");
+            visPanel("VIS KONTRAKTER");
         }
         else if(e.getSource()  == stat){
             vinduer.add(new VisStatistikkPANEL(bregister,legister,register,sregister, this), "STATS");

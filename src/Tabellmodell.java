@@ -289,3 +289,47 @@ class Leilighetmodell extends Tabellmodell<Leilighet> { //Tabellmodell for enebo
         return (Leilighet) super.getData().get(rad);
     }
 }
+
+class Kontraktmodell extends Tabellmodell<Kontrakt> {
+
+    private final int BOLIG = 0;
+    private final int EIER = 1;
+    private final int LEIER = 2;
+    private final int KONTRAKTNR = 3;
+    private final int PRIS = 4;
+    private final int FRA = 5;
+    private final int TIL = 6;
+
+    public Kontraktmodell(String[] kolonnenavn, LinkedList<Kontrakt> data) {
+        super(kolonnenavn, data);
+    }
+
+    public Object getValueAt(int rad, int kol) {
+        Kontrakt kontrakt = (Kontrakt) super.getData().get(rad);
+
+        switch (kol) {
+            case BOLIG:
+                return kontrakt.getBolignr();
+            case EIER:
+                return kontrakt.getUtleiernavn();
+            case LEIER:
+                return kontrakt.getLeietagernavn();
+            case KONTRAKTNR:
+                return kontrakt.getKontraktnr();
+            case PRIS:
+                return kontrakt.getPris();
+            case FRA:
+                return kontrakt.getFra();
+            case TIL:
+                return kontrakt.getTil();
+            default:
+                return null;
+        }
+
+    }
+
+    public Kontrakt getValueAt(int rad) {
+        return (Kontrakt) super.getData().get(rad);
+
+    }
+}
