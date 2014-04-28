@@ -27,15 +27,17 @@ public class VisStatistikkPANEL extends JPanel implements ActionListener {
     private Leilighetregister legister;
     private Personregister register;
     private Sokerregister sregister;
+    private Kontraktregister kregister;
 
     private MainFrame parent;
 
-    public VisStatistikkPANEL(Boligregister bregister,Leilighetregister legister,Personregister register,Sokerregister sregister, MainFrame parent){
+    public VisStatistikkPANEL(Boligregister bregister,Leilighetregister legister,Personregister register,Sokerregister sregister,Kontraktregister kregister, MainFrame parent){
         super(new BorderLayout());
         this.bregister = bregister;
         this.legister = legister;
         this.register = register;
         this.sregister = sregister;
+        this.kregister = kregister;
         this.parent = parent;
         initialiser();
         lagGUI();
@@ -63,7 +65,8 @@ public class VisStatistikkPANEL extends JPanel implements ActionListener {
         String stats = "Antall utleiere BoligBrowse™ har registrert i sine systemer: " + register.size()
                         +"\n\nAntall boligsøkere BoligBrowse™ har registrert i sine systemer: " + sregister.size()
                         +"\n\nAntall leiligheter BoligBrowse™ har registrert for leie i sine systemer: " + legister.size()
-                        +"\n\nAntall eneboliger BoligBrowse™ har registrert for leie i sine systemer: " + bregister.size();
+                        +"\n\nAntall eneboliger BoligBrowse™ har registrert for leie i sine systemer: " + bregister.size()
+                        +"\n\nAntall kontrakter BoligBrowse™ har registrert i sine systemer: " + kregister.size();
 
         utleierutskriftsområde.setText(stats);
 

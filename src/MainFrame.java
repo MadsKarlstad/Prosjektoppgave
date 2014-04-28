@@ -171,7 +171,7 @@ public class MainFrame extends JFrame implements ActionListener {
             visPanel("VIS KONTRAKTER");
         }
         else if(e.getSource()  == stat){
-            vinduer.add(new VisStatistikkPANEL(bregister,legister,register,sregister, this), "STATS");
+            vinduer.add(new VisStatistikkPANEL(bregister,legister,register,sregister,kregister, this), "STATS");
             visPanel("STATS");
         }
         else if(e.getSource()  == boligBrowse){

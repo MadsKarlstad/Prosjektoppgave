@@ -24,7 +24,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
     private JTable tabell;
     private JScrollPane scroll;
     private Kontraktmodell modell;
-    private final String[] kolonner = {"Adresse", "Boareal", "Antall rom", "Byggeår", "Beskrivelse", "Pris", "Ledig fra","Bolignr"};
+    private final String[] kolonner = {"Kontraktnr", "Eier", "Leier","Bolignr", "Pris", "Fra", "Til"};
 
     private JButton visInfo;
     private JButton endre;
@@ -104,7 +104,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         scroll = new JScrollPane(tabell);
         tabellpanel.add(scroll, BorderLayout.CENTER);
 
-        overskrift = new JLabel("Antall leiligheter: " + kontraktliste.size());
+        overskrift = new JLabel("Antall kontrakter: " + kontraktliste.size());
         overskriftpanel.add(overskrift);
 
         revalidate();
@@ -242,7 +242,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == tilbake){
-            parent.visPanel("VIS PROMPT");
+            parent.visPanel(MainFrame.MAIN_BOARD);
         }
         else if(e.getSource() == fjern){
             slettUtleier();
