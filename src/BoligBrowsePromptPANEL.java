@@ -19,11 +19,13 @@ public class BoligBrowsePromptPANEL extends JPanel implements ActionListener {
     private MainFrame parent;
 
     private Personregister pregister;
+    private Sokerregister sregister;
 
-    public BoligBrowsePromptPANEL(Personregister pregister,MainFrame parent){
+    public BoligBrowsePromptPANEL(Personregister pregister,Sokerregister sregister,MainFrame parent){
 
         setLayout(new BorderLayout());
         this.pregister = pregister;
+        this.sregister = sregister;
         this.parent = parent;
 
         initialiser();
@@ -66,18 +68,21 @@ public class BoligBrowsePromptPANEL extends JPanel implements ActionListener {
 
         if(pregister.finnes(pnr)){
             parent.doClick(3);
+            Utleier utleier = pregister.get(pnr);
+            System.out.println("Hei, "+utleier.getNavn());
+
         }
 
-        else
+        else{
             parent.doClick(4);
-
+            Soker soker = sregister.get(pnr);
+            System.out.println("Hei, "+soker.getNavn());
+        }
     }
 
-    public String getFødselsnummer(){
-
+    public String getPnr(){
         return fødselsnummer.getText();
     }
-
 
 
 

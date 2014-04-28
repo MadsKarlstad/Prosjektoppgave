@@ -117,7 +117,7 @@ public class MainFrame extends JFrame implements ActionListener {
         visUtleierBrowse.addActionListener(this);
         visLeietakerBrowse.addActionListener(this);
 
-        child = new BoligBrowsePromptPANEL(register,this);
+        child = new BoligBrowsePromptPANEL(register,sregister,this);
 
 
 
@@ -181,7 +181,7 @@ public class MainFrame extends JFrame implements ActionListener {
             visPanel("STATS");
         }
         else if(e.getSource()  == boligBrowse){
-            vinduer.add(new BoligBrowsePromptPANEL(register, this), "VIS BOLIGBROWSEPROMPT");
+            vinduer.add(new BoligBrowsePromptPANEL(register,sregister, this), "VIS BOLIGBROWSEPROMPT");
             visPanel("VIS BOLIGBROWSEPROMPT");
         }
         else if(e.getSource()  == visEnebolig){

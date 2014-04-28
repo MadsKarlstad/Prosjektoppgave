@@ -21,6 +21,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     private Leilighetregister legister;
 
     private String pnr;
+    private Soker soker;
 
     private BoligBrowsePromptPANEL parent;
     private MainFrame grandfather;
@@ -31,6 +32,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         this.legister = legister;
         this.parent = parent;
         this.grandfather = grandfather;
+
 
         initialiser();
         lagGui();
@@ -45,7 +47,8 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         tilbake = new JButton("tilbake");
         avbryt = new JButton("forrige");
 
-        //pnr = parent.getFø
+
+
         matchProsent();
         lagGui();
 
@@ -64,11 +67,6 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     }
 
     public void matchProsent(){
-
-        System.out.println("matchprosent kalt på");
-        /*if(sregister.finnes(pnr)){
-            System.out.println("funnet");
-        }*/
     }
 
     @Override
