@@ -163,12 +163,11 @@ public class BoligBrowse {
 
         for(int i = 0; i < 10; i++){
             String eierpnr = String.valueOf(i+1);
-            String sokerpnr = String.valueOf(i+1000);
+            String sokerpnr = String.valueOf(i+1001);
             String bolignr = String.valueOf(i+1);
             Utleier eier = register.get(eierpnr);
             Soker soker = sregister.get(sokerpnr);
             Bolig bolig = legister.get(bolignr);
-            String fornavn = fornavns[r.nextInt(fornavns.length)];
             int p = pris[r.nextInt(pris.length)];
             String fra = fradato[r.nextInt(fradato.length)];
             String til = tildato[r.nextInt(tildato.length)];
@@ -176,8 +175,9 @@ public class BoligBrowse {
             Kontrakt kontrakt = new Kontrakt(String.valueOf(i+1), bolig, eier, soker,p,fra,til);
 
             kregister.leggTil(kontrakt);
-        }
 
+        }
+        System.out.println(kregister);
         frame = new MainFrame(register,bregister,sregister,legister);
         frame.setVisible(true);
 

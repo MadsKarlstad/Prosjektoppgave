@@ -177,4 +177,9 @@ public class Soker extends Person{
         return heis;
     }
 
+    public String getNavn(){
+        String navn = getFornavn() + " " + getEtternavn();
+        return navn;
+    }
+
 }

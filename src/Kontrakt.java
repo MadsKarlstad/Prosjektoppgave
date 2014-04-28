@@ -70,14 +70,14 @@ leieavtalens varighet (tidrom)*/
         return til;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Kontrakt for leie av bolig med bolignummer: " +
                 bolig.getBolignr() +
                 "\n utleier: " + utleier.getNavn() +
-                "\n leietager:" + leietager.getNavn() +
+                "\n leietager:" + leietager +
                 "\n pris:" + pris +
                 "\n fra:" + fra +
                 "\n til" + til;
-    }
+    }*/
 }

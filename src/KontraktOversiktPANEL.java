@@ -55,6 +55,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
 
         initialiser();
         lagGUI();
+
     }
 
     public void initialiser() {
@@ -69,7 +70,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
 
         søkfelt.getDocument().addDocumentListener(this);
 
-        Iterator it = register.entrySet().iterator();
+        Iterator it = kregister.entrySet().iterator();
 
         kontraktliste = new LinkedList<Kontrakt>();
 
@@ -191,20 +192,6 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
             Kontrakt kontrakt = (Kontrakt) it.next();
 
             String kontraktnr = kontrakt.getKontraktnr();
-            //String fødselsnummer = enebolig.getBoareal().toUpperCase();
-            //String fornavn = utleier.getFornavn().toUpperCase();
-            //String etternavn = utleier.getEtternavn().toUpperCase();
-            /*String adresse = enebolig.getAdresse().toUpperCase();
-            boolean røyke = enebolig.røyke();
-            String ledigfra = enebolig.getLedigDato();
-            String bolignr = enebolig.getBolignr().toUpperCase();
-            utleier = enebolig.getEier();
-            String utleierfornavn = utleier.getFornavn().toUpperCase();
-            String utleieretternavn = utleier.getEtternavn().toUpperCase();
-            String mail = utleier.getMail().toUpperCase();
-            String telfonnummer = utleier.getTelefonnummer().toUpperCase();
-            String firma = utleier.getFirma().toUpperCase();
-            String navn = utleier.getNavn().toUpperCase();*/
 
             if(kontraktnr.startsWith(søk)
                     ){
@@ -264,6 +251,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
             visInfo();
         }
     }
+
 
     @Override
     public void insertUpdate(DocumentEvent documentEvent) {
