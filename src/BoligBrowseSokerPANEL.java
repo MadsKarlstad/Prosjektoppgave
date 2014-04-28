@@ -66,9 +66,9 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     public void matchProsent(){
 
         System.out.println("matchprosent kalt på");
-        if(sregister.finnes(pnr)){
+        /*if(sregister.finnes(pnr)){
             System.out.println("funnet");
-        }
+        }*/
     }
 
     @Override

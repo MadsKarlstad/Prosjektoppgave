@@ -35,6 +35,8 @@ public class MainFrame extends JFrame implements ActionListener {
     private Leilighetregister legister;
     private Kontraktregister kregister;
 
+    private BoligBrowsePromptPANEL child;
+
 
     public MainFrame(Personregister register,Boligregister bregister,Sokerregister sregister,Leilighetregister legister, Kontraktregister kregister){
         super("Bolig Browse™");
@@ -77,6 +79,7 @@ public class MainFrame extends JFrame implements ActionListener {
         visLeilighet = new JButton();
         visEnebolig = new JButton();
         visUtleierBrowse = new JButton();
+        visLeietakerBrowse = new JButton();
 
         regUt = new JButton (regUtIkon);
         visUt = new JButton (visUtIkon);
@@ -112,7 +115,10 @@ public class MainFrame extends JFrame implements ActionListener {
         visEnebolig.addActionListener(this);
 
         visUtleierBrowse.addActionListener(this);
-        visUtleierBrowse.addActionListener(this);
+        visLeietakerBrowse.addActionListener(this);
+
+        child = new BoligBrowsePromptPANEL(register,this);
+
 
 
     }
@@ -187,6 +193,18 @@ public class MainFrame extends JFrame implements ActionListener {
 
             vinduer.add(new LeilighetOversiktPANEL(legister,register,this), "VIS LEILIGHET");
             visPanel("VIS LEILIGHET");
+        }
+
+        else if(e.getSource()  == visLeietakerBrowse){
+
+            vinduer.add(new BoligBrowseSokerPANEL(sregister,bregister,legister,child, this),"VIS SØKERBROWSE");
+            visPanel("VIS SØKERBROWSE");
+            System.out.println("DU er nå i søkerbrowse!! CONGRATZ");
+        }
+
+        else if(e.getSource()  == visUtleierBrowse){
+
+            System.out.println("utleier not supported");
         }
 
 
