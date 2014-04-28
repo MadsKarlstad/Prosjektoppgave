@@ -47,8 +47,6 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         tilbake = new JButton("tilbake");
         avbryt = new JButton("forrige");
 
-
-
         matchProsent();
         lagGui();
 
@@ -67,6 +65,8 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     }
 
     public void matchProsent(){
+        pnr = parent.getPnr();
+        System.out.println("Pnr: "+pnr);
     }
 
     @Override
