@@ -177,8 +177,7 @@ public class BoligBrowse {
             kregister.leggTil(kontrakt);
 
         }
-        System.out.println(kregister);
-        frame = new MainFrame(register,bregister,sregister,legister);
+        frame = new MainFrame(register,bregister,sregister,legister,kregister);
         frame.setVisible(true);
 
         frame.addWindowListener(

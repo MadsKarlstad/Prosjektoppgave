@@ -24,7 +24,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
     private JTable tabell;
     private JScrollPane scroll;
     private Kontraktmodell modell;
-    private final String[] kolonner = {"Bolignummer", "Utleier", "Leietager", "Kontraktnummer", "Pris", "Fra dato", "Til dato"};
+    private final String[] kolonner = {"Adresse", "Boareal", "Antall rom", "Byggeår", "Beskrivelse", "Pris", "Ledig fra","Bolignr"};
 
     private JButton visInfo;
     private JButton endre;
@@ -35,27 +35,23 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
     private LinkedList<Kontrakt> temp;//listen som omfatter søket vårt
 
     private Utleier utleier;
-    private Soker soker;
-    private Boligregister register;
     private Leilighetregister legister;
     private Personregister pregister;
+    private Kontraktregister register;
+    private Boligregister bregister;
     private Sokerregister sregister;
-    private Kontraktregister kregister;
     private MainFrame parent;
 
-    public KontraktOversiktPANEL(Boligregister register, Leilighetregister legister, Sokerregister sregister, Personregister pregister, Kontraktregister kregister, MainFrame parent) {
+    public KontraktOversiktPANEL(Kontraktregister register,Leilighetregister legister, Personregister pregister, MainFrame parent) {
 
         super(new BorderLayout());
         this.register = register;
-        this.kregister = kregister;
-        this.sregister = sregister;
+        this.parent = parent;
         this.legister = legister;
         this.pregister = pregister;
-        this.parent = parent;
 
         initialiser();
         lagGUI();
-
     }
 
     public void initialiser() {
@@ -64,17 +60,17 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         tabellpanel = new JPanel(new BorderLayout());
         knapppanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        overskrift = new JLabel("Antall kontrakter: " + kregister.size());
+        overskrift = new JLabel("Antall kontrakter: " + register.size());
         søkfelt = new JTextField(10);
         tabell = new JTable();
 
         søkfelt.getDocument().addDocumentListener(this);
 
-        Iterator it = kregister.entrySet().iterator();
+        Iterator it = register.entrySet().iterator();
 
         kontraktliste = new LinkedList<Kontrakt>();
 
-        for(Map.Entry<String,Kontrakt> entry : kregister.entrySet()) {
+        for(Map.Entry<String,Kontrakt> entry : register.entrySet()) {
             kontraktliste.add((Kontrakt) entry.getValue());
         }
 
@@ -108,13 +104,12 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         scroll = new JScrollPane(tabell);
         tabellpanel.add(scroll, BorderLayout.CENTER);
 
-        overskrift = new JLabel("Antall kontrakter: " + kontraktliste.size());
+        overskrift = new JLabel("Antall leiligheter: " + kontraktliste.size());
         overskriftpanel.add(overskrift);
 
         revalidate();
         repaint();
     }
-
 
     public void lagGUI(){
         overskriftpanel.add(overskrift);
@@ -148,7 +143,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
 
                 String kontraktnr = søk.substring(0,søk.length() - 1);
 
-                Kontrakt kontrakt = (Kontrakt) kregister.getObject(kontraktnr);
+                Kontrakt kontrakt = (Kontrakt) register.getObject(kontraktnr);
 
                 if(kontrakt != null){
 
@@ -177,7 +172,6 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         }
 
         catch (IndexOutOfBoundsException x){
-
         }
 
         if(søk.length()== 0){
@@ -191,11 +185,20 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
 
             Kontrakt kontrakt = (Kontrakt) it.next();
 
-            String kontraktnr = kontrakt.getKontraktnr();
+            //String fødselsnummer = enebolig.getBoareal().toUpperCase();
+            //String fornavn = utleier.getFornavn().toUpperCase();
+            //String etternavn = utleier.getEtternavn().toUpperCase();
+            //boolean røyke = enebolig.røyke();
+            //String ledigfra = leilighet.getLedigDato();
+            String kontraktnr = kontrakt.getBolignr().toUpperCase();
+
+            /*String mail = utleier.getMail().toUpperCase();
+            String telfonnummer = utleier.getTelefonnummer().toUpperCase();
+            String firma = utleier.getFirma().toUpperCase();
+            String navn = utleier.getNavn().toUpperCase();*/
 
             if(kontraktnr.startsWith(søk)
                     ){
-
                 temp.add(kontrakt);
             }
         }
@@ -251,7 +254,6 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
             visInfo();
         }
     }
-
 
     @Override
     public void insertUpdate(DocumentEvent documentEvent) {

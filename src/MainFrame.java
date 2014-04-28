@@ -36,7 +36,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private Kontraktregister kregister;
 
 
-    public MainFrame(Personregister register,Boligregister bregister,Sokerregister sregister,Leilighetregister legister){
+    public MainFrame(Personregister register,Boligregister bregister,Sokerregister sregister,Leilighetregister legister, Kontraktregister kregister){
         super("Bolig Browse™");
         setLayout(new BorderLayout());
 
@@ -44,6 +44,7 @@ public class MainFrame extends JFrame implements ActionListener {
         this.sregister = sregister;
         this.bregister = bregister;
         this.legister = legister;
+        this.kregister = kregister;
 
         initialiser();
 
@@ -166,7 +167,7 @@ public class MainFrame extends JFrame implements ActionListener {
             visPanel("VIS PROMPT");
         }
         else if(e.getSource()  == visKon){
-            vinduer.add(new KontraktOversiktPANEL(bregister,legister,sregister,register,kregister, this), "VIS KONTRAKTER");
+            vinduer.add(new KontraktOversiktPANEL(kregister,legister,register, this), "VIS KONTRAKTER");
             visPanel("VIS KONTRAKTER");
         }
         else if(e.getSource()  == stat){
