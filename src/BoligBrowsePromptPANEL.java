@@ -70,24 +70,17 @@ public class BoligBrowsePromptPANEL extends JPanel implements ActionListener {
 
         if(pregister.finnes(pnr)){
             parent.doClick(3);
-            Utleier utleier = pregister.get(pnr);
-            System.out.println("Hei, "+utleier.getNavn());
 
         }
 
         else{
             parent.doClick(4);
-            Soker soker = sregister.get(pnr);
-            //System.out.println("Hei, "+soker.getNavn());
         }
     }
 
-    public void setPnr(String pnr){
-        fødselsnr = pnr;
-    }
 
     public String getPnr(){
-        return fødselsnr;
+        return fødselsnummer.getText();
     }
 
     @Override
@@ -96,12 +89,15 @@ public class BoligBrowsePromptPANEL extends JPanel implements ActionListener {
         if(e.getSource() == finn){
 
             finnPerson(fødselsnummer.getText());
-            setPnr(fødselsnummer.getText());
+            System.out.println("i prompt : " + getPnr());
+            System.out.println("metode i prompt : " + getPnr());
+
         }
 
         else if(e.getSource() == tilbake){
 
             parent.visPanel(MainFrame.MAIN_BOARD);
+
         }
 
     }

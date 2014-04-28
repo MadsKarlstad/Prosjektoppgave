@@ -20,16 +20,18 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     private Boligregister bregister;
     private Leilighetregister legister;
 
-    private String pnr;
     private Soker soker;
 
     private BoligBrowsePromptPANEL parent;
     private MainFrame grandfather;
 
-    public BoligBrowseSokerPANEL(Sokerregister sregister, Boligregister bregister, Leilighetregister legister, BoligBrowsePromptPANEL parent, MainFrame grandfather) {
+    private String personnummer;
+
+    public BoligBrowseSokerPANEL(Sokerregister sregister, Boligregister bregister, Leilighetregister legister, String personnummer, BoligBrowsePromptPANEL parent, MainFrame grandfather) {
         this.sregister = sregister;
         this.bregister = bregister;
         this.legister = legister;
+        this.personnummer = personnummer;
         this.parent = parent;
         this.grandfather = grandfather;
 
@@ -53,6 +55,8 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         neste.addActionListener(this);
         tilbake.addActionListener(this);
         avbryt.addActionListener(this);
+
+
     }
 
     public void lagGui(){
@@ -65,8 +69,8 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     }
 
     public void matchProsent(){
-        pnr = parent.getPnr();
-        System.out.println("Pnr: "+pnr);
+
+        System.out.println("i boligbrowse : " + personnummer);
     }
 
     @Override

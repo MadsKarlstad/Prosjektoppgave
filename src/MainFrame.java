@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
+ *
+ * hei
  * Created by Erlend on 16/04/14.
  */
 public class MainFrame extends JFrame implements ActionListener {
@@ -36,6 +38,8 @@ public class MainFrame extends JFrame implements ActionListener {
     private Kontraktregister kregister;
 
     private BoligBrowsePromptPANEL child;
+
+    private String pnr;
 
 
     public MainFrame(Personregister register,Boligregister bregister,Sokerregister sregister,Leilighetregister legister, Kontraktregister kregister){
@@ -119,6 +123,10 @@ public class MainFrame extends JFrame implements ActionListener {
 
         child = new BoligBrowsePromptPANEL(register,sregister,this);
 
+        pnr = child.getPnr();
+
+        System.out.println("variable i mainframe : " + pnr);
+
 
 
     }
@@ -197,7 +205,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         else if(e.getSource()  == visLeietakerBrowse){
 
-            vinduer.add(new BoligBrowseSokerPANEL(sregister,bregister,legister,child, this),"VIS SØKERBROWSE");
+            vinduer.add(new BoligBrowseSokerPANEL(sregister,bregister,legister, pnr ,child, this),"VIS SØKERBROWSE");
             visPanel("VIS SØKERBROWSE");
             System.out.println("DU er nå i søkerbrowse!! CONGRATZ");
         }
