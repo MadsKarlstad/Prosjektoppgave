@@ -197,9 +197,33 @@ public class Soker extends Person{
         double sum = 0;
         for (Map.Entry<String, Enebolig> entry : eneboligregister.entrySet()){
             if(isRøyk() == entry.getValue().røyke()){
-                eneboligliste.add((Enebolig) entry.getValue());
-                System.out.println("SAMSVARER, " + entry.getValue().getBolignr());
+                System.out.println("Røyke, " + entry.getValue().getBolignr());
             }
+            if(isBalkong() == entry.getValue().balkong()){
+                System.out.println("balkong, " + entry.getValue().getBolignr());
+            }
+            if(isHusdyr() == entry.getValue().husdyr()){
+                System.out.println("husdyr, " + entry.getValue().getBolignr());
+            }
+            if(isInternetinkludert() == entry.getValue().internettInkludert()){
+                System.out.println("internett, " + entry.getValue().getBolignr());
+            }
+            if(isTVinkludert() == entry.getValue().tvInkludert()){
+                System.out.println("teve, " + entry.getValue().getBolignr());
+            }
+            if(isKjeller() == entry.getValue().isKjeller()){
+                System.out.println("kjeller, " + entry.getValue().getBolignr());
+            }
+            if(isStrøminkludert() == entry.getValue().strømInkludert()){
+                System.out.println("strøm, " + entry.getValue().getBolignr());
+            }
+            if(isParkering() == entry.getValue().parkering()){
+                System.out.println("parkering, " + entry.getValue().getBolignr());
+            }
+            if(isTerasse() == entry.getValue().terasse()){
+                System.out.println("terasse, " + entry.getValue().getBolignr());
+            }
+
 
 
         }
