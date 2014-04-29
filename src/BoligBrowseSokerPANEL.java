@@ -137,7 +137,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         pris.setEditable(false);
 
         bolignummeLabel = new JLabel("Bolignummer");
-        eierLabel = new JLabel("Boligeier");
+        eierLabel = new JLabel("Biligeier");
         prisLabel = new JLabel("Pris pr mnd");
         arealLabel = new JLabel("Areal");
 
@@ -191,7 +191,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         areal.setText(String.valueOf(eneboligliste.get(flytt).getBoareal()));
 
         boligArea.setText(eneboligliste.get(flytt).toString() + " Dette er en " + String.valueOf(df.format((eneboligliste.get(flytt).getProsent()))) + " % match etter " + soker.getNavn()
-        + " sine ønsker");
+                + " sine ønsker");
 
         bilde = ImageIO.read(new File("/Users/Erlend/Desktop/etJoAAP.png"));
         bildeLabel = new JLabel(new ImageIcon(bilde));
@@ -221,9 +221,9 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     public void nextVasClicked(String pnr) throws IOException {
 
         if(flytt>=0){
-        flytt+=frem;
-        Soker soker = sregister.get(pnr);
-        visEneboliger(soker,flytt);
+            flytt+=frem;
+            Soker soker = sregister.get(pnr);
+            visEneboliger(soker,flytt);
         }
         else{}
 
