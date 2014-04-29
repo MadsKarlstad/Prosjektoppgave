@@ -20,6 +20,8 @@ public class MainFrame extends JFrame implements ActionListener {
     private JButton visUtleierBrowse;
     private JButton visLeietakerBrowse;
 
+    private String pnr;
+
 
     //paneler for visning av leiligheter og eneboliger
     private JPanel boligvinduer;

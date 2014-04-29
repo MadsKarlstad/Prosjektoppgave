@@ -40,7 +40,6 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         this.parent = parent;
         this.pregister = pregister;
 
-
         initialiser();
         lagGui();
     }
@@ -98,7 +97,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         if(sregister.finnes(pnr)){
 
-            Soker søker = sregister.get(pnr);
+            Soker soker = sregister.get(pnr);
             System.out.println("hei " + soker.getNavn());
         }
 
