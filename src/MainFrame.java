@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 /**
  *
- * hei
+ * hei ref til crish
  * Created by Erlend on 16/04/14.
  */
 public class MainFrame extends JFrame implements ActionListener {
