@@ -199,7 +199,7 @@ public class Soker extends Person{
         return heis;
     }
 
-    public void matcherEnebolig(){
+    public LinkedList<Enebolig> matcherEnebolig(){
         for (Map.Entry<String, Enebolig> entry : eneboligregister.entrySet()){
             double prosent = 0;
             double sum = 0;
@@ -241,13 +241,11 @@ public class Soker extends Person{
             prosent = ((sum/9)*100);
 
             if(prosent > 50){
-                System.out.println("Prosentmatch: "+ df.format(prosent) +"% for bolignummer " + entry.getValue().getBolignr());
+                //System.out.println("Prosentmatch: "+ df.format(prosent) +"% for bolignummer " + entry.getValue().getBolignr());
+                eneboligliste.add((Enebolig) entry.getValue());
             }
         }
-    }
-
-    public void eneboligMatchListe(){
-        matcherEnebolig();
+        return eneboligliste;
     }
 
     public String getNavn(){
