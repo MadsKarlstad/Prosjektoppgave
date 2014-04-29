@@ -76,8 +76,8 @@ public class MainFrame extends JFrame implements ActionListener {
         try{
         regUtIkon = new ImageIcon(getClass().getResource("Bilder/Registrerutleier.png")); 
         visUtIkon = new ImageIcon(getClass().getResource("Bilder/Visutleier.png")); 
-        regSøkIkon = new ImageIcon(getClass().getResource("Bilder/Registrersøker.png")); 
-        visSøkIkon = new ImageIcon(getClass().getResource("Bilder/Vissøker.png")); 
+        regSøkIkon = new ImageIcon(getClass().getResource("Bilder/Registrersoker.png"));
+        visSøkIkon = new ImageIcon(getClass().getResource("Bilder/Vissoker.png"));
         visKonIkon = new ImageIcon(getClass().getResource("Bilder/Viskontrakt.png")); 
         statIkon = new ImageIcon(getClass().getResource("Bilder/Statistikk.png"));
         regBoIkon = new ImageIcon(getClass().getResource("Bilder/Registrerbolig.png"));

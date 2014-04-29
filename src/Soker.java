@@ -60,6 +60,9 @@ public class Soker extends Person{
         this.eneboligregister = eneboligregister;
         this.leilighetregister = leilighetregister;
 
+        eneboligliste = new LinkedList<Enebolig>();
+
+
     }
 
     public String getAntallPersoner() {
@@ -192,22 +195,13 @@ public class Soker extends Person{
 
     public void matcherEnebolig(){
         double sum = 0;
-        System.out.println(eneboligregister);
         for (Map.Entry<String, Enebolig> entry : eneboligregister.entrySet()){
             if(isRøyk() == entry.getValue().røyke()){
-                sum += 1;
-            }
-            if(isHusdyr() == entry.getValue().husdyr()){
-                sum += 1;
-            }
-            if(isBalkong() == entry.getValue().balkong()){
-                sum += 1;
-            }
-            if(sum>1){
                 eneboligliste.add((Enebolig) entry.getValue());
-
+                System.out.println("SAMSVARER, " + entry.getValue().getBolignr());
             }
-            System.out.println(eneboligliste);
+
+
         }
     }
 
