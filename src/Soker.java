@@ -242,9 +242,6 @@ public class Soker extends Person{
             }
             prosent = ((sum/9)*100);
             System.out.println("Prosentmatch: "+prosent+"%");
-
-
-
         }
     }
 
