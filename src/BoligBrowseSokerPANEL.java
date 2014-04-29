@@ -13,7 +13,8 @@ import java.util.LinkedList;
 import java.util.Map;
 
 /**
- * Created by Erlend on 22/04/14. test
+ * Created by Erlend on 22/04/14. test nå skal alt funke
+ *
  */
 public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
