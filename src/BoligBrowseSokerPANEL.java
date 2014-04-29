@@ -13,12 +13,14 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
 
     private int flytt;
+    private int frem;
+    private int tilbake;
 
     private JTextField fødselsnummer;
     private JButton finn;
 
     private JButton neste;
-    private JButton tilbake;
+    private JButton tilbakeknapp;
     private JButton forrige;
 
     private JPanel knappepanel;
@@ -38,7 +40,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     private LinkedList<Enebolig> eneboligliste;
 
     private Soker soker;
-    private Enebolig første;
+
 
     private MainFrame parent;
 
@@ -70,12 +72,12 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         finn = new JButton("Finn");
 
         neste = new JButton("neste");
-        tilbake = new JButton("tilbake");
+        tilbakeknapp = new JButton("tilbake");
         forrige = new JButton("forrige");
 
 
         neste.addActionListener(this);
-        tilbake.addActionListener(this);
+        tilbakeknapp.addActionListener(this);
         forrige.addActionListener(this);
         finn.addActionListener(this);
 
@@ -83,12 +85,14 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         eneboligliste = new LinkedList<Enebolig>();
 
         flytt = 0;
+        frem = 1;
+        tilbake = 1;
     }
 
     public void lagGui(){
         knappepanel.add(forrige);
         knappepanel.add(neste);
-        knappepanel.add(tilbake);
+        knappepanel.add(tilbakeknapp);
 
         infopanel_søker.add(boligArea, BorderLayout.CENTER);
 
@@ -107,16 +111,16 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
     public void nextVasClicked(String pnr){
 
+        flytt+=frem;
         Soker soker = sregister.get(pnr);
-        flytt += 1;
         visEneboliger(soker,flytt);
 
     }
 
     public void previousVasClicked(String pnr){
 
+        flytt-=tilbake;
         Soker soker = sregister.get(pnr);
-        flytt -= 1;
         visEneboliger(soker,flytt);
     }
 
@@ -140,8 +144,8 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int i = 1;
-        if (e.getSource() == tilbake){
+
+        if (e.getSource() == tilbakeknapp){
             parent.visPanel(MainFrame.MAIN_BOARD);
         }
         else if(e.getSource() == finn){
