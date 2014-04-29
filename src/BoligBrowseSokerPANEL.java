@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
@@ -32,6 +33,19 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
     private JPanel midtpanel;
 
+    private JPanel eneboligFelter;
+
+    private JTextField bolignummer;
+    private JTextField eier;
+    private JTextField pris;
+    private JTextField areal;
+
+    private JLabel bolignummeLabel;
+    private JLabel eierLabel;
+    private JLabel prisLabel;
+    private JLabel arealLabel;
+
+
     private JTextArea boligArea;
 
     private Sokerregister sregister;
@@ -42,6 +56,10 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     private LinkedList<Enebolig> eneboligliste;
 
     private Soker soker;
+
+    private DecimalFormat df;
+
+
 
 
     private MainFrame parent;
@@ -65,6 +83,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         søkepanel = new JPanel(new GridLayout(1,2,1,1));
 
         midtpanel = new JPanel(new BorderLayout());
+        eneboligFelter = new JPanel(new GridLayout(4,2,1,1));
 
         infopanel_tomt = new JPanel();
         infopanel_søker = new JPanel(new BorderLayout());
@@ -91,12 +110,45 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         flytt = 0;
         frem = 1;
         tilbake = 1;
+
+        bolignummer = new JTextField(10);
+        eier = new JTextField(10);
+        areal = new JTextField(10);
+        pris = new JTextField(10);
+
+        bolignummer.setEditable(false);
+        eier.setEditable(false);
+        areal.setEditable(false);
+        pris.setEditable(false);
+
+        bolignummeLabel = new JLabel("Bolignummer");
+        eierLabel = new JLabel("Biligeier");
+        prisLabel = new JLabel("Pris pr mnd");
+        arealLabel = new JLabel("Areal");
+
+        boligArea.setLineWrap(true);
+        boligArea.setWrapStyleWord(true);
+
+        df = new DecimalFormat("#.");
+
+
+
+
     }
 
     public void lagGui(){
         knappepanel.add(forrige);
         knappepanel.add(neste);
         knappepanel.add(tilbakeknapp);
+
+        eneboligFelter.add(bolignummeLabel);
+        eneboligFelter.add(bolignummer);
+        eneboligFelter.add(eierLabel);
+        eneboligFelter.add(eier);
+        eneboligFelter.add(prisLabel);
+        eneboligFelter.add(pris);
+        eneboligFelter.add(arealLabel);
+        eneboligFelter.add(areal);
 
         infopanel_søker.add(boligArea, BorderLayout.CENTER);
 
@@ -112,7 +164,15 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
     public void visEneboliger(Soker soker,int i){
         eneboligliste = soker.matcherEnebolig();
-        boligArea.setText(eneboligliste.get(i).getBolignr());
+        bolignummer.setText(eneboligliste.get(flytt).getBolignr());
+        eier.setText(eneboligliste.get(flytt).getEiersNavn());
+        pris.setText(String.valueOf(eneboligliste.get(flytt).getPris()));
+        areal.setText(String.valueOf(eneboligliste.get(flytt).getBoareal()));
+
+        boligArea.setText(eneboligliste.get(flytt).toString() + " Dette er en " + String.valueOf(df.format((eneboligliste.get(flytt).getProsent()))) + " % match etter " + soker.getNavn()
+        + " sine ønsker");
+
+
     }
 
     public void visEneboligPANEL(){
@@ -120,6 +180,9 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         midtpanel.removeAll();
         midtpanel.revalidate();
         midtpanel.repaint();
+
+        infopanel_søker.add(eneboligFelter, BorderLayout.LINE_START);
+        infopanel_søker.add(boligArea, BorderLayout.CENTER);
 
         midtpanel.add(infopanel_søker);
 
