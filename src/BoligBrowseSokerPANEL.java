@@ -136,7 +136,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == tilbake){
-            parent.visPanel("VIS BOLIGBROWSEPROMPT");
+            parent.visPanel(MainFrame.MAIN_BOARD);
         }
         else if(e.getSource() == finn){
             toggle(fødselsnummer.getText());
