@@ -1,195 +1,297 @@
-
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.Random;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Map;
 
 /**
- SLANGEDREAM COPYRIGHT
+ * Created by Erlend on 22/04/14. test
  */
-public class BoligBrowse {
-    public static void main(String[] args){
-        Personregister register = new Personregister();
-        Sokerregister sregister = new Sokerregister();
-        Boligregister bregister = new Boligregister();
-        Leilighetregister legister = new Leilighetregister();
-        Kontraktregister kregister = new Kontraktregister();
-
-        MainFrame frame;
+public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
 
-        String[] fornavns = {"Ole", "Vetle","Simen","Karl", "Nils","Trine", "Kari", "Tina", "Hamed","Per-Arne","Mads","Erlend","Christoffer"};
+    private int flytt;
+    private int frem;
+    private int tilbake;
 
-        String[] etternavns = {"Larsen", "Moradi", "Thommasen", "Kulterud", "Bror", "McFlurry", "Olsen", "Pettersen","Baggins","Lannister","Targaryen"};
+    private JTextField fødselsnummer;
+    private JButton finn;
 
-        String adresses[] = {"Tollbodgata 18", "Pilestredet 45", "Storgata 65", "Ingesteder 12", "Andeby City", "Eventyrdalen 762","King's Landing, The Red Keep","The Shire 43B"};
+    private JButton neste;
+    private JButton tilbakeknapp;
+    private JButton forrige;
 
-        String[] firma = {"","Illuminati","Monstermasten","Überkul A/S","Pilen Dytt og Flytt Inc."};
+    private JPanel knappepanel;
+    private JPanel søkepanel;
 
-        String[] antPersoner = {"0","1","2","3","4","5"};
+    private JPanel infopanel_tomt;
+    private JPanel infopanel_søker;
+    private JPanel infopanel_utleier;
 
-        String[] sivilstatus = {"Gift","Samboer","Singel"};
+    private JPanel midtpanel;
 
-        String[] yrke = {"Snekker","Ingeniør","Sykepleier","Lege","Advokat","Økonom","Freakonom","Hobbyelektriker/brannstarter","Sosionom","Arbeidsledig","Student"};
+    private JPanel eneboligFelter;
+    private JPanel bilde_info;
 
-        String[] arbeidsforhold = {"UIO","HIOA","UIB","NTNU","Aker Solutions","Microsoft","Apple Inc.","Monstermasten","Illuminati"};
+    private JTextField bolignummer;
+    private JTextField eier;
+    private JTextField pris;
+    private JTextField areal;
 
-        String[] domene = {"hotmail.com","me.com","gmail.com","yahoo.com","live.no","hotmail.no"};
+    private JLabel bolignummeLabel;
+    private JLabel eierLabel;
+    private JLabel prisLabel;
+    private JLabel arealLabel;
 
-        String[] fradato = {"01.06.14","01.07.14","01.08.14"};
 
-        String[] tildato = {"01.06.19","01.07.19","01.08.19"};
+    private JTextArea boligArea;
 
-        int[] boareal = {20,30,40,50,60,70,80};
-        int[] antrom = {1,2,3,4,5,6};
-        int[] byggår = {1970,1980,1990,2000,2010};
-        String[] beskrivelse = {"Flott enebolig!","Nyoppusset enebolig","Lys og fin enebolig","Gammel herskapelig enebolig"};
-        String[] beskrivLeil = {"Nyoppusset leilighet","Penthouse suite","Lys og fin leilighet"};
-        int[] pris = {5000,6000,6500,7000,7499,7999,8750,10899};
-        String[] ledigfra = {"Snarest","01.08.14","01.07.14","01.09.14","01.10.14","01.11.14"};
-        boolean[] røyke = {true,false};
-        boolean[] husdyr ={true,false};
-        boolean[] balkong ={true,false};
-        boolean[] terasse ={true,false};
-        boolean[] tv ={true,false};
-        boolean[] nett ={true,false};
-        boolean[] strøm ={true,false};
-        boolean[] parkering ={true,false};
-        boolean[] heis = {true,false};
-        int[] antetg = {1,2,3,4,5,6};
-        boolean[] kjeller ={true,false};
-        double[] tomt = {90,100,110,120,130,140,150};
-        int[] antbad = {1,2,3,4};
-        int[] etgleil = {1,2,3,4,5,6,7,8,9,10,11,12,13};
-        int[] boder = {1,2,3};
+    private Border border;
 
-        int minareal = 0;
-        int maksareal = 100;
-        int minpris = 0;
-        int[] makspris = {1000,2000,3000,4000,5000,6000,7000,8000,9000,10000,11000,12000,13000,14000,15000};
+    private BufferedImage bilde;
+    private JLabel bildeLabel;
 
-        Random r = new Random();
 
-        for(int i = 0; i < 1000; i++){
-            String fornavn = fornavns[r.nextInt(fornavns.length)];
-            String etternavn = etternavns[r.nextInt(etternavns.length)];
-            String adresse = adresses[r.nextInt(adresses.length)];
-            String mail = fornavn.toLowerCase() + "."+etternavn.toLowerCase()+ "@" + domene[r.nextInt(domene.length)];
-            String firm = firma[r.nextInt(firma.length)];
 
-            Utleier utleier = new Utleier(String.valueOf(i+1), fornavn, etternavn, adresse, mail, String.valueOf(i+100), firm);
+    private Sokerregister sregister;
+    private Personregister pregister;
+    private Boligregister bregister;
+    private Leilighetregister legister;
 
-            register.leggTil(utleier);
+    private LinkedList<Enebolig> eneboligliste;
+
+    private Soker soker;
+
+    private DecimalFormat df;
+
+
+
+
+    private MainFrame parent;
+
+    public BoligBrowseSokerPANEL(Sokerregister sregister, Boligregister bregister, Leilighetregister legister,Personregister pregister, MainFrame parent) {
+        this.sregister = sregister;
+        this.bregister = bregister;
+        this.legister = legister;
+        this.parent = parent;
+        this.pregister = pregister;
+
+
+        initialiser();
+        lagGui();
+    }
+
+    public void initialiser(){
+        setLayout(new BorderLayout());
+
+        knappepanel = new JPanel(new GridLayout(1,3,1,1));
+        søkepanel = new JPanel(new GridLayout(1,2,1,1));
+
+        midtpanel = new JPanel(new BorderLayout());
+        eneboligFelter = new JPanel(new GridLayout(4,2,1,1));
+
+        infopanel_tomt = new JPanel();
+        infopanel_søker = new JPanel(new BorderLayout());
+        infopanel_utleier = new JPanel();
+
+        bilde_info = new JPanel(new BorderLayout());
+
+        boligArea = new JTextArea();
+
+        fødselsnummer = new JTextField(10);
+        finn = new JButton("Finn");
+
+        neste = new JButton("neste");
+        tilbakeknapp = new JButton("tilbake");
+        forrige = new JButton("forrige");
+
+
+        neste.addActionListener(this);
+        tilbakeknapp.addActionListener(this);
+        forrige.addActionListener(this);
+        finn.addActionListener(this);
+
+        //Iterator it = bregister.entrySet().iterator();
+        eneboligliste = new LinkedList<Enebolig>();
+
+        flytt = 0;
+        frem = 1;
+        tilbake = 1;
+
+        bolignummer = new JTextField(10);
+        eier = new JTextField(10);
+        areal = new JTextField(10);
+        pris = new JTextField(10);
+
+        bolignummer.setEditable(false);
+        eier.setEditable(false);
+        areal.setEditable(false);
+        pris.setEditable(false);
+
+        bolignummeLabel = new JLabel("Bolignummer");
+        eierLabel = new JLabel("Biligeier");
+        prisLabel = new JLabel("Pris pr mnd");
+        arealLabel = new JLabel("Areal");
+
+        boligArea.setLineWrap(true);
+        boligArea.setWrapStyleWord(true);
+
+        df = new DecimalFormat("#.");
+
+        border = BorderFactory.createLineBorder(Color.BLACK, 1);
+
+
+
+
+
+
+    }
+
+    public void lagGui(){
+        knappepanel.add(forrige);
+        knappepanel.add(neste);
+        knappepanel.add(tilbakeknapp);
+
+        eneboligFelter.add(bolignummeLabel);
+        eneboligFelter.add(bolignummer);
+        eneboligFelter.add(eierLabel);
+        eneboligFelter.add(eier);
+        eneboligFelter.add(prisLabel);
+        eneboligFelter.add(pris);
+        eneboligFelter.add(arealLabel);
+        eneboligFelter.add(areal);
+
+        infopanel_søker.add(boligArea, BorderLayout.CENTER);
+
+        søkepanel.add(fødselsnummer);
+        søkepanel.add(finn);
+
+        add(knappepanel, BorderLayout.PAGE_END);
+        add(søkepanel, BorderLayout.PAGE_START);
+
+
+        add(midtpanel, BorderLayout.CENTER);
+
+        boligArea.setBorder(border);
+    }
+
+    public void visEneboliger(Soker soker,int i) throws IOException {
+        eneboligliste = soker.matcherEnebolig();
+        bolignummer.setText(eneboligliste.get(flytt).getBolignr());
+        eier.setText(eneboligliste.get(flytt).getEiersNavn());
+        pris.setText(String.valueOf(eneboligliste.get(flytt).getPris()));
+        areal.setText(String.valueOf(eneboligliste.get(flytt).getBoareal()));
+
+        boligArea.setText(eneboligliste.get(flytt).toString() + " Dette er en " + String.valueOf(df.format((eneboligliste.get(flytt).getProsent()))) + " % match etter " + soker.getNavn()
+        + " sine ønsker");
+
+        bilde = ImageIO.read(new File("/Users/Erlend/Desktop/etJoAAP.png"));
+        bildeLabel = new JLabel(new ImageIcon(bilde));
+
+
+
+    }
+
+    public void visEneboligPANEL(){
+
+        midtpanel.removeAll();
+        midtpanel.revalidate();
+        midtpanel.repaint();
+
+
+        bilde_info.add(boligArea, BorderLayout.PAGE_START);
+        bilde_info.add(bildeLabel, BorderLayout.CENTER);
+
+        infopanel_søker.add(eneboligFelter, BorderLayout.LINE_START);
+        infopanel_søker.add(bilde_info, BorderLayout.CENTER);
+
+
+        midtpanel.add(infopanel_søker);
+
+    }
+
+    public void nextVasClicked(String pnr) throws IOException {
+
+        if(flytt>=0){
+        flytt+=frem;
+        Soker soker = sregister.get(pnr);
+        visEneboliger(soker,flytt);
+        }
+        else{}
+
+    }
+
+    public void previousVasClicked(String pnr) throws IOException {
+
+        try {
+            flytt -= tilbake;
+            Soker soker = sregister.get(pnr);
+            visEneboliger(soker, flytt);
         }
 
-        for(int i=1000;i<2000; i++){
-            String fornavn = fornavns[r.nextInt(fornavns.length)];
-            String etternavn = etternavns[r.nextInt(etternavns.length)];
-            String adresse = adresses[r.nextInt(adresses.length)];
-            String mail = fornavn.toLowerCase() + "." + etternavn.toLowerCase() + "@" + domene[r.nextInt(domene.length)];
-            String antpersoner = antPersoner[r.nextInt(antPersoner.length)];
-            String sivstat = sivilstatus[r.nextInt(sivilstatus.length)];
-            String work = yrke[r.nextInt(yrke.length)];
-            String arbforhold = arbeidsforhold[r.nextInt(arbeidsforhold.length)];
-            boolean røykeinn = røyke[r.nextInt(røyke.length)];
-            boolean husdyrinn = husdyr[r.nextInt(husdyr.length)];
-            boolean balkonginn = balkong[r.nextInt(balkong.length)];
-            boolean terasseinn = terasse[r.nextInt(terasse.length)];
-            boolean TVinn = tv[r.nextInt(tv.length)];
-            boolean internetinn = nett[r.nextInt(nett.length)];
-            boolean strøminn = strøm[r.nextInt(strøm.length)];
-            boolean parkeringinn = parkering[r.nextInt(parkering.length)];
-            boolean kjellerinn = kjeller[r.nextInt(kjeller.length)];
-            boolean heisinn = kjeller[r.nextInt(kjeller.length)];
-            int mpris = makspris[r.nextInt(makspris.length)];
-
-            Soker soker = new Soker(String.valueOf(i+1),fornavn,etternavn,adresse,mail,String.valueOf(i+100),antpersoner,sivstat,work,arbforhold,minareal,maksareal,minpris,mpris,
-                    røykeinn,husdyrinn,balkonginn,terasseinn,TVinn,internetinn,strøminn,parkeringinn,kjellerinn,heisinn,bregister,legister);
-            sregister.leggTil(soker);
-        }
-
-        for(int i=0;i<500; i++){
-            int bareal = boareal[r.nextInt(boareal.length)];
-            String adresse = adresses[r.nextInt(adresses.length)];
-            int rom = antrom[r.nextInt(antrom.length)];
-            int år = byggår[r.nextInt(byggår.length)];
-            int price = pris[r.nextInt(pris.length)];
-            String pnr = String.valueOf(i+1);
-            Utleier utleier = register.get(pnr);
-            boolean smoke = røyke[r.nextInt(røyke.length)];
-            boolean dyr = husdyr[r.nextInt(husdyr.length)];
-            boolean balk = balkong[r.nextInt(balkong.length)];
-            boolean ter = terasse[r.nextInt(terasse.length)];
-            boolean TV = tv[r.nextInt(tv.length)];
-            boolean internet = nett[r.nextInt(nett.length)];
-            boolean s = strøm[r.nextInt(strøm.length)];
-            boolean park = parkering[r.nextInt(parkering.length)];
-            int etg = antetg[r.nextInt(antetg.length)];
-            boolean kj = kjeller[r.nextInt(kjeller.length)];
-            double tmt = tomt[r.nextInt(tomt.length)];
-            int bad = antbad[r.nextInt(antbad.length)];
-            String ledig = ledigfra[r.nextInt(ledigfra.length)];
-            String beskriv = beskrivelse[r.nextInt(beskrivelse.length)];
-
-            Enebolig enebolig = new Enebolig(adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
-                    TV,internet,s,park,etg,kj,tmt,bad);
-            bregister.leggTil(enebolig);
-        }
-
-        for(int i=0;i<500; i++){
-            int bareal = boareal[r.nextInt(boareal.length)];
-            String adresse = adresses[r.nextInt(adresses.length)];
-            int rom = antrom[r.nextInt(antrom.length)];
-            int år = byggår[r.nextInt(byggår.length)];
-            int price = pris[r.nextInt(pris.length)];
-            String pnr = String.valueOf(i+1);
-            Utleier utleier = register.get(pnr);
-            boolean smoke = røyke[r.nextInt(røyke.length)];
-            boolean dyr = husdyr[r.nextInt(husdyr.length)];
-            boolean balk = balkong[r.nextInt(balkong.length)];
-            boolean ter = terasse[r.nextInt(terasse.length)];
-            boolean TV = tv[r.nextInt(tv.length)];
-            boolean internet = nett[r.nextInt(nett.length)];
-            boolean s = strøm[r.nextInt(strøm.length)];
-            boolean park = parkering[r.nextInt(parkering.length)];
-            String ledig = ledigfra[r.nextInt(ledigfra.length)];
-            String beskriv = beskrivLeil[r.nextInt(beskrivLeil.length)];
-            int antboder = boder[r.nextInt(boder.length)];
-            int etasje = etgleil[r.nextInt(etgleil.length)];
-            boolean elevator = heis[r.nextInt(heis.length)];
-
-            Leilighet leilighet = new Leilighet(adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
-                    TV,internet,s,park,antboder,etasje,elevator);
-            legister.leggTil(leilighet);
-        }
-
-        for(int i = 0; i < 10; i++){
-            String eierpnr = String.valueOf(i+1);
-            String sokerpnr = String.valueOf(i+1001);
-            String bolignr = String.valueOf(i+1);
-            Utleier eier = register.get(eierpnr);
-            Soker soker = sregister.get(sokerpnr);
-            Bolig bolig = legister.get(bolignr);
-            int p = pris[r.nextInt(pris.length)];
-            String fra = fradato[r.nextInt(fradato.length)];
-            String til = tildato[r.nextInt(tildato.length)];
-
-            Kontrakt kontrakt = new Kontrakt(String.valueOf(i+1), bolig, eier, soker,p,fra,til);
-
-            kregister.leggTil(kontrakt);
+        catch (IndexOutOfBoundsException io){
+            flytt = 0;
 
         }
-        frame = new MainFrame(register,bregister,sregister,legister,kregister);
-        frame.setVisible(true);
-
-        frame.addWindowListener(
-                new WindowAdapter() {
-                    @Override
-                    public void windowClosing(WindowEvent e) {
-                        System.exit(0);
-                    }
-                }
-        );
     }
 
 
+
+
+
+    public void toggle(String pnr) throws IOException {
+
+        if(sregister.finnes(pnr)){
+            Soker soker = sregister.get(pnr);
+            System.out.println("hei " + soker.getNavn());
+            visEneboliger(soker, 0);
+            visEneboligPANEL();
+        }
+
+        else if(pregister.finnes(pnr)){
+            Utleier utleier = pregister.get(pnr);
+            System.out.println("hei " + utleier.getNavn());
+        }
+
+        else{
+            System.out.println("ingen person med dette fødselsnummer registrert");
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == tilbakeknapp){
+            parent.visPanel(MainFrame.MAIN_BOARD);
+        }
+        else if(e.getSource() == finn){
+            try {
+                toggle(fødselsnummer.getText());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+        else if(e.getSource() == neste){
+            try {
+                nextVasClicked(fødselsnummer.getText());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+        else if(e.getSource() == forrige){
+            try {
+                previousVasClicked(fødselsnummer.getText());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
 }
