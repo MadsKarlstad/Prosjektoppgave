@@ -25,6 +25,9 @@ public abstract class Bolig implements Hjem {
     private boolean strømInkludert;
     private boolean parkering;
 
+    private boolean erØnsket;
+    private boolean erUtleid;
+
     private Personregister register;
 
 
@@ -147,5 +150,19 @@ public abstract class Bolig implements Hjem {
     public boolean parkering(){
         return parkering;
     }
+
+    public void setErØnsket(boolean b){
+
+        erØnsket = new Boolean(b);
+
+    }
+
+    public void setErUtleid(boolean b){
+
+        erUtleid = new Boolean(b);
+    }
+    public boolean isErØnsket(){return erØnsket;}
+
+    public boolean isErUtleid(){return erUtleid;}
 
 }
