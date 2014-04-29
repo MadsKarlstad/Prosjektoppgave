@@ -37,10 +37,6 @@ public class MainFrame extends JFrame implements ActionListener {
     private Leilighetregister legister;
     private Kontraktregister kregister;
 
-    private BoligBrowsePromptPANEL child;
-
-    private String pnr;
-
 
     public MainFrame(Personregister register,Boligregister bregister,Sokerregister sregister,Leilighetregister legister, Kontraktregister kregister){
         super("Bolig Browse™");
@@ -121,12 +117,6 @@ public class MainFrame extends JFrame implements ActionListener {
         visUtleierBrowse.addActionListener(this);
         visLeietakerBrowse.addActionListener(this);
 
-        child = new BoligBrowsePromptPANEL(register,sregister,this);
-
-        pnr = child.getPnr();
-
-        System.out.println("variable i mainframe : " + pnr);
-
 
 
     }
@@ -188,10 +178,6 @@ public class MainFrame extends JFrame implements ActionListener {
             vinduer.add(new VisStatistikkPANEL(bregister,legister,register,sregister,kregister, this), "STATS");
             visPanel("STATS");
         }
-        else if(e.getSource()  == boligBrowse){
-            vinduer.add(new BoligBrowsePromptPANEL(register,sregister, this), "VIS BOLIGBROWSEPROMPT");
-            visPanel("VIS BOLIGBROWSEPROMPT");
-        }
         else if(e.getSource()  == visEnebolig){
             vinduer.add(new BoligOversiktPANEL(bregister,register, this), "VIS BOLIG");
             visPanel("VIS BOLIG");
@@ -203,9 +189,9 @@ public class MainFrame extends JFrame implements ActionListener {
             visPanel("VIS LEILIGHET");
         }
 
-        else if(e.getSource()  == visLeietakerBrowse){
+        else if(e.getSource()  == boligBrowse){
 
-            vinduer.add(new BoligBrowseSokerPANEL(sregister,bregister,legister, pnr ,child, this),"VIS SØKERBROWSE");
+            vinduer.add(new BoligBrowseSokerPANEL(sregister,bregister,legister, this),"VIS SØKERBROWSE");
             visPanel("VIS SØKERBROWSE");
             System.out.println("DU er nå i søkerbrowse!! CONGRATZ");
         }
