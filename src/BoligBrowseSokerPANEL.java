@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Map;
 
 /**
  * Created by Erlend on 22/04/14.
@@ -31,6 +34,9 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
     private Soker soker;
 
+
+
+
     private MainFrame parent;
 
     public BoligBrowseSokerPANEL(Sokerregister sregister, Boligregister bregister, Leilighetregister legister,Personregister pregister, MainFrame parent) {
@@ -39,6 +45,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         this.legister = legister;
         this.parent = parent;
         this.pregister = pregister;
+
 
         initialiser();
         lagGui();
@@ -62,15 +69,13 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         avbryt = new JButton("forrige");
 
 
-
-
-        matchProsent();
-        lagGui();
-
         neste.addActionListener(this);
         tilbake.addActionListener(this);
         avbryt.addActionListener(this);
         finn.addActionListener(this);
+
+        Iterator it = bregister.entrySet().iterator();
+
 
 
     }
@@ -89,8 +94,10 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
     }
 
-    public void matchProsent(){
 
+
+    public void visEneboliger(Soker soker){
+        soker.eneboligMatchListe();
     }
 
     public void toggle(String pnr){
@@ -99,6 +106,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
             Soker soker = sregister.get(pnr);
             System.out.println("hei " + soker.getNavn());
+            visEneboliger(soker);
         }
 
         else if(pregister.finnes(pnr)){

@@ -170,7 +170,7 @@ public class MainFrame extends JFrame implements ActionListener {
             visPanel("Oversikt");
         }
         else if(e.getSource()  == regSøk){
-            vinduer.add(new RegistrerSokerPANEL(sregister, this), "REG SØKER");
+            vinduer.add(new RegistrerSokerPANEL(sregister,bregister,legister, this), "REG SØKER");
             visPanel("REG SØKER");
         }
         else if(e.getSource()  == visSøk){

@@ -102,7 +102,8 @@ public class BoligBrowse {
             boolean heisinn = kjeller[r.nextInt(kjeller.length)];
             int mpris = makspris[r.nextInt(makspris.length)];
 
-            Soker soker = new Soker(String.valueOf(i+1),fornavn,etternavn,adresse,mail,String.valueOf(i+100),antpersoner,sivstat,work,arbforhold,minareal,maksareal,minpris,mpris,røykeinn,husdyrinn,balkonginn,terasseinn,TVinn,internetinn,strøminn,parkeringinn,kjellerinn,heisinn);
+            Soker soker = new Soker(String.valueOf(i+1),fornavn,etternavn,adresse,mail,String.valueOf(i+100),antpersoner,sivstat,work,arbforhold,minareal,maksareal,minpris,mpris,
+                    røykeinn,husdyrinn,balkonginn,terasseinn,TVinn,internetinn,strøminn,parkeringinn,kjellerinn,heisinn,bregister,legister);
             sregister.leggTil(soker);
         }
 

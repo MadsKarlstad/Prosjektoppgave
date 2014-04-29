@@ -1,3 +1,7 @@
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Map;
+
 /**
  SLANGEDREAM COPYRIGHT
  */
@@ -24,10 +28,16 @@ public class Soker extends Person{
     private boolean kjeller;
     private boolean heis;
 
+    private LinkedList<Enebolig> eneboligliste;
+    private LinkedList<Enebolig> temp;
+
+    private Boligregister eneboligregister;
+    private Leilighetregister leilighetregister;
+
     public Soker(String FØDSELSNUMMER, String fornavn, String etternavn, String adresse, String mail, String telefonnummer,
                  String antallPersoner, String sivilstatus, String yrke, String arbeidsfohold_studiested, int minAreal,
                  int maksAreal, int minPris, int maksPris,boolean røyk,boolean husdyr,boolean balkong,boolean terasse,
-                 boolean TVinkludert,boolean Internetinkludert,boolean strøminkludert,boolean parkering,boolean kjeller,boolean heis) {
+                 boolean TVinkludert,boolean Internetinkludert,boolean strøminkludert,boolean parkering,boolean kjeller,boolean heis,Boligregister eneboligregister, Leilighetregister leilighetregister) {
         super(FØDSELSNUMMER, fornavn, etternavn, adresse, mail, telefonnummer);
         this.antallPersoner = antallPersoner;
         this.sivilstatus = sivilstatus;
@@ -47,6 +57,9 @@ public class Soker extends Person{
         this.parkering = parkering;
         this.kjeller = kjeller;
         this.heis = heis;
+        this.eneboligregister = eneboligregister;
+        this.leilighetregister = leilighetregister;
+
     }
 
     public String getAntallPersoner() {
@@ -175,6 +188,33 @@ public class Soker extends Person{
 
     public boolean isHeis() {
         return heis;
+    }
+
+    public void matcherEnebolig(){
+        double sum = 0;
+        System.out.println(eneboligregister);
+        for (Map.Entry<String, Enebolig> entry : eneboligregister.entrySet()){
+            if(isRøyk() == entry.getValue().røyke()){
+                sum += 1;
+            }
+            if(isHusdyr() == entry.getValue().husdyr()){
+                sum += 1;
+            }
+            if(isBalkong() == entry.getValue().balkong()){
+                sum += 1;
+            }
+            if(sum>1){
+                eneboligliste.add((Enebolig) entry.getValue());
+
+            }
+            System.out.println(eneboligliste);
+        }
+    }
+
+    public void eneboligMatchListe(){
+        matcherEnebolig();
+        System.out.println(""+eneboligliste);
+
     }
 
     public String getNavn(){

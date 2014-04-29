@@ -54,11 +54,15 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
     private JButton avbryt;
 
     private Sokerregister register;
+    private Boligregister eneboligregister;
+    private Leilighetregister leilighetregister;
     private MainFrame parent;
 
-    public RegistrerSokerPANEL(Sokerregister register, MainFrame parent) {
+    public RegistrerSokerPANEL(Sokerregister register,Boligregister eneboligregister,Leilighetregister leilighetregister, MainFrame parent) {
         super(new BorderLayout());
         this.register = register;
+        this.eneboligregister = eneboligregister;
+        this.leilighetregister = leilighetregister;
         this.parent = parent;
         initialiser();
         lagGUI();
@@ -141,7 +145,7 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
         boolean heis = bokser[HEIS].isSelected();
 
         Person søker = new Soker(fødselsnummer,fornavn,etternavn,adresse, mail, telefonnummer, antpers, sivilstatus,yrke,
-                arbeidsforhold,minareal,maxareal,minpris,maxpris,røyke,dyr,balk,ter,tv,nett,strøm,parkering,kjeller,heis);
+                arbeidsforhold,minareal,maxareal,minpris,maxpris,røyke,dyr,balk,ter,tv,nett,strøm,parkering,kjeller,heis,eneboligregister,leilighetregister);
 
         if(register.leggTil(søker)){
             //gå tilbake til mainframe
