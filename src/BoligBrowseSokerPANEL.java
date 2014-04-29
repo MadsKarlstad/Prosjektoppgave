@@ -122,7 +122,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         pris.setEditable(false);
 
         bolignummeLabel = new JLabel("Bolignummer");
-        eierLabel = new JLabel("Biligeier");
+        eierLabel = new JLabel("Boligeier");
         prisLabel = new JLabel("Pris pr mnd");
         arealLabel = new JLabel("Areal");
 
