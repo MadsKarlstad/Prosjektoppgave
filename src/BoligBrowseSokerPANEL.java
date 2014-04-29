@@ -13,7 +13,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 /**
- * Created by Erlend on 22/04/14.
+ * Created by Erlend on 22/04/14. test
  */
 public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
