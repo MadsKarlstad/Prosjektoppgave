@@ -1,7 +1,12 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -34,6 +39,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     private JPanel midtpanel;
 
     private JPanel eneboligFelter;
+    private JPanel bilde_info;
 
     private JTextField bolignummer;
     private JTextField eier;
@@ -47,6 +53,13 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
 
     private JTextArea boligArea;
+
+    private Border border;
+
+    private BufferedImage bilde;
+    private JLabel bildeLabel;
+
+
 
     private Sokerregister sregister;
     private Personregister pregister;
@@ -88,6 +101,8 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         infopanel_tomt = new JPanel();
         infopanel_søker = new JPanel(new BorderLayout());
         infopanel_utleier = new JPanel();
+
+        bilde_info = new JPanel(new BorderLayout());
 
         boligArea = new JTextArea();
 
@@ -131,6 +146,10 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         df = new DecimalFormat("#.");
 
+        border = BorderFactory.createLineBorder(Color.BLACK, 1);
+
+
+
 
 
 
@@ -160,9 +179,11 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
 
         add(midtpanel, BorderLayout.CENTER);
+
+        boligArea.setBorder(border);
     }
 
-    public void visEneboliger(Soker soker,int i){
+    public void visEneboliger(Soker soker,int i) throws IOException {
         eneboligliste = soker.matcherEnebolig();
         bolignummer.setText(eneboligliste.get(flytt).getBolignr());
         eier.setText(eneboligliste.get(flytt).getEiersNavn());
@@ -171,6 +192,10 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         boligArea.setText(eneboligliste.get(flytt).toString() + " Dette er en " + String.valueOf(df.format((eneboligliste.get(flytt).getProsent()))) + " % match etter " + soker.getNavn()
         + " sine ønsker");
+
+        bilde = ImageIO.read(new File("/Users/Erlend/Desktop/etJoAAP.png"));
+        bildeLabel = new JLabel(new ImageIcon(bilde));
+
 
 
     }
@@ -181,29 +206,48 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         midtpanel.revalidate();
         midtpanel.repaint();
 
+
+        bilde_info.add(boligArea, BorderLayout.PAGE_START);
+        bilde_info.add(bildeLabel, BorderLayout.CENTER);
+
         infopanel_søker.add(eneboligFelter, BorderLayout.LINE_START);
-        infopanel_søker.add(boligArea, BorderLayout.CENTER);
+        infopanel_søker.add(bilde_info, BorderLayout.CENTER);
+
 
         midtpanel.add(infopanel_søker);
 
     }
 
-    public void nextVasClicked(String pnr){
+    public void nextVasClicked(String pnr) throws IOException {
 
+        if(flytt>=0){
         flytt+=frem;
         Soker soker = sregister.get(pnr);
         visEneboliger(soker,flytt);
+        }
+        else{}
 
     }
 
-    public void previousVasClicked(String pnr){
+    public void previousVasClicked(String pnr) throws IOException {
 
-        flytt-=tilbake;
-        Soker soker = sregister.get(pnr);
-        visEneboliger(soker,flytt);
+        try {
+            flytt -= tilbake;
+            Soker soker = sregister.get(pnr);
+            visEneboliger(soker, flytt);
+        }
+
+        catch (IndexOutOfBoundsException io){
+            flytt = 0;
+
+        }
     }
 
-    public void toggle(String pnr){
+
+
+
+
+    public void toggle(String pnr) throws IOException {
 
         if(sregister.finnes(pnr)){
             Soker soker = sregister.get(pnr);
@@ -229,13 +273,25 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
             parent.visPanel(MainFrame.MAIN_BOARD);
         }
         else if(e.getSource() == finn){
-            toggle(fødselsnummer.getText());
+            try {
+                toggle(fødselsnummer.getText());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
         else if(e.getSource() == neste){
-            nextVasClicked(fødselsnummer.getText());
+            try {
+                nextVasClicked(fødselsnummer.getText());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
         else if(e.getSource() == forrige){
-            previousVasClicked(fødselsnummer.getText());
+            try {
+                previousVasClicked(fødselsnummer.getText());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 }
