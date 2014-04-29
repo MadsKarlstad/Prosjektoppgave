@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 /**
  *
- * hei ref til crish
+ *
  * Created by Erlend on 16/04/14.
  */
 public class MainFrame extends JFrame implements ActionListener {
@@ -38,6 +38,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private Sokerregister sregister;
     private Leilighetregister legister;
     private Kontraktregister kregister;
+
 
 
     public MainFrame(Personregister register,Boligregister bregister,Sokerregister sregister,Leilighetregister legister, Kontraktregister kregister){

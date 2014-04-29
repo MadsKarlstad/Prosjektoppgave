@@ -30,6 +30,8 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     private JPanel infopanel_søker;
     private JPanel infopanel_utleier;
 
+    private JPanel midtpanel;
+
     private JTextArea boligArea;
 
     private Sokerregister sregister;
@@ -62,6 +64,8 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         knappepanel = new JPanel(new GridLayout(1,3,1,1));
         søkepanel = new JPanel(new GridLayout(1,2,1,1));
 
+        midtpanel = new JPanel(new BorderLayout());
+
         infopanel_tomt = new JPanel();
         infopanel_søker = new JPanel(new BorderLayout());
         infopanel_utleier = new JPanel();
@@ -81,7 +85,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         forrige.addActionListener(this);
         finn.addActionListener(this);
 
-        Iterator it = bregister.entrySet().iterator();
+        //Iterator it = bregister.entrySet().iterator();
         eneboligliste = new LinkedList<Enebolig>();
 
         flytt = 0;
@@ -101,12 +105,24 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         add(knappepanel, BorderLayout.PAGE_END);
         add(søkepanel, BorderLayout.PAGE_START);
-        add(infopanel_søker,BorderLayout.CENTER);
+
+
+        add(midtpanel, BorderLayout.CENTER);
     }
 
     public void visEneboliger(Soker soker,int i){
         eneboligliste = soker.matcherEnebolig();
         boligArea.setText(eneboligliste.get(i).getBolignr());
+    }
+
+    public void visEneboligPANEL(){
+
+        midtpanel.removeAll();
+        midtpanel.revalidate();
+        midtpanel.repaint();
+
+        midtpanel.add(infopanel_søker);
+
     }
 
     public void nextVasClicked(String pnr){
@@ -129,7 +145,8 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         if(sregister.finnes(pnr)){
             Soker soker = sregister.get(pnr);
             System.out.println("hei " + soker.getNavn());
-            visEneboliger(soker,0);
+            visEneboliger(soker, 0);
+            visEneboligPANEL();
         }
 
         else if(pregister.finnes(pnr)){
