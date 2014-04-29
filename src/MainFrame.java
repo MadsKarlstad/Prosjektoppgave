@@ -68,21 +68,22 @@ public class MainFrame extends JFrame implements ActionListener {
         
         /*visLeil = new JButton("Vis leilighet");
         visEne = new JButton("Vis enebolig");*/
-        regUtIkon = new ImageIcon(getClass().getResource("Bilder/Registrerutleier.png"));
-        visUtIkon = new ImageIcon(getClass().getResource("Bilder/Visutleier.png"));
-        regSøkIkon = new ImageIcon(getClass().getResource("Bilder/Registrersoker.png"));
-        visSøkIkon = new ImageIcon(getClass().getResource("Bilder/Vissoker.png"));
-        visKonIkon = new ImageIcon(getClass().getResource("Bilder/Viskontrakt.png"));
-        statIkon = new ImageIcon(getClass().getResource("Bilder/Statistikk.png"));
-        regBoIkon = new ImageIcon(getClass().getResource("Bilder/Registrerbolig.png"));
-        visBoIkon = new ImageIcon(getClass().getResource("Bilder/Visbolig.png"));
-        boligBrowseIkon = new ImageIcon(getClass().getResource("Bilder/Boligbrowse.png"));
-
         visLeilighet = new JButton();
         visEnebolig = new JButton();
         visUtleierBrowse = new JButton();
         visLeietakerBrowse = new JButton();
 
+        try{
+        regUtIkon = new ImageIcon(getClass().getResource("Bilder/Registrerutleier.png")); 
+        visUtIkon = new ImageIcon(getClass().getResource("Bilder/Visutleier.png")); 
+        regSøkIkon = new ImageIcon(getClass().getResource("Bilder/Registrersøker.png")); 
+        visSøkIkon = new ImageIcon(getClass().getResource("Bilder/Vissøker.png")); 
+        visKonIkon = new ImageIcon(getClass().getResource("Bilder/Viskontrakt.png")); 
+        statIkon = new ImageIcon(getClass().getResource("Bilder/Statistikk.png"));
+        regBoIkon = new ImageIcon(getClass().getResource("Bilder/Registrerbolig.png"));
+        visBoIkon = new ImageIcon(getClass().getResource("Bilder/Visbolig.png"));
+        boligBrowseIkon = new ImageIcon(getClass().getResource("Bilder/Boligbrowse.png"));    
+        
         regUt = new JButton (regUtIkon);
         visUt = new JButton (visUtIkon);
         regSøk = new JButton (regSøkIkon);
@@ -92,6 +93,18 @@ public class MainFrame extends JFrame implements ActionListener {
         visKon = new JButton (visKonIkon);
         stat = new JButton (statIkon);
         boligBrowse = new JButton (boligBrowseIkon);
+        }
+        catch (NullPointerException npe){
+        regUt = new JButton ("Registrer utleier");
+        visUt = new JButton ("Vis utleiere");
+        regSøk = new JButton ("Registrer søker");
+        visSøk = new JButton ("Vis søkere");
+        regBo = new JButton ("Registrer bolig");
+        visBo = new JButton ("Vis boliger");
+        visKon = new JButton ("Vis kontrakter");
+        stat = new JButton ("Statistikk");
+        boligBrowse = new JButton ("Bolig Browse");
+        }
 
         mainboard.add(regUt);
         mainboard.add(visUt);
