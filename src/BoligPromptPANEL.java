@@ -40,14 +40,21 @@ public class BoligPromptPANEL extends JPanel implements ActionListener {
 
         setLayout(new BorderLayout());
 
-        leilighetIkon = new ImageIcon(getClass().getResource("Bilder/Leilighet.png"));
-        eneboligIkon = new ImageIcon(getClass().getResource("Bilder/Enebolig.png"));
-
         knappanel = new JPanel(new GridLayout(1,2,5,5));
         tilbakepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
+        try{
+        leilighetIkon = new ImageIcon(getClass().getResource("Bilder/Leilighet.png"));
+        eneboligIkon = new ImageIcon(getClass().getResource("Bilder/Enebolig.png"));
         visLeil = new JButton(leilighetIkon);
         visEnebolig = new JButton(eneboligIkon);
+        }
+        
+        catch (NullPointerException npe){
+            visLeil = new JButton ("Vis leiligheter");
+            visEnebolig = new JButton ("Vis eneboliger");
+        }
+        
         tilbake = new JButton("Tilbake");
 
         overskrift = new JLabel("Velg boligtype");
