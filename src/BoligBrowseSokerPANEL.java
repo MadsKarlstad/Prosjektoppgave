@@ -11,7 +11,8 @@ import java.util.Map;
  */
 public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
-    private double sum;
+
+    private int flytt;
 
     private JTextField fødselsnummer;
     private JButton finn;
@@ -80,6 +81,8 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         Iterator it = bregister.entrySet().iterator();
         eneboligliste = new LinkedList<Enebolig>();
+
+        flytt = 0;
     }
 
     public void lagGui(){
@@ -102,8 +105,19 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         boligArea.setText(eneboligliste.get(i).getBolignr());
     }
 
-    public void visNesteEnebolig(Soker soker,int i){
-        boligArea.setText(eneboligliste.get(i).getBolignr());
+    public void nextVasClicked(String pnr){
+
+        Soker soker = sregister.get(pnr);
+        flytt += 1;
+        visEneboliger(soker,flytt);
+
+    }
+
+    public void previousVasClicked(String pnr){
+
+        Soker soker = sregister.get(pnr);
+        flytt -= 1;
+        visEneboliger(soker,flytt);
     }
 
     public void toggle(String pnr){
@@ -134,10 +148,10 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
             toggle(fødselsnummer.getText());
         }
         else if(e.getSource() == neste){
-            visNesteEnebolig(soker,i++);
+            nextVasClicked(fødselsnummer.getText());
         }
         else if(e.getSource() == forrige){
-            visNesteEnebolig(soker,i--);
+            previousVasClicked(fødselsnummer.getText());
         }
     }
 }
