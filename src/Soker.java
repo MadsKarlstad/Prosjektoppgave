@@ -194,35 +194,54 @@ public class Soker extends Person{
     }
 
     public void matcherEnebolig(){
-        double sum = 0;
         for (Map.Entry<String, Enebolig> entry : eneboligregister.entrySet()){
+            double prosent = 0;
+            double sum = 0;
             if(isRøyk() == entry.getValue().røyke()){
                 System.out.println("Røyke, " + entry.getValue().getBolignr());
+                sum+=1;
             }
             if(isBalkong() == entry.getValue().balkong()){
                 System.out.println("balkong, " + entry.getValue().getBolignr());
+                sum+=1;
+
             }
             if(isHusdyr() == entry.getValue().husdyr()){
                 System.out.println("husdyr, " + entry.getValue().getBolignr());
+                sum+=1;
+
             }
             if(isInternetinkludert() == entry.getValue().internettInkludert()){
                 System.out.println("internett, " + entry.getValue().getBolignr());
+                sum+=1;
+
             }
             if(isTVinkludert() == entry.getValue().tvInkludert()){
                 System.out.println("teve, " + entry.getValue().getBolignr());
+                sum+=1;
+
             }
             if(isKjeller() == entry.getValue().isKjeller()){
                 System.out.println("kjeller, " + entry.getValue().getBolignr());
+                sum+=1;
+
             }
             if(isStrøminkludert() == entry.getValue().strømInkludert()){
                 System.out.println("strøm, " + entry.getValue().getBolignr());
+                sum+=1;
+
             }
             if(isParkering() == entry.getValue().parkering()){
                 System.out.println("parkering, " + entry.getValue().getBolignr());
+                sum+=1;
+
             }
             if(isTerasse() == entry.getValue().terasse()){
                 System.out.println("terasse, " + entry.getValue().getBolignr());
+                sum+=1;
             }
+            prosent = ((sum/9)*100);
+            System.out.println("Prosentmatch: "+prosent+"%");
 
 
 
