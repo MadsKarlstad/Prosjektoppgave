@@ -14,6 +14,8 @@ public class Soker extends Person{
 
     private DecimalFormat df;
 
+    private int match = 1;
+
     private int minAreal;
     private int maksAreal;
 
@@ -205,35 +207,35 @@ public class Soker extends Person{
                 sum+=1;
             }
             if(isBalkong() == entry.getValue().balkong()){
-                sum+=1;
+                sum+=match;
 
             }
             if(isHusdyr() == entry.getValue().husdyr()){
-                sum+=1;
+                sum+=match;
 
             }
             if(isInternetinkludert() == entry.getValue().internettInkludert()){
-                sum+=1;
+                sum+=match;
 
             }
             if(isTVinkludert() == entry.getValue().tvInkludert()){
-                sum+=1;
+                sum+=match;
 
             }
             if(isKjeller() == entry.getValue().isKjeller()){
-                sum+=1;
+                sum+=match;
 
             }
             if(isStrøminkludert() == entry.getValue().strømInkludert()){
-                sum+=1;
+                sum+=match;
 
             }
             if(isParkering() == entry.getValue().parkering()){
-                sum+=1;
+                sum+=match;
 
             }
             if(isTerasse() == entry.getValue().terasse()){
-                sum+=1;
+                sum+=match;
             }
 
             prosent = ((sum/9)*100);
