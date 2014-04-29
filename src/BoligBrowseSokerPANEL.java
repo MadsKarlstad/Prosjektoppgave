@@ -18,7 +18,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
     private JButton neste;
     private JButton tilbake;
-    private JButton avbryt;
+    private JButton forrige;
 
     private JPanel knappepanel;
     private JPanel søkepanel;
@@ -38,9 +38,6 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
     private Soker soker;
     private Enebolig første;
-
-
-
 
     private MainFrame parent;
 
@@ -73,22 +70,20 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         neste = new JButton("neste");
         tilbake = new JButton("tilbake");
-        avbryt = new JButton("forrige");
+        forrige = new JButton("forrige");
 
 
         neste.addActionListener(this);
         tilbake.addActionListener(this);
-        avbryt.addActionListener(this);
+        forrige.addActionListener(this);
         finn.addActionListener(this);
 
         Iterator it = bregister.entrySet().iterator();
         eneboligliste = new LinkedList<Enebolig>();
-
     }
 
     public void lagGui(){
-
-        knappepanel.add(avbryt);
+        knappepanel.add(forrige);
         knappepanel.add(neste);
         knappepanel.add(tilbake);
 
@@ -102,39 +97,36 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         add(infopanel_søker,BorderLayout.CENTER);
     }
 
-    public void visEneboliger(Soker soker){
+    public void visEneboliger(Soker soker,int i){
         eneboligliste = soker.matcherEnebolig();
-        boligArea.setText(eneboligliste.get(0).getBolignr());
+        boligArea.setText(eneboligliste.get(i).getBolignr());
     }
 
     public void visNesteEnebolig(Soker soker,int i){
-        int j = i;
-        boligArea.setText(eneboligliste.get(j).getBolignr());
+        boligArea.setText(eneboligliste.get(i).getBolignr());
     }
 
     public void toggle(String pnr){
 
         if(sregister.finnes(pnr)){
-
             Soker soker = sregister.get(pnr);
             System.out.println("hei " + soker.getNavn());
-            visEneboliger(soker);
+            visEneboliger(soker,0);
         }
 
         else if(pregister.finnes(pnr)){
-
             Utleier utleier = pregister.get(pnr);
             System.out.println("hei " + utleier.getNavn());
         }
 
         else{
-
             System.out.println("ingen person med dette fødselsnummer registrert");
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        int i = 1;
         if (e.getSource() == tilbake){
             parent.visPanel(MainFrame.MAIN_BOARD);
         }
@@ -142,8 +134,10 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
             toggle(fødselsnummer.getText());
         }
         else if(e.getSource() == neste){
-            int i = 0;
-            visNesteEnebolig(soker,i+1);
+            visNesteEnebolig(soker,i++);
+        }
+        else if(e.getSource() == forrige){
+            visNesteEnebolig(soker,i--);
         }
     }
 }
