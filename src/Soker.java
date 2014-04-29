@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
@@ -10,6 +11,8 @@ public class Soker extends Person{
     private String sivilstatus;
     private String yrke;
     private String arbeidsfohold_studiested;
+
+    private DecimalFormat df;
 
     private int minAreal;
     private int maksAreal;
@@ -61,6 +64,7 @@ public class Soker extends Person{
         this.leilighetregister = leilighetregister;
 
         eneboligliste = new LinkedList<Enebolig>();
+        df = new DecimalFormat("#.##");
 
 
     }
@@ -231,11 +235,11 @@ public class Soker extends Person{
             if(isTerasse() == entry.getValue().terasse()){
                 sum+=1;
             }
+
             prosent = ((sum/9)*100);
-            System.out.println("Prosentmatch: "+prosent+"% for bolignummer " + entry.getValue().getBolignr());
 
             if(prosent > 50){
-                System.out.println("denne er bra!");
+                System.out.println("Prosentmatch: "+ df.format(prosent) +"% for bolignummer " + entry.getValue().getBolignr());
             }
         }
     }
