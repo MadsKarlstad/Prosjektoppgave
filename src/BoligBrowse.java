@@ -160,7 +160,7 @@ public class BoligBrowse {
             int etasje = etgleil[r.nextInt(etgleil.length)];
             boolean elevator = heis[r.nextInt(heis.length)];
             String bildesti = "Bilder/boligbilder/"+ String.valueOf((1 + r.nextInt(46))) + ".jpg";
-            System.out.println(bildesti);
+
 
             Leilighet leilighet = new Leilighet(bildesti,adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
                     TV,internet,s,park,antboder,etasje,elevator);
