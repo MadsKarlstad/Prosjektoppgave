@@ -409,9 +409,11 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
             else if(legister.finnes(bolignummer.getText())){
                 System.out.println("beskjedmetode legges her");
                 leilighetliste.get(flytt).setØnsket(true);
-                System.out.println(leilighetliste.get(flytt).erØnsket());
+                leilighetliste.get(flytt).setSoker(soker);
+
+
                 utleier.leggInnØnsketLeilighet(leilighetliste.get(flytt).getLeilighet());
-                System.out.println(utleier.getØnskedeLeiligheter());
+                System.out.println(eneboligliste.get(flytt).getSoker().getNavn());
             }
 
 

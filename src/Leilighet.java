@@ -10,7 +10,7 @@ public class Leilighet extends Bolig {
     private boolean ønsket;
     private boolean utleid;
 
-    String bildesti;
+    private Soker soker;
 
     private double prosent;
 
@@ -64,9 +64,7 @@ public class Leilighet extends Bolig {
     public void setUtleid(boolean b){
 
         utleid = b;
-
     }
-
     public boolean erUtleid(){
 
         return  utleid;
@@ -83,9 +81,14 @@ public class Leilighet extends Bolig {
         return "Dette er en (leilighet) " + getBeskrivelse() + " på " + getBoareal() + " kvadratmeter, den ligger på adressen " + getAdresse();
     }
 
-    public Soker setSoker(Soker soker){
+    public void setSoker(Soker s){
+
+        soker = s;
+
+    }
+
+    public Soker getSoker(){
 
         return soker;
-
     }
 }
