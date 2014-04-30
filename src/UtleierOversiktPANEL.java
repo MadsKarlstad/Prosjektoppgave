@@ -278,7 +278,7 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
     }
 
     public void slettUtleier(int rad){
-        String kontrollord = "Superduper";
+        String kontrollord = "En";
         String kontroll = JOptionPane.showInputDialog(null,"For å slette objektet, vennligst skriv inn kontrollordet:\n" +
                 kontrollord);
         if(kontroll == kontrollord) {
