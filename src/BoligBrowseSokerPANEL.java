@@ -28,19 +28,15 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     private JButton neste;
     private JButton tilbakeknapp;
     private JButton forrige;
-
     private JButton enebolig;
     private JButton leilighet;
 
     private JPanel knappepanel;
     private JPanel søkepanel;
-
     private JPanel infopanel_start_søker;
     private JPanel infopanel_søker;
     private JPanel infopanel_utleier;
-
     private JPanel midtpanel;
-
     private JPanel eneboligFelter;
     private JPanel bilde_info;
 
@@ -62,8 +58,6 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     private BufferedImage bilde;
     private JLabel bildeLabel;
 
-
-
     private Sokerregister sregister;
     private Personregister pregister;
     private Boligregister bregister;
@@ -75,9 +69,6 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
     private Icon leilighetIkon, eneboligIkon;
 
-
-
-
     private MainFrame parent;
 
     public BoligBrowseSokerPANEL(Sokerregister sregister, Boligregister bregister, Leilighetregister legister,Personregister pregister, MainFrame parent) {
@@ -86,7 +77,6 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         this.legister = legister;
         this.parent = parent;
         this.pregister = pregister;
-
 
         initialiser();
         lagGui();
@@ -168,13 +158,6 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         border = BorderFactory.createLineBorder(Color.BLACK, 1);
 
-
-
-
-
-
-
-
     }
 
     public void lagGui(){
@@ -202,7 +185,6 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         add(knappepanel, BorderLayout.PAGE_END);
         add(søkepanel, BorderLayout.PAGE_START);
 
-
         add(midtpanel, BorderLayout.CENTER);
 
         boligArea.setBorder(border);
@@ -221,8 +203,6 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         bilde = ImageIO.read(new File("/Users/Erlend/Desktop/etJoAAP.png"));
         bildeLabel = new JLabel(new ImageIcon(bilde));
 
-
-
     }
 
     public void visStartPANELsøker(){
@@ -233,8 +213,6 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         midtpanel.add(infopanel_start_søker, BorderLayout.CENTER);
 
-
-
     }
 
     public void visEneboligPANEL(){
@@ -243,13 +221,11 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         midtpanel.revalidate();
         midtpanel.repaint();
 
-
         bilde_info.add(boligArea, BorderLayout.PAGE_START);
         bilde_info.add(bildeLabel, BorderLayout.CENTER);
 
         infopanel_søker.add(eneboligFelter, BorderLayout.LINE_START);
         infopanel_søker.add(bilde_info, BorderLayout.CENTER);
-
 
         midtpanel.add(infopanel_søker);
 
@@ -280,11 +256,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         }
     }
 
-
-
-
-
-    public void toggle(String fnr){
+     public void toggle(String fnr){
 
         if(sregister.finnes(fnr)){
 
@@ -324,8 +296,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         }
 
-
-        try {
+     try {
             if (e.getSource() == finn) {
 
                 toggle(fødselsnummer.getText());
@@ -340,7 +311,6 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
             }
         }
         catch(IOException io){
-
 
         }
     }
