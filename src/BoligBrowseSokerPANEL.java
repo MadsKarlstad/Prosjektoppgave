@@ -104,6 +104,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         boligArea = new JTextArea();
 
+
         fødselsnummer = new JTextField(10);
         finn = new JButton("Finn");
 
@@ -159,8 +160,9 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         boligArea.setLineWrap(true);
         boligArea.setWrapStyleWord(true);
+        boligArea.setEditable(false);
 
-        df = new DecimalFormat("#.");
+        df = new DecimalFormat("#");
 
         border = BorderFactory.createLineBorder(Color.BLACK, 1);
 

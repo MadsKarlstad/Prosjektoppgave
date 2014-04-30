@@ -33,7 +33,7 @@ public abstract class Bolig implements Hjem {
     private Personregister register;
 
 
-    public Bolig(String bildesti, String adresse, int boareal, int antallRom, int byggeår, String beskrivelse, int pris, String ledigFra, String bolignummer, Utleier eier, boolean røyke, boolean husdyr, boolean balkong, boolean terasse, boolean tvInkludert, boolean internettInkludert, boolean strømInkludert, boolean parkering) {
+    public Bolig(String bildesti, String adresse, int boareal, int antallRom, int byggeår, String beskrivelse, int pris, String ledigFra, String bolignummer, Utleier eier, boolean røyke, boolean husdyr, boolean balkong, boolean terasse, boolean tvInkludert, boolean internettInkludert, boolean strømInkludert, boolean parkering, boolean erØnsket, boolean erUtleid) {
         this.bildesti = bildesti;
         this.adresse = adresse;
         this.boareal = boareal;
@@ -52,6 +52,8 @@ public abstract class Bolig implements Hjem {
         this.internettInkludert = internettInkludert;
         this.strømInkludert = strømInkludert;
         this.parkering = parkering;
+        this.erUtleid = erUtleid;
+        this.erØnsket = erØnsket;
     }
 
     @Override
@@ -156,18 +158,10 @@ public abstract class Bolig implements Hjem {
         return parkering;
     }
 
-    public void setErØnsket(boolean b){
+    public  boolean erUtleid(){return erUtleid;}
 
-        erØnsket = new Boolean(b);
+    public boolean erØnsker(){return erØnsket;}
 
-    }
 
-    public void setErUtleid(boolean b){
-
-        erUtleid = new Boolean(b);
-    }
-    public boolean isErØnsket(){return erØnsket;}
-
-    public boolean isErUtleid(){return erUtleid;}
 
 }

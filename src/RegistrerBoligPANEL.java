@@ -362,7 +362,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
 
         Enebolig enebolig = new Enebolig("",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
-                            røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad);
+                            røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false);
         bregister.put(bolignr,enebolig);
 
         System.out.println("Registrert");
@@ -399,7 +399,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
 
         Leilighet leilighet = new Leilighet("",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
-                røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antboder,etg,heis);
+                røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antboder,etg,heis,false,false);
         legister.put(bolignr,leilighet);
 
         System.out.println("Registrert");

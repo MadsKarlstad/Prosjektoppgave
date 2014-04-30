@@ -13,9 +13,12 @@ public class Enebolig extends Bolig {
 
     private double prosent;
 
+    private boolean ønsket;
+    private boolean utleid;
 
-    public Enebolig(String bildesti, String adresse, int boareal, int antallRom, int byggeår, String beskrivelse, int pris, String ledigFra, String bolignummer, Utleier eier, boolean røyke, boolean husdyr, boolean balkong, boolean terasse, boolean tvInkludert, boolean internettInkludert, boolean strømInkludert, boolean parkering, int antallEtasjer, boolean kjeller, double tomtareal, int antallBad) {
-        super(bildesti,adresse, boareal, antallRom, byggeår, beskrivelse, pris, ledigFra, bolignummer, eier, røyke, husdyr, balkong, terasse, tvInkludert, internettInkludert, strømInkludert, parkering);
+
+    public Enebolig(String bildesti, String adresse, int boareal, int antallRom, int byggeår, String beskrivelse, int pris, String ledigFra, String bolignummer, Utleier eier, boolean røyke, boolean husdyr, boolean balkong, boolean terasse, boolean tvInkludert, boolean internettInkludert, boolean strømInkludert, boolean parkering, int antallEtasjer, boolean kjeller, double tomtareal, int antallBad, boolean ønsket, boolean utleid) {
+        super(bildesti,adresse, boareal, antallRom, byggeår, beskrivelse, pris, ledigFra, bolignummer, eier, røyke, husdyr, balkong, terasse, tvInkludert, internettInkludert, strømInkludert, parkering, ønsket, utleid);
         this.antallEtasjer = antallEtasjer;
         this.kjeller = kjeller;
         this.tomtareal = tomtareal;
@@ -69,5 +72,27 @@ public class Enebolig extends Bolig {
     public double getProsent(){
 
         return  prosent;
+    }
+
+    public void setØnsket(boolean b){
+
+        ønsket = b;
+
+    }
+
+    public boolean erØnsket(){
+
+        return  ønsket;
+    }
+
+    public void setUtleid(boolean b){
+
+        utleid = b;
+
+    }
+
+    public boolean erUtleid(){
+
+        return  utleid;
     }
 }

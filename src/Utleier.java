@@ -7,6 +7,9 @@ public class Utleier extends Person {
     private String firma;
     private Boligregister boligregister;
 
+    private LinkedList<Enebolig> eneboligliste;
+    private LinkedList<Leilighet> leilighetliste;
+
     public Utleier(String FØDSELSNUMMER, String fornavn, String etternavn, String adresse, String mail, String telefonnummer, String firma) {
         super(FØDSELSNUMMER, fornavn, etternavn, adresse, mail, telefonnummer);
         this.firma = firma;
