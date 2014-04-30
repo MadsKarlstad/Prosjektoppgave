@@ -13,8 +13,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 /**
- * Created by Erlend on 22/04/14. test nå skal alt funke
- *
+ * Created by Erlend on 22/04/14.
  */
 public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
@@ -30,10 +29,13 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     private JButton tilbakeknapp;
     private JButton forrige;
 
+    private JButton enebolig;
+    private JButton leilighet;
+
     private JPanel knappepanel;
     private JPanel søkepanel;
 
-    private JPanel infopanel_tomt;
+    private JPanel infopanel_start_søker;
     private JPanel infopanel_søker;
     private JPanel infopanel_utleier;
 
@@ -69,9 +71,9 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
     private LinkedList<Enebolig> eneboligliste;
 
-    private Soker soker;
-
     private DecimalFormat df;
+
+    private Icon leilighetIkon, eneboligIkon;
 
 
 
@@ -99,7 +101,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         midtpanel = new JPanel(new BorderLayout());
         eneboligFelter = new JPanel(new GridLayout(4,2,1,1));
 
-        infopanel_tomt = new JPanel();
+        infopanel_start_søker = new JPanel(new GridLayout(1,2,1,1));
         infopanel_søker = new JPanel(new BorderLayout());
         infopanel_utleier = new JPanel();
 
@@ -114,11 +116,28 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         tilbakeknapp = new JButton("tilbake");
         forrige = new JButton("forrige");
 
+        try{
+            leilighetIkon = new ImageIcon(getClass().getResource("Bilder/Leilighet.png"));
+            eneboligIkon = new ImageIcon(getClass().getResource("Bilder/Enebolig.png"));
+            leilighet = new JButton(leilighetIkon);
+            enebolig = new JButton(eneboligIkon);
+        }
+
+        catch (NullPointerException npe){
+            leilighet = new JButton ("Vis leiligheter");
+            enebolig = new JButton ("Vis eneboliger");
+        }
+
+        /*enebolig = new JButton();
+        leilighet = new JButton();*/
+
 
         neste.addActionListener(this);
         tilbakeknapp.addActionListener(this);
         forrige.addActionListener(this);
         finn.addActionListener(this);
+        leilighet.addActionListener(this);
+        enebolig.addActionListener(this);
 
         //Iterator it = bregister.entrySet().iterator();
         eneboligliste = new LinkedList<Enebolig>();
@@ -154,6 +173,8 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
 
 
+
+
     }
 
     public void lagGui(){
@@ -173,7 +194,10 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         infopanel_søker.add(boligArea, BorderLayout.CENTER);
 
         søkepanel.add(fødselsnummer);
-        søkepanel.add(finn);
+        søkepanel.add(finn);//disse durde byttes rekkefølge på søkepanel og infopane_søker
+
+        infopanel_start_søker.add(enebolig);
+        infopanel_start_søker.add(leilighet);
 
         add(knappepanel, BorderLayout.PAGE_END);
         add(søkepanel, BorderLayout.PAGE_START);
@@ -196,6 +220,18 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         bilde = ImageIO.read(new File("/Users/Erlend/Desktop/etJoAAP.png"));
         bildeLabel = new JLabel(new ImageIcon(bilde));
+
+
+
+    }
+
+    public void visStartPANELsøker(){
+
+        midtpanel.removeAll();
+        midtpanel.revalidate();
+        midtpanel.repaint();
+
+        midtpanel.add(infopanel_start_søker, BorderLayout.CENTER);
 
 
 
@@ -248,17 +284,17 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
 
 
-    public void toggle(String pnr) throws IOException {
+    public void toggle(String fnr){
 
-        if(sregister.finnes(pnr)){
-            Soker soker = sregister.get(pnr);
-            System.out.println("hei " + soker.getNavn());
-            visEneboliger(soker, 0);
-            visEneboligPANEL();
+        if(sregister.finnes(fnr)){
+
+            visStartPANELsøker();
+
+
         }
 
-        else if(pregister.finnes(pnr)){
-            Utleier utleier = pregister.get(pnr);
+        else if(pregister.finnes(fnr)){
+            Utleier utleier = pregister.get(fnr);
             System.out.println("hei " + utleier.getNavn());
         }
 
@@ -273,26 +309,39 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         if (e.getSource() == tilbakeknapp){
             parent.visPanel(MainFrame.MAIN_BOARD);
         }
-        else if(e.getSource() == finn){
-            try {
+
+        else if (e.getSource() == enebolig){
+
+            Soker soker = sregister.get(fødselsnummer.getText());
+            try
+            {
+                visEneboliger(soker, 0);
+                visEneboligPANEL();
+            }
+            catch (IOException io){
+
+            }
+
+        }
+
+
+        try {
+            if (e.getSource() == finn) {
+
                 toggle(fødselsnummer.getText());
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        }
-        else if(e.getSource() == neste){
-            try {
+
+            } else if (e.getSource() == neste) {
+
                 nextVasClicked(fødselsnummer.getText());
-            } catch (IOException e1) {
-                e1.printStackTrace();
+
+            } else if (e.getSource() == forrige) {
+                previousVasClicked(fødselsnummer.getText());
+
             }
         }
-        else if(e.getSource() == forrige){
-            try {
-                previousVasClicked(fødselsnummer.getText());
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+        catch(IOException io){
+
+
         }
     }
 }
