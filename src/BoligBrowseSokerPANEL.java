@@ -199,6 +199,13 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         add(midtpanel, BorderLayout.CENTER);
 
         boligArea.setBorder(border);
+
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension skjerm = kit.getScreenSize();
+        int bredde = skjerm.width;
+        int høyde = skjerm.height;
+
+        parent.setSize(bredde/2, høyde-400);
     }
 
     public void visEneboliger(Soker soker) throws IOException {
@@ -355,6 +362,14 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         if (e.getSource() == tilbakeknapp){
             parent.visPanel(MainFrame.MAIN_BOARD);
+
+            Toolkit kit = Toolkit.getDefaultToolkit();
+            Dimension skjerm = kit.getScreenSize();
+            int bredde = skjerm.width;
+            int høyde = skjerm.height;
+
+            parent.setSize(bredde/2, høyde-100);
+            parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
         }
 
         else if (e.getSource() == enebolig){
