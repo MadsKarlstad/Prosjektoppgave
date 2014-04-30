@@ -39,6 +39,7 @@ public class BoligBrowse {
 
         String[] tildato = {"01.06.19","01.07.19","01.08.19"};
 
+
         int[] boareal = {20,30,40,50,60,70,80};
         int[] antrom = {1,2,3,4,5,6};
         int[] byggår = {1970,1980,1990,2000,2010};
@@ -129,8 +130,10 @@ public class BoligBrowse {
             int bad = antbad[r.nextInt(antbad.length)];
             String ledig = ledigfra[r.nextInt(ledigfra.length)];
             String beskriv = beskrivelse[r.nextInt(beskrivelse.length)];
+            String bildesti = "/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/"+ String.valueOf((1 + r.nextInt(32))) + ".jpg";
 
-            Enebolig enebolig = new Enebolig(adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
+
+            Enebolig enebolig = new Enebolig(bildesti,adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
                     TV,internet,s,park,etg,kj,tmt,bad);
             bregister.leggTil(enebolig);
         }
@@ -156,8 +159,9 @@ public class BoligBrowse {
             int antboder = boder[r.nextInt(boder.length)];
             int etasje = etgleil[r.nextInt(etgleil.length)];
             boolean elevator = heis[r.nextInt(heis.length)];
+            String bildesti = "/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/"+ String.valueOf(10) + ".jpg";
 
-            Leilighet leilighet = new Leilighet(adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
+            Leilighet leilighet = new Leilighet(bildesti,adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
                     TV,internet,s,park,antboder,etasje,elevator);
             legister.leggTil(leilighet);
         }

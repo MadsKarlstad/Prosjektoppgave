@@ -28,10 +28,13 @@ public abstract class Bolig implements Hjem {
     private boolean erØnsket;
     private boolean erUtleid;
 
+    private String bildesti;
+
     private Personregister register;
 
 
-    public Bolig(String adresse, int boareal, int antallRom, int byggeår, String beskrivelse, int pris, String ledigFra, String bolignummer, Utleier eier, boolean røyke, boolean husdyr, boolean balkong, boolean terasse, boolean tvInkludert, boolean internettInkludert, boolean strømInkludert, boolean parkering) {
+    public Bolig(String bildesti, String adresse, int boareal, int antallRom, int byggeår, String beskrivelse, int pris, String ledigFra, String bolignummer, Utleier eier, boolean røyke, boolean husdyr, boolean balkong, boolean terasse, boolean tvInkludert, boolean internettInkludert, boolean strømInkludert, boolean parkering) {
+        this.bildesti = bildesti;
         this.adresse = adresse;
         this.boareal = boareal;
         this.antallRom = antallRom;
@@ -95,6 +98,8 @@ public abstract class Bolig implements Hjem {
     public Utleier getEier(){
         return eier;
     }
+
+    public String getBildesti(){return bildesti;}
 
     public String getEiersNavn(){
         return eier.getNavn();

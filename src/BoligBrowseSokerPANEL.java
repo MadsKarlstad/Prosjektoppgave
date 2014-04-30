@@ -208,7 +208,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         boligArea.setText(eneboligliste.get(flytt).toString() + " Dette er en " + String.valueOf(df.format((eneboligliste.get(flytt).getProsent()))) + " % match etter " + soker.getNavn()
                 + " sine ønsker");
 
-        bilde = ImageIO.read(new File("/Users/madsmkarlstad/Desktop/bilde.jpg"));
+        bilde = ImageIO.read(new File(eneboligliste.get(flytt).getBildesti()));
         bildeLabel = new JLabel(new ImageIcon(bilde));
 
         aEnebolig = true;
@@ -226,8 +226,15 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         boligArea.setText(leilighetliste.get(flytt).toString() + " Dette er en " + String.valueOf(df.format((leilighetliste.get(flytt).getProsent()))) + " % match etter " + soker.getNavn()
                 + " sine ønsker");
 
-        bilde = ImageIO.read(new File("/Users/madsmkarlstad/Desktop/bilde.jpg"));
+
+        bilde = ImageIO.read(new File(leilighetliste.get(flytt).getBildesti()));
         bildeLabel = new JLabel(new ImageIcon(bilde));
+        
+        bilde_info.removeAll();
+        bilde_info.revalidate();
+        bilde_info.repaint();
+
+
 
         aLeilighet = true;
         aEnebolig = false;
@@ -283,7 +290,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
             Soker soker = sregister.get(pnr);
 
             if(aEnebolig){
-                visEneboliger(soker);
+            visEneboliger(soker);
             }
 
             if(aLeilighet){
@@ -315,7 +322,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         }
     }
 
-    public void toggle(String fnr){
+     public void toggle(String fnr){
 
         if(sregister.finnes(fnr)){
 
@@ -369,7 +376,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         }
 
-        try {
+     try {
             if (e.getSource() == finn) {
 
                 toggle(fødselsnummer.getText());
