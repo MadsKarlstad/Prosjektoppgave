@@ -197,12 +197,14 @@ public class MainFrame extends JFrame implements ActionListener {
         else if(e.getSource()  == visEnebolig){
             vinduer.add(new BoligOversiktPANEL(bregister,register, this), "VIS BOLIG");
             visPanel("VIS BOLIG");
+            setExtendedState(JFrame.MAXIMIZED_BOTH);
         }
 
         else if(e.getSource()  == visLeilighet){
 
             vinduer.add(new LeilighetOversiktPANEL(legister,register,this), "VIS LEILIGHET");
             visPanel("VIS LEILIGHET");
+            setExtendedState(JFrame.MAXIMIZED_BOTH);
         }
 
         else if(e.getSource()  == boligBrowse){
