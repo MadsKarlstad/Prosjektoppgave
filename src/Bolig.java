@@ -14,6 +14,7 @@ public abstract class Bolig implements Hjem {
     private String ledigFra;
     private String bolignummer;
     private Utleier eier;
+    private Soker soker;
 
     private boolean røyke;
     private boolean husdyr;

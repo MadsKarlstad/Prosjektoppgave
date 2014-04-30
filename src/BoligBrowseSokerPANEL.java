@@ -309,6 +309,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         infopanel_søker.add(boligFelter, BorderLayout.LINE_START);
         infopanel_søker.add(bilde_info, BorderLayout.CENTER);
+        infopanel_søker.add(knappepanel_søker,BorderLayout.PAGE_END);
 
         midtpanel.add(infopanel_søker);
 
@@ -390,13 +391,18 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         else if (e.getSource() == ønsket){
 
             Utleier utleier = eneboligliste.get(flytt).getEier();
+            Soker soker = sregister.get(fødselsnummer.getText());
 
 
             if(bregister.finnes(bolignummer.getText())){
             System.out.println("beskjedmetode legges her");
                 eneboligliste.get(flytt).setØnsket(true);
+                eneboligliste.get(flytt).setSoker(soker);
+
                 utleier.leggInnØnsketEnebolig(eneboligliste.get(flytt).getEnebolig());
-                System.out.println(utleier.getØnskedeEneboliger());
+
+                System.out.println(eneboligliste.get(flytt).getSoker().getNavn());
+
 
             }
 

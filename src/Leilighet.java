@@ -82,4 +82,10 @@ public class Leilighet extends Bolig {
 
         return "Dette er en (leilighet) " + getBeskrivelse() + " på " + getBoareal() + " kvadratmeter, den ligger på adressen " + getAdresse();
     }
+
+    public Soker setSoker(Soker soker){
+
+        return soker;
+
+    }
 }

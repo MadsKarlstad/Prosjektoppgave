@@ -8,6 +8,7 @@ public class Enebolig extends Bolig {
     private boolean kjeller;
     private double tomtareal;
     private int antallBad;
+    private Soker soker;
 
     String bildesti;
 
@@ -100,4 +101,18 @@ public class Enebolig extends Bolig {
 
         return this;
     }
+
+    public void setSoker(Soker s){
+
+        soker = s;
+
+    }
+
+    public Soker getSoker(){
+
+        return soker;
+    }
+
+
+
 }
