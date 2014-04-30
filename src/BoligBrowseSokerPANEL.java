@@ -25,10 +25,10 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     private Boligregister bregister;
     private Leilighetregister legister;
 
-    private JTextField fødselsnummer,bolignummer,eier,pris,areal;
+    private JTextField fødselsnummer,bolignummer,eier,pris,areal,søkernavn,søkeradresse,søkertelefon,søkermail;
     private JButton neste,ønsketleilighet,ønsketenebolig,leilighet,enebolig,forrige,tilbakeknapp,finn;
-    private JLabel  bolignummeLabel,eierLabel,prisLabel,arealLabel,bildeLabel;
-    private JPanel knappepanel,knappepanel_søker,søkepanel,infopanel_start_søker,midtpanel,boligFelter,bilde_info,infopanel_søker,infopanel_utleier;
+    private JLabel  bolignummeLabel,eierLabel,prisLabel,arealLabel,bildeLabel,søkerLabel,søkerAdrLabel,tlfLabel,mailLabel;
+    private JPanel knappepanel,knappepanel_søker,søkepanel,infopanel_start_søker,midtpanel,boligFelter,bilde_info,infopanel_søker,infopanel_utleier,utleierFelter;
     private JTextArea boligArea;
 
     private Border border;
@@ -38,6 +38,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
     private LinkedList<Enebolig> eneboligliste;
     private LinkedList<Leilighet> leilighetliste;
+
 
     private DecimalFormat df;
 
@@ -65,6 +66,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         midtpanel = new JPanel(new BorderLayout());
         boligFelter = new JPanel(new GridLayout(4,2,1,1));
+        utleierFelter = new JPanel(new GridLayout(4,2,1,1));
 
         infopanel_start_søker = new JPanel(new GridLayout(1,2,1,1));
         infopanel_søker = new JPanel(new BorderLayout());
@@ -125,6 +127,11 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         eier = new JTextField(10);
         areal = new JTextField(10);
         pris = new JTextField(10);
+        søkeradresse = new JTextField(10);
+        søkermail = new JTextField(10);
+        søkernavn = new JTextField(10);
+        søkertelefon = new JTextField(10);
+
 
         bolignummer.setEditable(false);
         eier.setEditable(false);
@@ -135,6 +142,10 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         eierLabel = new JLabel("Biligeier");
         prisLabel = new JLabel("Pris pr mnd");
         arealLabel = new JLabel("Areal");
+        søkerLabel = new JLabel("Søkers navn");
+        søkerAdrLabel= new JLabel("Søkers adresse");
+        tlfLabel = new JLabel("Søkers telfon");
+        mailLabel = new JLabel("Søkers mail");
 
         boligArea.setLineWrap(true);
         boligArea.setWrapStyleWord(true);
@@ -164,6 +175,15 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         boligFelter.add(pris);
         boligFelter.add(arealLabel);
         boligFelter.add(areal);
+
+        utleierFelter.add(søkerLabel);
+        utleierFelter.add(søkernavn);
+        utleierFelter.add(søkerAdrLabel);
+        utleierFelter.add(søkeradresse);
+        utleierFelter.add(tlfLabel);
+        utleierFelter.add(søkertelefon);
+        utleierFelter.add(mailLabel);
+        utleierFelter.add(søkermail);
 
         infopanel_søker.add(boligArea, BorderLayout.CENTER);
 
@@ -236,6 +256,19 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         bildeLabel.setIcon( bildeikon );
     }
 
+    public void visSøkerEnebolig(Utleier utleier){
+
+        eneboligliste = utleier.getØnskedeEneboliger();
+
+        søkernavn.setText(eneboligliste.get(index).getEnebolig().getSoker().getNavn());
+        søkeradresse.setText(eneboligliste.get(index).getEnebolig().getSoker().getAdresse());
+        søkertelefon.setText(eneboligliste.get(index).getEnebolig().getSoker().getTelefonnummer());
+        søkermail.setText(eneboligliste.get(index).getEnebolig().getSoker().getMail());
+
+
+
+    }
+
     public void visStartPANELsøker(){
 
         midtpanel.removeAll();
@@ -296,6 +329,19 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
     }
 
+    public void visUtleierpanel(){
+
+        midtpanel.removeAll();
+        midtpanel.revalidate();
+        midtpanel.repaint();
+
+
+
+        midtpanel.add(utleierFelter, BorderLayout.LINE_START);
+
+
+    }
+
     public void nextVasClicked(String pnr) throws IOException {
 
         if(index>=0){
@@ -346,7 +392,8 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         else if(pregister.finnes(fnr)){
             Utleier utleier = pregister.get(fnr);
-            System.out.println("hei " + utleier.getNavn());
+            visSøkerEnebolig(utleier);
+            visUtleierpanel();
         }
 
         else{
