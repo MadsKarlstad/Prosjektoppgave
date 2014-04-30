@@ -117,6 +117,9 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         this.parent = parent;
         initialiser();
         lagGUI();
+        
+         parent.setSize(bredde/2, høyde/2);
+         parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
 
     }
 
@@ -433,6 +436,14 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             }
             else if(e.getSource()==avbryt){
                 parent.visPanel(MainFrame.MAIN_BOARD);
+                
+                Toolkit kit = Toolkit.getDefaultToolkit();
+            Dimension skjerm = kit.getScreenSize();
+            int bredde = skjerm.width;
+            int høyde = skjerm.height;
+        
+            parent.setSize(bredde-1000, høyde-200);
+            parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
             }
         }
         else if(e.getSource() == registrer){
@@ -440,6 +451,8 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         }
         else if(e.getSource()==avbryt) {
             parent.visPanel(MainFrame.MAIN_BOARD);
+            
+            
 
     }
 }
