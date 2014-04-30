@@ -52,6 +52,8 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
 
         initialiser();
         lagGUI();
+        
+        parent.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     public void initialiser() {
@@ -243,6 +245,14 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == tilbake){
             parent.visPanel(MainFrame.MAIN_BOARD);
+            
+            Toolkit kit = Toolkit.getDefaultToolkit();
+            Dimension skjerm = kit.getScreenSize();
+            int bredde = skjerm.width;
+            int høyde = skjerm.height;
+        
+            parent.setSize(bredde-1000, høyde-200);
+            parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
         }
         else if(e.getSource() == fjern){
             slettUtleier();
