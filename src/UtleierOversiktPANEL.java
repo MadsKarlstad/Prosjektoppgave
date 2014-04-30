@@ -273,8 +273,9 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
 
     }
 
-    public void slettUtleier(){
-        JOptionPane.showMessageDialog(null,"Not yet supported");
+    public void slettUtleier(int rad){
+        modell.delRow(rad);
+
     }
 
     public void endreUtleier(){
@@ -291,7 +292,11 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
             parent.visPanel(MainFrame.MAIN_BOARD);
         }
         else if(e.getSource() == fjern){
-            slettUtleier();
+            int rad = tabell.getSelectedRow();
+            Utleier utleier = modell.getValueAt(rad);
+            String persnr = utleier.getFødselsnummer();
+            register.fjern(persnr);
+            slettUtleier(rad);
         }
         else if(e.getSource() == endre){
             endreUtleier();

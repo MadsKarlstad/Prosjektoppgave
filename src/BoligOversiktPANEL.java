@@ -229,8 +229,8 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
         repaint();
     }
 
-    public void slettUtleier(){
-        JOptionPane.showMessageDialog(null,"Not yet supported");
+    public void slettEnebolig(int rad){
+        modell.delRow(rad);
     }
 
     public void endreUtleier(){
@@ -247,7 +247,11 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
             parent.visPanel("VIS PROMPT");
         }
         else if(e.getSource() == fjern){
-            slettUtleier();
+            int rad = tabell.getSelectedRow();
+            Enebolig enebolig = modell.getValueAt(rad);
+            String bolignr = enebolig.getBolignr();
+            register.fjern(bolignr);
+            slettEnebolig(rad);
         }
         else if(e.getSource() == endre){
             endreUtleier();

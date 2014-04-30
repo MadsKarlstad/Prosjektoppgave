@@ -218,8 +218,8 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         repaint();
     }
 
-    public void slettUtleier(){
-        JOptionPane.showMessageDialog(null,"Not yet supported");
+    public void slettSoker(int rad) {
+        modell.delRow(rad);
     }
 
     public void endreUtleier(){
@@ -236,7 +236,11 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
             parent.visPanel(MainFrame.MAIN_BOARD);
         }
         else if(e.getSource() == fjern){
-            slettUtleier();
+            int rad = tabell.getSelectedRow();
+            Soker soker = modell.getValueAt(rad);
+            String persnr = soker.getFødselsnummer();
+            pregister.fjern(persnr);
+            slettSoker(rad);
         }
         else if(e.getSource() == endre){
             endreUtleier();
