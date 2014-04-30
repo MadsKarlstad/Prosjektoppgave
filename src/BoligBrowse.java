@@ -1,6 +1,8 @@
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Random;
+import java.awt.*;
+import javax.swing.*;
 
 /**
  SLANGEDREAM COPYRIGHT
@@ -181,14 +183,15 @@ public class BoligBrowse {
             kregister.leggTil(kontrakt);
 
         }
-        Toolkit kit = Toolkit.getDefaultToolkit();
+        /*Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension skjerm = kit.getScreenSize();
         int bredde = skjerm.width;
-        int høyde = skjerm.height;
+        int høyde = skjerm.height;*/
         
         frame = new MainFrame(register,bregister,sregister,legister,kregister);
-        frame.setVisible(true);
+        //frame.setVisible(true);
         frame.setSize(bredde, høyde);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 
         frame.addWindowListener(
                 new WindowAdapter() {
