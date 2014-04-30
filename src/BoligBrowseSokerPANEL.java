@@ -30,8 +30,10 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     private JButton forrige;
     private JButton enebolig;
     private JButton leilighet;
+    private JButton ønsket;
 
     private JPanel knappepanel;
+    private JPanel knappepanel_søker;
     private JPanel søkepanel;
     private JPanel infopanel_start_søker;
     private JPanel infopanel_søker;
@@ -100,6 +102,8 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         infopanel_søker = new JPanel(new BorderLayout());
         infopanel_utleier = new JPanel();
 
+        knappepanel_søker = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
         bilde_info = new JPanel(new BorderLayout());
 
         boligArea = new JTextArea();
@@ -111,6 +115,8 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         neste = new JButton("neste");
         tilbakeknapp = new JButton("tilbake");
         forrige = new JButton("forrige");
+
+        ønsket = new JButton("Ønsker å leie denne");
 
         try{
             leilighetIkon = new ImageIcon(getClass().getResource("Bilder/Leilighet.png"));
@@ -189,6 +195,8 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         infopanel_søker.add(boligArea, BorderLayout.CENTER);
 
+        knappepanel_søker.add(ønsket);
+
         søkepanel.add(fødselsnummer);
         søkepanel.add(finn);//disse durde byttes rekkefølge på søkepanel og infopane_søker
 
@@ -199,6 +207,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         add(søkepanel, BorderLayout.PAGE_START);
 
         add(midtpanel, BorderLayout.CENTER);
+
 
         boligArea.setBorder(border);
 
@@ -279,8 +288,10 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         bilde_info.add(boligArea, BorderLayout.PAGE_START);
         bilde_info.add(bildeLabel, BorderLayout.CENTER);
 
+
         infopanel_søker.add(boligFelter, BorderLayout.LINE_START);
         infopanel_søker.add(bilde_info, BorderLayout.CENTER);
+        infopanel_søker.add(knappepanel_søker,BorderLayout.PAGE_END);
 
         midtpanel.add(infopanel_søker);
 
