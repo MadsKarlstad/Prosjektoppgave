@@ -225,8 +225,8 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
         repaint();
     }
 
-    public void slettUtleier(){
-        JOptionPane.showMessageDialog(null,"Not yet supported");
+    public void slettLeilighet(int rad){
+        modell.delRow(rad);
     }
 
     public void endreUtleier(){
@@ -243,7 +243,13 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
             parent.visPanel("VIS PROMPT");
         }
         else if(e.getSource() == fjern){
-            slettUtleier();
+            int rad = tabell.getSelectedRow();
+            Leilighet leilighet = modell.getValueAt(rad);
+            String bolignr = leilighet.getBolignr();
+            register.fjern(bolignr);
+            slettLeilighet(rad);
+
+
         }
         else if(e.getSource() == endre){
             endreUtleier();
