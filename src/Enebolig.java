@@ -9,6 +9,8 @@ public class Enebolig extends Bolig {
     private double tomtareal;
     private int antallBad;
 
+    String bildesti;
+
     private double prosent;
 
 
@@ -18,6 +20,8 @@ public class Enebolig extends Bolig {
         this.kjeller = kjeller;
         this.tomtareal = tomtareal;
         this.antallBad = antallBad;
+
+        setBlidesti(super.getBildesti());
     }
 
     public int getAntallEtasjer() {
@@ -36,8 +40,17 @@ public class Enebolig extends Bolig {
         return antallBad;
     }
 
+    public void setBlidesti(String s){
+
+        bildesti = s;
+
+    }
+
+
     public String getBildesti(){
-        return super.getBildesti();
+
+        return bildesti;
+
     }
 
     @Override

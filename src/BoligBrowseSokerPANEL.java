@@ -55,8 +55,9 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
     private Border border;
 
-    private BufferedImage bilde;
+    private String bildenavn;
     private JLabel bildeLabel;
+    private ImageIcon bildeikon;
 
     private Sokerregister sregister;
     private Personregister pregister;
@@ -163,6 +164,8 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         border = BorderFactory.createLineBorder(Color.BLACK, 1);
 
+        bildeLabel = new JLabel();
+
         aLeilighet = false;
         aEnebolig = false;
 
@@ -208,15 +211,22 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         boligArea.setText(eneboligliste.get(flytt).toString() + " Dette er en " + String.valueOf(df.format((eneboligliste.get(flytt).getProsent()))) + " % match etter " + soker.getNavn()
                 + " sine ønsker");
 
-        bilde = ImageIO.read(new File(eneboligliste.get(flytt).getBildesti()));
-        bildeLabel = new JLabel(new ImageIcon(bilde));
-
         aEnebolig = true;
         aLeilighet = false;
+
+        bildenavn = eneboligliste.get(flytt).getBildesti();
+
+
+        bildeikon = new ImageIcon(bildenavn);
+        bildeikon.getImage().flush();
+        bildeLabel.setIcon( bildeikon );
+
+
 
     }
 
     public void visLeilighet(Soker soker) throws IOException {
+
         leilighetliste = soker.matcherLeilighet();
         bolignummer.setText(leilighetliste.get(flytt).getBolignr());
         eier.setText(leilighetliste.get(flytt).getEiersNavn());
@@ -227,12 +237,11 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
                 + " sine ønsker");
 
 
-        bilde = ImageIO.read(new File(leilighetliste.get(flytt).getBildesti()));
-        bildeLabel = new JLabel(new ImageIcon(bilde));
-        
-        bilde_info.removeAll();
-        bilde_info.revalidate();
-        bilde_info.repaint();
+        bildenavn = leilighetliste.get(flytt).getBildesti();
+
+        bildeikon = new ImageIcon(bildenavn);
+        bildeikon.getImage().flush();
+        bildeLabel.setIcon( bildeikon );
 
 
 
@@ -251,7 +260,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
     }
 
-    public void visEneboligPANEL(){
+    public void visEneboligPANEL() throws IOException {
 
         midtpanel.removeAll();
         midtpanel.revalidate();

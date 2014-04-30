@@ -133,7 +133,6 @@ public class BoligBrowse {
             String beskriv = beskrivelse[r.nextInt(beskrivelse.length)];
             String bildesti = "/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/"+ String.valueOf((1 + r.nextInt(32))) + ".jpg";
 
-
             Enebolig enebolig = new Enebolig(bildesti,adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
                     TV,internet,s,park,etg,kj,tmt,bad);
             bregister.leggTil(enebolig);
@@ -160,7 +159,7 @@ public class BoligBrowse {
             int antboder = boder[r.nextInt(boder.length)];
             int etasje = etgleil[r.nextInt(etgleil.length)];
             boolean elevator = heis[r.nextInt(heis.length)];
-            String bildesti = "/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/"+ String.valueOf(10) + ".jpg";
+            String bildesti = "/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/"+ String.valueOf((1 + r.nextInt(32))) + ".jpg";
 
             Leilighet leilighet = new Leilighet(bildesti,adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
                     TV,internet,s,park,antboder,etasje,elevator);
