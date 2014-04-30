@@ -36,7 +36,8 @@ public class Soker extends Person{
     private boolean heis;
 
     private LinkedList<Enebolig> eneboligliste;
-    private LinkedList<Enebolig> temp;
+    private LinkedList<Leilighet> leilighetliste;
+
 
     private Boligregister eneboligregister;
     private Leilighetregister leilighetregister;
@@ -68,6 +69,7 @@ public class Soker extends Person{
         this.leilighetregister = leilighetregister;
 
         eneboligliste = new LinkedList<Enebolig>();
+        leilighetliste = new LinkedList<Leilighet>();
         df = new DecimalFormat("#.##");
 
 
@@ -250,6 +252,58 @@ public class Soker extends Person{
         }
         return eneboligliste;
     }
+
+    public LinkedList<Leilighet> matcherLeilighet(){
+        for (Map.Entry<String, Leilighet> entry : leilighetregister.entrySet()){
+            double prosent = 0;
+            double sum = 0;
+            if(isRøyk() == entry.getValue().røyke()){
+                sum+=1;
+            }
+            if(isBalkong() == entry.getValue().balkong()){
+                sum+=match;
+
+            }
+            if(isHusdyr() == entry.getValue().husdyr()){
+                sum+=match;
+
+            }
+            if(isInternetinkludert() == entry.getValue().internettInkludert()){
+                sum+=match;
+
+            }
+            if(isTVinkludert() == entry.getValue().tvInkludert()){
+                sum+=match;
+
+            }
+            if(isHeis() == entry.getValue().isHeis()){
+                sum+=match;
+
+            }
+            if(isStrøminkludert() == entry.getValue().strømInkludert()){
+                sum+=match;
+
+            }
+            if(isParkering() == entry.getValue().parkering()){
+                sum+=match;
+
+            }
+            if(isTerasse() == entry.getValue().terasse()){
+                sum+=match;
+            }
+
+            prosent = ((sum/9)*100);
+
+            if(prosent > 50){
+                //System.out.println("Prosentmatch: "+ df.format(prosent) +"% for bolignummer " + entry.getValue().getBolignr());
+                leilighetliste.add((Leilighet) entry.getValue());
+                entry.getValue().setProsent(prosent);
+            }
+        }
+        return leilighetliste;
+    }
+
+
 
     public String getNavn(){
         String navn = getFornavn() + " " + getEtternavn();
