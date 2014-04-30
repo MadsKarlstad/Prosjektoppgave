@@ -190,7 +190,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         boligArea.setBorder(border);
     }
 
-    public void visEneboliger(Soker soker,int i) throws IOException {
+    public void visEneboliger(Soker soker) throws IOException {
         eneboligliste = soker.matcherEnebolig();
         bolignummer.setText(eneboligliste.get(flytt).getBolignr());
         eier.setText(eneboligliste.get(flytt).getEiersNavn());
@@ -236,7 +236,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         if(flytt>=0){
             flytt+=frem;
             Soker soker = sregister.get(pnr);
-            visEneboliger(soker,flytt);
+            visEneboliger(soker);
         }
         else{}
 
@@ -247,7 +247,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         try {
             flytt -= tilbake;
             Soker soker = sregister.get(pnr);
-            visEneboliger(soker, flytt);
+            visEneboliger(soker);
         }
 
         catch (IndexOutOfBoundsException io){
@@ -287,7 +287,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
             Soker soker = sregister.get(fødselsnummer.getText());
             try
             {
-                visEneboliger(soker, 0);
+                visEneboliger(soker);
                 visEneboligPANEL();
             }
             catch (IOException io){
