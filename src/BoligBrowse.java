@@ -183,15 +183,16 @@ public class BoligBrowse {
             kregister.leggTil(kontrakt);
 
         }
-        /*Toolkit kit = Toolkit.getDefaultToolkit();
+        Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension skjerm = kit.getScreenSize();
         int bredde = skjerm.width;
-        int høyde = skjerm.height;*/
+        int høyde = skjerm.height;
         
         frame = new MainFrame(register,bregister,sregister,legister,kregister);
-        //frame.setVisible(true);
-        //frame.setSize(bredde, høyde);
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        frame.setVisible(true);
+        //frame.setSize();
+        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setLocation(skjerm.width/2-frame.getSize().width/2, skjerm.height/2-frame.getSize().height/2);
 
         frame.addWindowListener(
                 new WindowAdapter() {
