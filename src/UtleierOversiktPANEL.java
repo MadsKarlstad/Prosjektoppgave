@@ -36,12 +36,16 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
 
 
     private Personregister register;
+    private Boligregister bregister;
+    private Leilighetregister legister;
     private MainFrame parent;
 
-    public UtleierOversiktPANEL(Personregister register, MainFrame parent) {
+    public UtleierOversiktPANEL(Personregister register,Boligregister bregister,Leilighetregister legister, MainFrame parent) {
 
         super(new BorderLayout());
         this.register = register;
+        this.bregister = bregister;
+        this.legister = legister;
         this.parent = parent;
 
         initialiser();
@@ -274,16 +278,20 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
     }
 
     public void slettUtleier(int rad){
-        modell.delRow(rad);
-
+        String kontrollord = "Superduper";
+        String kontroll = JOptionPane.showInputDialog(null,"For å slette objektet, vennligst skriv inn kontrollordet:\n" +
+                kontrollord);
+        if(kontroll == kontrollord) {
+            modell.delRow(rad);
+        }
+        modell.fireTableDataChanged();
     }
 
     public void endreUtleier(){
         JOptionPane.showMessageDialog(null,"Not yet supported");
     }
 
-    public void visInfo(){
-        JOptionPane.showMessageDialog(null,"Not yet supported");
+    public void visInfo(Boligregister eiersregister){
     }
 
     @Override
@@ -302,7 +310,10 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
             endreUtleier();
         }
         else if(e.getSource() == visInfo){
-            visInfo();
+            int rad = tabell.getSelectedRow();
+            Utleier utleier = modell.getValueAt(rad);
+            Boligregister eiersBoliger = utleier.getBoligregister();
+            visInfo(eiersBoliger);
         }
     }
 

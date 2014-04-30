@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 /**
  SLANGEDREAM COPYRIGHT
  */
@@ -17,6 +19,10 @@ public class Utleier extends Person {
     public String getNavn(){
         String navn = getFornavn() + " " + getEtternavn();
         return navn;
+    }
+
+    public void leggInnBolig(Enebolig enebolig){
+        boligregister.put(enebolig.getBolignr(),enebolig);
     }
 
     public Boligregister getBoligregister() {
