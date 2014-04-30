@@ -95,4 +95,9 @@ public class Enebolig extends Bolig {
 
         return  utleid;
     }
+
+    public Enebolig getEnebolig(){
+
+        return this;
+    }
 }

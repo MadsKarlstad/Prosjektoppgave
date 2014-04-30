@@ -140,6 +140,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         finn.addActionListener(this);
         leilighet.addActionListener(this);
         enebolig.addActionListener(this);
+        ønsket.addActionListener(this);
 
         //Iterator it = bregister.entrySet().iterator();
         eneboligliste = new LinkedList<Enebolig>();
@@ -384,6 +385,30 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
             parent.setSize(bredde/2, høyde-100);
             parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
+        }
+
+        else if (e.getSource() == ønsket){
+
+            Utleier utleier = eneboligliste.get(flytt).getEier();
+
+
+            if(bregister.finnes(bolignummer.getText())){
+            System.out.println("beskjedmetode legges her");
+                eneboligliste.get(flytt).setØnsket(true);
+                utleier.leggInnØnsketEnebolig(eneboligliste.get(flytt).getEnebolig());
+                System.out.println(utleier.getØnskedeEneboliger());
+
+            }
+
+            else if(legister.finnes(bolignummer.getText())){
+                System.out.println("beskjedmetode legges her");
+                leilighetliste.get(flytt).setØnsket(true);
+                System.out.println(leilighetliste.get(flytt).erØnsket());
+                utleier.leggInnØnsketLeilighet(leilighetliste.get(flytt).getLeilighet());
+                System.out.println(utleier.getØnskedeLeiligheter());
+            }
+
+
         }
 
         else if (e.getSource() == enebolig){

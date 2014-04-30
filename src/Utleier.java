@@ -14,6 +14,10 @@ public class Utleier extends Person {
         super(FØDSELSNUMMER, fornavn, etternavn, adresse, mail, telefonnummer);
         this.firma = firma;
         boligregister = new Boligregister();
+
+        eneboligliste = new LinkedList<Enebolig>();
+        leilighetliste = new LinkedList<Leilighet>();
+
     }
 
     public String getFirma() {
@@ -24,8 +28,37 @@ public class Utleier extends Person {
         return navn;
     }
 
-    public void leggInnBolig(Enebolig enebolig){
-        boligregister.put(enebolig.getBolignr(),enebolig);
+
+    public void leggInnØnsketEnebolig(Enebolig enebolig){
+
+
+        if(enebolig.erØnsket()){
+
+            eneboligliste.add(enebolig);
+
+
+        }
+
+    }
+
+    public void leggInnØnsketLeilighet(Leilighet leilighet){
+
+        if(leilighet.erØnsket()){
+
+            leilighetliste.add(leilighet);
+
+        }
+
+    }
+
+    public LinkedList getØnskedeEneboliger(){
+
+        return eneboligliste;
+    }
+
+    public LinkedList getØnskedeLeiligheter(){
+
+        return leilighetliste;
     }
 
     public Boligregister getBoligregister() {

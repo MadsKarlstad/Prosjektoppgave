@@ -72,6 +72,11 @@ public class Leilighet extends Bolig {
         return  utleid;
     }
 
+    public Leilighet getLeilighet(){
+
+        return this;
+    }
+
     @Override
     public String toString() {
 
