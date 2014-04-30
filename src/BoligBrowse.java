@@ -1,4 +1,3 @@
-
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Random;
@@ -182,8 +181,14 @@ public class BoligBrowse {
             kregister.leggTil(kontrakt);
 
         }
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension skjerm = kit.getScreenSize();
+        int bredde = skjerm.width;
+        int høyde = skjerm.height;
+        
         frame = new MainFrame(register,bregister,sregister,legister,kregister);
         frame.setVisible(true);
+        frame.setSize(bredde, høyde);
 
         frame.addWindowListener(
                 new WindowAdapter() {
