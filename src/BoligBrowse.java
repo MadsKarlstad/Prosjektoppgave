@@ -131,7 +131,7 @@ public class BoligBrowse {
             int bad = antbad[r.nextInt(antbad.length)];
             String ledig = ledigfra[r.nextInt(ledigfra.length)];
             String beskriv = beskrivelse[r.nextInt(beskrivelse.length)];
-            String bildesti = "/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/"+ String.valueOf((1 + r.nextInt(32))) + ".jpg";
+            String bildesti = "Bilder/boligbilder/"+ String.valueOf((1 + r.nextInt(32))) + ".jpg";
 
             Enebolig enebolig = new Enebolig(bildesti,adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
                     TV,internet,s,park,etg,kj,tmt,bad);
@@ -159,7 +159,8 @@ public class BoligBrowse {
             int antboder = boder[r.nextInt(boder.length)];
             int etasje = etgleil[r.nextInt(etgleil.length)];
             boolean elevator = heis[r.nextInt(heis.length)];
-            String bildesti = "/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/"+ String.valueOf((1 + r.nextInt(32))) + ".jpg";
+            String bildesti = "Bilder/boligbilder/"+ String.valueOf((1 + r.nextInt(32))) + ".jpg";
+            System.out.println(bildesti);
 
             Leilighet leilighet = new Leilighet(bildesti,adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
                     TV,internet,s,park,antboder,etasje,elevator);
@@ -189,7 +190,7 @@ public class BoligBrowse {
         
         frame = new MainFrame(register,bregister,sregister,legister,kregister);
         //frame.setVisible(true);
-        frame.setSize(bredde, høyde);
+        //frame.setSize(bredde, høyde);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 
         frame.addWindowListener(

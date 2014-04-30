@@ -217,7 +217,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         bildenavn = eneboligliste.get(flytt).getBildesti();
 
 
-        bildeikon = new ImageIcon(bildenavn);
+        bildeikon = new ImageIcon(getClass().getResource(bildenavn));
         bildeikon.getImage().flush();
         bildeLabel.setIcon( bildeikon );
 
@@ -237,7 +237,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
                 + " sine ønsker");
 
 
-        bildenavn = leilighetliste.get(flytt).getBildesti();
+        bildeikon = new ImageIcon(getClass().getResource(bildenavn));
 
         bildeikon = new ImageIcon(bildenavn);
         bildeikon.getImage().flush();
