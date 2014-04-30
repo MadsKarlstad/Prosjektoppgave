@@ -51,7 +51,7 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
         initialiser();
         lagGUI();
 
-        parent.setExtendedState(JFrame.MAXIMIZED_BOTH)
+        parent.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     }
 
