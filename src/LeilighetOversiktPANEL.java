@@ -241,6 +241,14 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == tilbake){
             parent.visPanel("VIS PROMPT");
+            
+            Toolkit kit = Toolkit.getDefaultToolkit();
+            Dimension skjerm = kit.getScreenSize();
+            int bredde = skjerm.width;
+            int høyde = skjerm.height;
+        
+            parent.setSize(bredde-1000, høyde-200);
+            parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
         }
         else if(e.getSource() == fjern){
             int rad = tabell.getSelectedRow();
