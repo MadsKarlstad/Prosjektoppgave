@@ -118,8 +118,13 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         initialiser();
         lagGUI();
         
-         parent.setSize(bredde/2, høyde/2);
-         parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension skjerm = kit.getScreenSize();
+        int bredde = skjerm.width;
+        int høyde = skjerm.height;
+        
+        parent.setSize(bredde/2, høyde/2);
+        parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
 
     }
 
