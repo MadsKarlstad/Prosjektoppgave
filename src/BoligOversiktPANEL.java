@@ -43,6 +43,7 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
 
         super(new BorderLayout());
         this.register = register;
+        this.pregister = pregister;
         this.parent = parent;
 
         initialiser();
