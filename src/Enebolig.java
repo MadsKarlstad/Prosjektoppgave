@@ -128,6 +128,4 @@ public class Enebolig extends Bolig {
         return sokerliste;
     }
 
-
-
 }

@@ -293,10 +293,10 @@ class Leilighetmodell extends Tabellmodell<Leilighet> { //Tabellmodell for enebo
 
 class Kontraktmodell extends Tabellmodell<Kontrakt> {
 
-    private final int BOLIG = 0;
+    private final int KONTRAKTNR = 0;
     private final int EIER = 1;
     private final int LEIER = 2;
-    private final int KONTRAKTNR = 3;
+    private final int BOLIG = 3;
     private final int PRIS = 4;
     private final int FRA = 5;
     private final int TIL = 6;

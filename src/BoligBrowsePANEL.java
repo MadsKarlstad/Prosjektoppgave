@@ -347,7 +347,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         bildeikon = new ImageIcon(getClass().getResource(bildenavn));
         bildeikon.getImage().flush();
-        bildeLabel.setIcon( bildeikon );
+        bildeLabel.setIcon(bildeikon);
     }
 
     public void visEneboligUtleier(Enebolig enebolig){
@@ -358,6 +358,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         søkeradresse.setText(soker.getAdresse());
         søkertelefon.setText(soker.getTelefonnummer());
         søkermail.setText(soker.getMail());
+        søkerbolignr.setText(enebolig.getBolignr());
+        søkerpersnr.setText(soker.getFødselsnummer());
 
         aLeilighetSøker = false;
         aEneboligSøker = false;
@@ -575,7 +577,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 eneboligliste.get(index).setØnsket(true);
                 eneboligliste.get(index).addSoker(soker);
 
-                System.out.println(enebolig.getSokere());
 
 
             }
@@ -590,7 +591,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 leilighetliste.get(index).setØnsket(true);
                 leilighetliste.get(index).addSoker(soker);
 
-                System.out.println(leilighet.getSokere());
 
             }
 
@@ -670,30 +670,41 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         if(e.getSource() == ønsketLeietakerLeilighet){
 
-
-            System.out.println("dothis");
             String eierspersnr = fødselsnummer.getText();
             String bolignr = søkerbolignr.getText();
             String leierspersnr = søkerpersnr.getText();
             Leilighet leilighet = legister.get(bolignr);
             Utleier eier = pregister.get(eierspersnr);
             Soker soker = sregister.get(leierspersnr);
-            System.out.println(eier.getNavn());
-            System.out.println(leilighet.getBolignr());
-            System.out.println(soker.getNavn());
 
             int pris = leilighet.getPris();
             String fra = leilighet.getLedigDato();
-            String til = "01.01.2019";
+            String til = "01.01.19";
             String kontraktnr = "1";
 
             Kontrakt kontrakt = new Kontrakt(kontraktnr,leilighet,eier,soker,pris,fra,til);
             kontraktregister.put(kontrakt.getKontraktnr(),kontrakt);
+            legister.fjern(bolignr);
         }
 
         else if(e.getSource() == ønsketLeietakerEnebolig){
+            String eierspersnr = fødselsnummer.getText();
+            String bolignr = søkerbolignr.getText();
+            String leierspersnr = søkerpersnr.getText();
+            Enebolig enebolig = bregister.get(bolignr);
+            Utleier eier = pregister.get(eierspersnr);
+            Soker soker = sregister.get(leierspersnr);
 
-            System.out.println("dothat");
+            int pris = enebolig.getPris();
+            String fra = enebolig.getLedigDato();
+            String til = "01.01.19";
+            String kontraktnr = "2";
+
+            Kontrakt kontrakt = new Kontrakt(kontraktnr,enebolig,eier,soker,pris,fra,til);
+            kontraktregister.put(kontrakt.getKontraktnr(),kontrakt);
+            bregister.fjern(bolignr);
+
+
         }
 
 
