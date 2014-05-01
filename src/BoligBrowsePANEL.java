@@ -419,10 +419,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         knappepanel_søker.revalidate();
         knappepanel_søker.repaint();
 
-
-
-        knappepanel_søker.add(ønsketenebolig);
-
         bilde_info.add(boligArea, BorderLayout.PAGE_START);
         bilde_info.add(bildeLabel, BorderLayout.CENTER);
 
@@ -555,6 +551,43 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         }
     }
 
+    public void godkjennkontrakt(Bolig b){
+
+        String eierspersnr = fødselsnummer.getText();
+        String bolignr = søkerbolignr.getText();
+        String leierspersnr = søkerpersnr.getText();
+        Leilighet leilighet = legister.get(bolignr);
+        Enebolig enebolig = bregister.get(bolignr);
+        Utleier eier = pregister.get(eierspersnr);
+        Soker soker = sregister.get(leierspersnr);
+
+        int pris = leilighet.getPris();
+        String fra = leilighet.getLedigDato();
+        String til = "01.01.19";
+        String kontraktnr = "1";
+
+        if(b instanceof Enebolig){
+
+            System.out.println("dothis");
+            Kontrakt kontrakt = new Kontrakt(kontraktnr,enebolig,eier,soker,pris,fra,til);
+            kontraktregister.put(kontrakt.getKontraktnr(),kontrakt);
+            legister.fjern(bolignr);
+
+        }
+
+        if(b instanceof Leilighet){
+
+            System.out.println("dothat");
+            Kontrakt kontrakt = new Kontrakt(kontraktnr,leilighet,eier,soker,pris,fra,til);
+            kontraktregister.put(kontrakt.getKontraktnr(),kontrakt);
+            legister.fjern(bolignr);
+
+
+        }
+
+
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -629,21 +662,21 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         }
 
         else if (e.getSource() == leilighetUtleier){
-                Leilighet leilighet = legister.get(bolignummer.getText());
+            Leilighet leilighet = legister.get(bolignummer.getText());
 
-                visUtleierpanel();
-                visLeilighetUtleier(leilighet);
-                index = 0;
-}
+            visUtleierpanel();
+            visLeilighetUtleier(leilighet);
+            index = 0;
+        }
 
         else if (e.getSource() == eneboligUtleier){
 
 
             Enebolig enebolig = bregister.get(bolignummer.getText());
 
-                visUtleierpanel();
-                visEneboligUtleier(enebolig);
-                index = 0;
+            visUtleierpanel();
+            visEneboligUtleier(enebolig);
+            index = 0;
 
 
 
@@ -670,39 +703,16 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         if(e.getSource() == ønsketLeietakerLeilighet){
 
-            String eierspersnr = fødselsnummer.getText();
-            String bolignr = søkerbolignr.getText();
-            String leierspersnr = søkerpersnr.getText();
-            Leilighet leilighet = legister.get(bolignr);
-            Utleier eier = pregister.get(eierspersnr);
-            Soker soker = sregister.get(leierspersnr);
+            Leilighet leilighet = legister.get(søkerbolignr.getText());
 
-            int pris = leilighet.getPris();
-            String fra = leilighet.getLedigDato();
-            String til = "01.01.19";
-            String kontraktnr = "1";
-
-            Kontrakt kontrakt = new Kontrakt(kontraktnr,leilighet,eier,soker,pris,fra,til);
-            kontraktregister.put(kontrakt.getKontraktnr(),kontrakt);
-            legister.fjern(bolignr);
+            godkjennkontrakt(leilighet);
         }
 
         else if(e.getSource() == ønsketLeietakerEnebolig){
-            String eierspersnr = fødselsnummer.getText();
-            String bolignr = søkerbolignr.getText();
-            String leierspersnr = søkerpersnr.getText();
-            Enebolig enebolig = bregister.get(bolignr);
-            Utleier eier = pregister.get(eierspersnr);
-            Soker soker = sregister.get(leierspersnr);
 
-            int pris = enebolig.getPris();
-            String fra = enebolig.getLedigDato();
-            String til = "01.01.19";
-            String kontraktnr = "2";
+            Enebolig enebolig = bregister.get(søkerbolignr.getText());
 
-            Kontrakt kontrakt = new Kontrakt(kontraktnr,enebolig,eier,soker,pris,fra,til);
-            kontraktregister.put(kontrakt.getKontraktnr(),kontrakt);
-            bregister.fjern(bolignr);
+            godkjennkontrakt(enebolig);
 
 
         }
