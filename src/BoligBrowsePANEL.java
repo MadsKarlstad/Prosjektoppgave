@@ -1,25 +1,20 @@
 /*
  * Copyright (c) 2014. Gruppeoppgave for Erlend Westbye s193377 Mads Karlstad s193949 Christoffer Jønsberg s193674
- */
-
-import javax.imageio.ImageIO;
+ */By
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Map;
+
 
 /**
  * Created by Erlend on 22/04/14.test
  */
-public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
+public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
     private boolean aLeilighetSøker;
     private boolean aEneboligSøker;
@@ -104,7 +99,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
     private MainFrame parent;
 
 
-    public BoligBrowseSokerPANEL(Sokerregister sregister, Boligregister bregister, Leilighetregister legister,Personregister pregister, MainFrame parent) {
+    public BoligBrowsePANEL(Sokerregister sregister, Boligregister bregister, Leilighetregister legister,Personregister pregister, MainFrame parent) {
         this.sregister = sregister;
         this.bregister = bregister;
         this.legister = legister;
