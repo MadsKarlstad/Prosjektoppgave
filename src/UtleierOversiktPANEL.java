@@ -278,13 +278,7 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
     }
 
     public void slettUtleier(int rad){
-        String kontrollord = "En";
-        String kontroll = JOptionPane.showInputDialog(null,"For å slette objektet, vennligst skriv inn kontrollordet:\n" +
-                kontrollord);
-        if(kontroll == kontrollord) {
-            modell.delRow(rad);
-        }
-        modell.fireTableDataChanged();
+        modell.delRow(rad);
     }
 
     public void endreUtleier(){
@@ -310,8 +304,8 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
         else if(e.getSource() == fjern){
             int rad = tabell.getSelectedRow();
             Utleier utleier = modell.getValueAt(rad);
-            String persnr = utleier.getFødselsnummer();
-            register.fjern(persnr);
+            String pnr = utleier.getFødselsnummer();
+            register.fjern(pnr);
             slettUtleier(rad);
         }
         else if(e.getSource() == endre){
