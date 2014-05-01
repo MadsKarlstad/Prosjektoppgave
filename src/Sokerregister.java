@@ -41,7 +41,7 @@ public class Sokerregister extends TreeMap<String, Soker> implements Register{
 
     public Soker getSoker(String nr){
         if(finnes(nr)){
-            return getSoker(nr);
+            return get(nr);
         }
         return null;
     }

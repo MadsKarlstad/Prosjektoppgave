@@ -327,9 +327,14 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         bildeLabel.setIcon( bildeikon );
     }
 
-    public void visEneboligUtleier(Utleier utleier){
+    public void visEneboligUtleier(Enebolig enebolig){
 
-        System.out.println("");
+        Soker soker = (Soker) enebolig.getSokere().get(index);
+
+        søkernavn.setText(soker.getNavn());
+        søkeradresse.setText(soker.getAdresse());
+        søkertelefon.setText(soker.getTelefonnummer());
+        søkermail.setText(soker.getMail());
 
         aLeilighetSøker = false;
         aEneboligSøker = false;
@@ -436,6 +441,11 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
             index+=frem;
             Soker soker = sregister.get(pnr);
             Utleier utleier = pregister.get(pnr);
+            String bnr = bolignummer.getText();
+
+            Enebolig enebolig = bregister.get(bnr);
+
+
 
             if(aEneboligSøker){
                 visEneboliger(soker);
@@ -446,7 +456,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
             }
 
             else if(aEneboligUtleier){
-                visEneboligUtleier(utleier);
+                visEneboligUtleier(enebolig);
             }
         }
         else{}
@@ -460,6 +470,10 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
             Soker soker = sregister.get(pnr);
             Utleier utleier = pregister.get(pnr);
 
+            String bnr = bolignummer.getText();
+
+            Enebolig enebolig = bregister.get(bnr);
+
             if(aEneboligSøker){
                 visEneboliger(soker);
             }
@@ -469,7 +483,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
             }
 
             else if(aEneboligUtleier){
-                visEneboligUtleier(utleier);
+                visEneboligUtleier(enebolig);
             }
         }
 
@@ -518,16 +532,12 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
             if(bregister.finnes(bolignummer.getText())){
                 Enebolig enebolig = bregister.get(bolignummer.getText());
                 Utleier utleier = eneboligliste.get(index).getEier();
-                Soker soker = sregister.get(fødselsnummer.getText());
+                Soker soker = sregister.getSoker(fødselsnummer.getText());
 
                 eneboligliste.get(index).setØnsket(true);
                 eneboligliste.get(index).addSoker(soker);
 
-                //utleier.leggInnØnsketEnebolig(eneboligliste.get(index));
-
                 System.out.println(enebolig.getSokere());
-                //System.out.println(utleier.getØnskedeEneboliger().get(index).getSoker().getNavn());
-
 
 
             }
@@ -601,9 +611,10 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
         else if (e.getSource() == eneboligUtleier){
 
             Utleier utleier = pregister.get(fødselsnummer.getText());
+            Enebolig enebolig = bregister.get(bolignummer.getText());
 
                 visUtleierpanel();
-                visEneboligUtleier(utleier);
+                visEneboligUtleier(enebolig);
                 index = 0;
 
 

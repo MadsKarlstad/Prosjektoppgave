@@ -10,6 +10,7 @@ public class Enebolig extends Bolig {
     private double tomtareal;
     private int antallBad;
     private Soker soker;
+    private Utleier eier;
 
     private LinkedList<Soker> sokerliste;
 
@@ -31,6 +32,15 @@ public class Enebolig extends Bolig {
         sokerliste = new LinkedList<Soker>();
 
         setBlidesti(super.getBildesti());
+        setEier(eier);
+    }
+
+    public void setEier(Utleier utleier){
+        eier = utleier;
+    }
+
+    public Utleier getEier(){
+        return eier;
     }
 
     public int getAntallEtasjer() {

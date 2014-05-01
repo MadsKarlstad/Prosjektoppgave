@@ -303,6 +303,9 @@ public class Soker extends Person{
         return leilighetliste;
     }
 
+    public Soker getSoker(){
+        return this;
+    }
 
 
     public String getNavn(){
