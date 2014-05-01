@@ -21,8 +21,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
     private boolean aLeilighetUtleier;
     private boolean aEneboligUtleier;
 
-
-
     private int index;
     private int frem;
     private int tilbake;
@@ -39,16 +37,19 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
     private JButton leilighetUtleier;
     private JButton ønsketenebolig;
     private JButton ønsketleilighet;
+    private JButton ønsketLeietakerEnebolig;
+    private JButton ønsketLeietakerLeilighet;
 
     private JPanel knappepanel;
     private JPanel knappepanel_søker;
+    private JPanel knappepanel_utleier;
+
     private JPanel søkepanel;
     private JPanel infopanel_start_søker;
     private JPanel infopanel_søker;
     private JPanel midtpanel;
     private JPanel feltpanel_søker;
     private JPanel bilde_info;
-
 
     //utleierpanelenee
     private JPanel infopanel_utleier;
@@ -123,6 +124,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         infopanel_start_søker = new JPanel(new GridLayout(1,2,1,1));
         infopanel_søker = new JPanel(new BorderLayout());
         knappepanel_søker = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        knappepanel_utleier = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         infopanel_utleier = new JPanel(new BorderLayout());
         infopanel_start_utleier = new JPanel(new GridLayout(1,2,1,1));
@@ -142,6 +144,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         ønsketenebolig = new JButton("Ønsker å leie denne");
         ønsketleilighet = new JButton("Ønsker å leie denne");
+        ønsketLeietakerEnebolig = new JButton("Godkjenn leietaker");
+        ønsketLeietakerLeilighet = new JButton("Godkjenn leietaker");
 
         try{
             leilighetIkon = new ImageIcon(getClass().getResource("Bilder/Leilighet.png"));
@@ -174,6 +178,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         ønsketleilighet.addActionListener(this);
         ønsketenebolig.addActionListener(this);
+        ønsketLeietakerEnebolig.addActionListener(this);
+        ønsketLeietakerLeilighet.addActionListener(this);
 
         //Iterator it = bregister.entrySet().iterator();
         eneboligliste = new LinkedList<Enebolig>();
@@ -339,6 +345,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aEneboligSøker = false;
         aLeilighetUtleier = false;
         aEneboligUtleier = true;
+
+        knappepanel_utleier.add(ønsketLeietakerEnebolig);
     }
 
     public void visLeilighetUtleier(Leilighet leilighet){
@@ -354,6 +362,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aEneboligSøker = false;
         aLeilighetUtleier = true;
         aEneboligUtleier = false;
+
+        knappepanel_utleier.add(ønsketLeietakerLeilighet);
     }
 
     public void visStartPANELsøker(){
@@ -434,15 +444,21 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         midtpanel.revalidate();
         midtpanel.repaint();
 
+        knappepanel_utleier.removeAll();
+        knappepanel_utleier.revalidate();
+        knappepanel_utleier.repaint();
+
         infopanel_utleier.removeAll();
         infopanel_utleier.revalidate();
         infopanel_utleier.repaint();
 
-
         infopanel_utleier.add(feltpanel_utleier, BorderLayout.LINE_START);
-
+        infopanel_utleier.add(knappepanel_utleier,BorderLayout.PAGE_END);
 
         midtpanel.add(infopanel_utleier);
+
+
+
 
 
     }
@@ -656,5 +672,17 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         catch(IOException io){
 
         }
+
+        if(e.getSource() == ønsketLeietakerLeilighet){
+
+            System.out.println("dothis");
+        }
+
+        else if(e.getSource() == ønsketLeietakerEnebolig){
+
+            System.out.println("dothat");
+        }
+
+
     }
 }
