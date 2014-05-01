@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2014. Gruppeoppgave for Erlend Westbye s193377 Mads Karlstad s193949 Christoffer Jønsberg s193674
+ */
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -436,7 +440,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
     public void nextVasClicked(String pnr) throws IOException {
 
-        if(index>=0){
+        try{
 
             index+=frem;
             Soker soker = sregister.get(pnr);
@@ -459,7 +463,9 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
                 visEneboligUtleier(enebolig);
             }
         }
-        else{}
+        catch (IndexOutOfBoundsException io){
+            index = 0;
+        }
 
     }
 

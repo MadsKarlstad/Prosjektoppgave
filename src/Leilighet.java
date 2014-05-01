@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.LinkedList;
 
 /**
  SLANGEDREAM COPYRIGHT
@@ -10,6 +11,8 @@ public class Leilighet extends Bolig {
     private boolean ønsket;
     private boolean utleid;
 
+    private LinkedList<Soker> sokerliste;
+
     private Soker soker;
 
     private double prosent;
@@ -19,6 +22,8 @@ public class Leilighet extends Bolig {
         this.antallBoder = antallBoder;
         this.etasje = etasje;
         this.heis = heis;
+
+        sokerliste = new LinkedList<Soker>();
 
     }
 
@@ -81,14 +86,16 @@ public class Leilighet extends Bolig {
         return "Dette er en (leilighet) " + getBeskrivelse() + " på " + getBoareal() + " kvadratmeter, den ligger på adressen " + getAdresse();
     }
 
-    public void setSoker(Soker s){
 
-        soker = s;
+
+    public void addSoker(Soker s){
+
+        sokerliste.add(s);
 
     }
 
-    public Soker getSoker(){
-
-        return soker;
+    public LinkedList getSokere(){
+        return sokerliste;
     }
+
 }
