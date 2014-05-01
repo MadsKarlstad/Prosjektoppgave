@@ -1,9 +1,10 @@
+/*
+ * Copyright (c) 2014. Gruppeoppgave for Erlend Westbye s193377 Mads Karlstad s193949 Christoffer Jønsberg s193674
+ */
+
 import javax.swing.table.AbstractTableModel;
 import java.util.LinkedList;
 
-/**
- SLANGEDREAM COPYRIGHT
- */
 public abstract class Tabellmodell<T> extends AbstractTableModel {
 
     private String[] kolonnenavn;

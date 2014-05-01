@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2014. Gruppeoppgave for Erlend Westbye s193377 Mads Karlstad s193949 Christoffer Jønsberg s193674
+ */
+
 import com.sun.codemodel.internal.JOp;
 
 import javax.swing.*;
@@ -125,8 +129,8 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         int bredde = skjerm.width;
         int høyde = skjerm.height;
         
-        parent.setSize(bredde/2, høyde/2);
-        parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
+        parent.setSize(bredde / 2, høyde / 2);
+        parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
 
     }
 
@@ -457,7 +461,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             int høyde = skjerm.height;
                 
             parent.setSize(bredde/2, høyde-100);
-            parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
+            parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
 
     }
 }

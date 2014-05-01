@@ -1,10 +1,11 @@
+/*
+ * Copyright (c) 2014. Gruppeoppgave for Erlend Westbye s193377 Mads Karlstad s193949 Christoffer Jønsberg s193674
+ */
+
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.TreeMap;
 
-/**
- SLANGEDREAM COPYRIGHT
- */
 public interface Menneske extends Serializable {
     public String getFødselsnummer();
     public String getNavn();

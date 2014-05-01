@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2014. Gruppeoppgave for Erlend Westbye s193377 Mads Karlstad s193949 Christoffer Jønsberg s193674
+ */
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -10,9 +14,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
-/**
- SLANGEDREAM COPYRIGHT
- */
 public class LeilighetOversiktPANEL extends JPanel implements ActionListener, DocumentListener {
     private JPanel overskriftpanel;
     private JPanel tabellpanel;
@@ -248,7 +249,7 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
             int høyde = skjerm.height;
         
             parent.setSize(bredde/2, høyde-100);
-            parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
+            parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
         }
         else if(e.getSource() == fjern){
             int rad = tabell.getSelectedRow();

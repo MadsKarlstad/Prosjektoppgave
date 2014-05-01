@@ -1,11 +1,12 @@
+/*
+ * Copyright (c) 2014. Gruppeoppgave for Erlend Westbye s193377 Mads Karlstad s193949 Christoffer Jønsberg s193674
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/*
-SLANGEDREAM COPYRIGHT
- */
 public class RegistrerUtleierPANEL extends JPanel implements ActionListener {
     private JTextField[] felt;
     private final String[] feltnavn = {"Fødselsnummer", "Fornavn", "Etternavn", "Adresse", "Mail", "Telefonnummer", "Firma"};
@@ -122,8 +123,8 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener {
             int bredde = skjerm.width;
             int høyde = skjerm.height;
         
-            parent.setSize(bredde-1000, høyde-200);
-            parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
+            parent.setSize(bredde - 1000, høyde - 200);
+            parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
 
         }else if(e.getSource() == avbryt){
             parent.visPanel(MainFrame.MAIN_BOARD);

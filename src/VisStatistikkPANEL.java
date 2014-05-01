@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2014. Gruppeoppgave for Erlend Westbye s193377 Mads Karlstad s193949 Christoffer Jønsberg s193674
+ */
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.event.DocumentListener;
@@ -5,9 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- SLANGEDREAM COPYRIGHT
- */
 public class VisStatistikkPANEL extends JPanel implements ActionListener {
 
     private JPanel tilbakepanel;

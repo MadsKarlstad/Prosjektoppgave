@@ -1,9 +1,10 @@
+/*
+ * Copyright (c) 2014. Gruppeoppgave for Erlend Westbye s193377 Mads Karlstad s193949 Christoffer Jønsberg s193674
+ */
+
 import java.util.Date;
 import java.util.LinkedList;
 
-/**
- SLANGEDREAM COPYRIGHT
- */
 public class Leilighet extends Bolig {
     private int antallBoder;
     private int etasje;

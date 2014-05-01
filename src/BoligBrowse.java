@@ -1,12 +1,13 @@
+/*
+ * Copyright (c) 2014. Gruppeoppgave for Erlend Westbye s193377 Mads Karlstad s193949 Christoffer Jønsberg s193674
+ */
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Random;
 import java.awt.*;
 import javax.swing.*;
 
-/**
- SLANGEDREAM COPYRIGHT
- */
 public class BoligBrowse {
     public static void main(String[] args){
         Personregister register = new Personregister();
@@ -196,7 +197,7 @@ public class BoligBrowse {
         frame.setSize(bredde/2, høyde-100);
 
         //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.setLocation(skjerm.width/2-frame.getSize().width/2, skjerm.height/2-frame.getSize().height/2);
+        frame.setLocation(skjerm.width / 2 - frame.getSize().width / 2, skjerm.height / 2 - frame.getSize().height / 2);
 
         frame.addWindowListener(
                 new WindowAdapter() {
