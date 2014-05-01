@@ -312,6 +312,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aEneboligUtleier = false;
 
         bildenavn = eneboligliste.get(index).getBildesti();
+        knappepanel_søker.add(ønsketenebolig);
 
 
         bildeikon = new ImageIcon(getClass().getResource(bildenavn));
@@ -340,6 +341,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
 
         bildenavn = leilighetliste.get(index).getBildesti();
+        knappepanel_søker.add(ønsketleilighet);
+
 
 
         bildeikon = new ImageIcon(getClass().getResource(bildenavn));
@@ -404,7 +407,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         midtpanel.add(infopanel_start_utleier, BorderLayout.CENTER);
     }
 
-    public void visEneboligPANEL() throws IOException {
+    public void visSøkerPANEL() throws IOException {
 
         midtpanel.removeAll();
         midtpanel.revalidate();
@@ -427,31 +430,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         infopanel_søker.add(knappepanel_søker,BorderLayout.PAGE_END);
 
         midtpanel.add(infopanel_søker);
-
-    }
-
-    public void visLeilighetPanel(){
-
-        midtpanel.removeAll();
-        midtpanel.revalidate();
-        midtpanel.repaint();
-
-        knappepanel_søker.removeAll();
-        knappepanel_søker.revalidate();
-        knappepanel_søker.repaint();
-
-        knappepanel_søker.add(ønsketleilighet);
-
-        bilde_info.add(boligArea, BorderLayout.PAGE_START);
-        bilde_info.add(bildeLabel, BorderLayout.CENTER);
-
-
-        infopanel_søker.add(feltpanel_søker, BorderLayout.LINE_START);
-        infopanel_søker.add(bilde_info, BorderLayout.CENTER);
-        infopanel_søker.add(knappepanel_søker,BorderLayout.PAGE_END);
-
-        midtpanel.add(infopanel_søker);
-
 
     }
 
@@ -624,8 +602,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             Soker soker = sregister.get(fødselsnummer.getText());
             try
             {
+                visSøkerPANEL();
                 visEneboliger(soker);
-                visEneboligPANEL();
                 index = 0;
             }
             catch (IOException io){
@@ -639,8 +617,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             Soker soker = sregister.get(fødselsnummer.getText());
             try
             {
+                visSøkerPANEL();
                 visLeilighet(soker);
-                visLeilighetPanel();
                 index = 0;
             }
             catch (IOException io){
