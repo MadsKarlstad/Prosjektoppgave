@@ -31,32 +31,20 @@ public class Utleier extends Person {
 
     public void leggInnØnsketEnebolig(Enebolig enebolig){
 
-
-        if(enebolig.erØnsket()){
-
-            eneboligliste.add(enebolig);
-
-
+        eneboligliste.add(enebolig);
         }
-
-    }
 
     public void leggInnØnsketLeilighet(Leilighet leilighet){
 
-        if(leilighet.erØnsket()){
-
-            leilighetliste.add(leilighet);
-
-        }
-
+        leilighetliste.add(leilighet);
     }
 
-    public LinkedList getØnskedeEneboliger(){
+    public LinkedList<Enebolig> getØnskedeEneboliger(){
 
         return eneboligliste;
     }
 
-    public LinkedList getØnskedeLeiligheter(){
+    public LinkedList<Leilighet> getØnskedeLeiligheter(){
 
         return leilighetliste;
     }

@@ -8,6 +8,8 @@ import java.util.*;
 
 /**
  * Created by Erlend on 22/04/14.
+ *
+ * http://stackoverflow.com/questions/5388146/copy-and-rename-file-on-different-location til image uploader
  */
 public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 

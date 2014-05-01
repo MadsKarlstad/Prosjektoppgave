@@ -127,6 +127,7 @@ public class BoligBrowse {
             boolean park = parkering[r.nextInt(parkering.length)];
             int etg = antetg[r.nextInt(antetg.length)];
             boolean kj = kjeller[r.nextInt(kjeller.length)];
+            boolean erønsket = husdyr[r.nextInt(husdyr.length)];
             double tmt = tomt[r.nextInt(tomt.length)];
             int bad = antbad[r.nextInt(antbad.length)];
             String ledig = ledigfra[r.nextInt(ledigfra.length)];
@@ -134,7 +135,7 @@ public class BoligBrowse {
             String bildesti = "Bilder/boligbilder/"+ String.valueOf((1 + r.nextInt(46))) + ".jpg";
 
             Enebolig enebolig = new Enebolig(bildesti,adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
-                    TV,internet,s,park,etg,kj,tmt,bad,false,false);
+                    TV,internet,s,park,etg,kj,tmt,bad,erønsket,false);
             bregister.leggTil(enebolig);
         }
 
