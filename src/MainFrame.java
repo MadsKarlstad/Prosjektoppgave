@@ -213,7 +213,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         else if(e.getSource()  == boligBrowse){
 
-            vinduer.add(new BoligBrowseSokerPANEL(sregister,bregister,legister,register, this),"VIS SØKERBROWSE");
+            vinduer.add(new BoligBrowsePANEL(sregister,bregister,legister,register, this),"VIS SØKERBROWSE");
             visPanel("VIS SØKERBROWSE");
         }
 
