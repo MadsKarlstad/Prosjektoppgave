@@ -66,6 +66,9 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
     private JTextField søkernavn;
     private JTextField søkermail;
     private JTextField søkertelefon;
+    private JTextField søkerbolignr;
+    private JTextField søkerpersnr;
+
 
     private JLabel bolignummeLabel;
     private JLabel eierLabel;
@@ -75,6 +78,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
     private JLabel søkerAdrLabel;
     private JLabel tlfLabel;
     private JLabel mailLabel;
+    private JLabel søkerbolignrLabel;
+    private JLabel søkerpersnrLabel;
 
 
     private JTextArea boligArea;
@@ -89,6 +94,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
     private Personregister pregister;
     private Boligregister bregister;
     private Leilighetregister legister;
+    private Kontraktregister kontraktregister;
 
     private LinkedList<Enebolig> eneboligliste;
     private LinkedList<Leilighet> leilighetliste;
@@ -100,12 +106,13 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
     private MainFrame parent;
 
 
-    public BoligBrowsePANEL(Sokerregister sregister, Boligregister bregister, Leilighetregister legister,Personregister pregister, MainFrame parent) {
+    public BoligBrowsePANEL(Sokerregister sregister, Boligregister bregister, Leilighetregister legister,Personregister pregister, Kontraktregister kontraktregister, MainFrame parent) {
         this.sregister = sregister;
         this.bregister = bregister;
         this.legister = legister;
         this.parent = parent;
         this.pregister = pregister;
+        this.kontraktregister = kontraktregister;
 
         initialiser();
         lagGui();
@@ -128,7 +135,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         infopanel_utleier = new JPanel(new BorderLayout());
         infopanel_start_utleier = new JPanel(new GridLayout(1,2,1,1));
-        feltpanel_utleier = new JPanel(new GridLayout(4,2,1,1));
+        feltpanel_utleier = new JPanel(new GridLayout(8,2,1,1));
 
         bilde_info = new JPanel(new BorderLayout());
 
@@ -197,6 +204,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         søkermail = new JTextField(10);
         søkernavn = new JTextField(10);
         søkertelefon = new JTextField(10);
+        søkerbolignr = new JTextField(10);
+        søkerpersnr = new JTextField(10);
 
 
         bolignummer.setEditable(false);
@@ -212,6 +221,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         søkerAdrLabel= new JLabel("Søkers adresse");
         tlfLabel = new JLabel("Søkers telfon");
         mailLabel = new JLabel("Søkers mail");
+        søkerbolignrLabel = new JLabel("Boligens bolignummer");
+        søkerpersnrLabel = new JLabel("Søkerens personnummer");
 
         boligArea.setLineWrap(true);
         boligArea.setWrapStyleWord(true);
@@ -252,6 +263,10 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         feltpanel_utleier.add(søkertelefon);
         feltpanel_utleier.add(mailLabel);
         feltpanel_utleier.add(søkermail);
+        feltpanel_utleier.add(søkerbolignrLabel);
+        feltpanel_utleier.add(søkerbolignr);
+        feltpanel_utleier.add(søkerpersnrLabel);
+        feltpanel_utleier.add(søkerpersnr);
 
         infopanel_søker.add(boligArea, BorderLayout.CENTER);
 
@@ -357,6 +372,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         søkeradresse.setText(soker.getAdresse());
         søkertelefon.setText(soker.getTelefonnummer());
         søkermail.setText(soker.getMail());
+        søkerbolignr.setText(leilighet.getBolignr());
+        søkerpersnr.setText(soker.getFødselsnummer());
 
         aLeilighetSøker = false;
         aEneboligSøker = false;
@@ -675,7 +692,25 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         if(e.getSource() == ønsketLeietakerLeilighet){
 
+
             System.out.println("dothis");
+            String eierspersnr = fødselsnummer.getText();
+            String bolignr = søkerbolignr.getText();
+            String leierspersnr = søkerpersnr.getText();
+            Leilighet leilighet = legister.get(bolignr);
+            Utleier eier = pregister.get(eierspersnr);
+            Soker soker = sregister.get(leierspersnr);
+            System.out.println(eier.getNavn());
+            System.out.println(leilighet.getBolignr());
+            System.out.println(soker.getNavn());
+
+            int pris = leilighet.getPris();
+            String fra = leilighet.getLedigDato();
+            String til = "01.01.2019";
+            String kontraktnr = "1";
+
+            Kontrakt kontrakt = new Kontrakt(kontraktnr,leilighet,eier,soker,pris,fra,til);
+            kontraktregister.put(kontrakt.getKontraktnr(),kontrakt);
         }
 
         else if(e.getSource() == ønsketLeietakerEnebolig){

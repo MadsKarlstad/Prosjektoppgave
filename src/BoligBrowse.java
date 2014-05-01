@@ -169,7 +169,7 @@ public class BoligBrowse {
             legister.leggTil(leilighet);
         }
 
-        for(int i = 0; i < 10; i++){
+        for(int i = 10; i < 20; i++){
             String eierpnr = String.valueOf(i+1);
             String sokerpnr = String.valueOf(i+1001);
             String bolignr = String.valueOf(i+1);
