@@ -329,8 +329,7 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
     public void visEneboligUtleier(Utleier utleier){
 
-        System.out.println(utleier.getØnskedeEneboliger().get(index).getSoker().getNavn());
-        System.out.println(index);
+        System.out.println("");
 
         aLeilighetSøker = false;
         aEneboligSøker = false;
@@ -517,16 +516,17 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
 
         else if (e.getSource() == ønsketenebolig){
             if(bregister.finnes(bolignummer.getText())){
+                Enebolig enebolig = bregister.get(bolignummer.getText());
                 Utleier utleier = eneboligliste.get(index).getEier();
                 Soker soker = sregister.get(fødselsnummer.getText());
 
                 eneboligliste.get(index).setØnsket(true);
-                eneboligliste.get(index).setSoker(soker);
+                eneboligliste.get(index).addSoker(soker);
 
+                //utleier.leggInnØnsketEnebolig(eneboligliste.get(index));
 
-                utleier.leggInnØnsketEnebolig(eneboligliste.get(index).getEnebolig());
-
-                System.out.println(utleier.getØnskedeEneboliger().get(index).getSoker().getNavn());
+                System.out.println(enebolig.getSokere());
+                //System.out.println(utleier.getØnskedeEneboliger().get(index).getSoker().getNavn());
 
 
 
@@ -543,8 +543,8 @@ public class BoligBrowseSokerPANEL extends JPanel implements ActionListener{
                 leilighetliste.get(index).setSoker(soker);
 
 
-                utleier.leggInnØnsketLeilighet(leilighetliste.get(index).getLeilighet());
-                System.out.println(leilighetliste.get(index).getSoker().getNavn());
+                //utleier.leggInnØnsketLeilighet(leilighetliste.get(index).getLeilighet());
+                System.out.println(leilighetliste);
 
             }
 

@@ -7,16 +7,16 @@ public class Utleier extends Person {
     private String firma;
     private Boligregister boligregister;
 
-    private LinkedList<Enebolig> eneboligliste;
-    private LinkedList<Leilighet> leilighetliste;
+    //private LinkedList<Enebolig> eneboligliste;
+    //private LinkedList<Leilighet> leilighetliste;
 
     public Utleier(String FØDSELSNUMMER, String fornavn, String etternavn, String adresse, String mail, String telefonnummer, String firma) {
         super(FØDSELSNUMMER, fornavn, etternavn, adresse, mail, telefonnummer);
         this.firma = firma;
         boligregister = new Boligregister();
 
-        eneboligliste = new LinkedList<Enebolig>();
-        leilighetliste = new LinkedList<Leilighet>();
+        /*eneboligliste = new LinkedList<Enebolig>();
+        leilighetliste = new LinkedList<Leilighet>();*/
 
     }
 
@@ -29,7 +29,7 @@ public class Utleier extends Person {
     }
 
 
-    public void leggInnØnsketEnebolig(Enebolig enebolig){
+    /*public void leggInnØnsketEnebolig(Enebolig enebolig){
 
         eneboligliste.add(enebolig);
         }
@@ -47,7 +47,7 @@ public class Utleier extends Person {
     public LinkedList<Leilighet> getØnskedeLeiligheter(){
 
         return leilighetliste;
-    }
+    }*/
 
     public Boligregister getBoligregister() {
         return boligregister;

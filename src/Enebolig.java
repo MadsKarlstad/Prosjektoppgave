@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.LinkedList;
 
 /**
  SLANGEDREAM COPYRIGHT
@@ -9,6 +10,8 @@ public class Enebolig extends Bolig {
     private double tomtareal;
     private int antallBad;
     private Soker soker;
+
+    private LinkedList<Soker> sokerliste;
 
     String bildesti;
 
@@ -24,6 +27,8 @@ public class Enebolig extends Bolig {
         this.kjeller = kjeller;
         this.tomtareal = tomtareal;
         this.antallBad = antallBad;
+
+        sokerliste = new LinkedList<Soker>();
 
         setBlidesti(super.getBildesti());
     }
@@ -102,15 +107,14 @@ public class Enebolig extends Bolig {
         return this;
     }
 
-    public void setSoker(Soker s){
+    public void addSoker(Soker s){
 
-        soker = s;
+        sokerliste.add(s);
 
     }
 
-    public Soker getSoker(){
-
-        return soker;
+    public LinkedList getSokere(){
+        return sokerliste;
     }
 
 
