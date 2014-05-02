@@ -233,7 +233,12 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
     }
 
     public void visInfo(Soker soker){
-        JOptionPane.showMessageDialog(null,soker.getØnskedeBolgier());
+        if(soker.getØnskedeBolgier().size()>0) {
+            JOptionPane.showMessageDialog(null, soker.getØnskedeBolgier());
+        }
+        else if(soker.getØnskedeBolgier().size()==0){
+            JOptionPane.showMessageDialog(null,"Søkeren har ingen ønskede boliger for øyeblikket");
+        }
     }
 
     @Override

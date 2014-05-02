@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
@@ -102,6 +103,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
     private LinkedList<Enebolig> eneboligliste;
     private LinkedList<Leilighet> leilighetliste;
+    private ListIterator<Enebolig> eneboligListIterator;
+    private ListIterator<Leilighet> leilighetListIterator;
 
     private DecimalFormat df;
 
@@ -202,6 +205,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         eneboligliste = new LinkedList<Enebolig>();
         leilighetliste = new LinkedList<Leilighet>();
+        eneboligListIterator = eneboligliste.listIterator();
+        leilighetListIterator = leilighetliste.listIterator();
 
         index = 0;
         frem = 1;
