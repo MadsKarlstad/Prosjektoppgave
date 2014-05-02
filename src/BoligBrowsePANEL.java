@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 
@@ -28,6 +29,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
     private JTextField fødselsnummer;
     private JButton finn;
+    private JButton finnbolig;
 
     private JButton neste;
     private JButton tilbakeknapp;
@@ -57,6 +59,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
     private JPanel feltpanel_utleier;
     private JPanel infopanel_start_utleier;
 
+    private JTextField finnboligfelt;
     private JTextField bolignummer;
     private JTextField eier;
     private JTextField pris;
@@ -127,7 +130,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         setLayout(new BorderLayout());
 
         knappepanel = new JPanel(new GridLayout(1,3,1,1));
-        søkepanel = new JPanel(new GridLayout(1,2,1,1));
+        søkepanel = new JPanel(new GridLayout(1,4,1,1));
 
         midtpanel = new JPanel(new BorderLayout());
         feltpanel_søker = new JPanel(new GridLayout(4,2,1,1));
@@ -148,7 +151,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
 
         fødselsnummer = new JTextField(10);
-        finn = new JButton("Finn");
+        finn = new JButton("Finn person");
+        finnbolig = new JButton("Finn bolig");
 
         neste = new JButton("neste");
         tilbakeknapp = new JButton("tilbake");
@@ -185,6 +189,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         tilbakeknapp.addActionListener(this);
         forrige.addActionListener(this);
         finn.addActionListener(this);
+        finnbolig.addActionListener(this);
         leilighetSøker.addActionListener(this);
         eneboligSøker.addActionListener(this);
         eneboligUtleier.addActionListener(this);
@@ -212,6 +217,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         søkertelefon = new JTextField(10);
         søkerbolignr = new JTextField(10);
         søkerpersnr = new JTextField(10);
+        finnboligfelt = new JTextField();
 
 
         bolignummer.setEditable(false);
@@ -339,7 +345,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         }
 
 
-
         bildeikon = new ImageIcon(getClass().getResource(bildenavn));
         bildeikon.getImage().flush();
         bildeLabel.setIcon( bildeikon );
@@ -450,6 +455,16 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         knappepanel_søker.removeAll();
         knappepanel_søker.revalidate();
         knappepanel_søker.repaint();
+
+        søkepanel.removeAll();
+        søkepanel.revalidate();
+        søkepanel.repaint();
+
+
+        søkepanel.add(fødselsnummer);
+        søkepanel.add(finn);
+        søkepanel.add(finnboligfelt);
+        søkepanel.add(finnbolig);
 
         bilde_info.add(boligArea, BorderLayout.PAGE_START);
         bilde_info.add(bildeLabel, BorderLayout.CENTER);
@@ -723,21 +738,31 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         }
 
         else if (e.getSource() == leilighetUtleier){
-            Utleier eier = pregister.get(fødselsnummer.getText());
+            try{Utleier eier = pregister.get(fødselsnummer.getText());
             Leilighet leilighet = eier.getØnskedeLeiligheter().getFirst();
             index = 0;
             visUtleierpanel();
-            visLeilighetUtleier(leilighet);
+            visLeilighetUtleier(leilighet);}
+
+            catch (NoSuchElementException ne){
+
+                visMelding("Ingen ønsker registrert, venligst gå tilbake");
+            }
 
         }
 
         else if (e.getSource() == eneboligUtleier){
 
-            Utleier eier = pregister.get(fødselsnummer.getText());
+            try{Utleier eier = pregister.get(fødselsnummer.getText());
             Enebolig enebolig = eier.getØnskedeEneboliger().getFirst();
             index = 0;
             visUtleierpanel();
-            visEneboligUtleier(enebolig);
+            visEneboligUtleier(enebolig);}
+            catch(NoSuchElementException ne){
+
+                visMelding("Ingen ønsker registrert, venligst gå tilbake");
+
+            }
 
 
 
@@ -745,6 +770,10 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         try {
             if (e.getSource() == finn) {
+
+                søkepanel.removeAll();
+                søkepanel.revalidate();
+                søkepanel.repaint();
 
                 toggle(fødselsnummer.getText());
 
