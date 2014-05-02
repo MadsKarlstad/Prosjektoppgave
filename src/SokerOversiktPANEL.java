@@ -78,7 +78,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
 
         scroll = new JScrollPane(tabell);
 
-        visInfo = new JButton("Vis info");
+        visInfo = new JButton("Vis ønskede boliger");
         endre = new JButton("Endre");
         fjern = new JButton("Slett");
         tilbake = new JButton("Tilbake");
