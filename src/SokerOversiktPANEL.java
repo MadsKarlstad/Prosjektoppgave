@@ -232,8 +232,8 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         JOptionPane.showMessageDialog(null,"Not yet supported");
     }
 
-    public void visInfo(){
-        JOptionPane.showMessageDialog(null,"Not yet supported");
+    public void visInfo(Soker soker){
+        JOptionPane.showMessageDialog(null,soker.getØnskedeBolgier());
     }
 
     @Override
@@ -260,7 +260,9 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
             endreUtleier();
         }
         else if(e.getSource() == visInfo){
-            visInfo();
+            int rad = tabell.getSelectedRow();
+            Soker soker = modell.getValueAt(rad);
+            visInfo(soker);
         }
     }
 

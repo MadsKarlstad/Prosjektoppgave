@@ -76,7 +76,7 @@ public class Enebolig extends Bolig {
     @Override
     public String toString() {
 
-        return "Dette er en " + getBeskrivelse() + " på " + getBoareal() + " kvadratmeter, den ligger på adressen " + getAdresse();
+        return "Dette er en " + getBeskrivelse() + " på " + getBoareal() + " kvadratmeter, den ligger på adressen " + getAdresse()+ " med bolignummer: " + getBolignr()+"\n";
     }
 
     public void setProsent(double p){

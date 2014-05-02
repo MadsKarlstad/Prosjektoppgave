@@ -37,6 +37,8 @@ public class Soker extends Person{
     private LinkedList<Enebolig> eneboligliste;
     private LinkedList<Leilighet> leilighetliste;
 
+    private LinkedList<Bolig> ønskedeboliger;
+
 
     private Boligregister eneboligregister;
     private Leilighetregister leilighetregister;
@@ -69,6 +71,7 @@ public class Soker extends Person{
 
         eneboligliste = new LinkedList<Enebolig>();
         leilighetliste = new LinkedList<Leilighet>();
+        ønskedeboliger = new LinkedList<Bolig>();
         df = new DecimalFormat("#.##");
 
 
@@ -304,6 +307,14 @@ public class Soker extends Person{
 
     public Soker getSoker(){
         return this;
+    }
+
+    public void addØnskedBolig(Bolig bolig){
+        ønskedeboliger.add(bolig);
+    }
+
+    public LinkedList getØnskedeBolgier(){
+        return ønskedeboliger;
     }
 
 

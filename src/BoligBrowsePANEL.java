@@ -599,7 +599,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         Soker soker = sregister.get(leierspersnr);
 
         int pris = b.getPris();
-        String fra = leilighet.getLedigDato();
+        String fra = b.getLedigDato();
         String til = "01.01.19";
         int siste = kontraktregister.size();
         int kontrakttall = siste +1;
@@ -664,6 +664,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 eneboligliste.get(index).setØnsket(true);
                 eneboligliste.get(index).addSoker(soker);
                 eier.addEnebolig(enebolig);
+                soker.addØnskedBolig(enebolig);
 
                 visMelding("Kunde har vist interesse\n venligst kontakt utleier");
             }
@@ -679,6 +680,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 leilighetliste.get(index).setØnsket(true);
                 leilighetliste.get(index).addSoker(soker);
                 eier.addLeilighet(leilighet);
+                soker.addØnskedBolig(leilighet);
 
 
                 visMelding("Kunde har vist interesse\n venligst kontakt utleier");

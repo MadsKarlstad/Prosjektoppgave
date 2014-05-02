@@ -72,7 +72,7 @@ public class BoligBrowse {
 
         Random r = new Random();
 
-        for(int i = 0; i < 1000; i++){
+        for(int i = 0; i < 800000; i++){
             String fornavn = fornavns[r.nextInt(fornavns.length)];
             String etternavn = etternavns[r.nextInt(etternavns.length)];
             String adresse = adresses[r.nextInt(adresses.length)];

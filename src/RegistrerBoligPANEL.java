@@ -322,6 +322,9 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         midtpanel.removeAll();
         midtpanel.revalidate();
         midtpanel.repaint();
+        feltpanelLeilighet.removeAll();
+        feltpanelLeilighet.revalidate();
+        feltpanelLeilighet.repaint();
 
         midtpanel.add(leilighet);
         midtpanel.add(bydelpanel, BorderLayout.PAGE_END);
@@ -334,6 +337,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             leilighetfelt[i].setText(leilighetfeltnavn[i]);
             leilighetfelt[i].setHorizontalAlignment(JTextField.CENTER);
             feltpanelLeilighet.add(leilighetfelt[i]);
+
         }
         leilighetpanel.add(bokspanelLeilighet,BorderLayout.CENTER);
         leilighetpanel.add(feltpanelLeilighet,BorderLayout.PAGE_END);
