@@ -203,6 +203,7 @@ class Eneboligmodell extends Tabellmodell<Enebolig> { //Tabellmodell for eneboli
     private final int BOLIGNR = 7;
     private final int RØYKER = 8;
     private final int EIER = 9;
+    private final int LEDIG = 10;
 
     public Eneboligmodell(String[] kolonnenavn, LinkedList<Enebolig> data) {
         super(kolonnenavn, data);
@@ -232,6 +233,8 @@ class Eneboligmodell extends Tabellmodell<Enebolig> { //Tabellmodell for eneboli
                 return enebolig.getLedigDato();
             case RØYKER:
                 return enebolig.røyketekst();
+            case LEDIG:
+                return enebolig.utleidTekst();
             default:
                 return null;
         }

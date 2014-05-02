@@ -80,6 +80,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
     private JLabel mailLabel;
     private JLabel søkerbolignrLabel;
     private JLabel søkerpersnrLabel;
+    private JLabel utleidLabel;
 
 
     private JTextArea boligArea;
@@ -236,6 +237,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         mailLabel = new JLabel("Søkers mail");
         søkerbolignrLabel = new JLabel("Boligens bolignummer");
         søkerpersnrLabel = new JLabel("Søkerens personnummer");
+        utleidLabel = new JLabel("Du kan sjekke kontraktregisteret for når leieforholdet for denne boligen opphører");
+
 
         boligArea.setLineWrap(true);
         boligArea.setWrapStyleWord(true);
@@ -325,7 +328,16 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aEneboligUtleier = false;
 
         bildenavn = eneboligliste.get(index).getBildesti();
-        knappepanel_søker.add(ønsketenebolig);
+        if(!eneboligliste.get(index).erUtleid()) {
+            knappepanel_søker.removeAll();
+            knappepanel_søker.revalidate();
+            knappepanel_søker.repaint();
+            knappepanel_søker.add(ønsketenebolig);
+        }
+        else {
+            knappepanel_søker.add(utleidLabel);
+        }
+
 
 
         bildeikon = new ImageIcon(getClass().getResource(bildenavn));
@@ -354,8 +366,15 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
 
         bildenavn = leilighetliste.get(index).getBildesti();
-        knappepanel_søker.add(ønsketleilighet);
-
+        if(!leilighetliste.get(index).erUtleid()) {
+            knappepanel_søker.removeAll();
+            knappepanel_søker.revalidate();
+            knappepanel_søker.repaint();
+            knappepanel_søker.add(ønsketleilighet);
+        }
+        else {
+            knappepanel_søker.add(utleidLabel);
+        }
 
 
         bildeikon = new ImageIcon(getClass().getResource(bildenavn));
@@ -617,10 +636,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
     }
 
-    public void interessemelding(){
-
-        JOptionPane.showMessageDialog(null,"Kunde har vist interesse\n venligst kontakt utleier");
-
+    public void visMelding(String melding){
+        JOptionPane.showMessageDialog(null,melding);
     }
 
     @Override
@@ -648,7 +665,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 eneboligliste.get(index).addSoker(soker);
                 eier.addEnebolig(enebolig);
 
-                interessemelding();
+                visMelding("Kunde har vist interesse\n venligst kontakt utleier");
             }
         }
 
@@ -664,7 +681,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 eier.addLeilighet(leilighet);
 
 
-                interessemelding();
+                visMelding("Kunde har vist interesse\n venligst kontakt utleier");
             }
 
 
@@ -749,6 +766,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             Leilighet leilighet = legister.get(søkerbolignr.getText());
 
             godkjennkontrakt(leilighet);
+
+            visMelding("Kontrakt er generert, finnes i kontraktregisteret");
         }
 
         else if(e.getSource() == ønsketLeietakerEnebolig){
@@ -757,7 +776,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
             godkjennkontrakt(enebolig);
 
-
+            visMelding("Kontrakt er generert, finnes i kontraktregisteret");
         }
 
 

@@ -113,6 +113,14 @@ public class Enebolig extends Bolig {
         return  utleid;
     }
 
+    public String utleidTekst(){
+        if(erUtleid()==true){
+            return "Nei";
+        }
+        else
+            return "Ja";
+    }
+
     public Enebolig getEnebolig(){
 
         return this;
