@@ -472,7 +472,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
             index+=frem;
             Soker soker = sregister.get(pnr);
-            Utleier utleier = pregister.get(pnr);
+            Utleier eier = pregister.get(fødselsnummer.getText());
             String bnr = bolignummer.getText();
 
             Enebolig enebolig = bregister.get(bnr);
@@ -489,10 +489,12 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             }
 
             else if(aEneboligUtleier){
+                enebolig = eier.getØnskedeEneboliger().getFirst();
                 visEneboligUtleier(enebolig);
             }
 
             else if (aLeilighetUtleier){
+                leilighet = eier.getØnskedeLeiligheter().getFirst();
                 visLeilighetUtleier(leilighet);
             }
         }
@@ -509,7 +511,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         try {
             index -= tilbake;
             Soker soker = sregister.get(pnr);
-
+            Utleier eier = pregister.get(fødselsnummer.getText());
             String bnr = bolignummer.getText();
 
             Enebolig enebolig = bregister.get(bnr);
@@ -524,10 +526,12 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             }
 
             else if(aEneboligUtleier){
+                enebolig = eier.getØnskedeEneboliger().getFirst();
                 visEneboligUtleier(enebolig);
             }
 
             else if(aLeilighetUtleier){
+                leilighet = eier.getØnskedeLeiligheter().getFirst();
                 visLeilighetUtleier(leilighet);
             }
         }
@@ -625,14 +629,14 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             if(bregister.finnes(bolignummer.getText())){
                 Enebolig enebolig = bregister.get(bolignummer.getText());
                 Soker soker = sregister.getSoker(fødselsnummer.getText());
+                Utleier eier = enebolig.getEier();
+
 
                 eneboligliste.get(index).setØnsket(true);
                 eneboligliste.get(index).addSoker(soker);
+                eier.addEnebolig(enebolig);
 
                 interessemelding();
-
-
-
             }
         }
 
@@ -641,13 +645,14 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             if(legister.finnes(bolignummer.getText())){
                 Leilighet leilighet = legister.get(bolignummer.getText());
                 Soker soker = sregister.get(fødselsnummer.getText());
+                Utleier eier = leilighet.getEier();
 
                 leilighetliste.get(index).setØnsket(true);
                 leilighetliste.get(index).addSoker(soker);
+                eier.addLeilighet(leilighet);
+
 
                 interessemelding();
-
-
             }
 
 
@@ -687,7 +692,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         }
 
         else if (e.getSource() == leilighetUtleier){
-            Leilighet leilighet = legister.get(bolignummer.getText());
+            Utleier eier = pregister.get(fødselsnummer.getText());
+            Leilighet leilighet = eier.getØnskedeLeiligheter().getFirst();
             index = 0;
             visUtleierpanel();
             visLeilighetUtleier(leilighet);
@@ -696,13 +702,11 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         else if (e.getSource() == eneboligUtleier){
 
-
-            Enebolig enebolig = bregister.get(bolignummer.getText());
+            Utleier eier = pregister.get(fødselsnummer.getText());
+            Enebolig enebolig = eier.getØnskedeEneboliger().getFirst();
             index = 0;
             visUtleierpanel();
             visEneboligUtleier(enebolig);
-            System.out.println(index);
-
 
 
 
@@ -727,6 +731,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         }
 
         if(e.getSource() == ønsketLeietakerLeilighet){
+
+            Utleier utleier = pregister.get(fødselsnummer.getText());
 
             Leilighet leilighet = legister.get(søkerbolignr.getText());
 
