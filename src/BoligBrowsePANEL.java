@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
+import java.util.Random;
 
 
 /**
@@ -101,6 +102,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
     private DecimalFormat df;
 
     private MainFrame parent;
+
+    Random r = new Random();
 
 
     public BoligBrowsePANEL(Sokerregister sregister, Boligregister bregister, Leilighetregister legister,Personregister pregister, Kontraktregister kontraktregister, MainFrame parent) {
@@ -579,15 +582,24 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         int pris = b.getPris();
         String fra = leilighet.getLedigDato();
         String til = "01.01.19";
-        String kontraktnr = "1";
+        int siste = kontraktregister.size();
+        int kontrakttall = siste +1;
+        String kontraktnr = String.valueOf(kontrakttall);
 
         if(b instanceof Enebolig){
 
 
             Kontrakt kontrakt = new Kontrakt(kontraktnr,enebolig,eier,soker,pris,fra,til);
-            kontraktregister.put(kontrakt.getKontraktnr(),kontrakt);
-            legister.fjern(bolignr);
-            enebolig.setUtleid(true);
+            if(!kontraktregister.finnes(kontraktnr)) {
+
+                kontraktregister.put(kontrakt.getKontraktnr(), kontrakt);
+                legister.fjern(bolignr);
+                enebolig.setUtleid(true);
+            }
+            else if(kontraktregister.finnes(kontraktnr)) {
+                JOptionPane.showMessageDialog(null,"Kontrakt med kontraktnummer: " + kontraktnr +" finnes allerede");
+
+            }
 
         }
 
