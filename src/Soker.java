@@ -17,8 +17,6 @@ public class Soker extends Person{
 
     private int match = 1;
 
-    private double prosent;
-
     private int minAreal;
     private int maksAreal;
 
@@ -245,7 +243,7 @@ public class Soker extends Person{
 
             prosent = ((sum/9)*100);
 
-            if(prosent > 50){
+            if(prosent > 50 || entry.getValue().erUtleid() == false){
                 //System.out.println("Prosentmatch: "+ df.format(prosent) +"% for bolignummer " + entry.getValue().getBolignr());
                 eneboligliste.add((Enebolig) entry.getValue());
                 entry.getValue().setProsent(prosent);
