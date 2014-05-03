@@ -14,8 +14,6 @@ public class Leilighet extends Bolig {
 
     private LinkedList<Soker> sokerliste;
 
-    private Soker soker;
-
     private double prosent;
 
     public Leilighet(String bildesti, String adresse, int boareal, int antallRom, int byggeår, String beskrivelse, int pris, String ledigFra, String bolignummer, Utleier eier, boolean røyke, boolean husdyr, boolean balkong, boolean terasse, boolean tvInkludert, boolean internettInkludert, boolean strømInkludert, boolean parkering, int antallBoder, int etasje, boolean heis, boolean ønsket, boolean utleid) {

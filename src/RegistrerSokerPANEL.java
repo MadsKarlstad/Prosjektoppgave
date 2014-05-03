@@ -6,6 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * Created by Erlend on 22/04/14.
@@ -163,6 +167,10 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
             //gå tilbake til mainframe
             return;
         }
+    }
+
+    public static void copyFile( File from, File to ) throws IOException {
+        Files.copy( from.toPath(), to.toPath() );
     }
 
     @Override
