@@ -85,6 +85,10 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
     private final int ANTBODER = 0;
     private final int ETG = 1;
 
+    private final int TOMT_PANEL = 0;
+    private final int ENEBOLIG = 1;
+    private final int LEILIGHET = 2;
+
     private JTextArea utskriftsområde;
 
     private JLabel overskrift;
@@ -319,13 +323,10 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
     }
     public boolean visLeilighetpanel(){
-        midtpanel.removeAll();
-        midtpanel.revalidate();
-        midtpanel.repaint();
-        feltpanelLeilighet.removeAll();
-        feltpanelLeilighet.revalidate();
-        feltpanelLeilighet.repaint();
-
+       remove(midtpanel);
+       revalidate();
+       repaint();
+       midtpanel = new JPanel(new BorderLayout());
         midtpanel.add(leilighet);
         midtpanel.add(bydelpanel, BorderLayout.PAGE_END);
 
@@ -345,6 +346,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         isLeilighet=true;
         isTom=false;
         isEnebolig=false;
+        add(midtpanel, BorderLayout.CENTER);
         return isLeilighet;
     }
     public void registrerEnebolig(){
@@ -427,7 +429,24 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(isTom){
+
+        if(e.getSource() == registrer){
+            if(boligtype.getSelectedIndex() == TOMT_PANEL){
+                JOptionPane.showMessageDialog(null,"Venligst velg boligtype");
+                return;
+            }else if(boligtype.getSelectedIndex() == ENEBOLIG){
+                registrerEnebolig();
+                parent.visPanel(MainFrame.MAIN_BOARD);
+            }else if(boligtype.getSelectedIndex() == LEILIGHET){
+                registrerLeilighet();
+                parent.visPanel(MainFrame.MAIN_BOARD);
+            }
+        }else if(e.getSource() == avbryt){
+            parent.visPanel(MainFrame.MAIN_BOARD);
+        }
+        /*
+
+                if(isTom){
             if(e.getSource() == registrer){
                 JOptionPane.showMessageDialog(null,"Venligst velg boligtype");
             }
@@ -435,6 +454,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
                 parent.visPanel(MainFrame.MAIN_BOARD);
             }
         }
+
         else if(isEnebolig){
             if(e.getSource()==registrer){
                 registrerEnebolig();
@@ -481,6 +501,6 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             parent.setSize(bredde/2, høyde-100);
             parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
 
-    }
+    }*/
 }
 }

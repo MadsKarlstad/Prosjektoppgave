@@ -313,9 +313,17 @@ public class Soker extends Person{
         ønskedeboliger.add(bolig);
     }
 
+    public void oppdaterØnskedeBoliger(){
+
+        matcherEnebolig();
+        matcherLeilighet();
+    }
+
     public LinkedList getØnskedeBolgier(){
         return ønskedeboliger;
     }
+
+
 
 
     public String getNavn(){
