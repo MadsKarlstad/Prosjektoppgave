@@ -27,9 +27,9 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
     private final String[] kolonner = {"Kontraktnr", "Eier", "Leier","Bolignr", "Pris", "Fra", "Til"};
 
     private JButton visInfo;
-    private JButton endre;
-    private JButton fjern;
     private JButton tilbake;
+
+    private JTextArea utskriftsområde;
 
     private LinkedList<Kontrakt> kontraktliste;
     private LinkedList<Kontrakt> temp;//listen som omfatter søket vårt
@@ -66,6 +66,8 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         søkfelt = new JTextField(10);
         tabell = new JTable();
 
+        utskriftsområde = new JTextArea();
+
         søkfelt.getDocument().addDocumentListener(this);
 
         Iterator it = register.entrySet().iterator();
@@ -83,13 +85,9 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         scroll = new JScrollPane(tabell);
 
         visInfo = new JButton("Vis info");
-        endre = new JButton("Endre");
-        fjern = new JButton("Slett");
         tilbake = new JButton("Tilbake");
 
         visInfo.addActionListener(this);
-        endre.addActionListener(this);
-        fjern.addActionListener(this);
         tilbake.addActionListener(this);
     }
 
@@ -122,9 +120,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         tabellpanel.add(scroll, BorderLayout.CENTER);
 
         knapppanel.add(visInfo);
-        knapppanel.add(fjern);
         knapppanel.add(tilbake);
-        knapppanel.add(endre);
 
         add(overskriftpanel, BorderLayout.PAGE_START);
         add(tabellpanel, BorderLayout.CENTER);
@@ -229,16 +225,20 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         repaint();
     }
 
-    public void slettUtleier(){
-        JOptionPane.showMessageDialog(null,"Not yet supported");
-    }
+    public void visInfo(int rad){
+        Kontrakt kontraktobjekt = modell.getValueAt(rad);
+        Utleier eier = kontraktobjekt.getUtleier();
+        Soker soker = kontraktobjekt.getLeietager();
+        Bolig bolig = kontraktobjekt.getBolig();
+        String kontrakt = "";
+        kontrakt += "Kontrakt for leie av bolig\n\n\n";
+        kontrakt += "Boligformidler: BoligBrowse™\n\n";
+        kontrakt += "Boliginformasjon:\n" + "Bolignummer: " + bolig.getBolignr() + "\nBoligens adresse: " + bolig.getAdresse();
+        kontrakt += "\n\nBoligens eier: " + eier.getNavn() + "\n\nBoligens leietager: " +soker.getNavn();
+        //kontrakt += "\n\n\n\n";
+        kontrakt += "";
 
-    public void endreUtleier(){
-        JOptionPane.showMessageDialog(null,"Not yet supported");
-    }
-
-    public void visInfo(){
-        JOptionPane.showMessageDialog(null,"Not yet supported");
+        JOptionPane.showMessageDialog(null,kontrakt);
     }
 
     @Override
@@ -252,16 +252,11 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
             int høyde = skjerm.height;
         
             parent.setSize(bredde/2, høyde-100);
-            parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
-        }
-        else if(e.getSource() == fjern){
-            slettUtleier();
-        }
-        else if(e.getSource() == endre){
-            endreUtleier();
+            parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
         }
         else if(e.getSource() == visInfo){
-            visInfo();
+            int rad = tabell.getSelectedRow();
+            visInfo(rad);
         }
     }
 

@@ -233,11 +233,17 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
     public void slettEnebolig(int rad){
         int svar = JOptionPane.showOptionDialog(null,"Vil du slette eneboligen?","Bekreft sletting",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
         if(svar==JOptionPane.YES_OPTION){
+
             rad = tabell.getSelectedRow();
             Enebolig enebolig = modell.getValueAt(rad);
             String bolignr = enebolig.getBolignr();
-            modell.delRow(rad);
-            register.fjern(bolignr);
+            if(enebolig.erUtleid() == true){
+                JOptionPane.showMessageDialog(null,"Boligen er utleid og kan ikke slettes.");
+            }
+            else {
+                modell.delRow(rad);
+                register.fjern(bolignr);
+            }
         }
         if(svar==JOptionPane.NO_OPTION){
             JOptionPane.showMessageDialog(null,"Sletting avbrutt");

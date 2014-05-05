@@ -232,8 +232,13 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
             rad = tabell.getSelectedRow();
             Leilighet leilighet = modell.getValueAt(rad);
             String bolignr = leilighet.getBolignr();
-            modell.delRow(rad);
-            register.fjern(bolignr);
+            if(leilighet.erUtleid() == true){
+                JOptionPane.showMessageDialog(null,"Leiligheten er utleid og kan ikke slettes");
+            }
+            else{
+                modell.delRow(rad);
+                register.fjern(bolignr);
+            }
         }
         if(svar==JOptionPane.NO_OPTION){
             JOptionPane.showMessageDialog(null,"Sletting avbrutt");

@@ -187,7 +187,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         /*enebolig = new JButton();
         leilighet = new JButton();*/
 
-
         neste.addActionListener(this);
         tilbakeknapp.addActionListener(this);
         forrige.addActionListener(this);
@@ -237,7 +236,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         søkerbolignr.setEditable(false);
         søkerpersnr.setEditable(false);
 
-
         bolignummeLabel = new JLabel("Bolignummer");
         eierLabel = new JLabel("Biligeier");
         prisLabel = new JLabel("Pris pr mnd");
@@ -265,7 +263,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aEneboligSøker = false;
         aLeilighetUtleier = false;
         aEneboligUtleier = false;
-
     }
 
     public void lagGui(){
@@ -311,7 +308,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         add(midtpanel, BorderLayout.CENTER);
 
-
         boligArea.setBorder(border);
 
         Toolkit kit = Toolkit.getDefaultToolkit();
@@ -342,7 +338,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         bildenavn = eneboligliste.get(index).getBildesti();
 
-
         bildeikon = new ImageIcon(getClass().getResource(bildenavn));
         bildeikon.getImage().flush();
         bildeLabel.setIcon( bildeikon );
@@ -361,9 +356,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         }
 
         visSøkerPANEL();
-
-
-
     }
 
     public void visLeilighet(Soker soker) throws IOException {
@@ -384,9 +376,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aLeilighetUtleier = false;
         aEneboligUtleier = false;
 
-
         bildenavn = leilighetliste.get(index).getBildesti();
-
 
         bildeikon = new ImageIcon(getClass().getResource(bildenavn));
         bildeikon.getImage().flush();
@@ -452,10 +442,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         midtpanel.revalidate();
         midtpanel.repaint();
 
-
-
         midtpanel.add(infopanel_start_søker, BorderLayout.CENTER);
-
     }
 
     public void visStartPANELutleier(){
@@ -477,7 +464,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         søkepanel.revalidate();
         søkepanel.repaint();
 
-
         søkepanel.add(fødselsnummer);
         søkepanel.add(finn);
         søkepanel.add(finnboligfelt);
@@ -486,13 +472,11 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         bilde_info.add(boligArea, BorderLayout.PAGE_START);
         bilde_info.add(bildeLabel, BorderLayout.CENTER);
 
-
         infopanel_søker.add(feltpanel_søker, BorderLayout.LINE_START);
         infopanel_søker.add(bilde_info, BorderLayout.CENTER);
         infopanel_søker.add(knappepanel_søker,BorderLayout.PAGE_END);
 
         midtpanel.add(infopanel_søker);
-
     }
 
     public void visUtleierpanel(){
@@ -513,11 +497,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         infopanel_utleier.add(knappepanel_utleier,BorderLayout.PAGE_END);
 
         midtpanel.add(infopanel_utleier);
-
-
-
-
-
     }
 
     public void nextVasClicked(String pnr) throws IOException {
@@ -531,8 +510,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
             Enebolig enebolig;
             Leilighet leilighet;
-
-
 
             if(aEneboligSøker){
                 visEneboliger(soker);
@@ -557,7 +534,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             index-=tilbake;
 
         }
-
     }
 
     public void previousVasClicked(String pnr) throws IOException {
@@ -593,8 +569,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         catch (IndexOutOfBoundsException io){
 
             index = 0;
-
-
         }
     }
 
@@ -603,15 +577,11 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         if(sregister.finnes(fnr)){
 
             visStartPANELsøker();
-
-
         }
 
         else if(pregister.finnes(fnr)){
 
             visStartPANELutleier();
-
-
         }
 
         else{
@@ -620,7 +590,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
     }
 
     public void godkjennkontrakt(Bolig b){
-
 
         String eierspersnr = fødselsnummer.getText();
         String bolignr = søkerbolignr.getText();
@@ -651,7 +620,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 JOptionPane.showMessageDialog(null,"Kontrakt med kontraktnummer: " + kontraktnr +" finnes allerede");
 
             }
-
         }
 
         if(b instanceof Leilighet){
@@ -661,11 +629,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             kontraktregister.put(kontrakt.getKontraktnr(),kontrakt);
             legister.fjern(bolignr);
             leilighet.setUtleid(true);
-
-
         }
-
-
     }
 
     public void visMelding(String melding){
@@ -717,8 +681,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
                 visMelding("Kunde har vist interesse\n venligst kontakt utleier");
             }
-
-
         }
 
         else if (e.getSource() == eneboligSøker){
@@ -733,7 +695,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             catch (IOException io){
 
             }
-
         }
 
         else if (e.getSource() == leilighetSøker){
@@ -748,8 +709,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             catch (IOException io){
 
             }
-
-
         }
 
         else if (e.getSource() == leilighetUtleier){
@@ -763,7 +722,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
                 visMelding("Ingen ønsker registrert, venligst gå tilbake");
             }
-
         }
 
         else if (e.getSource() == eneboligUtleier){
@@ -776,11 +734,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             catch(NoSuchElementException ne){
 
                 visMelding("Ingen ønsker registrert, venligst gå tilbake");
-
             }
-
-
-
         }
 
         try {
