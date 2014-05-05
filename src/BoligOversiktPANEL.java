@@ -231,7 +231,17 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
     }
 
     public void slettEnebolig(int rad){
-        modell.delRow(rad);
+        int svar = JOptionPane.showOptionDialog(null,"Vil du slette eneboligen?","Bekreft sletting",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
+        if(svar==JOptionPane.YES_OPTION){
+            rad = tabell.getSelectedRow();
+            Enebolig enebolig = modell.getValueAt(rad);
+            String bolignr = enebolig.getBolignr();
+            modell.delRow(rad);
+            register.fjern(bolignr);
+        }
+        if(svar==JOptionPane.NO_OPTION){
+            JOptionPane.showMessageDialog(null,"Sletting avbrutt");
+        }
     }
 
     public void endreUtleier(){
@@ -257,9 +267,6 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
         }
         else if(e.getSource() == fjern){
             int rad = tabell.getSelectedRow();
-            Enebolig enebolig = modell.getValueAt(rad);
-            String bolignr = enebolig.getBolignr();
-            register.fjern(bolignr);
             slettEnebolig(rad);
         }
         else if(e.getSource() == endre){

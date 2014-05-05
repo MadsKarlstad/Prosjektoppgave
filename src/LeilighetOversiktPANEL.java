@@ -227,7 +227,17 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
     }
 
     public void slettLeilighet(int rad){
-        modell.delRow(rad);
+        int svar = JOptionPane.showOptionDialog(null,"Vil du slette leiligheten?","Bekreft sletting",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
+        if(svar==JOptionPane.YES_OPTION){
+            rad = tabell.getSelectedRow();
+            Leilighet leilighet = modell.getValueAt(rad);
+            String bolignr = leilighet.getBolignr();
+            modell.delRow(rad);
+            register.fjern(bolignr);
+        }
+        if(svar==JOptionPane.NO_OPTION){
+            JOptionPane.showMessageDialog(null,"Sletting avbrutt");
+        }
     }
 
     public void endreUtleier(){
@@ -253,9 +263,6 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
         }
         else if(e.getSource() == fjern){
             int rad = tabell.getSelectedRow();
-            Leilighet leilighet = modell.getValueAt(rad);
-            String bolignr = leilighet.getBolignr();
-            register.fjern(bolignr);
             slettLeilighet(rad);
 
 

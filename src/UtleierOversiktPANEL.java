@@ -279,7 +279,17 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
     }
 
     public void slettUtleier(int rad){
-        modell.delRow(rad);
+        int svar = JOptionPane.showOptionDialog(null,"Vil du slette utleieren?","Bekreft sletting",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
+        if(svar==JOptionPane.YES_OPTION){
+            rad = tabell.getSelectedRow();
+            Utleier utleier = modell.getValueAt(rad);
+            String persnr = utleier.getFødselsnummer();
+            modell.delRow(rad);
+            register.fjern(persnr);
+        }
+        if(svar==JOptionPane.NO_OPTION){
+            JOptionPane.showMessageDialog(null,"Sletting avbrutt");
+        }
     }
 
     public void endreUtleier(){
@@ -304,9 +314,6 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
         }
         else if(e.getSource() == fjern){
             int rad = tabell.getSelectedRow();
-            Utleier utleier = modell.getValueAt(rad);
-            String pnr = utleier.getFødselsnummer();
-            register.fjern(pnr);
             slettUtleier(rad);
         }
         else if(e.getSource() == endre){

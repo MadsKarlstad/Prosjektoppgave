@@ -225,7 +225,18 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
     }
 
     public void slettSoker(int rad) {
-        modell.delRow(rad);
+        int svar = JOptionPane.showOptionDialog(null,"Vil du slette søkeren?","Bekreft sletting",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
+        if(svar==JOptionPane.YES_OPTION){
+            rad = tabell.getSelectedRow();
+            Soker soker = modell.getValueAt(rad);
+            String persnr = soker.getFødselsnummer();
+            modell.delRow(rad);
+            pregister.fjern(persnr);
+        }
+        if(svar==JOptionPane.NO_OPTION){
+            JOptionPane.showMessageDialog(null,"Sletting avbrutt");
+        }
+
     }
 
     public void endreUtleier(){
@@ -256,9 +267,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         }
         else if(e.getSource() == fjern){
             int rad = tabell.getSelectedRow();
-            Soker soker = modell.getValueAt(rad);
-            String persnr = soker.getFødselsnummer();
-            pregister.fjern(persnr);
+
             slettSoker(rad);
         }
         else if(e.getSource() == endre){
