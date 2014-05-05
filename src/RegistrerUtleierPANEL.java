@@ -30,6 +30,7 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener {
     private Personregister register;
     private MainFrame parent;
 
+
     public RegistrerUtleierPANEL(Personregister register, MainFrame parent) {
         super(new BorderLayout());
         this.register = register;
@@ -54,15 +55,18 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener {
 
     public void initialiser() {
 
+
+        felt = new JTextField[feltnavn.length];
+        TextPrompt tp [] = new TextPrompt[felt.length];
+
         feltpanel = new JPanel(new GridLayout(7, 1, 5, 5));
         knapppanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        felt = new JTextField[feltnavn.length];
 
         for (int i = 0; i < feltnavn.length; i++) {
             felt[i] = new JTextField(10);
-            felt[i].setText(feltnavn[i]);
-            felt[i].setHorizontalAlignment(JTextField.CENTER);
+            tp[i] = new TextPrompt(feltnavn[i], felt[i]);
+            tp[i].changeAlpha(0.7f);
 
         }
         registrer = new JButton("Registrer");

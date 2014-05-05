@@ -712,10 +712,10 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         else if (e.getSource() == leilighetUtleier){
             try{Utleier eier = pregister.get(fødselsnummer.getText());
-            Leilighet leilighet = eier.getØnskedeLeiligheter().getFirst();
-            index = 0;
-            visUtleierpanel();
-            visLeilighetUtleier(leilighet);}
+                Leilighet leilighet = eier.getØnskedeLeiligheter().getFirst();
+                index = 0;
+                visUtleierpanel();
+                visLeilighetUtleier(leilighet);}
 
             catch (NoSuchElementException ne){
 
@@ -726,10 +726,10 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         else if (e.getSource() == eneboligUtleier){
 
             try{Utleier eier = pregister.get(fødselsnummer.getText());
-            Enebolig enebolig = eier.getØnskedeEneboliger().getFirst();
-            index = 0;
-            visUtleierpanel();
-            visEneboligUtleier(enebolig);}
+                Enebolig enebolig = eier.getØnskedeEneboliger().getFirst();
+                index = 0;
+                visUtleierpanel();
+                visEneboligUtleier(enebolig);}
             catch(NoSuchElementException ne){
 
                 visMelding("Ingen ønsker registrert, venligst gå tilbake");

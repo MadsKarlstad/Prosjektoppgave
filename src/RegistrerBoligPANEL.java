@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -111,13 +113,16 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
     private JPanel feltpanelLeilighet;
     private JPanel bokspanelLeilighet;
 
-    private JPanel knapppanel;
+    private JPanel knappepanel;
     private JPanel bunnpanel;
 
     private JButton registrer;
     private JButton avbryt;
+    private JButton bilde;
 
     private MainFrame parent;
+
+    private ImageIcon image;
 
     public RegistrerBoligPANEL(Personregister pregister,Boligregister bregister,Leilighetregister legister, MainFrame parent) {
         super(new BorderLayout());
@@ -170,7 +175,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         midtpanel = new JPanel(new BorderLayout());
 
         //bunnpanel
-        knapppanel = new JPanel(new GridLayout(1,2,5,5));
+        knappepanel = new JPanel(new GridLayout(1,3,5,5));
         bunnpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         //eneboligunikt
@@ -185,13 +190,31 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         feltpanelLeilighet = new JPanel(new GridLayout(1,2,5,5));
         bokspanelLeilighet = new JPanel(new GridLayout(5,2,5,5));
 
+        TextPrompt tp [] = new TextPrompt[standardfelter.length];
+        TextPrompt tp1 [] = new TextPrompt[eneboligfelt.length];
+        TextPrompt tp2 [] = new TextPrompt[leilighetfelt.length];
+
 
 
 
         for (int i = 0; i < feltnavn.length; i++) {
             standardfelter[i] = new JTextField(10);
-            standardfelter[i].setText(feltnavn[i]);
-            standardfelter[i].setHorizontalAlignment(JTextField.CENTER);
+            tp[i] = new TextPrompt(feltnavn[i], standardfelter[i]);
+            tp[i].changeAlpha(0.7f);
+        }
+        for (int i = 0; i < eneboligfeltnavn.length; i++) {
+            eneboligfelt[i] = new JTextField(10);
+            tp1[i] = new TextPrompt(eneboligfeltnavn[i],eneboligfelt[i]);
+            tp1[i].changeAlpha(0.7f);
+            feltpanelEnebolig.add(eneboligfelt[i]);
+        }
+
+        for (int i = 0; i < leilighetfeltnavn.length; i++) {
+            leilighetfelt[i] = new JTextField(10);
+            tp2[i] = new TextPrompt(leilighetfeltnavn[i],leilighetfelt[i]);
+            tp2[i].changeAlpha(0.7f);
+            feltpanelLeilighet.add(leilighetfelt[i]);
+
         }
 
         for (int i = 0; i < boksnavn.length-minusHeis; i++) {
@@ -204,12 +227,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             leilighetbokser[i].setText(boksnavn[i]);
             leilighetbokser[i].setHorizontalAlignment(JCheckBox.CENTER);
         }
-        for (int i = 0; i < eneboligfeltnavn.length; i++) {
-            eneboligfelt[i] = new JTextField(10);
-            eneboligfelt[i].setText(eneboligfeltnavn[i]);
-            eneboligfelt[i].setHorizontalAlignment(JTextField.CENTER);
-            feltpanelEnebolig.add(eneboligfelt[i]);
-        }
+
 
 
 
@@ -238,10 +256,12 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         });
         registrer = new JButton("Registrer");
         avbryt = new JButton("Avbryt");
+        bilde = new JButton("Last opp bilde");
 
 
         registrer.addActionListener(this);
         avbryt.addActionListener(this);
+        bilde.addActionListener(this);
 
 
     }
@@ -254,8 +274,9 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         boligtypepanel.add(boligtype);
         bydelpanel.add(beliggenhet);
 
-        knapppanel.add(registrer);
-        knapppanel.add(avbryt);
+        knappepanel.add(registrer);
+        knappepanel.add(avbryt);
+        knappepanel.add(bilde);
 
         overskriftpanel.add(overskrift);
 
@@ -267,7 +288,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         midtpanel.add(bydelpanel, BorderLayout.PAGE_END);
 
 
-        bunnpanel.add(knapppanel);
+        bunnpanel.add(knappepanel);
 
 
 
@@ -289,7 +310,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
     public boolean leiligetErValgt(){
 
     }*/
-    public boolean visTomtpanel(){
+    public void visTomtpanel(){
         midtpanel.removeAll();
         midtpanel.revalidate();
         midtpanel.repaint();
@@ -297,9 +318,9 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         isTom=true;
         isEnebolig=false;
         isLeilighet=false;
-        return isTom;
+
     }
-    public boolean visEneboligpanel(){
+    public void visEneboligpanel(){
 
 
         midtpanel.removeAll();
@@ -318,11 +339,11 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         isEnebolig=true;
         isTom=false;
         isLeilighet=false;
-        return isEnebolig;
+
 
 
     }
-    public boolean visLeilighetpanel(){
+    public void visLeilighetpanel(){
        remove(midtpanel);
        revalidate();
        repaint();
@@ -333,13 +354,6 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         for (int i = 0; i < boksnavn.length; i++) {
             bokspanelLeilighet.add(leilighetbokser[i]);
         }
-        for (int i = 0; i < leilighetfeltnavn.length; i++) {
-            leilighetfelt[i] = new JTextField(10);
-            leilighetfelt[i].setText(leilighetfeltnavn[i]);
-            leilighetfelt[i].setHorizontalAlignment(JTextField.CENTER);
-            feltpanelLeilighet.add(leilighetfelt[i]);
-
-        }
         leilighetpanel.add(bokspanelLeilighet,BorderLayout.CENTER);
         leilighetpanel.add(feltpanelLeilighet,BorderLayout.PAGE_END);
         midtpanel.add(leilighetpanel,BorderLayout.CENTER);
@@ -347,7 +361,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         isTom=false;
         isEnebolig=false;
         add(midtpanel, BorderLayout.CENTER);
-        return isLeilighet;
+
     }
     public void registrerEnebolig(){
 
@@ -388,7 +402,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
         System.out.println("Registrert");
     }
-    public void registrerLeilighet(){
+    public void registrerLeilighet() throws IOException {
 
         int boareal = Integer.parseInt(standardfelter[BOAREAL].getText());
         int antrom = Integer.parseInt(standardfelter[ANTALLROM].getText());
@@ -421,10 +435,38 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
         Leilighet leilighet = new Leilighet("",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
                 røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antboder,etg,heis,false,false);
+
         legister.put(bolignr,leilighet);
         utleier.addBolig(leilighet);
 
-        System.out.println("Registrert");
+
+
+
+    }
+
+    public void lastOppBilde() throws IOException{
+
+        File bildefil;
+
+        JFileChooser filvelger = new JFileChooser();
+
+        filvelger.setCurrentDirectory( new File( "." ) );
+
+        int resultat = filvelger.showOpenDialog( this );
+
+        bildefil = filvelger.getSelectedFile();
+
+        String bildesti = bildefil.getPath();
+
+        System.out.println(bildesti);
+
+        ImageIcon b = new ImageIcon(getClass().getResource(bildesti));
+
+
+
+
+
+
 
     }
 
@@ -440,11 +482,27 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
                 registrerEnebolig();
                 parent.visPanel(MainFrame.MAIN_BOARD);
             }else if(boligtype.getSelectedIndex() == LEILIGHET){
-                registrerLeilighet();
+                try{
+                    registrerLeilighet();
+                }catch (Exception ex){
+                    System.out.println("MONGO");
+                }
+
                 parent.visPanel(MainFrame.MAIN_BOARD);
             }
         }else if(e.getSource() == avbryt){
             parent.visPanel(MainFrame.MAIN_BOARD);
+        }
+
+        else if(e.getSource() == bilde){
+
+            try
+            {
+                lastOppBilde();
+            }
+            catch (IOException io){
+
+            }
         }
         /*
 

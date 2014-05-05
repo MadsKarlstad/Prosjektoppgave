@@ -2,6 +2,7 @@
  * Copyright (c) 2014. Gruppeoppgave for Erlend Westbye s193377 Mads Karlstad s193949 Christoffer Jønsberg s193674
  */
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.Date;
 
@@ -32,7 +33,7 @@ public abstract class Bolig implements Hjem {
 
     private String bildesti;
 
-    private Image bilde;
+    private ImageIcon bilde;
 
 
     private Personregister register;
@@ -60,8 +61,11 @@ public abstract class Bolig implements Hjem {
         this.erUtleid = erUtleid;
         this.erØnsket = erØnsket;
     }
-    public void setBilde(Image bilde){
+    public void setBilde(ImageIcon bilde){
         this.bilde = bilde;
+    }
+    public ImageIcon getBilde(){
+        return bilde;
     }
 
     @Override

@@ -36,9 +36,7 @@ public class Soker extends Person{
 
     private LinkedList<Enebolig> eneboligliste;
     private LinkedList<Leilighet> leilighetliste;
-
     private LinkedList<Bolig> ønskedeboliger;
-
 
     private Boligregister eneboligregister;
     private Leilighetregister leilighetregister;
@@ -72,6 +70,7 @@ public class Soker extends Person{
         eneboligliste = new LinkedList<Enebolig>();
         leilighetliste = new LinkedList<Leilighet>();
         ønskedeboliger = new LinkedList<Bolig>();
+
         df = new DecimalFormat("#.##");
 
 
@@ -246,9 +245,10 @@ public class Soker extends Person{
 
             prosent = ((sum/9)*100);
 
-            if(prosent > 50){
+            if(prosent > 50 || entry.getValue().erUtleid() == false){
                 //System.out.println("Prosentmatch: "+ df.format(prosent) +"% for bolignummer " + entry.getValue().getBolignr());
                 eneboligliste.add((Enebolig) entry.getValue());
+
                 entry.getValue().setProsent(prosent);
             }
         }
@@ -313,16 +313,6 @@ public class Soker extends Person{
         ønskedeboliger.add(bolig);
     }
 
-    public void oppdaterØnskedeBoliger(){
-
-        matcherEnebolig();
-        matcherLeilighet();
-    }
-
-    public LinkedList getØnskedeBolgier(){
-        return ønskedeboliger;
-    }
-
 
 
 
@@ -330,5 +320,24 @@ public class Soker extends Person{
         String navn = getFornavn() + " " + getEtternavn();
         return navn;
     }
+
+    public LinkedList<Enebolig> getEneboligliste(){
+        return eneboligliste;
+    }
+
+    public LinkedList<Leilighet> getLeilighetliste(){
+        return leilighetliste;
+    }
+    public LinkedList getØnskedeBolgier(){
+        return ønskedeboliger;
+    }
+
+    public void oppdaterØnskedeBoliger(){
+
+        matcherEnebolig();
+        matcherLeilighet();
+    }
+
+
 
 }

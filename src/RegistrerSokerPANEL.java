@@ -95,10 +95,18 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
         felt = new JTextField[feltnavn.length];
         bokser = new JCheckBox[boksnavn.length];
 
+
+        TextPrompt tp [] = new TextPrompt[felt.length];
+
+
+
+
         for (int i = 0; i < feltnavn.length; i++) {
             felt[i] = new JTextField(10);
-            felt[i].setText(feltnavn[i]);
-            felt[i].setHorizontalAlignment(JTextField.CENTER);
+            tp[i] = new TextPrompt(feltnavn[i], felt[i]);
+            tp[i].changeAlpha(0.7f);
+
+            //felt[i].setHorizontalAlignment(JTextField.CENTER);
         }
 
         for (int i = 0; i < boksnavn.length; i++) {
