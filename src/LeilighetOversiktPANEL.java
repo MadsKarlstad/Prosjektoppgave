@@ -25,7 +25,7 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
     private JTable tabell;
     private JScrollPane scroll;
     private Leilighetmodell modell;
-    private final String[] kolonner = {"Adresse", "Boareal", "Antall rom", "Byggeår", "Beskrivelse", "Pris", "Ledig fra","Bolignr","Eier"};
+    private final String[] kolonner = {"Adresse", "Boareal", "Antall rom", "Byggeår", "Beskrivelse", "Pris", "Ledig fra","Bolignr","Eier","Ledig"};
 
     private JButton visInfo;
     private JButton endre;
@@ -181,22 +181,21 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
 
             Leilighet leilighet = (Leilighet) it.next();
 
-            //String fødselsnummer = enebolig.getBoareal().toUpperCase();
-            //String fornavn = utleier.getFornavn().toUpperCase();
-            //String etternavn = utleier.getEtternavn().toUpperCase();
             String adresse = leilighet.getAdresse().toUpperCase();
-            //boolean røyke = enebolig.røyke();
             String ledigfra = leilighet.getLedigDato();
             String bolignr = leilighet.getBolignr().toUpperCase();
             utleier = leilighet.getEier();
             String utleierfornavn = utleier.getFornavn().toUpperCase();
             String utleieretternavn = utleier.getEtternavn().toUpperCase();
-            /*String mail = utleier.getMail().toUpperCase();
-            String telfonnummer = utleier.getTelefonnummer().toUpperCase();
-            String firma = utleier.getFirma().toUpperCase();
-            String navn = utleier.getNavn().toUpperCase();*/
+            String beskrivelse = leilighet.getBeskrivelse();
+            String byggår = String.valueOf(leilighet.getByggår());
+            String pris = String.valueOf(leilighet.getPris());
+            String ledig = leilighet.getLedigTekst();
+
 
             if(adresse.startsWith(søk) || bolignr.startsWith(søk) || utleierfornavn.startsWith(søk) || utleieretternavn.startsWith(søk)
+                    || ledigfra.startsWith(søk) || beskrivelse.startsWith(søk) || byggår.startsWith(søk) || pris.startsWith(søk)
+                    || ledig.startsWith(søk)
                     ){
                 temp.add(leilighet);
             }

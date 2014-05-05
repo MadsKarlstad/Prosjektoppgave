@@ -8,6 +8,8 @@ public class Utleier extends Person {
     private String firma;
     private Boligregister boligregister;
 
+
+    private LinkedList<Bolig> eideBoliger;
     private LinkedList<Enebolig> ønskedeeneboligliste;
     private LinkedList<Leilighet> ønskedeleilighetListe;
 
@@ -18,6 +20,7 @@ public class Utleier extends Person {
 
         ønskedeeneboligliste = new LinkedList<Enebolig>();
         ønskedeleilighetListe = new LinkedList<Leilighet>();
+        eideBoliger = new LinkedList<Bolig>();
 
     }
 
@@ -56,6 +59,14 @@ public class Utleier extends Person {
 
     public void addEnebolig(Enebolig enebolig){
         ønskedeeneboligliste.add(enebolig);
+    }
+
+    public void addBolig(Bolig bolig){
+        eideBoliger.add(bolig);
+    }
+
+    public LinkedList<Bolig> getEideBoliger(){
+        return eideBoliger;
     }
 
     public Boligregister getBoligregister() {

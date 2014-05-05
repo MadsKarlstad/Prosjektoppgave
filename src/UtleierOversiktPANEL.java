@@ -32,6 +32,7 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
     private JButton fjern;
     private JButton tilbake;
 
+    private LinkedList<Bolig> eiersboliger;
     private LinkedList<Utleier> utleierliste;
     private LinkedList<Utleier> temp;//listen som omfatter søket vårt
 
@@ -283,9 +284,15 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
         if(svar==JOptionPane.YES_OPTION){
             rad = tabell.getSelectedRow();
             Utleier utleier = modell.getValueAt(rad);
-            String persnr = utleier.getFødselsnummer();
-            modell.delRow(rad);
-            register.fjern(persnr);
+            eiersboliger = utleier.getEideBoliger();
+            if(eiersboliger.size()!=0){
+                JOptionPane.showMessageDialog(null,"Utleieren har boliger registrert og kan ikke slettes");
+            }
+            else if(eiersboliger.size()==0) {
+                String persnr = utleier.getFødselsnummer();
+                modell.delRow(rad);
+                register.fjern(persnr);
+            }
         }
         if(svar==JOptionPane.NO_OPTION){
             JOptionPane.showMessageDialog(null,"Sletting avbrutt");

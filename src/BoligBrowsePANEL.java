@@ -627,7 +627,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
             Kontrakt kontrakt = new Kontrakt(kontraktnr,leilighet,eier,soker,pris,fra,til);
             kontraktregister.put(kontrakt.getKontraktnr(),kontrakt);
-            legister.fjern(bolignr);
             leilighet.setUtleid(true);
         }
     }

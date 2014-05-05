@@ -2,6 +2,9 @@
  * Copyright (c) 2014. Gruppeoppgave for Erlend Westbye s193377 Mads Karlstad s193949 Christoffer Jønsberg s193674
  */
 
+import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
+import sun.jvm.hotspot.oops.Instance;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Random;
@@ -110,7 +113,7 @@ public class BoligBrowse {
             sregister.leggTil(soker);
         }
 
-        for(int i=0;i<500; i++){
+        for(int i=500;i<1000; i++){
             int bareal = boareal[r.nextInt(boareal.length)];
             String adresse = adresses[r.nextInt(adresses.length)];
             int rom = antrom[r.nextInt(antrom.length)];
@@ -138,6 +141,7 @@ public class BoligBrowse {
             Enebolig enebolig = new Enebolig(bildesti,adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
                     TV,internet,s,park,etg,kj,tmt,bad,erønsket,false);
             bregister.leggTil(enebolig);
+            utleier.addBolig(enebolig);
         }
 
         for(int i=0;i<500; i++){
@@ -167,6 +171,7 @@ public class BoligBrowse {
             Leilighet leilighet = new Leilighet(bildesti,adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
                     TV,internet,s,park,antboder,etasje,elevator,false,false);
             legister.leggTil(leilighet);
+            utleier.addBolig(leilighet);
         }
 
         for(int i = 0; i < 10; i++){
@@ -181,7 +186,14 @@ public class BoligBrowse {
             String til = tildato[r.nextInt(tildato.length)];
 
             Kontrakt kontrakt = new Kontrakt(String.valueOf(i+1), bolig, eier, soker,p,fra,til);
-
+            if(bolig instanceof Leilighet){
+                Leilighet leilighet = legister.get(bolig.getBolignr());
+                leilighet.setUtleid(true);
+            }
+            else if(bolig instanceof Enebolig){
+                Enebolig enebolig = bregister.get(bolig.getBolignr());
+                enebolig.setUtleid(true);
+            }
             kregister.leggTil(kontrakt);
 
         }

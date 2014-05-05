@@ -79,6 +79,18 @@ public class Leilighet extends Bolig {
         return this;
     }
 
+    public String getLedigTekst(){
+        String s = "";
+        if(erUtleid() == true){
+            s="Nei";
+            //Er boligen er utleid så skal teksten vise "Nei" i tabellen, under kollonnen "Ledig".
+        }
+        else {
+            s="Ja";
+        }
+        return s;
+    }
+
     @Override
     public String toString() {
 

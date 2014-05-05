@@ -257,6 +257,7 @@ class Leilighetmodell extends Tabellmodell<Leilighet> { //Tabellmodell for enebo
     private final int LEDIGFRA = 6;
     private final int BOLIGNR = 7;
     private final int EIER = 8;
+    private final int UTLEID = 9;
 
     public Leilighetmodell(String[] kolonnenavn, LinkedList<Leilighet> data) {
         super(kolonnenavn, data);
@@ -284,6 +285,8 @@ class Leilighetmodell extends Tabellmodell<Leilighet> { //Tabellmodell for enebo
                 return leilighet.getPris();
             case LEDIGFRA:
                 return leilighet.getLedigDato();
+            case UTLEID:
+                return leilighet.getLedigTekst();
             default:
                 return null;
         }
