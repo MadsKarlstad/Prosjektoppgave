@@ -2,9 +2,6 @@
  * Copyright (c) 2014. Gruppeoppgave for Erlend Westbye s193377 Mads Karlstad s193949 Christoffer Jønsberg s193674
  */
 
-import com.sun.codemodel.internal.JOp;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.awt.*;
@@ -15,16 +12,15 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
-import java.util.*;
 
 /**
  * Created by Erlend on 22/04/14.
- *
  * http://stackoverflow.com/questions/5388146/copy-and-rename-file-on-different-location til image uploader
  */
 public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
-    String bildesti;
+    String sti;
+    int bildesti;
 
     //felter som gjelder for både enebolig og leilighet
     private JTextField[] standardfelter;
@@ -388,10 +384,11 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         boolean parkering = eneboligbokser[PARKERING].isSelected();
         boolean kjeller = eneboligbokser[KJELLER].isSelected();
 
+        if(sti == null){
+            bildesti = 0;
+        }
 
-
-
-        Enebolig enebolig = new Enebolig("",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
+        Enebolig enebolig = new Enebolig(String.valueOf(bildesti),adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
                 røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false);
         bregister.put(bolignr,enebolig);
         utleier.addBolig(enebolig);
@@ -426,11 +423,13 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         boolean parkering = eneboligbokser[PARKERING].isSelected();
         boolean heis = leilighetbokser[HEIS].isSelected();
 
-        if(bildesti == null){
-            bildesti = "";
+        if(sti == null){
+            bildesti = 0;
         }
 
-        Leilighet leilighet = new Leilighet(bildesti,adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
+
+
+        Leilighet leilighet = new Leilighet(String.valueOf(bildesti),adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
                 røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antboder,etg,heis,false,false);
 
         legister.put(bolignr,leilighet);
@@ -461,26 +460,25 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             }
         });
 
-        int folderestøresle = new File("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/").listFiles().length;
+        bildesti = new File("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/").listFiles().length;
 
         filvelger.setCurrentDirectory( new File( "." ) );
 
         int resultat = filvelger.showOpenDialog( this );
 
-        bildesti = filvelger.getSelectedFile().getCanonicalPath();
+        sti = filvelger.getSelectedFile().getCanonicalPath();
 
         if(resultat == JFileChooser.APPROVE_OPTION){
 
-        FileInputStream source = new FileInputStream(bildesti);
-        FileOutputStream destination = new FileOutputStream("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/" + String.valueOf(folderestøresle) + ".jpg");
+        FileInputStream source = new FileInputStream(sti);
+        FileOutputStream destination =
+        new FileOutputStream("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg");
 
         FileChannel sourceFileChannel = source.getChannel();
         FileChannel destinationFileChannel = destination.getChannel();
 
         long size = sourceFileChannel.size();
         sourceFileChannel.transferTo(0, size, destinationFileChannel);
-
-            System.out.println("approve option");
         }
     }
 
