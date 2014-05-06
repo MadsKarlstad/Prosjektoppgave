@@ -321,7 +321,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
     public void visEneboliger(Soker soker) throws IOException {
 
         eneboligliste = soker.getEneboligliste();
-        System.out.println(eneboligliste);
 
         bolignummer.setText(eneboligliste.get(index).getBolignr());
         eier.setText(eneboligliste.get(index).getEiersNavn());
@@ -336,9 +335,10 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aLeilighetUtleier = false;
         aEneboligUtleier = false;
 
-        bildenavn = eneboligliste.get(index).getBildesti();
+        bildenavn = "/Bilder/boligbilder/"+eneboligliste.get(index).getBildesti()+".jpg";
 
-        bildeikon = new ImageIcon(getClass().getResource(""));
+
+        bildeikon = new ImageIcon(getClass().getResource(bildenavn));
         bildeikon.getImage().flush();
         bildeLabel.setIcon( bildeikon );
 
