@@ -9,7 +9,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.*;
 
 /**
@@ -439,13 +442,30 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
     public void lastOppBilde() throws IOException{
 
 
+        int folderestøresle = new File("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/").listFiles().length;
+        System.out.println(folderestøresle);
+
         JFileChooser filvelger = new JFileChooser();
 
         filvelger.setCurrentDirectory( new File( "." ) );
 
-       int resultat = filvelger.showOpenDialog( this );
+        int resultat = filvelger.showOpenDialog( this );
 
-       bildesti = filvelger.getSelectedFile().getPath();
+        bildesti = filvelger.getSelectedFile().getCanonicalPath();
+
+        if(resultat == JFileChooser.APPROVE_OPTION){
+
+        FileInputStream source = new FileInputStream(bildesti);
+        FileOutputStream destination = new FileOutputStream("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/" + String.valueOf(folderestøresle) + ".jpg");
+
+        FileChannel sourceFileChannel = source.getChannel();
+        FileChannel destinationFileChannel = destination.getChannel();
+
+        long size = sourceFileChannel.size();
+        sourceFileChannel.transferTo(0, size, destinationFileChannel);
+
+            System.out.println("approve option");
+        }
     }
 
 
@@ -463,7 +483,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
                 try{
                     registrerLeilighet();
                 }catch (Exception ex){
-                    System.out.println("MONGO");
+
                 }
 
                 parent.visPanel(MainFrame.MAIN_BOARD);

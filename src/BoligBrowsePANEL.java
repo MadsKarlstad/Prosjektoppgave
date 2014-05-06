@@ -376,9 +376,11 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aLeilighetUtleier = false;
         aEneboligUtleier = false;
 
+        System.out.println(leilighetliste.get(index).getBildesti());
+
         bildenavn = leilighetliste.get(index).getBildesti();
 
-        bildeikon = new ImageIcon(getClass().getResource(bildenavn));//sput
+        bildeikon = new ImageIcon(getClass().getResource(bildenavn));
         bildeikon.getImage().flush();
         bildeLabel.setIcon(bildeikon);
 
