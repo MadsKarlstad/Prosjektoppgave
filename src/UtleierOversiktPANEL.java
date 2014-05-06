@@ -292,6 +292,7 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
                 String persnr = utleier.getFødselsnummer();
                 modell.delRow(rad);
                 register.fjern(persnr);
+                parent.skrivTilFil(utleier);
             }
         }
         if(svar==JOptionPane.NO_OPTION){

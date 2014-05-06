@@ -2,10 +2,14 @@
  * Copyright (c) 2014. Gruppeoppgave for Erlend Westbye s193377 Mads Karlstad s193949 Christoffer Jønsberg s193674
  */
 
+import com.sun.codemodel.internal.JOp;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.TreeMap;
 
 /**
  *
@@ -23,6 +27,12 @@ public class MainFrame extends JFrame implements ActionListener {
     private JButton visEnebolig;
     private JButton visUtleierBrowse;
     private JButton visLeietakerBrowse;
+
+    private final int UTLEIER = 0;
+    private final int SOKER = 1;
+    private final int ENEBOLIG = 2;
+    private final int LEILIGHET = 3;
+    private final int KONTRAKT = 4;
 
     private String pnr;
 
@@ -64,6 +74,17 @@ public class MainFrame extends JFrame implements ActionListener {
 
         setVisible(true);
         pack();
+
+        readList(UTLEIER);
+        writeList(UTLEIER);
+        readList(SOKER);
+        writeList(SOKER);
+        readList(ENEBOLIG);
+        writeList(ENEBOLIG);
+        readList(LEILIGHET);
+        writeList(LEILIGHET);
+        readList(KONTRAKT);
+        writeList(KONTRAKT);
     }
 
     public void initialiser(){
@@ -146,6 +167,10 @@ public class MainFrame extends JFrame implements ActionListener {
         cl.show(vinduer,st);
     }
 
+    public void visMelding(String melding){
+        JOptionPane.showMessageDialog(null,melding);
+    }
+
     public void doClick(int i){//generer actionevent fra ved kall
 
         switch (i) {
@@ -160,8 +185,135 @@ public class MainFrame extends JFrame implements ActionListener {
         }
 
     }
+    public void skrivTilFil(Object object){
+        if(object instanceof Utleier){
+            writeList(UTLEIER);
+        }
+        if(object instanceof Soker){
+            writeList(SOKER);
+        }
+        if(object instanceof Enebolig){
+            writeList(ENEBOLIG);
+        }
+        if(object instanceof Leilighet){
+            writeList(LEILIGHET);
+        }
+        if(object instanceof Kontrakt){
+            writeList(KONTRAKT);
+        }
+    }
 
+    private void readList(int n){
+        if(n==UTLEIER){
+            try(ObjectInputStream innfil = new ObjectInputStream(new FileInputStream("src/utleierliste.data"))){
+                register=(Personregister) innfil.readObject();
+            }
+            catch(ClassNotFoundException ce){
+                visMelding(""+ce.getMessage());
+                register = new Personregister();
+            }
+            catch(IOException ioe){
+                visMelding("Feil ved innlesning, oppretter ny utleierliste");
+                register = new Personregister();
+            }
+        }
+        if(n==SOKER){
+            try(ObjectInputStream innfil = new ObjectInputStream(new FileInputStream("src/sokerliste.data"))){
+                sregister=(Sokerregister) innfil.readObject();
+            }
+            catch(ClassNotFoundException ce){
+                visMelding(""+ce.getMessage());
+                sregister = new Sokerregister();
+            }
+            catch(IOException ioe){
+                visMelding("Feil ved innlesning, oppretter ny søkerliste");
+                sregister = new Sokerregister();
+            }
+        }
+        if(n==ENEBOLIG){
+            try(ObjectInputStream innfil = new ObjectInputStream(new FileInputStream("src/eneboligliste.data"))){
+                bregister=(Boligregister) innfil.readObject();
+            }
+            catch(ClassNotFoundException ce){
+                visMelding(""+ce.getMessage());
+                bregister = new Boligregister();
+            }
+            catch(IOException ioe){
+                visMelding("Feil ved innlesning, oppretter ny eneboligliste");
+                bregister = new Boligregister();
+            }
+        }
+        if(n==LEILIGHET){
+            try(ObjectInputStream innfil = new ObjectInputStream(new FileInputStream("src/leilighetliste.data"))){
+                legister=(Leilighetregister) innfil.readObject();
+            }
+            catch(ClassNotFoundException ce){
+                visMelding(""+ce.getMessage());
+                legister = new Leilighetregister();
+            }
+            catch(IOException ioe){
+                visMelding("Feil ved innlesning, oppretter ny leilighetliste");
+                legister = new Leilighetregister();
+            }
+        }
+        if(n==KONTRAKT){
+            try(ObjectInputStream innfil = new ObjectInputStream(new FileInputStream("src/kontraktliste.data"))){
+                kregister=(Kontraktregister) innfil.readObject();
+            }
+            catch(ClassNotFoundException ce){
+                visMelding(""+ce.getMessage());
+                kregister = new Kontraktregister();
+            }
+            catch(IOException ioe){
+                visMelding("Feil ved innlesning, oppretter ny kontraktliste");
+                kregister = new Kontraktregister();
+            }
+        }
 
+    }
+
+    private void writeList(int n){
+        if(n==UTLEIER){
+            try(ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("src/utleierliste.data"))){
+                utfil.writeObject(register);
+            }
+            catch(IOException ioe){
+                visMelding("Feil ved lagring til fil");
+            }
+        }
+        if(n==SOKER){
+            try(ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("src/sokerliste.data"))){
+                utfil.writeObject(sregister);
+            }
+            catch(IOException ioe){
+                visMelding("Feil ved lagring til fil");
+            }
+        }
+        if(n==ENEBOLIG){
+            try(ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("src/eneboligliste.data"))){
+                utfil.writeObject(bregister);
+            }
+            catch(IOException ioe){
+                visMelding("Feil ved lagring til fil");
+            }
+        }
+        if(n==LEILIGHET){
+            try(ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("src/leilighetliste.data"))){
+                utfil.writeObject(legister);
+            }
+            catch(IOException ioe){
+                visMelding("Feil ved lagring til fil");
+            }
+        }
+        if(n==KONTRAKT){
+            try(ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("src/kontraktliste.data"))){
+                utfil.writeObject(kregister);
+            }
+            catch(IOException ioe){
+                visMelding("Feil ved lagring til fil");
+            }
+        }
+    }
 
 
     @Override

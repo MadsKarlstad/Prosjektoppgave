@@ -172,6 +172,7 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
                 arbeidsforhold,minareal,maxareal,minpris,maxpris,røyke,dyr,balk,ter,tv,nett,strøm,parkering,kjeller,heis,eneboligregister,leilighetregister);
 
         if(register.leggTil(søker)){
+            parent.skrivTilFil(søker);
             //gå tilbake til mainframe
             return;
         }
