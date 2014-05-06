@@ -338,7 +338,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         bildenavn = eneboligliste.get(index).getBildesti();
 
-        bildeikon = new ImageIcon(getClass().getResource(bildenavn));
+        bildeikon = new ImageIcon(getClass().getResource("/Bilder/boligbilder"+bildenavn+".jpg"));
         bildeikon.getImage().flush();
         bildeLabel.setIcon( bildeikon );
 
@@ -618,6 +618,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 enebolig.setUtleid(true);
                 parent.skrivTilFil(kontrakt);
                 parent.skrivTilFil(enebolig);
+                parent.lesFraFil(enebolig);
             }
             else if(kontraktregister.finnes(kontraktnr)) {
                 JOptionPane.showMessageDialog(null,"Kontrakt med kontraktnummer: " + kontraktnr +" finnes allerede");
@@ -633,6 +634,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             leilighet.setUtleid(true);
             parent.skrivTilFil(kontrakt);
             parent.skrivTilFil(leilighet);
+            parent.lesFraFil(leilighet);
         }
     }
 

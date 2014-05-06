@@ -304,7 +304,9 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
         JOptionPane.showMessageDialog(null,"Not yet supported");
     }
 
-    public void visInfo(Boligregister eiersregister){
+    public void visInfo(int rad){
+        Utleier utleier = modell.getValueAt(rad);
+        JOptionPane.showMessageDialog(null,utleier.getEideBoliger());
     }
 
     @Override
@@ -329,9 +331,7 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
         }
         else if(e.getSource() == visInfo){
             int rad = tabell.getSelectedRow();
-            Utleier utleier = modell.getValueAt(rad);
-            Boligregister eiersBoliger = utleier.getBoligregister();
-            visInfo(eiersBoliger);
+            visInfo(rad);
         }
     }
 

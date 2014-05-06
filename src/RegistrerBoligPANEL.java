@@ -392,6 +392,8 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
                 røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false);
         bregister.put(bolignr,enebolig);
         utleier.addBolig(enebolig);
+        parent.skrivTilFil(enebolig);
+        parent.skrivTilFil(utleier);
 
         System.out.println("Registrert");
     }
@@ -434,6 +436,8 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
         legister.put(bolignr,leilighet);
         utleier.addBolig(leilighet);
+        parent.skrivTilFil(leilighet);
+        parent.skrivTilFil(utleier);
 
 
 
