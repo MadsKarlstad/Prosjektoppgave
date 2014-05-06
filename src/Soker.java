@@ -203,48 +203,48 @@ public class Soker extends Person{
         return heis;
     }
 
-    public LinkedList<Enebolig> matcherEnebolig(){
-        for (Map.Entry<String, Enebolig> entry : eneboligregister.entrySet()){
+    public void matcherEnebolig(){
+        for (Map.Entry<String, Enebolig> entry : eneboligregister.entrySet()) {
             double prosent = 0;
             double sum = 0;
-            if(isRøyk() == entry.getValue().røyke()){
-                sum+=1;
+            if (isRøyk() == entry.getValue().røyke()) {
+                sum += 1;
             }
-            if(isBalkong() == entry.getValue().balkong()){
-                sum+=match;
+            if (isBalkong() == entry.getValue().balkong()) {
+                sum += match;
 
             }
-            if(isHusdyr() == entry.getValue().husdyr()){
-                sum+=match;
+            if (isHusdyr() == entry.getValue().husdyr()) {
+                sum += match;
 
             }
-            if(isInternetinkludert() == entry.getValue().internettInkludert()){
-                sum+=match;
+            if (isInternetinkludert() == entry.getValue().internettInkludert()) {
+                sum += match;
 
             }
-            if(isTVinkludert() == entry.getValue().tvInkludert()){
-                sum+=match;
+            if (isTVinkludert() == entry.getValue().tvInkludert()) {
+                sum += match;
 
             }
-            if(isKjeller() == entry.getValue().isKjeller()){
-                sum+=match;
+            if (isKjeller() == entry.getValue().isKjeller()) {
+                sum += match;
 
             }
-            if(isStrøminkludert() == entry.getValue().strømInkludert()){
-                sum+=match;
+            if (isStrøminkludert() == entry.getValue().strømInkludert()) {
+                sum += match;
 
             }
-            if(isParkering() == entry.getValue().parkering()){
-                sum+=match;
+            if (isParkering() == entry.getValue().parkering()) {
+                sum += match;
 
             }
-            if(isTerasse() == entry.getValue().terasse()){
-                sum+=match;
+            if (isTerasse() == entry.getValue().terasse()) {
+                sum += match;
             }
 
-            prosent = ((sum/9)*100);
+            prosent = ((sum / 9) * 100);
 
-            if(prosent > 50 || entry.getValue().erUtleid() == false){
+            if (prosent > 50 || entry.getValue().erUtleid() == false) {
                 //System.out.println("Prosentmatch: "+ df.format(prosent) +"% for bolignummer " + entry.getValue().getBolignr());
                 eneboligliste.add((Enebolig) entry.getValue());
 
@@ -252,10 +252,9 @@ public class Soker extends Person{
 
             }
         }
-        return eneboligliste;
     }
 
-    public LinkedList<Leilighet> matcherLeilighet(){
+    public void matcherLeilighet(){
         for (Map.Entry<String, Leilighet> entry : leilighetregister.entrySet()){
             double prosent = 0;
             double sum = 0;
@@ -302,7 +301,6 @@ public class Soker extends Person{
                 entry.getValue().setProsent(prosent);
             }
         }
-        return leilighetliste;
     }
 
     public Soker getSoker(){
@@ -321,13 +319,7 @@ public class Soker extends Person{
         return navn;
     }
 
-    public LinkedList<Enebolig> getEneboligliste(){
-        return eneboligliste;
-    }
 
-    public LinkedList<Leilighet> getLeilighetliste(){
-        return leilighetliste;
-    }
     public LinkedList getØnskedeBolgier(){
         return ønskedeboliger;
     }
@@ -336,6 +328,18 @@ public class Soker extends Person{
 
         matcherEnebolig();
         matcherLeilighet();
+
+    }
+
+    public LinkedList<Enebolig> getEneboligliste(){
+
+        return eneboligliste;
+
+    }
+
+    public LinkedList<Leilighet> getLeilighetliste(){
+
+        return leilighetliste;
     }
 
 
