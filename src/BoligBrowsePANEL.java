@@ -615,8 +615,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             if(!kontraktregister.finnes(kontraktnr)) {
 
                 kontraktregister.put(kontrakt.getKontraktnr(), kontrakt);
-                legister.fjern(bolignr);
                 enebolig.setUtleid(true);
+                parent.skrivTilFil(kontrakt);
             }
             else if(kontraktregister.finnes(kontraktnr)) {
                 JOptionPane.showMessageDialog(null,"Kontrakt med kontraktnummer: " + kontraktnr +" finnes allerede");
@@ -630,6 +630,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             Kontrakt kontrakt = new Kontrakt(kontraktnr,leilighet,eier,soker,pris,fra,til);
             kontraktregister.put(kontrakt.getKontraktnr(),kontrakt);
             leilighet.setUtleid(true);
+            parent.skrivTilFil(kontrakt);
         }
     }
 

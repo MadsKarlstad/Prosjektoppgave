@@ -4,9 +4,10 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Date;
 
-public abstract class Bolig implements Hjem {
+public abstract class Bolig implements Hjem,Serializable {
     private String adresse;
     private int boareal;
     private int antallRom;

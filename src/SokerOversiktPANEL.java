@@ -232,6 +232,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
             String persnr = soker.getFødselsnummer();
             modell.delRow(rad);
             pregister.fjern(persnr);
+            parent.skrivTilFil(soker);
         }
         if(svar==JOptionPane.NO_OPTION){
             JOptionPane.showMessageDialog(null,"Sletting avbrutt");

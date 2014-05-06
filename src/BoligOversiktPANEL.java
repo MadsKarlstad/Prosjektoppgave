@@ -243,6 +243,7 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
             else {
                 modell.delRow(rad);
                 register.fjern(bolignr);
+                parent.skrivTilFil(enebolig);
             }
         }
         if(svar==JOptionPane.NO_OPTION){

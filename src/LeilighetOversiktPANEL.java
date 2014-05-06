@@ -237,6 +237,7 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
             else{
                 modell.delRow(rad);
                 register.fjern(bolignr);
+                parent.skrivTilFil(leilighet);
             }
         }
         if(svar==JOptionPane.NO_OPTION){

@@ -5,7 +5,6 @@
 import com.sun.codemodel.internal.JOp;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -394,7 +393,6 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
                 røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false);
         bregister.put(bolignr,enebolig);
         utleier.addBolig(enebolig);
-        //parent.skrivTilFil(enebolig);
 
         System.out.println("Registrert");
     }
@@ -435,7 +433,6 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
         legister.put(bolignr,leilighet);
         utleier.addBolig(leilighet);
-        //parent.skrivTilFil(leilighet);
 
 
 
@@ -449,22 +446,8 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         System.out.println(folderestøresle);
 
         JFileChooser filvelger = new JFileChooser();
+
         filvelger.setCurrentDirectory( new File( "." ) );
-        filvelger.setAcceptAllFileFilterUsed(false);
-        filvelger.setFileFilter(new FileFilter() {
-
-            public String getDescription() {
-                return "JPG";
-            }
-
-            public boolean accept(File f) {
-                if (f.isDirectory()) {
-                    return true;
-                } else {
-                    return f.getName().toLowerCase().endsWith(".jpg");
-                }
-            }
-        });
 
         int resultat = filvelger.showOpenDialog( this );
 
@@ -472,14 +455,14 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
         if(resultat == JFileChooser.APPROVE_OPTION){
 
-            FileInputStream source = new FileInputStream(bildesti);
-            FileOutputStream destination = new FileOutputStream("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/" + String.valueOf(folderestøresle) + ".jpg");
+        FileInputStream source = new FileInputStream(bildesti);
+        FileOutputStream destination = new FileOutputStream("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/" + String.valueOf(folderestøresle) + ".jpg");
 
-            FileChannel sourceFileChannel = source.getChannel();
-            FileChannel destinationFileChannel = destination.getChannel();
+        FileChannel sourceFileChannel = source.getChannel();
+        FileChannel destinationFileChannel = destination.getChannel();
 
-            long size = sourceFileChannel.size();
-            sourceFileChannel.transferTo(0, size, destinationFileChannel);
+        long size = sourceFileChannel.size();
+        sourceFileChannel.transferTo(0, size, destinationFileChannel);
 
             System.out.println("approve option");
         }
