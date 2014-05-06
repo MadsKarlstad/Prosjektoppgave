@@ -19,6 +19,8 @@ import java.util.*;
  */
 public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
+    String bildesti;
+
     //felter som gjelder for både enebolig og leilighet
     private JTextField[] standardfelter;
     private final String[] feltnavn = {"eiersFødselsnummer","adresse","beskrivelse","bolignummer","boareal","antallRom","byggeår","pris","ledigFra"};
@@ -132,12 +134,12 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         this.parent = parent;
         initialiser();
         lagGUI();
-        
+
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension skjerm = kit.getScreenSize();
         int bredde = skjerm.width;
         int høyde = skjerm.height;
-        
+
         parent.setSize(bredde / 2, høyde / 2);
         parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
 
@@ -299,17 +301,6 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
 
     }
-   /* public boolean tomtErValgt(){
-        boolean b = true;
-        visTomtpanel(b);
-        return true;
-    }
-    public boolean eneboligErValgt(){
-
-    }
-    public boolean leiligetErValgt(){
-
-    }*/
     public void visTomtpanel(){
         midtpanel.removeAll();
         midtpanel.revalidate();
@@ -344,10 +335,10 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
     }
     public void visLeilighetpanel(){
-       remove(midtpanel);
-       revalidate();
-       repaint();
-       midtpanel = new JPanel(new BorderLayout());
+        remove(midtpanel);
+        revalidate();
+        repaint();
+        midtpanel = new JPanel(new BorderLayout());
         midtpanel.add(leilighet);
         midtpanel.add(bydelpanel, BorderLayout.PAGE_END);
 
@@ -396,7 +387,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
 
         Enebolig enebolig = new Enebolig("",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
-                            røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false);
+                røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false);
         bregister.put(bolignr,enebolig);
         utleier.addBolig(enebolig);
 
@@ -430,10 +421,11 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         boolean parkering = eneboligbokser[PARKERING].isSelected();
         boolean heis = leilighetbokser[HEIS].isSelected();
 
+        if(bildesti == null){
+            bildesti = "";
+        }
 
-
-
-        Leilighet leilighet = new Leilighet("",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
+        Leilighet leilighet = new Leilighet(bildesti,adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
                 røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antboder,etg,heis,false,false);
 
         legister.put(bolignr,leilighet);
@@ -446,28 +438,14 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
     public void lastOppBilde() throws IOException{
 
-        File bildefil;
 
         JFileChooser filvelger = new JFileChooser();
 
         filvelger.setCurrentDirectory( new File( "." ) );
 
-        int resultat = filvelger.showOpenDialog( this );
+       int resultat = filvelger.showOpenDialog( this );
 
-        bildefil = filvelger.getSelectedFile();
-
-        String bildesti = bildefil.getPath();
-
-        System.out.println(bildesti);
-
-        ImageIcon b = new ImageIcon(getClass().getResource(bildesti));
-
-
-
-
-
-
-
+       bildesti = filvelger.getSelectedFile().getPath();
     }
 
 
@@ -499,8 +477,16 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             try
             {
                 lastOppBilde();
+                knappepanel.removeAll();
+                knappepanel.revalidate();
+                knappepanel.repaint();
+                knappepanel.add(registrer);
+                knappepanel.add(avbryt);
             }
             catch (IOException io){
+
+            }
+            catch(NullPointerException ne){
 
             }
         }
@@ -526,7 +512,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             Dimension skjerm = kit.getScreenSize();
             int bredde = skjerm.width;
             int høyde = skjerm.height;
-                
+
             parent.setSize(bredde/2, høyde-100);
             parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
             }
@@ -542,7 +528,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             Dimension skjerm = kit.getScreenSize();
             int bredde = skjerm.width;
             int høyde = skjerm.height;
-                
+
             parent.setSize(bredde/2, høyde-100);
             parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
             }
@@ -552,15 +538,15 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         }
         else if(e.getSource()==avbryt) {
             parent.visPanel(MainFrame.MAIN_BOARD);
-            
+
             Toolkit kit = Toolkit.getDefaultToolkit();
             Dimension skjerm = kit.getScreenSize();
             int bredde = skjerm.width;
             int høyde = skjerm.height;
-                
+
             parent.setSize(bredde/2, høyde-100);
             parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
 
     }*/
-}
+    }
 }
