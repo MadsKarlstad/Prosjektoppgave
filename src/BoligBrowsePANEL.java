@@ -320,10 +320,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
     public void visEneboliger(Soker soker) throws IOException {
 
-
-
-        soker.oppdaterØnskedeBoliger();
         eneboligliste = soker.getEneboligliste();
+        System.out.println(eneboligliste);
 
         bolignummer.setText(eneboligliste.get(index).getBolignr());
         eier.setText(eneboligliste.get(index).getEiersNavn());
@@ -690,6 +688,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             try
             {
                 index = 0;
+                soker.oppdaterØnskedeBoliger();
                 visEneboliger(soker);
 
             }
@@ -704,6 +703,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             try
             {
                 index = 0;
+                soker.oppdaterØnskedeBoliger();
                 visLeilighet(soker);
 
             }
