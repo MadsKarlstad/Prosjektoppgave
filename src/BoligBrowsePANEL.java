@@ -237,7 +237,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         søkerpersnr.setEditable(false);
 
         bolignummeLabel = new JLabel("Bolignummer");
-        eierLabel = new JLabel("Biligeier");
+        eierLabel = new JLabel("Boligeier");
         prisLabel = new JLabel("Pris pr mnd");
         arealLabel = new JLabel("Areal");
         søkerLabel = new JLabel("Søkers navn");
@@ -579,6 +579,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         if(sregister.finnes(fnr)){
 
             visStartPANELsøker();
+            Soker soker = sregister.get(fnr);
+            soker.oppdaterØnskedeBoliger();
         }
 
         else if(pregister.finnes(fnr)){
@@ -616,7 +618,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
                 kontraktregister.put(kontrakt.getKontraktnr(), kontrakt);
                 enebolig.setUtleid(true);
-                eier.removeEnebolig(enebolig);
+
 
             }
             else if(kontraktregister.finnes(kontraktnr)) {
@@ -631,7 +633,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             Kontrakt kontrakt = new Kontrakt(kontraktnr,leilighet,eier,soker,pris,fra,til);
             kontraktregister.put(kontrakt.getKontraktnr(), kontrakt);
             leilighet.setUtleid(true);
-            eier.removeLeilighet(leilighet);
         }
     }
 
