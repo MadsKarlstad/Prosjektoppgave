@@ -617,6 +617,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 kontraktregister.put(kontrakt.getKontraktnr(), kontrakt);
                 enebolig.setUtleid(true);
                 parent.skrivTilFil(kontrakt);
+                parent.skrivTilFil(enebolig);
             }
             else if(kontraktregister.finnes(kontraktnr)) {
                 JOptionPane.showMessageDialog(null,"Kontrakt med kontraktnummer: " + kontraktnr +" finnes allerede");
@@ -631,6 +632,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             kontraktregister.put(kontrakt.getKontraktnr(),kontrakt);
             leilighet.setUtleid(true);
             parent.skrivTilFil(kontrakt);
+            parent.skrivTilFil(leilighet);
         }
     }
 
@@ -664,6 +666,9 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 eier.addEnebolig(enebolig);
                 soker.addØnskedBolig(enebolig);
 
+                parent.skrivTilFil(eier);
+                parent.skrivTilFil(soker);
+                parent.skrivTilFil(enebolig);
                 visMelding("Kunde har vist interesse\n venligst kontakt utleier");
             }
         }
@@ -680,7 +685,9 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 eier.addLeilighet(leilighet);
                 soker.addØnskedBolig(leilighet);
 
-
+                parent.skrivTilFil(eier);
+                parent.skrivTilFil(soker);
+                parent.skrivTilFil(leilighet);
                 visMelding("Kunde har vist interesse\n venligst kontakt utleier");
             }
         }
@@ -714,11 +721,15 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         }
 
         else if (e.getSource() == leilighetUtleier){
-            try{Utleier eier = pregister.get(fødselsnummer.getText());
+            try{
+                Utleier eier = pregister.get(fødselsnummer.getText());
                 Leilighet leilighet = eier.getØnskedeLeiligheter().getFirst();
+                parent.lesFraFil(eier);
+                parent.lesFraFil(leilighet);
                 index = 0;
                 visUtleierpanel();
-                visLeilighetUtleier(leilighet);}
+                visLeilighetUtleier(leilighet);
+            }
 
             catch (NoSuchElementException ne){
 
@@ -728,11 +739,15 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         else if (e.getSource() == eneboligUtleier){
 
-            try{Utleier eier = pregister.get(fødselsnummer.getText());
+            try{
+                Utleier eier = pregister.get(fødselsnummer.getText());
                 Enebolig enebolig = eier.getØnskedeEneboliger().getFirst();
+                parent.lesFraFil(eier);
+                parent.lesFraFil(enebolig);
                 index = 0;
                 visUtleierpanel();
-                visEneboligUtleier(enebolig);}
+                visEneboligUtleier(enebolig);
+            }
             catch(NoSuchElementException ne){
 
                 visMelding("Ingen ønsker registrert, venligst gå tilbake");

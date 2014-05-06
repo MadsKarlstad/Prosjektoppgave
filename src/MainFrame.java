@@ -203,6 +203,24 @@ public class MainFrame extends JFrame implements ActionListener {
         }
     }
 
+    public void lesFraFil(Object object){
+        if(object instanceof Utleier){
+            readList(UTLEIER);
+        }
+        if(object instanceof Soker){
+            readList(SOKER);
+        }
+        if(object instanceof Enebolig){
+            readList(ENEBOLIG);
+        }
+        if(object instanceof Leilighet){
+            readList(LEILIGHET);
+        }
+        if(object instanceof Kontrakt){
+            readList(KONTRAKT);
+        }
+    }
+
     private void readList(int n){
         if(n==UTLEIER){
             try(ObjectInputStream innfil = new ObjectInputStream(new FileInputStream("src/utleierliste.data"))){
