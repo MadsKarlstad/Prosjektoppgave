@@ -5,7 +5,7 @@
 import java.io.Serializable;
 import java.util.Date;
 
-public class Kontrakt implements Serializable {
+public class Kontrakt implements Serializable{
     /*utleieboligen
 utleier
 leietager

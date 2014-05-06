@@ -292,7 +292,6 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
                 String persnr = utleier.getFødselsnummer();
                 modell.delRow(rad);
                 register.fjern(persnr);
-                parent.skrivTilFil(utleier);
             }
         }
         if(svar==JOptionPane.NO_OPTION){
@@ -306,7 +305,8 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
 
     public void visInfo(int rad){
         Utleier utleier = modell.getValueAt(rad);
-        JOptionPane.showMessageDialog(null,utleier.getEideBoliger());
+        JOptionPane.showMessageDialog(null, "Ønskede boliger: "+utleier.getØnskedeEneboliger() + "\n" + utleier.getØnskedeLeiligheter()
+        +"\nEide boliger: " + utleier.getEideBoliger());
     }
 
     @Override

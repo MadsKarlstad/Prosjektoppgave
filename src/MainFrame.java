@@ -290,13 +290,13 @@ public class MainFrame extends JFrame implements ActionListener {
 
     }
 
-    private void writeList(int n){
+    public void writeList(int n){
         if(n==UTLEIER){
             try(ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("src/utleierliste.data"))){
                 utfil.writeObject(register);
             }
             catch(IOException ioe){
-                visMelding("Feil ved lagring til fil");
+                visMelding("Feil ved lagring til fil(utleier)");
             }
         }
         if(n==SOKER){
@@ -304,7 +304,7 @@ public class MainFrame extends JFrame implements ActionListener {
                 utfil.writeObject(sregister);
             }
             catch(IOException ioe){
-                visMelding("Feil ved lagring til fil");
+                visMelding("Feil ved lagring til fil(søker)");
             }
         }
         if(n==ENEBOLIG){
@@ -312,7 +312,7 @@ public class MainFrame extends JFrame implements ActionListener {
                 utfil.writeObject(bregister);
             }
             catch(IOException ioe){
-                visMelding("Feil ved lagring til fil");
+                visMelding("Feil ved lagring til fil(enebolig)");
             }
         }
         if(n==LEILIGHET){
@@ -320,7 +320,7 @@ public class MainFrame extends JFrame implements ActionListener {
                 utfil.writeObject(legister);
             }
             catch(IOException ioe){
-                visMelding("Feil ved lagring til fil");
+                visMelding("Feil ved lagring til fil(leilighet)");
             }
         }
         if(n==KONTRAKT){
@@ -328,7 +328,7 @@ public class MainFrame extends JFrame implements ActionListener {
                 utfil.writeObject(kregister);
             }
             catch(IOException ioe){
-                visMelding("Feil ved lagring til fil");
+                visMelding("Feil ved lagring til fil(kontrakt)");
             }
         }
     }

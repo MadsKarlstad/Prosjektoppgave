@@ -338,7 +338,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         bildenavn = eneboligliste.get(index).getBildesti();
 
-        bildeikon = new ImageIcon(getClass().getResource("Bilder/boligbilder/"+bildenavn+".jpg"));
+        bildeikon = new ImageIcon(getClass().getResource(""));
         bildeikon.getImage().flush();
         bildeLabel.setIcon( bildeikon );
 
@@ -380,7 +380,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         bildenavn = leilighetliste.get(index).getBildesti();
 
-        bildeikon = new ImageIcon(getClass().getResource(bildenavn));
+        bildeikon = new ImageIcon(getClass().getResource(""));
         bildeikon.getImage().flush();
         bildeLabel.setIcon(bildeikon);
 
@@ -616,9 +616,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
                 kontraktregister.put(kontrakt.getKontraktnr(), kontrakt);
                 enebolig.setUtleid(true);
-                parent.skrivTilFil(kontrakt);
-                parent.skrivTilFil(enebolig);
-                parent.lesFraFil(enebolig);
+                eier.removeEnebolig(enebolig);
+
             }
             else if(kontraktregister.finnes(kontraktnr)) {
                 JOptionPane.showMessageDialog(null,"Kontrakt med kontraktnummer: " + kontraktnr +" finnes allerede");
@@ -630,11 +629,9 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
 
             Kontrakt kontrakt = new Kontrakt(kontraktnr,leilighet,eier,soker,pris,fra,til);
-            kontraktregister.put(kontrakt.getKontraktnr(),kontrakt);
+            kontraktregister.put(kontrakt.getKontraktnr(), kontrakt);
             leilighet.setUtleid(true);
-            parent.skrivTilFil(kontrakt);
-            parent.skrivTilFil(leilighet);
-            parent.lesFraFil(leilighet);
+            eier.removeLeilighet(leilighet);
         }
     }
 
@@ -661,16 +658,10 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 Enebolig enebolig = bregister.get(bolignummer.getText());
                 Soker soker = sregister.getSoker(fødselsnummer.getText());
                 Utleier eier = enebolig.getEier();
-
-
                 eneboligliste.get(index).setØnsket(true);
                 eneboligliste.get(index).addSoker(soker);
                 eier.addEnebolig(enebolig);
                 soker.addØnskedBolig(enebolig);
-
-                parent.skrivTilFil(eier);
-                parent.skrivTilFil(soker);
-                parent.skrivTilFil(enebolig);
                 visMelding("Kunde har vist interesse\n venligst kontakt utleier");
             }
         }
@@ -686,10 +677,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 leilighetliste.get(index).addSoker(soker);
                 eier.addLeilighet(leilighet);
                 soker.addØnskedBolig(leilighet);
-
-                parent.skrivTilFil(eier);
-                parent.skrivTilFil(soker);
-                parent.skrivTilFil(leilighet);
                 visMelding("Kunde har vist interesse\n venligst kontakt utleier");
             }
         }
@@ -726,8 +713,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             try{
                 Utleier eier = pregister.get(fødselsnummer.getText());
                 Leilighet leilighet = eier.getØnskedeLeiligheter().getFirst();
-                parent.lesFraFil(eier);
-                parent.lesFraFil(leilighet);
                 index = 0;
                 visUtleierpanel();
                 visLeilighetUtleier(leilighet);
@@ -744,8 +729,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             try{
                 Utleier eier = pregister.get(fødselsnummer.getText());
                 Enebolig enebolig = eier.getØnskedeEneboliger().getFirst();
-                parent.lesFraFil(eier);
-                parent.lesFraFil(enebolig);
                 index = 0;
                 visUtleierpanel();
                 visEneboligUtleier(enebolig);

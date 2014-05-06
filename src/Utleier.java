@@ -43,6 +43,18 @@ public class Utleier extends Person {
         leilighetliste.add(leilighet);
     }*/
 
+    public void addLeilighet(Leilighet leilighet){
+        ønskedeleilighetListe.add(leilighet);
+    }
+
+    public void addEnebolig(Enebolig enebolig){
+        ønskedeeneboligliste.add(enebolig);
+    }
+
+    public void removeLeilighet(Leilighet leilighet){ ønskedeleilighetListe.remove(leilighet);}
+
+    public void removeEnebolig(Enebolig enebolig){ ønskedeeneboligliste.remove(enebolig);}
+
     public LinkedList<Enebolig> getØnskedeEneboliger(){
 
         return ønskedeeneboligliste;
@@ -53,17 +65,12 @@ public class Utleier extends Person {
         return ønskedeleilighetListe;
     }
 
-    public void addLeilighet(Leilighet leilighet){
-        ønskedeleilighetListe.add(leilighet);
-    }
-
-    public void addEnebolig(Enebolig enebolig){
-        ønskedeeneboligliste.add(enebolig);
-    }
 
     public void addBolig(Bolig bolig){
         eideBoliger.add(bolig);
     }
+
+    public void removeBolig(Bolig bolig){eideBoliger.remove(bolig);}
 
     public LinkedList<Bolig> getEideBoliger(){
         return eideBoliger;

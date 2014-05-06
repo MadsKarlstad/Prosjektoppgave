@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Personregister extends TreeMap<String, Utleier> implements Register,Serializable{
+public class Personregister extends TreeMap<String, Utleier> implements Register{
     @Override
     public boolean leggTil(Object object) {
         if(object instanceof Utleier){

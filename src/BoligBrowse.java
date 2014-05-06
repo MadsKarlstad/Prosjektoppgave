@@ -19,7 +19,7 @@ public class BoligBrowse {
         Leilighetregister legister = new Leilighetregister();
         Kontraktregister kregister = new Kontraktregister();
 
-        MainFrame frame;
+        final MainFrame frame;
         frame = new MainFrame(register,bregister,sregister,legister,kregister);
 
 
@@ -85,9 +85,9 @@ public class BoligBrowse {
 
             Utleier utleier = new Utleier(String.valueOf(i+1), fornavn, etternavn, adresse, mail, String.valueOf(i+100), firm);
             register.leggTil(utleier);
-        }*/
+        }
 
-        /*for(int i=1000;i<2000; i++){
+        for(int i=1000;i<2000; i++){
             String fornavn = fornavns[r.nextInt(fornavns.length)];
             String etternavn = etternavns[r.nextInt(etternavns.length)];
             String adresse = adresses[r.nextInt(adresses.length)];
@@ -111,9 +111,9 @@ public class BoligBrowse {
             Soker soker = new Soker(String.valueOf(i+1),fornavn,etternavn,adresse,mail,String.valueOf(i+100),antpersoner,sivstat,work,arbforhold,minareal,maksareal,minpris,mpris,
                     røykeinn,husdyrinn,balkonginn,terasseinn,TVinn,internetinn,strøminn,parkeringinn,kjellerinn,heisinn,bregister,legister);
             sregister.leggTil(soker);
-        }*/
+        }
 
-        /*for(int i=500;i<1000; i++){
+        for(int i=500;i<1000; i++){
             int bareal = boareal[r.nextInt(boareal.length)];
             String adresse = adresses[r.nextInt(adresses.length)];
             int rom = antrom[r.nextInt(antrom.length)];
@@ -142,9 +142,9 @@ public class BoligBrowse {
                     TV,internet,s,park,etg,kj,tmt,bad,erønsket,false);
             bregister.leggTil(enebolig);
             utleier.addBolig(enebolig);
-        }*/
+        }
 
-        /*for(int i=0;i<500; i++){
+        for(int i=0;i<500; i++){
             int bareal = boareal[r.nextInt(boareal.length)];
             String adresse = adresses[r.nextInt(adresses.length)];
             int rom = antrom[r.nextInt(antrom.length)];
@@ -172,9 +172,9 @@ public class BoligBrowse {
                     TV,internet,s,park,antboder,etasje,elevator,false,false);
             legister.leggTil(leilighet);
             utleier.addBolig(leilighet);
-        }*/
+        }
 
-        /*for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 10; i++){
             String eierpnr = String.valueOf(i+1);
             String sokerpnr = String.valueOf(i+1001);
             String bolignr = String.valueOf(i+1);
@@ -197,6 +197,12 @@ public class BoligBrowse {
             kregister.leggTil(kontrakt);
 
         }*/
+        final int UTLEIER = 0;
+        final int SOKER = 1;
+        final int ENEBOLIG = 2;
+        final int LEILIGHET = 3;
+        final int KONTRAKT = 4;
+
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension skjerm = kit.getScreenSize();
         int bredde = skjerm.width;
@@ -214,6 +220,11 @@ public class BoligBrowse {
                 new WindowAdapter() {
                     @Override
                     public void windowClosing(WindowEvent e) {
+                        frame.writeList(UTLEIER);
+                        frame.writeList(SOKER);
+                        frame.writeList(ENEBOLIG);
+                        frame.writeList(LEILIGHET);
+                        frame.writeList(KONTRAKT);
                         System.exit(0);
                     }
                 }

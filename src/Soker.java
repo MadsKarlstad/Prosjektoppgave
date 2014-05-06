@@ -73,7 +73,6 @@ public class Soker extends Person{
 
         df = new DecimalFormat("#.##");
 
-
     }
 
     public String getAntallPersoner() {
@@ -250,6 +249,7 @@ public class Soker extends Person{
                 eneboligliste.add((Enebolig) entry.getValue());
 
                 entry.getValue().setProsent(prosent);
+
             }
         }
         return eneboligliste;

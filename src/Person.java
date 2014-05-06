@@ -5,7 +5,7 @@
 import java.io.Serializable;
 import java.util.TreeMap;
 
-public abstract class Person implements Menneske, Serializable {
+public abstract class Person implements Menneske {
     private final String FØDSELSNUMMER;
     private String fornavn;
     private String etternavn;
