@@ -3,8 +3,10 @@
  */
 
 import com.sun.codemodel.internal.JOp;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -441,11 +443,25 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
     public void lastOppBilde() throws IOException{
 
+        JFileChooser filvelger = new JFileChooser();
+        filvelger.setCurrentDirectory( new File( "." ) );
+        filvelger.setAcceptAllFileFilterUsed(false);
+        filvelger.addChoosableFileFilter(new FileFilter() {
+
+            public String getDescription() {
+                return "JPEG";
+            }
+
+            public boolean accept(File f) {
+                if (f.isDirectory()) {
+                    return true;
+                } else {
+                    return f.getName().toLowerCase().endsWith(".jpg");
+                }
+            }
+        });
 
         int folderestøresle = new File("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/").listFiles().length;
-        System.out.println(folderestøresle);
-
-        JFileChooser filvelger = new JFileChooser();
 
         filvelger.setCurrentDirectory( new File( "." ) );
 
@@ -507,66 +523,8 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
             }
             catch(NullPointerException ne){
-
+                System.out.println("feil i filsti");
             }
         }
-        /*
-
-                if(isTom){
-            if(e.getSource() == registrer){
-                JOptionPane.showMessageDialog(null,"Venligst velg boligtype");
-            }
-            else if(e.getSource() == avbryt){
-                parent.visPanel(MainFrame.MAIN_BOARD);
-            }
-        }
-
-        else if(isEnebolig){
-            if(e.getSource()==registrer){
-                registrerEnebolig();
-                parent.visPanel(MainFrame.MAIN_BOARD);
-            }
-            else if(e.getSource()==avbryt){
-                parent.visPanel(MainFrame.MAIN_BOARD);
-                Toolkit kit = Toolkit.getDefaultToolkit();
-            Dimension skjerm = kit.getScreenSize();
-            int bredde = skjerm.width;
-            int høyde = skjerm.height;
-
-            parent.setSize(bredde/2, høyde-100);
-            parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
-            }
-        }
-        else if(isLeilighet){
-            if(e.getSource()==registrer){
-                registrerLeilighet();
-                parent.visPanel(MainFrame.MAIN_BOARD);
-            }
-            else if(e.getSource()==avbryt){
-                parent.visPanel(MainFrame.MAIN_BOARD);
-                Toolkit kit = Toolkit.getDefaultToolkit();
-            Dimension skjerm = kit.getScreenSize();
-            int bredde = skjerm.width;
-            int høyde = skjerm.height;
-
-            parent.setSize(bredde/2, høyde-100);
-            parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
-            }
-        }
-        else if(e.getSource() == registrer){
-            JOptionPane.showMessageDialog(null,"Venligst velg boligtype");
-        }
-        else if(e.getSource()==avbryt) {
-            parent.visPanel(MainFrame.MAIN_BOARD);
-
-            Toolkit kit = Toolkit.getDefaultToolkit();
-            Dimension skjerm = kit.getScreenSize();
-            int bredde = skjerm.width;
-            int høyde = skjerm.height;
-
-            parent.setSize(bredde/2, høyde-100);
-            parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
-
-    }*/
     }
 }
