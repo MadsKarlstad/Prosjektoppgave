@@ -390,7 +390,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
         Enebolig enebolig = new Enebolig(String.valueOf(bildesti),adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
                 røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false);
-        bregister.put(bolignr,enebolig);
+        bregister.put(bolignr, enebolig);
         utleier.addBolig(enebolig);
 
         System.out.println("Registrert");
@@ -432,7 +432,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         Leilighet leilighet = new Leilighet(String.valueOf(bildesti),adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
                 røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antboder,etg,heis,false,false);
 
-        legister.put(bolignr,leilighet);
+        legister.put(bolignr, leilighet);
         utleier.addBolig(leilighet);
 
 
@@ -461,6 +461,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         });
 
         bildesti = new File("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/").listFiles().length;
+
 
         filvelger.setCurrentDirectory( new File( "." ) );
 
