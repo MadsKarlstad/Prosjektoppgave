@@ -20,7 +20,9 @@ import java.nio.channels.FileChannel;
 public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
 
-    int bildesti;
+    private int bildesti;
+    private boolean bildeOk;
+
 
     //felter som gjelder for både enebolig og leilighet
     private JTextField[] standardfelter;
@@ -197,6 +199,8 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         TextPrompt tp1 [] = new TextPrompt[eneboligfelt.length];
         TextPrompt tp2 [] = new TextPrompt[leilighetfelt.length];
 
+        bildeOk = false;
+
 
 
 
@@ -357,7 +361,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         add(midtpanel, BorderLayout.CENTER);
 
     }
-    public void registrerEnebolig(){
+    public void registrerEnebolig() throws IOException{
 
         int boareal = Integer.parseInt(standardfelter[BOAREAL].getText());
         int antrom = Integer.parseInt(standardfelter[ANTALLROM].getText());
@@ -386,30 +390,20 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         boolean parkering = eneboligbokser[PARKERING].isSelected();
         boolean kjeller = eneboligbokser[KJELLER].isSelected();
 
-        try{
-
-            if(!lastOppBilde()){
-
-                bildesti = 0;
-
+        if(!bildeOk){
+            bildesti = 0;
         }
 
-
-
-        Enebolig enebolig = new Enebolig("/Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
+        Enebolig enebolig = new Enebolig("/Bilder/bildesti/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
                 røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false);
 
         bregister.put(bolignr, enebolig);
 
         utleier.addBolig(enebolig);
 
-        System.out.println("Registrert");}
-
-        catch ( IOException io){
-            System.out.println("sum thing wong");
-        }
+        System.out.println("Registrert");
     }
-    public void registrerLeilighet(){
+    public void registrerLeilighet() throws IOException {
 
         int boareal = Integer.parseInt(standardfelter[BOAREAL].getText());
         int antrom = Integer.parseInt(standardfelter[ANTALLROM].getText());
@@ -436,26 +430,25 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         boolean strøm = eneboligbokser[STRØM].isSelected();
         boolean parkering = eneboligbokser[PARKERING].isSelected();
         boolean heis = leilighetbokser[HEIS].isSelected();
-try{
-        if(!lastOppBilde()){
+
+
+        if(!bildeOk){
             bildesti = 0;
         }
 
-        Leilighet leilighet = new Leilighet("/Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
+
+        Leilighet leilighet = new Leilighet("/Bilder/bildesti/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
                 røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antboder,etg,heis,false,false);
 
         legister.put(bolignr, leilighet);
-        utleier.addBolig(leilighet);}
-catch (IOException io){
-    System.out.println("some thung wong");
-}
+        utleier.addBolig(leilighet);
 
 
 
 
     }
 
-    public boolean lastOppBilde() throws IOException{
+    public void lastOppBilde() throws IOException{
 
         JFileChooser filvelger = new JFileChooser();
         filvelger.setCurrentDirectory( new File( "." ) );
@@ -475,7 +468,7 @@ catch (IOException io){
             }
         });
 
-        bildesti = new File("/Users/madsmkarlstad/Documents/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/").listFiles().length;
+        bildesti = new File("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/").listFiles().length;
 
 
         filvelger.setCurrentDirectory(new File("."));
@@ -488,7 +481,7 @@ catch (IOException io){
 
             FileInputStream source = new FileInputStream(sti);
             FileOutputStream destination =
-                    new FileOutputStream("/Users/madsmkarlstad/Documents/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/" + String.valueOf(bildesti-1) + ".jpg");
+                    new FileOutputStream("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/" + String.valueOf(bildesti-1) + ".jpg");
 
             FileChannel sourceFileChannel = source.getChannel();
             FileChannel destinationFileChannel = destination.getChannel();
@@ -497,7 +490,7 @@ catch (IOException io){
             sourceFileChannel.transferTo(0, size, destinationFileChannel);
         }
 
-        return true;
+        bildeOk = true;
     }
 
 
@@ -509,12 +502,18 @@ catch (IOException io){
                 JOptionPane.showMessageDialog(null,"Venligst velg boligtype");
                 return;
             }else if(boligtype.getSelectedIndex() == ENEBOLIG){
-                registrerEnebolig();
+                try{
+                    registrerEnebolig();
+                }catch (Exception ex){
+
+                }
                 parent.visPanel(MainFrame.MAIN_BOARD);
             }else if(boligtype.getSelectedIndex() == LEILIGHET){
-
+                try{
                     registrerLeilighet();
+                }catch (Exception ex){
 
+                }
 
                 parent.visPanel(MainFrame.MAIN_BOARD);
             }
