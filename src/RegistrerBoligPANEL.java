@@ -395,7 +395,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
         System.out.println("Registrert");
     }
-    public void registrerLeilighet() throws IOException {
+    public void registrerLeilighet(){
 
         int boareal = Integer.parseInt(standardfelter[BOAREAL].getText());
         int antrom = Integer.parseInt(standardfelter[ANTALLROM].getText());
@@ -491,13 +491,19 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
                 JOptionPane.showMessageDialog(null,"Venligst velg boligtype");
                 return;
             }else if(boligtype.getSelectedIndex() == ENEBOLIG){
-                registrerEnebolig();
-                parent.visPanel(MainFrame.MAIN_BOARD);
+                try{registrerEnebolig();
+                parent.visPanel(MainFrame.MAIN_BOARD);}
+                catch (NullPointerException np){
+                    System.out.println("feil input i feltene");
+                }
+                catch (NumberFormatException ne){
+                    System.out.println("Objekt kan ikke oprettes");
+                }
             }else if(boligtype.getSelectedIndex() == LEILIGHET){
                 try{
                     registrerLeilighet();
-                }catch (Exception ex){
-
+                }catch (NullPointerException ne){
+                    System.out.println("feil i et av feltene");
                 }
 
                 parent.visPanel(MainFrame.MAIN_BOARD);
