@@ -394,7 +394,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             bildesti = 0;
         }
 
-        Enebolig enebolig = new Enebolig("/Bilder/bildesti/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
+        Enebolig enebolig = new Enebolig("/Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
                 røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false);
 
         bregister.put(bolignr, enebolig);
@@ -437,7 +437,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         }
 
 
-        Leilighet leilighet = new Leilighet("/Bilder/bildesti/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
+        Leilighet leilighet = new Leilighet("/Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
                 røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antboder,etg,heis,false,false);
 
         legister.put(bolignr, leilighet);
