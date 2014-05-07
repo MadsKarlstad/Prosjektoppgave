@@ -164,39 +164,14 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
         setFirma(felt[FIRMA].getText());
     }
 
-    public void setFødselsnummer(String s){
+    public void setFødselsnummer(String s){fødselnummer = s;}
 
-        fødselnummer = s;
-
-    }
-
-    public void setFornavn(String s){
-
-        fornavn = s;
-
-    }
-    public void setETTERNAVN(String s){
-
-        etternavn = s;
-
-    }
-    public void setADRESSE(String s){
-
-        adresse = s;
-    }
-    public void setMAIL(String s){
-
-        mail = s;
-    }
-    public void setTELEFONUMMER(String s){
-
-        telefonnummer = s;
-    }
-    public void setFirma(String s){
-
-        firma = s;
-    }
-
+    public void setFornavn(String s){fornavn = s;}
+    public void setETTERNAVN(String s){etternavn = s;}
+    public void setADRESSE(String s){adresse = s;}
+    public void setMAIL(String s){mail = s;}
+    public void setTELEFONUMMER(String s){telefonnummer = s;}
+    public void setFirma(String s){firma = s;}
 
     public String getFødselnummer(){return fødselnummer;}
     public String getFornavn(){return fornavn;}
