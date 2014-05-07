@@ -813,7 +813,5 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
             visMelding("Kontrakt er generert, finnes i kontraktregisteret");
         }
-
-
     }
 }
