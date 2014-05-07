@@ -781,6 +781,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 søkepanel.repaint();
 
                 toggle(fødselsnummer.getText());
+                //TEST HELLO
 
             } else if (e.getSource() == neste) {
 
