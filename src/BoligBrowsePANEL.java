@@ -684,8 +684,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 Utleier eier = enebolig.getEier();
                 eneboligliste.get(index).setØnsket(true);
                 eneboligliste.get(index).addSoker(soker);
-                eier.addEnebolig(enebolig);
                 soker.addØnskedBolig(enebolig);
+                eier.addEnebolig(enebolig);
                 visMelding("Kunde har vist interesse\n venligst kontakt utleier");
             }
         }
@@ -699,8 +699,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
                 leilighetliste.get(index).setØnsket(true);
                 leilighetliste.get(index).addSoker(soker);
-                eier.addLeilighet(leilighet);
                 soker.addØnskedBolig(leilighet);
+                eier.addLeilighet(leilighet);
                 visMelding("Kunde har vist interesse\n venligst kontakt utleier");
             }
         }
