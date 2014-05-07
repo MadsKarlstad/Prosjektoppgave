@@ -81,4 +81,6 @@ public class Utleier extends Person {
         return boligregister;
     }
 
+
+
 }

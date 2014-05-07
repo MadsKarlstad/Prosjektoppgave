@@ -32,6 +32,8 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
     private JButton fjern;
     private JButton tilbake;
 
+    private JButton oppdater;
+
     private LinkedList<Bolig> eiersboliger;
     private LinkedList<Utleier> utleierliste;
     private LinkedList<Utleier> temp;//listen som omfatter søket vårt
@@ -41,6 +43,7 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
     private Boligregister bregister;
     private Leilighetregister legister;
     private MainFrame parent;
+    private RegistrerUtleierPANEL sibling;
 
     public UtleierOversiktPANEL(Personregister register,Boligregister bregister,Leilighetregister legister, MainFrame parent) {
 
@@ -58,6 +61,9 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
     }
 
     public void initialiser() {
+
+        setLayout(new BorderLayout());
+
         overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         søkpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         tabellpanel = new JPanel(new BorderLayout());
@@ -97,11 +103,15 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
         endre = new JButton("Endre");
         fjern = new JButton("Slett");
         tilbake = new JButton("Tilbake");
+        oppdater = new JButton("Oppdater");
 
         visInfo.addActionListener(this);
         endre.addActionListener(this);
         fjern.addActionListener(this);
         tilbake.addActionListener(this);
+        oppdater.addActionListener(this);
+
+        sibling = new RegistrerUtleierPANEL(register,parent);
 
 
 
@@ -299,9 +309,28 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
         }
     }
 
-    public void endreUtleier(){
-        JOptionPane.showMessageDialog(null,"Not yet supported");
-    }
+    public void endreUtleier(int rad){
+
+        int svar = JOptionPane.showOptionDialog(null,"Vil du endre denne utleier?","Bekreft endring",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
+
+        if(svar==JOptionPane.YES_OPTION){
+
+            Utleier utleier = modell.getValueAt(rad);
+
+            sibling.endreUtleier(utleier);
+
+            removeAll();
+            revalidate();
+            repaint();
+
+            add(sibling, BorderLayout.CENTER);
+            add(oppdater,BorderLayout.PAGE_END);
+
+
+             }
+        if(svar==JOptionPane.NO_OPTION){
+            JOptionPane.showMessageDialog(null,"endring avbrutt");
+        }}
 
     public void visInfo(int rad){
         Utleier utleier = modell.getValueAt(rad);
@@ -327,11 +356,34 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
             slettUtleier(rad);
         }
         else if(e.getSource() == endre){
-            endreUtleier();
+            int rad = tabell.getSelectedRow();
+            endreUtleier(rad);
         }
         else if(e.getSource() == visInfo){
             int rad = tabell.getSelectedRow();
             visInfo(rad);
+        }
+
+        else if(e.getSource() == oppdater){
+
+            Utleier utleier = register.get(sibling.getFødselnummer());
+
+
+            utleier.setFornavn(sibling.getFornavn());
+            System.out.println(sibling.getFornavn());
+            utleier.setEtternavn(sibling.getEtternavn());
+            utleier.setAdresse(sibling.getAdresse());
+            utleier.setMail(sibling.getMail());
+            utleier.setTelefonnummer(sibling.getTelefonnummer());
+
+            removeAll();
+            revalidate();
+            repaint();
+
+            initialiser();
+            lagGUI();
+
+
         }
     }
 

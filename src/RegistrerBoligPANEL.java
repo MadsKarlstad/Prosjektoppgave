@@ -471,7 +471,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         bildesti = new File("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/").listFiles().length-1;
 
 
-        filvelger.setCurrentDirectory(new File("."));
+        filvelger.setCurrentDirectory(new File(System.getProperty("user.home")));
 
         int resultat = filvelger.showOpenDialog( this );
 

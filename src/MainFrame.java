@@ -181,6 +181,8 @@ public class MainFrame extends JFrame implements ActionListener {
             case 3:  visUtleierBrowse.doClick();
                 break;
             case 4:  visLeietakerBrowse.doClick();
+
+            case 5: regUt.doClick();
                 break;
         }
 

@@ -3,11 +3,13 @@
  */
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RegistrerUtleierPANEL extends JPanel implements ActionListener {
+public class RegistrerUtleierPANEL extends JPanel implements ActionListener, DocumentListener{
     private JTextField[] felt;
     private final String[] feltnavn = {"Fødselsnummer", "Fornavn", "Etternavn", "Adresse", "Mail", "Telefonnummer", "Firma"};
 
@@ -18,6 +20,14 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener {
     private final int MAIL = 4;
     private final int TELEFONUMMER = 5;
     private final int FIRMA = 6;
+
+    private String fødselnummer;
+    private String fornavn;
+    private String etternavn;
+    private String adresse;
+    private String mail;
+    private String telefonnummer ;
+    private String firma;
 
     private JPanel feltpanel;
     private JPanel knapppanel;
@@ -37,9 +47,6 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener {
         this.parent = parent;
         initialiser();
         lagGUI();
-
-        add(feltpanel, BorderLayout.CENTER);
-        add(knapppanel, BorderLayout.SOUTH);
         
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension skjerm = kit.getScreenSize();
@@ -51,7 +58,6 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener {
 
 
     }
-
 
     public void initialiser() {
 
@@ -88,17 +94,21 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener {
         knapppanel.add(registrer);
         knapppanel.add(avbryt);
 
+        add(feltpanel, BorderLayout.CENTER);
+        add(knapppanel, BorderLayout.SOUTH);
+
 
     }
 
     public void registrer(){
         String fødselsnummer = felt[FØDSELSNUMMER].getText();
-        String fornavn = felt[FORNAVN].getText();
-        String etternavn = felt[ETTERNAVN].getText();
-        String adresse = felt[ADRESSE].getText();
-        String mail = felt[MAIL].getText();
-        String telefonnummer = felt[TELEFONUMMER].getText();
-        String firma = felt[FIRMA].getText();
+
+         fornavn = felt[FORNAVN].getText();
+         etternavn = felt[ETTERNAVN].getText();
+         adresse = felt[ADRESSE].getText();
+         mail = felt[MAIL].getText();
+         telefonnummer = felt[TELEFONUMMER].getText();
+        firma = felt[FIRMA].getText();
 
         Person utleier = new Utleier(fødselsnummer,fornavn,etternavn,adresse, mail, telefonnummer, firma);
 
@@ -114,6 +124,91 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener {
 
 
     }
+
+    public void endreUtleier(Utleier utleier){
+
+        feltpanel.removeAll();
+        feltpanel.revalidate();
+        feltpanel.repaint();
+
+        knapppanel.removeAll();
+
+        for (int i = 0; i < feltnavn.length; i++) {
+            felt[i] = new JTextField(10);
+            feltpanel.add(felt[i]);
+            felt[i].getDocument().addDocumentListener(this);
+
+        }
+        felt[FØDSELSNUMMER].setEditable(false);
+
+        felt[FØDSELSNUMMER].setText(utleier.getFødselsnummer());
+        felt[FORNAVN].setText(utleier.getFornavn());
+        felt[ETTERNAVN].setText(utleier.getEtternavn());
+        felt[ADRESSE].setText(utleier.getAdresse());
+        felt[MAIL].setText(utleier.getMail());
+        felt[TELEFONUMMER].setText(utleier.getTelefonnummer());
+        felt[FIRMA].setText(utleier.getFirma());
+
+        add(feltpanel);
+
+    }
+
+    public void oppdaterinfo(){
+
+        setFødselsnummer(felt[FØDSELSNUMMER].getText());
+        setFornavn(felt[FORNAVN].getText());
+        setETTERNAVN(felt[ETTERNAVN].getText());
+        setADRESSE(felt[ADRESSE].getText());
+        setMAIL(felt[MAIL].getText());
+        setTELEFONUMMER(felt[TELEFONUMMER].getText());
+        setFirma(felt[FIRMA].getText());
+    }
+
+    public void setFødselsnummer(String s){
+
+        fødselnummer = s;
+
+    }
+
+    public void setFornavn(String s){
+
+        fornavn = s;
+
+    }
+    public void setETTERNAVN(String s){
+
+        etternavn = s;
+
+    }
+    public void setADRESSE(String s){
+
+        adresse = s;
+    }
+    public void setMAIL(String s){
+
+        mail = s;
+    }
+    public void setTELEFONUMMER(String s){
+
+        telefonnummer = s;
+    }
+    public void setFirma(String s){
+
+        firma = s;
+    }
+
+
+    public String getFødselnummer(){return fødselnummer;}
+    public String getFornavn(){return fornavn;}
+    public String getEtternavn(){return etternavn;}
+    public String getAdresse(){return adresse;}
+    public String getMail(){return mail;}
+    public String getTelefonnummer(){return telefonnummer;}
+    public String getFirma(){return firma;}
+
+
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -144,4 +239,18 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener {
     }
 
 
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        oppdaterinfo();
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        oppdaterinfo();
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        oppdaterinfo();
+    }
 }
