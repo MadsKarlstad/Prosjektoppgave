@@ -244,7 +244,7 @@ public class Soker extends Person{
 
             prosent = ((sum / 9) * 100);
 
-            if (prosent > 50 || entry.getValue().erUtleid() == false) {
+            if (prosent > 50) {
                 //System.out.println("Prosentmatch: "+ df.format(prosent) +"% for bolignummer " + entry.getValue().getBolignr());
                 eneboligliste.add((Enebolig) entry.getValue());
 

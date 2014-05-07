@@ -320,7 +320,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
     public void visEneboliger(Soker soker) throws IOException {
 
-
+        soker.oppdaterØnskedeBoliger();
 
         eneboligliste = soker.getEneboligliste();
         System.out.println(eneboligliste);
@@ -679,29 +679,38 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         else if (e.getSource() == ønsketenebolig){
             if(bregister.finnes(bolignummer.getText())){
+
+
+
                 Enebolig enebolig = bregister.get(bolignummer.getText());
                 Soker soker = sregister.getSoker(fødselsnummer.getText());
                 Utleier eier = enebolig.getEier();
-                eneboligliste.get(index).setØnsket(true);
-                eneboligliste.get(index).addSoker(soker);
+
                 soker.addØnskedBolig(enebolig);
                 eier.addEnebolig(enebolig);
+
                 visMelding("Kunde har vist interesse\n venligst kontakt utleier");
+
+                enebolig.setØnsket(true);
+                enebolig.addSoker(soker);
             }
         }
 
         else if(e.getSource() == ønsketleilighet){
 
             if(legister.finnes(bolignummer.getText())){
+
                 Leilighet leilighet = legister.get(bolignummer.getText());
                 Soker soker = sregister.get(fødselsnummer.getText());
                 Utleier eier = leilighet.getEier();
 
-                leilighetliste.get(index).setØnsket(true);
-                leilighetliste.get(index).addSoker(soker);
+
                 soker.addØnskedBolig(leilighet);
                 eier.addLeilighet(leilighet);
                 visMelding("Kunde har vist interesse\n venligst kontakt utleier");
+
+                leilighet.setØnsket(true);
+                leilighet.addSoker(soker);
             }
         }
 
