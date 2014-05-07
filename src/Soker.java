@@ -303,10 +303,6 @@ public class Soker extends Person{
         }
     }
 
-    public void addEneboligMatch(Enebolig enebolig){
-        eneboligliste.add(enebolig);
-    }
-
     public Soker getSoker(){
         return this;
     }
@@ -332,8 +328,6 @@ public class Soker extends Person{
 
         eneboligliste.clear();
         leilighetliste.clear();
-
-        System.out.println(eneboligregister);
 
         matcherEnebolig();
         matcherLeilighet();

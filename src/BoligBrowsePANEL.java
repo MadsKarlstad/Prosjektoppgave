@@ -103,6 +103,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
     private LinkedList<Enebolig> eneboligliste;
     private LinkedList<Leilighet> leilighetliste;
+    private ListIterator<Enebolig> eneboligListIterator;
+    private ListIterator<Leilighet> leilighetListIterator;
 
     private DecimalFormat df;
 
@@ -202,6 +204,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         eneboligliste = new LinkedList<Enebolig>();
         leilighetliste = new LinkedList<Leilighet>();
+        eneboligListIterator = eneboligliste.listIterator();
+        leilighetListIterator = leilighetliste.listIterator();
 
         index = 0;
         frem = 1;
@@ -316,8 +320,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
     public void visEneboliger(Soker soker) throws IOException {
 
-        soker.oppdaterØnskedeBoliger();
         eneboligliste = soker.getEneboligliste();
+        System.out.println(eneboligliste);
 
         bolignummer.setText(eneboligliste.get(index).getBolignr());
         eier.setText(eneboligliste.get(index).getEiersNavn());
@@ -332,11 +336,9 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aLeilighetUtleier = false;
         aEneboligUtleier = false;
 
-        bildenavn = "/Bilder/boligbilder/"+eneboligliste.get(index).getBildesti()+".jpg";
-        System.out.println(bildenavn);
+        bildenavn = eneboligliste.get(index).getBildesti();
 
-
-        bildeikon = new ImageIcon(getClass().getResource(bildenavn));
+        bildeikon = new ImageIcon(getClass().getResource(""));
         bildeikon.getImage().flush();
         bildeLabel.setIcon( bildeikon );
 
@@ -616,6 +618,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
                 kontraktregister.put(kontrakt.getKontraktnr(), kontrakt);
                 enebolig.setUtleid(true);
+
 
             }
             else if(kontraktregister.finnes(kontraktnr)) {
