@@ -332,6 +332,26 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
             JOptionPane.showMessageDialog(null,"endring avbrutt");
         }}
 
+    public void oppdater(){
+
+        Utleier utleier = register.get(sibling.getFødselnummer());
+
+
+        utleier.setFornavn(sibling.getFornavn());
+        System.out.println(sibling.getFornavn());
+        utleier.setEtternavn(sibling.getEtternavn());
+        utleier.setAdresse(sibling.getAdresse());
+        utleier.setMail(sibling.getMail());
+        utleier.setTelefonnummer(sibling.getTelefonnummer());
+
+        removeAll();
+        revalidate();
+        repaint();
+
+        initialiser();
+        lagGUI();
+    }
+
     public void visInfo(int rad){
         Utleier utleier = modell.getValueAt(rad);
         JOptionPane.showMessageDialog(null, "Ønskede boliger: "+utleier.getØnskedeEneboliger() + "\n" + utleier.getØnskedeLeiligheter()
@@ -366,23 +386,7 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
 
         else if(e.getSource() == oppdater){
 
-            Utleier utleier = register.get(sibling.getFødselnummer());
-
-
-            utleier.setFornavn(sibling.getFornavn());
-            System.out.println(sibling.getFornavn());
-            utleier.setEtternavn(sibling.getEtternavn());
-            utleier.setAdresse(sibling.getAdresse());
-            utleier.setMail(sibling.getMail());
-            utleier.setTelefonnummer(sibling.getTelefonnummer());
-
-            removeAll();
-            revalidate();
-            repaint();
-
-            initialiser();
-            lagGUI();
-
+            oppdater();
 
         }
     }
