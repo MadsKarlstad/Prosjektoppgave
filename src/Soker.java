@@ -303,6 +303,10 @@ public class Soker extends Person{
         }
     }
 
+    public void addEneboligMatch(Enebolig enebolig){
+        eneboligliste.add(enebolig);
+    }
+
     public Soker getSoker(){
         return this;
     }

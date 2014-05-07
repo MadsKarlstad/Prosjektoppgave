@@ -619,7 +619,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 kontraktregister.put(kontrakt.getKontraktnr(), kontrakt);
                 enebolig.setUtleid(true);
 
-
             }
             else if(kontraktregister.finnes(kontraktnr)) {
                 JOptionPane.showMessageDialog(null,"Kontrakt med kontraktnummer: " + kontraktnr +" finnes allerede");
