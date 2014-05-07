@@ -333,6 +333,8 @@ public class Soker extends Person{
         eneboligliste.clear();
         leilighetliste.clear();
 
+        System.out.println(eneboligregister);
+
         matcherEnebolig();
         matcherLeilighet();
 

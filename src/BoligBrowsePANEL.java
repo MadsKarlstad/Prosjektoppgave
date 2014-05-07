@@ -336,6 +336,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aEneboligUtleier = false;
 
         bildenavn = "/Bilder/boligbilder/"+eneboligliste.get(index).getBildesti()+".jpg";
+        System.out.println(bildenavn);
 
 
         bildeikon = new ImageIcon(getClass().getResource(bildenavn));
