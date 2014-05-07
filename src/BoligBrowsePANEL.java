@@ -103,8 +103,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
     private LinkedList<Enebolig> eneboligliste;
     private LinkedList<Leilighet> leilighetliste;
-    private ListIterator<Enebolig> eneboligListIterator;
-    private ListIterator<Leilighet> leilighetListIterator;
 
     private DecimalFormat df;
 
@@ -204,8 +202,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         eneboligliste = new LinkedList<Enebolig>();
         leilighetliste = new LinkedList<Leilighet>();
-        eneboligListIterator = eneboligliste.listIterator();
-        leilighetListIterator = leilighetliste.listIterator();
 
         index = 0;
         frem = 1;
@@ -320,6 +316,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
     public void visEneboliger(Soker soker) throws IOException {
 
+        soker.oppdaterØnskedeBoliger();
         eneboligliste = soker.getEneboligliste();
 
         bolignummer.setText(eneboligliste.get(index).getBolignr());
