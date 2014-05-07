@@ -386,17 +386,30 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         boolean parkering = eneboligbokser[PARKERING].isSelected();
         boolean kjeller = eneboligbokser[KJELLER].isSelected();
 
+        try{
 
-        Enebolig enebolig = new Enebolig("/Bilder/bildesti/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
+            if(!lastOppBilde()){
+
+                bildesti = 0;
+
+        }
+
+
+
+        Enebolig enebolig = new Enebolig("/Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
                 røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false);
 
         bregister.put(bolignr, enebolig);
 
         utleier.addBolig(enebolig);
 
-        System.out.println("Registrert");
+        System.out.println("Registrert");}
+
+        catch ( IOException io){
+            System.out.println("sum thing wong");
+        }
     }
-    public void registrerLeilighet() throws IOException {
+    public void registrerLeilighet(){
 
         int boareal = Integer.parseInt(standardfelter[BOAREAL].getText());
         int antrom = Integer.parseInt(standardfelter[ANTALLROM].getText());
@@ -423,21 +436,26 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         boolean strøm = eneboligbokser[STRØM].isSelected();
         boolean parkering = eneboligbokser[PARKERING].isSelected();
         boolean heis = leilighetbokser[HEIS].isSelected();
+try{
+        if(!lastOppBilde()){
+            bildesti = 0;
+        }
 
-
-
-        Leilighet leilighet = new Leilighet("/Bilder/bildesti/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
+        Leilighet leilighet = new Leilighet("/Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
                 røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antboder,etg,heis,false,false);
 
         legister.put(bolignr, leilighet);
-        utleier.addBolig(leilighet);
+        utleier.addBolig(leilighet);}
+catch (IOException io){
+    System.out.println("some thung wong");
+}
 
 
 
 
     }
 
-    public void lastOppBilde() throws IOException{
+    public boolean lastOppBilde() throws IOException{
 
         JFileChooser filvelger = new JFileChooser();
         filvelger.setCurrentDirectory( new File( "." ) );
@@ -457,7 +475,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             }
         });
 
-        bildesti = new File("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/").listFiles().length;
+        bildesti = new File("/Users/madsmkarlstad/Documents/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/").listFiles().length;
 
 
         filvelger.setCurrentDirectory(new File("."));
@@ -470,7 +488,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
             FileInputStream source = new FileInputStream(sti);
             FileOutputStream destination =
-                    new FileOutputStream("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/" + String.valueOf(bildesti-1) + ".jpg");
+                    new FileOutputStream("/Users/madsmkarlstad/Documents/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/" + String.valueOf(bildesti-1) + ".jpg");
 
             FileChannel sourceFileChannel = source.getChannel();
             FileChannel destinationFileChannel = destination.getChannel();
@@ -478,6 +496,8 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             long size = sourceFileChannel.size();
             sourceFileChannel.transferTo(0, size, destinationFileChannel);
         }
+
+        return true;
     }
 
 
@@ -492,11 +512,9 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
                 registrerEnebolig();
                 parent.visPanel(MainFrame.MAIN_BOARD);
             }else if(boligtype.getSelectedIndex() == LEILIGHET){
-                try{
-                    registrerLeilighet();
-                }catch (Exception ex){
 
-                }
+                    registrerLeilighet();
+
 
                 parent.visPanel(MainFrame.MAIN_BOARD);
             }
