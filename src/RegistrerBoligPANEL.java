@@ -460,7 +460,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             }
         });
 
-        bildesti = new File("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/").listFiles().length;
+        bildesti = new File("/Users/madsmkarlstad/Documents/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/").listFiles().length;
 
         filvelger.setCurrentDirectory( new File( "." ) );
 
@@ -472,7 +472,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
             FileInputStream source = new FileInputStream(sti);
             FileOutputStream destination =
-                    new FileOutputStream("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg");
+                    new FileOutputStream("/Users/madsmkarlstad/Documents/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/" + String.valueOf(bildesti) + ".jpg");
 
             FileChannel sourceFileChannel = source.getChannel();
             FileChannel destinationFileChannel = destination.getChannel();

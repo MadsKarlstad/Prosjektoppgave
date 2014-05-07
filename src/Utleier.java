@@ -3,6 +3,7 @@
  */
 
 import java.util.LinkedList;
+import java.util.Map;
 
 public class Utleier extends Person {
     private String firma;

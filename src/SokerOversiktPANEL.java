@@ -244,6 +244,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
     }
 
     public void visInfo(Soker soker){
+        System.out.println(soker.getEneboligliste());
         if(soker.getØnskedeBolgier().size()>0) {
             JOptionPane.showMessageDialog(null, soker.getØnskedeBolgier());
         }
