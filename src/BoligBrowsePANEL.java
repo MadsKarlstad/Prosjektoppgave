@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
-import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
@@ -105,7 +104,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
     private LinkedList<Enebolig> eneboligliste;
     private LinkedList<Leilighet> leilighetliste;
-    private LinkedList<Soker> sokerliste;
 
     private DecimalFormat df;
 
@@ -205,7 +203,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         eneboligliste = new LinkedList<Enebolig>();
         leilighetliste = new LinkedList<Leilighet>();
-        sokerliste = new LinkedList<Soker>();
 
         index = 0;
         frem = 1;
@@ -339,8 +336,9 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aEneboligUtleier = false;
 
         bildenavn = eneboligliste.get(index).getBildesti();
+        System.out.println(bildenavn);
 
-        bildeikon = new ImageIcon(getClass().getResource(""));
+        bildeikon = new ImageIcon(getClass().getResource(bildenavn));
         bildeikon.getImage().flush();
         bildeLabel.setIcon( bildeikon );
 
@@ -378,11 +376,10 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aLeilighetUtleier = false;
         aEneboligUtleier = false;
 
-        System.out.println(leilighetliste.get(index).getBildesti());
-
         bildenavn = leilighetliste.get(index).getBildesti();
+        System.out.println(bildenavn);
 
-        bildeikon = new ImageIcon(getClass().getResource(""));
+        bildeikon = new ImageIcon(getClass().getResource(bildenavn));
         bildeikon.getImage().flush();
         bildeLabel.setIcon(bildeikon);
 
