@@ -32,6 +32,8 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
     private JButton endre;
     private JButton fjern;
     private JButton tilbake;
+    private JButton oppdater;
+
 
     private LinkedList<Soker> søkerliste;
     private LinkedList<Soker> temp;//listen som omfatter søket vårt
@@ -39,6 +41,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
 
     private Sokerregister pregister;
     private MainFrame parent;
+    private RegistrerUtleierPANEL sibling;
 
     public SokerOversiktPANEL(Sokerregister register, MainFrame parent) {
 
@@ -239,9 +242,48 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
 
     }
 
-    public void endreUtleier(){
-        JOptionPane.showMessageDialog(null,"Not yet supported");
-    }
+    /*public void endreSoker(int rad){
+
+        int svar = JOptionPane.showOptionDialog(null,"Vil du endre denne søkeren?","Bekreft endring",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
+
+        if(svar==JOptionPane.YES_OPTION){
+
+            Soker soker = modell.getValueAt(rad);
+
+            sibling.endreSoker(soker);
+
+            removeAll();
+            revalidate();
+            repaint();
+
+            add(sibling, BorderLayout.CENTER);
+            add(oppdater,BorderLayout.PAGE_END);
+
+
+        }
+        if(svar==JOptionPane.NO_OPTION){
+            JOptionPane.showMessageDialog(null,"endring avbrutt");
+        }}*/
+
+    /*public void oppdater(){
+
+        Soker soker = pregister.get(sibling.getFødselnummer());
+
+
+        soker.setFornavn(sibling.getFornavn());
+        soker.setEtternavn(sibling.getEtternavn());
+        soker.setAdresse(sibling.getAdresse());
+        soker.setMail(sibling.getMail());
+        soker.setTelefonnummer(sibling.getTelefonnummer());
+        soker.setAntallPersoner(sibling.getAn);
+
+        removeAll();
+        revalidate();
+        repaint();
+
+        initialiser();
+        lagGUI();
+    }*/
 
     public void visInfo(Soker soker){
         System.out.println(soker.getEneboligliste());
@@ -272,7 +314,9 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
             slettSoker(rad);
         }
         else if(e.getSource() == endre){
-            endreUtleier();
+            int rad = tabell.getSelectedRow();
+            //endreSoker(rad);
+            JOptionPane.showMessageDialog(null,"Not yet supported");
         }
         else if(e.getSource() == visInfo){
             int rad = tabell.getSelectedRow();

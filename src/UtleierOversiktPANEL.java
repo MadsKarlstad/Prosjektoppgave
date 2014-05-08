@@ -338,11 +338,11 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
 
 
         utleier.setFornavn(sibling.getFornavn());
-        System.out.println(sibling.getFornavn());
         utleier.setEtternavn(sibling.getEtternavn());
         utleier.setAdresse(sibling.getAdresse());
         utleier.setMail(sibling.getMail());
         utleier.setTelefonnummer(sibling.getTelefonnummer());
+
 
         removeAll();
         revalidate();

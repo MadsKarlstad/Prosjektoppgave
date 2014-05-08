@@ -320,7 +320,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         soker.oppdaterØnskedeBoliger();
 
         eneboligliste = soker.getEneboligliste();
-        System.out.println(eneboligliste);
 
         bolignummer.setText(eneboligliste.get(index).getBolignr());
         eier.setText(eneboligliste.get(index).getEiersNavn());
@@ -425,7 +424,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         knappepanel_utleier.add(ønsketLeietakerEnebolig);
     }
 
-    public void visLeilighetUtleier(Utleier utleier) throws IndexOutOfBoundsException{
+    public void visLeilighetUtleier(Utleier utleier,int index,int boligindex) throws IndexOutOfBoundsException{
 
 
         leilighetliste = utleier.getØnskedeLeiligheter();
@@ -533,16 +532,16 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                     boligindex++;
                     index = 0;
                     visEneboligUtleier(eier,index,boligindex);
-
                 }
             }
 
             else if (aLeilighetUtleier){
 
-                try{visLeilighetUtleier(eier);}
+                try{visLeilighetUtleier(eier,index,boligindex);}
                 catch (IndexOutOfBoundsException ie){
                     boligindex++;
                     index = 0;
+                    visLeilighetUtleier(eier,index,boligindex);
                 }
             }
         }
@@ -561,36 +560,40 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             Utleier eier = pregister.get(fødselsnummer.getText());
             String bnr = bolignummer.getText();
 
-            if(aEneboligSøker){
+            if (aEneboligSøker) {
                 visEneboliger(soker);
-            }
-
-            else if(aLeilighetSøker){
+            } else if (aLeilighetSøker) {
                 visLeilighet(soker);
-            }
-
-            else if(aEneboligUtleier){
-                try{visEneboligUtleier(eier,index,boligindex);}
-                catch (IndexOutOfBoundsException ie){
-                    if(boligindex!=0){
+            } else if (aEneboligUtleier) {
+                try {
+                    visEneboligUtleier(eier, index, boligindex);
+                } catch (IndexOutOfBoundsException ie) {
+                    if (boligindex != 0) {
                         boligindex--;
+                    } else {
+                        boligindex = 0;
                     }
-                    else{boligindex = 0;}
                     index = 0;
-                    visEneboligUtleier(eier,index,boligindex);
+                    visEneboligUtleier(eier, index, boligindex);
 
                 }
-            }
+            } else if (aLeilighetUtleier) {
 
-            else if(aLeilighetUtleier){
-
-                visLeilighetUtleier(eier);
+                try {
+                    visLeilighetUtleier(eier, index, boligindex);
+                } catch (IndexOutOfBoundsException ie) {
+                    if (boligindex != 0) {
+                        boligindex--;
+                    } else {
+                        boligindex = 0;
+                    }
+                    index = 0;
+                    visLeilighetUtleier(eier, index, boligindex);
+                }
             }
         }
-
         catch (IndexOutOfBoundsException io){
 
-            index = 0;
         }
     }
 
@@ -642,7 +645,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
             }
             else if(kontraktregister.finnes(kontraktnr)) {
-                JOptionPane.showMessageDialog(null,"Kontrakt med kontraktnummer: " + kontraktnr +" finnes allerede");
+                visMelding("Kontrakt med kontraktnummer: " + kontraktnr +" finnes allerede");
 
             }
         }
@@ -651,8 +654,13 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
 
             Kontrakt kontrakt = new Kontrakt(kontraktnr,leilighet,eier,soker,pris,fra,til);
-            kontraktregister.put(kontrakt.getKontraktnr(), kontrakt);
-            leilighet.setUtleid(true);
+            if(!kontraktregister.finnes(kontraktnr)){
+                kontraktregister.put(kontrakt.getKontraktnr(), kontrakt);
+                leilighet.setUtleid(true);
+            }
+            else if(kontraktregister.finnes(kontraktnr)){
+                visMelding("Kontrakt med kontraktnummer: " + kontraktnr +" finnes allerede");
+            }
         }
     }
 
@@ -677,8 +685,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         else if (e.getSource() == ønsketenebolig){
             if(bregister.finnes(bolignummer.getText())){
 
-
-
                 Enebolig enebolig = bregister.get(bolignummer.getText());
                 Soker soker = sregister.getSoker(fødselsnummer.getText());
                 Utleier eier = enebolig.getEier();
@@ -701,9 +707,9 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 Soker soker = sregister.get(fødselsnummer.getText());
                 Utleier eier = leilighet.getEier();
 
-
                 soker.addØnskedBolig(leilighet);
                 eier.addLeilighet(leilighet);
+
                 visMelding("Kunde har vist interesse\n venligst kontakt utleier");
 
                 leilighet.setØnsket(true);
@@ -747,7 +753,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 index = 0;
                 boligindex = 0;
                 visUtleierpanel();
-                visLeilighetUtleier(eier);
+                visLeilighetUtleier(eier,index,boligindex);
             }
 
             catch (NoSuchElementException ne){
@@ -765,7 +771,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
                 visUtleierpanel();
                 visEneboligUtleier(eier,index,boligindex);
-
             }
             catch(NoSuchElementException ne){
 
@@ -781,7 +786,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 søkepanel.repaint();
 
                 toggle(fødselsnummer.getText());
-                //TEST HELLO
 
             } else if (e.getSource() == neste) {
 

@@ -400,8 +400,6 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         bregister.put(bolignr, enebolig);
 
         utleier.addBolig(enebolig);
-
-        System.out.println("Registrert");
     }
     public void registrerLeilighet() throws IOException {
 

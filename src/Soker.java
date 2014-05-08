@@ -75,6 +75,10 @@ public class Soker extends Person{
 
     }
 
+    public void setAntallPersoner(String s){
+        antallPersoner = s;
+    }
+
     public String getAntallPersoner() {
         return antallPersoner;
     }
