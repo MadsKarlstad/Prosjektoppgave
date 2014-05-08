@@ -115,7 +115,6 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
 
         if(register.leggTil(utleier)){
             //gå tilbake til mainframe
-            System.out.println("Lagt til!");
             return;
         }
         //vis feilmelding
