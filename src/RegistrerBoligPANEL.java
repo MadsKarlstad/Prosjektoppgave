@@ -498,6 +498,15 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         if(e.getSource() == registrer){
             if(boligtype.getSelectedIndex() == TOMT_PANEL){
                 JOptionPane.showMessageDialog(null,"Venligst velg boligtype");
+
+                Toolkit kit = Toolkit.getDefaultToolkit();
+                Dimension skjerm = kit.getScreenSize();
+                int bredde = skjerm.width;
+                int høyde = skjerm.height;
+
+                parent.setSize(bredde/2, høyde-100);
+                parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
+
                 return;
             }else if(boligtype.getSelectedIndex() == ENEBOLIG){
                 try{
@@ -517,6 +526,14 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             }
         }else if(e.getSource() == avbryt){
             parent.visPanel(MainFrame.MAIN_BOARD);
+
+            Toolkit kit = Toolkit.getDefaultToolkit();
+            Dimension skjerm = kit.getScreenSize();
+            int bredde = skjerm.width;
+            int høyde = skjerm.height;
+
+            parent.setSize(bredde/2, høyde-100);
+            parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
         }
 
         else if(e.getSource() == bilde){
