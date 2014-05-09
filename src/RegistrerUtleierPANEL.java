@@ -80,8 +80,6 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
 
         registrer.addActionListener(this);
         avbryt.addActionListener(this);
-
-
     }
 
     public void lagGUI() {
@@ -110,21 +108,19 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
          telefonnummer = felt[TELEFONUMMER].getText();
         firma = felt[FIRMA].getText();
 
-        Person utleier = new Utleier(fødselsnummer,fornavn,etternavn,adresse, mail, telefonnummer, firma);
-
-
-        if(register.leggTil(utleier)){
-            //gå tilbake til mainframe
-            return;
+        if(fødselsnummer.length()!=0||fornavn.length()!=0||etternavn.length()!=0||adresse.length()!=0||mail.length()!=0||telefonnummer.length()!=0){
+                Person utleier = new Utleier(fødselsnummer,fornavn,etternavn,adresse, mail, telefonnummer, firma);
+            if(register.leggTil(utleier)){
+                //gå tilbake til mainframe
+                return;
+            }
+            else if(!register.leggTil(utleier)){
+                visMelding("Feil informasjon ble utfylt, venligst prøv igjen");
+            }
         }
-        else if(!register.leggTil(utleier)){
-            visMelding("Feil informasjon ble utfylt, venligst prøv igjen");
+        else{
+            visMelding("Venligst fyll ut all informasjon");
         }
-        //vis feilmelding
-
-
-
-
     }
 
     public void endreUtleier(Utleier utleier){
