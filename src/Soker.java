@@ -67,9 +67,7 @@ public class Soker extends Person{
         this.eneboligregister = eneboligregister;
         this.leilighetregister = leilighetregister;
 
-        eneboligliste = new LinkedList<Enebolig>();
-        leilighetliste = new LinkedList<Leilighet>();
-        ønskedeboliger = new LinkedList<Bolig>();
+        initialiserLister();
 
         df = new DecimalFormat("#.##");
 
@@ -77,6 +75,12 @@ public class Soker extends Person{
 
     public void setAntallPersoner(String s){
         antallPersoner = s;
+    }
+
+    public void initialiserLister(){
+        eneboligliste = new LinkedList<Enebolig>();
+        leilighetliste = new LinkedList<Leilighet>();
+        ønskedeboliger = new LinkedList<Bolig>();
     }
 
     public String getAntallPersoner() {
@@ -332,6 +336,7 @@ public class Soker extends Person{
 
         eneboligliste.clear();
         leilighetliste.clear();
+        initialiserLister();
 
         matcherEnebolig();
         matcherLeilighet();
