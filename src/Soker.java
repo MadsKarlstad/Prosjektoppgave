@@ -73,6 +73,11 @@ public class Soker extends Person{
 
     }
 
+    public void oppdaterBoliger(Boligregister b, Leilighetregister l){
+        eneboligregister = b;
+        leilighetregister = l;
+    }
+
     public void setAntallPersoner(String s){
         antallPersoner = s;
     }
@@ -318,9 +323,6 @@ public class Soker extends Person{
     public void addØnskedBolig(Bolig bolig){
         ønskedeboliger.add(bolig);
     }
-
-
-
 
     public String getNavn(){
         String navn = getFornavn() + " " + getEtternavn();
