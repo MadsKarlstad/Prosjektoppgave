@@ -117,6 +117,9 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
             //gå tilbake til mainframe
             return;
         }
+        else if(!register.leggTil(utleier)){
+            visMelding("Feil informasjon ble utfylt, venligst prøv igjen");
+        }
         //vis feilmelding
 
 
@@ -180,9 +183,9 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
     public String getTelefonnummer(){return telefonnummer;}
     public String getFirma(){return firma;}
 
-
-
-
+    public void visMelding(String melding){
+        JOptionPane.showMessageDialog(null,melding);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
