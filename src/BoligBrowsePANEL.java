@@ -603,7 +603,9 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
             visStartPANELsøker();
             Soker soker = sregister.get(fnr);
+            soker.oppdaterBoliger(bregister,legister);
             soker.oppdaterØnskedeBoliger();
+
         }
 
         else if(pregister.finnes(fnr)){
