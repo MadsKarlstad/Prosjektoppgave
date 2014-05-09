@@ -394,12 +394,18 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             bildesti = 0;
         }
 
-        Enebolig enebolig = new Enebolig("Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
-                røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false);
+        if(bolignr.length()!=0||pnr.length()!=0||adresse.length()!=0||beskrivelse.length()!=0||ledig.length()!=0){
+            Enebolig enebolig = new Enebolig("Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
+                    røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false);
 
-        bregister.put(bolignr, enebolig);
+            bregister.put(bolignr, enebolig);
 
-        utleier.addBolig(enebolig);
+            utleier.addBolig(enebolig);
+        }
+        else{
+            visMelding("Vennligst fyll inn all informasjon");
+        }
+
     }
     public void registrerLeilighet() throws IOException {
 
@@ -434,16 +440,16 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             bildesti = 0;
         }
 
+        if(bolignr.length()!=0||pnr.length()!=0||adresse.length()!=0||beskrivelse.length()!=0||ledig.length()!=0){
+            Leilighet leilighet = new Leilighet("Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
+                    røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antboder,etg,heis,false,false);
 
-        Leilighet leilighet = new Leilighet("Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
-                røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antboder,etg,heis,false,false);
-
-        legister.put(bolignr, leilighet);
-        utleier.addBolig(leilighet);
-
-
-
-
+            legister.put(bolignr, leilighet);
+            utleier.addBolig(leilighet);
+        }
+        else{
+            visMelding("Venligst fyll inn all informasjon");
+        }
     }
 
     public void lastOppBilde() throws IOException{
@@ -491,6 +497,9 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         bildeOk = true;
     }
 
+    public void visMelding(String melding){
+        JOptionPane.showMessageDialog(null,melding);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -511,15 +520,27 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             }else if(boligtype.getSelectedIndex() == ENEBOLIG){
                 try{
                     registrerEnebolig();
-                }catch (Exception ex){
+                }catch (NullPointerException npe){
 
+                }
+                catch(IOException ioe){
+
+                }
+                catch (NumberFormatException nfe){
+                    JOptionPane.showMessageDialog(null,"Venligst fyll inn tall for feltene som krever det");
                 }
                 parent.visPanel(MainFrame.MAIN_BOARD);
             }else if(boligtype.getSelectedIndex() == LEILIGHET){
                 try{
                     registrerLeilighet();
-                }catch (Exception ex){
+                }catch (NullPointerException npe){
 
+                }
+                catch(IOException ioe){
+
+                }
+                catch (NumberFormatException nfe){
+                    JOptionPane.showMessageDialog(null,"Venligst fyll inn tall for feltene som krever det");
                 }
 
                 parent.visPanel(MainFrame.MAIN_BOARD);

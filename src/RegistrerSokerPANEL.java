@@ -140,7 +140,7 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
         add(knapppanel, BorderLayout.PAGE_END);
     }
 
-    public void registrer(){
+        public void registrer () {
         String fødselsnummer = felt[FØDSELSNUMMER].getText();
         String fornavn = felt[FORNAVN].getText();
         String etternavn = felt[ETTERNAVN].getText();
@@ -168,13 +168,25 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
         boolean kjeller = bokser[KJELLER].isSelected();
         boolean heis = bokser[HEIS].isSelected();
 
-        Person søker = new Soker(fødselsnummer,fornavn,etternavn,adresse, mail, telefonnummer, antpers, sivilstatus,yrke,
-                arbeidsforhold,minareal,maxareal,minpris,maxpris,røyke,dyr,balk,ter,tv,nett,strøm,parkering,kjeller,heis,eneboligregister,leilighetregister);
+        if (fødselsnummer.length() != 0 || fornavn.length() != 0 || etternavn.length() != 0 || adresse.length() != 0 || mail.length() != 0 || telefonnummer.length() != 0) {
+            Person søker = new Soker(fødselsnummer, fornavn, etternavn, adresse, mail, telefonnummer, antpers, sivilstatus, yrke,
+                    arbeidsforhold, minareal, maxareal, minpris, maxpris, røyke, dyr, balk, ter, tv, nett, strøm, parkering, kjeller, heis, eneboligregister, leilighetregister);
 
-        if(register.leggTil(søker)){
-            //gå tilbake til mainframe
-            return;
+            if (register.leggTil(søker)) {
+                //gå tilbake til mainframe
+                parent.visPanel(MainFrame.MAIN_BOARD);
+
+            } else if (!register.leggTil(søker)) {
+                visMelding("Feil informasjon ble utfylt, venligst prøv igjen");
+            }
+        } else {
+            visMelding("Vennligst fyll ut all informasjon");
         }
+    }
+
+
+    public void visMelding(String melding){
+        JOptionPane.showMessageDialog(null,melding);
     }
 
     public static void copyFile( File from, File to ) throws IOException {
@@ -185,16 +197,12 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == registrer){
 
-            registrer();
-            parent.visPanel(MainFrame.MAIN_BOARD);
-
-            Toolkit kit = Toolkit.getDefaultToolkit();
-            Dimension skjerm = kit.getScreenSize();
-            int bredde = skjerm.width;
-            int høyde = skjerm.height;
-
-            parent.setSize(bredde/2, høyde-100);
-            parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
+            try{
+                registrer();
+            }
+            catch (NumberFormatException nfe){
+                visMelding("Vennligst fyll inn tall ved feltene for areal og pris");
+            }
         }
         else if(e.getSource() == avbryt){
             parent.visPanel(MainFrame.MAIN_BOARD);

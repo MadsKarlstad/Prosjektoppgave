@@ -759,7 +759,11 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             }
 
             catch (NoSuchElementException ne){
-
+                visStartPANELutleier();
+                visMelding("Ingen ønsker registrert, venligst gå tilbake");
+            }
+            catch(IndexOutOfBoundsException ie){
+                visStartPANELutleier();
                 visMelding("Ingen ønsker registrert, venligst gå tilbake");
             }
         }
@@ -770,14 +774,19 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 Utleier eier = pregister.get(fødselsnummer.getText());
                 index = 0;
                 boligindex = 0;
-
                 visUtleierpanel();
                 visEneboligUtleier(eier,index,boligindex);
             }
             catch(NoSuchElementException ne){
-
+                visStartPANELutleier();
                 visMelding("Ingen ønsker registrert, venligst gå tilbake");
             }
+            catch(IndexOutOfBoundsException ie){
+                visStartPANELutleier();
+                visMelding("Ingen ønsker registrert, venligst gå tilbake");
+
+            }
+
         }
 
         try {
