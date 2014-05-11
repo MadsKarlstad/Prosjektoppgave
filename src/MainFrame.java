@@ -90,7 +90,7 @@ public class MainFrame extends JFrame implements ActionListener {
             ImageIcon bilde = new ImageIcon(getClass().getResource("Bilder/Logoliten2.png"));
             Image icon = bilde.getImage();
             setIconImage(icon);
-        }
+        }//
         catch(NullPointerException npe){}
     }
 
