@@ -195,7 +195,7 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
             int bredde = skjerm.width;
             int høyde = skjerm.height;
         
-            parent.setSize(bredde - 1000, høyde - 200);
+            parent.setSize(bredde/2, høyde - 100);
             parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
 
         }else if(e.getSource() == avbryt){

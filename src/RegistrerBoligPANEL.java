@@ -520,6 +520,13 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
                 catch (NumberFormatException nfe){
                     JOptionPane.showMessageDialog(null,"Venligst fyll inn tall for feltene som krever det");
                 }
+                Toolkit kit = Toolkit.getDefaultToolkit();
+                Dimension skjerm = kit.getScreenSize();
+                int bredde = skjerm.width;
+                int høyde = skjerm.height;
+
+                parent.setSize(bredde/2, høyde-100);
+                parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
                 parent.visPanel(MainFrame.MAIN_BOARD);
             }else if(boligtype.getSelectedIndex() == LEILIGHET){
                 try{
@@ -533,11 +540,24 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
                 catch (NumberFormatException nfe){
                     JOptionPane.showMessageDialog(null,"Venligst fyll inn tall for feltene som krever det");
                 }
+                Toolkit kit = Toolkit.getDefaultToolkit();
+                Dimension skjerm = kit.getScreenSize();
+                int bredde = skjerm.width;
+                int høyde = skjerm.height;
 
+                parent.setSize(bredde/2, høyde-100);
+                parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
                 parent.visPanel(MainFrame.MAIN_BOARD);
             }
         }else if(e.getSource() == avbryt){
             parent.visPanel(MainFrame.MAIN_BOARD);
+            Toolkit kit = Toolkit.getDefaultToolkit();
+            Dimension skjerm = kit.getScreenSize();
+            int bredde = skjerm.width;
+            int høyde = skjerm.height;
+
+            parent.setSize(bredde/2, høyde-100);
+            parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
         }
 
         else if(e.getSource() == bilde){
