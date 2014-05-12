@@ -146,6 +146,8 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         parent.setSize(bredde / 2, høyde / 2);
         parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
 
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
     }
 
     public void initialiser() {

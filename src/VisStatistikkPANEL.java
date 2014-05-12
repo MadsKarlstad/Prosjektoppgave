@@ -73,6 +73,8 @@ public class VisStatistikkPANEL extends JPanel implements ActionListener {
 
 
         tilbake.addActionListener(this);
+
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     }
 
     public void lagGUI(){

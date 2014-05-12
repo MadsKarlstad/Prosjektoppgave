@@ -80,6 +80,8 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
 
         registrer.addActionListener(this);
         avbryt.addActionListener(this);
+
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     }
 
     public void lagGUI() {

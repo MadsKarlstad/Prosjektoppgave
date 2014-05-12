@@ -113,6 +113,8 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
 
         sibling = new RegistrerUtleierPANEL(register,parent);
 
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
 
 
 

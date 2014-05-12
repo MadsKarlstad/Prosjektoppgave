@@ -89,6 +89,9 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
 
         visInfo.addActionListener(this);
         tilbake.addActionListener(this);
+
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
     }
 
     public void visAlle(){

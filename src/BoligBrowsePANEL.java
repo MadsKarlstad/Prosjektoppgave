@@ -109,8 +109,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
     private MainFrame parent;
 
-    Random r = new Random();
-
 
     public BoligBrowsePANEL(Sokerregister sregister, Boligregister bregister, Leilighetregister legister,Personregister pregister, Kontraktregister kontraktregister, MainFrame parent) {
         this.sregister = sregister;
@@ -260,6 +258,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aEneboligSøker = false;
         aLeilighetUtleier = false;
         aEneboligUtleier = false;
+
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     }
 
     public void lagGui(){

@@ -85,6 +85,8 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
         endre.addActionListener(this);
         fjern.addActionListener(this);
         tilbake.addActionListener(this);
+
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     }
 
     public void visAlle(){

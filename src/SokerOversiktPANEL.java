@@ -26,7 +26,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
     private JTable tabell;
     private JScrollPane scroll;
     private Sokermodell modell;
-    private final String[] kolonner = {"Fødselsnummer", "Fornavn", "Etternavn", "Adresse", "Mail", "Telefonnummer","Røyker","Husdyr","Min. pris","Maks. pris"};
+    private final String[] kolonner = {"Fødselsnummer", "Fornavn", "Etternavn", "Adresse", "Mail", "Telefonnummer","Røyker","Husdyr","Ønsket pris"};
 
     private JButton visInfo;
     private JButton endre;
@@ -90,6 +90,8 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         endre.addActionListener(this);
         fjern.addActionListener(this);
         tilbake.addActionListener(this);
+
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     }
 
     public void visAlle(){
@@ -241,49 +243,6 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         }
 
     }
-
-    /*public void endreSoker(int rad){
-
-        int svar = JOptionPane.showOptionDialog(null,"Vil du endre denne søkeren?","Bekreft endring",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
-
-        if(svar==JOptionPane.YES_OPTION){
-
-            Soker soker = modell.getValueAt(rad);
-
-            sibling.endreSoker(soker);
-
-            removeAll();
-            revalidate();
-            repaint();
-
-            add(sibling, BorderLayout.CENTER);
-            add(oppdater,BorderLayout.PAGE_END);
-
-
-        }
-        if(svar==JOptionPane.NO_OPTION){
-            JOptionPane.showMessageDialog(null,"endring avbrutt");
-        }}*/
-
-    /*public void oppdater(){
-
-        Soker soker = pregister.get(sibling.getFødselnummer());
-
-
-        soker.setFornavn(sibling.getFornavn());
-        soker.setEtternavn(sibling.getEtternavn());
-        soker.setAdresse(sibling.getAdresse());
-        soker.setMail(sibling.getMail());
-        soker.setTelefonnummer(sibling.getTelefonnummer());
-        soker.setAntallPersoner(sibling.getAn);
-
-        removeAll();
-        revalidate();
-        repaint();
-
-        initialiser();
-        lagGUI();
-    }*/
 
     public void visInfo(Soker soker){
         System.out.println(soker.getEneboligliste());
