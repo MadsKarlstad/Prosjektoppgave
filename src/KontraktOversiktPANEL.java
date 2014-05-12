@@ -24,10 +24,11 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
     private JTable tabell;
     private JScrollPane scroll;
     private Kontraktmodell modell;
-    private final String[] kolonner = {"Kontraktnr", "Eier", "Leier","Bolignr", "Pris", "Fra", "Til"};
+    private final String[] kolonner = {"Kontraktnr", "Eier", "Leier","Bolignr", "Pris", "Fra", "Til","Aktiv"};
 
     private JButton visInfo;
     private JButton tilbake;
+    private JButton terminer;
 
     private JTextArea utskriftsområde;
 
@@ -86,9 +87,11 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
 
         visInfo = new JButton("Vis info");
         tilbake = new JButton("Tilbake");
+        terminer = new JButton("Opphør leieforhold");
 
         visInfo.addActionListener(this);
         tilbake.addActionListener(this);
+        terminer.addActionListener(this);
 
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
@@ -124,6 +127,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
 
         knapppanel.add(visInfo);
         knapppanel.add(tilbake);
+        knapppanel.add(terminer);
 
         add(overskriftpanel, BorderLayout.PAGE_START);
         add(tabellpanel, BorderLayout.CENTER);
@@ -250,6 +254,12 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         JOptionPane.showMessageDialog(null,kontrakt);
     }
 
+    public void opphørKontrakt(int rad){
+        Kontrakt kontrakt = modell.getValueAt(rad);
+        kontrakt.setAktiv(false);
+        kontrakt.getBolig().setUtleid(false);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == tilbake){
@@ -266,6 +276,10 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         else if(e.getSource() == visInfo){
             int rad = tabell.getSelectedRow();
             visInfo(rad);
+        }
+        else if(e.getSource()==terminer){
+            int rad = tabell.getSelectedRow();
+            opphørKontrakt(rad);
         }
     }
 

@@ -310,6 +310,7 @@ class Kontraktmodell extends Tabellmodell<Kontrakt> {
     private final int PRIS = 4;
     private final int FRA = 5;
     private final int TIL = 6;
+    private final int AKTIV = 7;
 
     public Kontraktmodell(String[] kolonnenavn, LinkedList<Kontrakt> data) {
         super(kolonnenavn, data);
@@ -333,6 +334,8 @@ class Kontraktmodell extends Tabellmodell<Kontrakt> {
                 return kontrakt.getFra();
             case TIL:
                 return kontrakt.getTil();
+            case AKTIV:
+                return kontrakt.getAktivTekst();
             default:
                 return null;
         }

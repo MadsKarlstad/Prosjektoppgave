@@ -626,15 +626,25 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             soker.oppdaterBoliger(bregister,legister);
             soker.oppdaterØnskedeBoliger();
 
+            søkepanel.removeAll();
+            søkepanel.revalidate();
+            søkepanel.repaint();
+
         }
 
         else if(pregister.finnes(fnr)){
 
             visStartPANELutleier();
+
+            søkepanel.removeAll();
+            søkepanel.revalidate();
+            søkepanel.repaint();
         }
 
         else{
+
             visMelding("Ingen person med dette fødselsnummeret registrert");
+
         }
     }
 
@@ -663,6 +673,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
                 kontraktregister.put(kontrakt.getKontraktnr(), kontrakt);
                 enebolig.setUtleid(true);
+                kontrakt.setAktiv(true);
 
 
             }
@@ -679,10 +690,95 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             if(!kontraktregister.finnes(kontraktnr)){
                 kontraktregister.put(kontrakt.getKontraktnr(), kontrakt);
                 leilighet.setUtleid(true);
+                kontrakt.setAktiv(true);
             }
             else if(kontraktregister.finnes(kontraktnr)){
                 visMelding("Kontrakt med kontraktnummer: " + kontraktnr +" finnes allerede");
             }
+        }
+    }
+
+    public void finnBolig(String bnr)  throws Exception{
+
+        finnboligfelt.setText("");
+
+        if(bregister.finnes(bnr)){
+
+
+            Enebolig enebolig = bregister.get(bnr);
+
+            bolignummer.setText(enebolig.getBolignr());
+            eier.setText(enebolig.getEiersNavn());
+            pris.setText(String.valueOf(enebolig.getPris()));
+            areal.setText(String.valueOf(enebolig.getBoareal()));
+
+            boligArea.setText(enebolig.toString());
+
+            aLeilighetSøker = false;
+            aEneboligSøker = true;
+            aLeilighetUtleier = false;
+            aEneboligUtleier = false;
+
+            bildenavn = enebolig.getBildesti();
+
+            bildeikon = new ImageIcon(getClass().getResource(bildenavn));
+            bildeikon.getImage().flush();
+            bildeLabel.setIcon( bildeikon );
+
+            if(!enebolig.erUtleid()) {
+                knappepanel_søker.removeAll();
+                knappepanel_søker.revalidate();
+                knappepanel_søker.repaint();
+                knappepanel_søker.add(ønsketenebolig);
+            }
+            else if(enebolig.erUtleid()){
+                knappepanel_søker.removeAll();
+                knappepanel_søker.revalidate();
+                knappepanel_søker.repaint();
+                knappepanel_søker.add(utleidLabel);
+            }
+
+            visSøkerPANEL();
+
+        }
+
+        else if(legister.finnes(bnr)){
+
+            Leilighet leilighet = legister.get(bnr);
+
+            bolignummer.setText(leilighet.getBolignr());
+            eier.setText(leilighet.getEiersNavn());
+            pris.setText(String.valueOf(leilighet.getPris()));
+            areal.setText(String.valueOf(leilighet.getBoareal()));
+
+            boligArea.setText(leilighet.toString());
+
+            aLeilighetSøker = true;
+            aEneboligSøker = false;
+            aLeilighetUtleier = false;
+            aEneboligUtleier = false;
+
+            bildenavn = leilighet.getBildesti();
+
+            bildeikon = new ImageIcon(getClass().getResource(bildenavn));
+            bildeikon.getImage().flush();
+            bildeLabel.setIcon(bildeikon);
+
+            if(!leilighet.erUtleid()) {
+                knappepanel_søker.removeAll();
+                knappepanel_søker.revalidate();
+                knappepanel_søker.repaint();
+                knappepanel_søker.add(ønsketleilighet);
+            }
+            else if(leilighet.erUtleid()){
+                knappepanel_søker.removeAll();
+                knappepanel_søker.revalidate();
+                knappepanel_søker.repaint();
+                knappepanel_søker.add(utleidLabel);
+            }
+
+            visSøkerPANEL();
+
         }
     }
 
@@ -812,10 +908,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         try {
             if (e.getSource() == finn) {
 
-                søkepanel.removeAll();
-                søkepanel.revalidate();
-                søkepanel.repaint();
-
                 toggle(fødselsnummer.getText());
 
             } else if (e.getSource() == neste) {
@@ -848,6 +940,13 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             godkjennkontrakt(enebolig);
 
             visMelding("Kontrakt er generert, finnes i kontraktregisteret");
+        }
+
+        else if(e.getSource() == finnbolig){
+
+            try{finnBolig(finnboligfelt.getText());}
+            catch(Exception s){}
+
         }
     }
 }

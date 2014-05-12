@@ -18,6 +18,7 @@ leieavtalens varighet (tidrom)*/
     private int pris;
     private String fra;
     private String til;
+    private boolean aktiv;
 
 
     public Kontrakt(String kontraktnr,Bolig bolig, Utleier utleier, Soker leietager, int pris, String fra, String til) {
@@ -69,6 +70,25 @@ leieavtalens varighet (tidrom)*/
 
     public String getTil() {
         return til;
+    }
+
+    public void setAktiv(boolean b){
+        aktiv = b;
+    }
+
+    public boolean getAktiv(){
+        return aktiv;
+    }
+
+    public String getAktivTekst(){
+        String s = "";
+        if(aktiv==true){
+            s="Ja";
+        }
+        else if(aktiv==false){
+            s="Nei";
+        }
+        return s;
     }
 
     @Override

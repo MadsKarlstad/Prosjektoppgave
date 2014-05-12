@@ -200,6 +200,10 @@ public abstract class Bolig implements Hjem {
 
     public  boolean erUtleid(){return erUtleid;}
 
+    public void setUtleid(boolean b){
+        erUtleid = b;
+    }
+
     public boolean erØnsker(){return erØnsket;}
 
 
