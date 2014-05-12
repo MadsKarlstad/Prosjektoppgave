@@ -39,12 +39,14 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
     //checkbokser + string
     private JCheckBox[] eneboligbokser;
     private JCheckBox[] leilighetbokser;
-    private final String[]boksnavn = {"røyker","husdyr","balkong","terasse","TVinkludert","internetInkludert","strømInkludert","parkering","kjeller","heis"};
+    private final String[]boksnavn = {"Røyke","Husdyr","Balkong","Terasse","Tv","Internett","Strøm","Parkering","Kjeller","Heis"};
     private final int minusHeis = 1;
 
     //combobokser
     private JComboBox<String> beliggenhet;
     private JComboBox<String> boligtype;
+
+    private JLabel[] boxlabels;
 
     String[] boligtypevalg = {"Velg boligtype","Enebolig","Leilighet"};
     String [] bydeler = { "Velg bydel", "Alna", "Bjerke", "Frogner", "Gamle Oslo", "Grorud",
@@ -183,6 +185,8 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         overskrift = new JLabel("Registrer ny Bolig");
         overskrift.setVisible(true);
 
+        boxlabels = new JLabel[boksnavn.length];
+
         //toppanel
         feltpanel = new JPanel(new GridLayout(3, 4, 5, 5));
         boligtypepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -206,7 +210,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         eneboligpanel = new JPanel(new BorderLayout());
         eneboligpanel.setLayout(new BorderLayout());
         feltpanelEnebolig = new JPanel(new GridLayout(1,3,5,5));
-        bokspanel = new JPanel(new GridLayout(3,3,5,5));
+        bokspanel = new JPanel(new GridLayout(3,3));
 
         //leilighetunikt
         leilighetpanel = new JPanel(new BorderLayout());
@@ -245,13 +249,13 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
         for (int i = 0; i < boksnavn.length-minusHeis; i++) {
             eneboligbokser[i] = new JCheckBox();
-            eneboligbokser[i].setText(boksnavn[i]);
-            eneboligbokser[i].setHorizontalAlignment(JCheckBox.CENTER);
+            boxlabels[i] = new JLabel(boksnavn[i]);
+
         }
         for (int i = 0; i < boksnavn.length; i++) {
             leilighetbokser[i] = new JCheckBox();
-            leilighetbokser[i].setText(boksnavn[i]);
-            leilighetbokser[i].setHorizontalAlignment(JCheckBox.CENTER);
+            boxlabels[i] = new JLabel((boksnavn[i]));
+
         }
 
 
@@ -325,6 +329,21 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         add(midtpanel,BorderLayout.CENTER);
         add(bunnpanel,BorderLayout.PAGE_END);
 
+        knappepanel.setBackground(Color.decode("#B3D5E3"));
+        overskriftpanel.setBackground(Color.decode("#B3D5E3"));
+        //tabellpanel.setBackground(Color.decode("#DAEDF5"));
+        boligtypepanel.setBackground(Color.decode("#B3D5E3"));
+        bokspanelLeilighet.setBackground(Color.decode("#B3D5E3"));
+        feltpanel.setBackground(Color.decode("#B3D5E3"));
+        feltpanelEnebolig.setBackground(Color.decode("#B3D5E3"));
+        feltpanelLeilighet.setBackground(Color.decode("#B3D5E3"));
+        bokspanel.setBackground(Color.decode("#B3D5E3"));
+        bydelpanel.setBackground(Color.decode("#B3D5E3"));
+        bunnpanel.setBackground(Color.decode("#B3D5E3"));
+        midtpanel.setBackground(Color.decode("#B3D5E3"));
+
+        setBackground(Color.decode("#B3D5E3"));
+
 
     }
     public void visTomtpanel(){
@@ -335,6 +354,10 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         isTom=true;
         isEnebolig=false;
         isLeilighet=false;
+
+        midtpanel.setBackground(Color.decode("#B3D5E3"));
+
+
 
     }
     public void visEneboligpanel(){
@@ -348,6 +371,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
         for (int i = 0; i < boksnavn.length-minusHeis; i++) {
             bokspanel.add(eneboligbokser[i]);
+            bokspanel.add(boxlabels[i]);
         }
 
         eneboligpanel.add(bokspanel, BorderLayout.CENTER);
@@ -370,6 +394,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
         for (int i = 0; i < boksnavn.length; i++) {
             bokspanelLeilighet.add(leilighetbokser[i]);
+            bokspanelLeilighet.add(boxlabels[i]);
         }
         leilighetpanel.add(bokspanelLeilighet,BorderLayout.CENTER);
         leilighetpanel.add(feltpanelLeilighet,BorderLayout.PAGE_END);

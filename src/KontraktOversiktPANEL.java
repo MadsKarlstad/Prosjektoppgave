@@ -128,6 +128,12 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         add(overskriftpanel, BorderLayout.PAGE_START);
         add(tabellpanel, BorderLayout.CENTER);
         add(knapppanel, BorderLayout.PAGE_END);
+
+        knapppanel.setBackground(Color.decode("#B3D5E3"));
+        overskriftpanel.setBackground(Color.decode("#B3D5E3"));
+        //tabellpanel.setBackground(Color.decode("#DAEDF5"));
+        søkpanel.setBackground(Color.decode("#B3D5E3"));
+        setBackground(Color.decode("#B3D5E3"));
     }
 
     public void søk(){
