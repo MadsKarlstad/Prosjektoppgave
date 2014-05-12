@@ -7,10 +7,7 @@ import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.channels.FileChannel;
 
 /**
@@ -146,7 +143,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
     private MainFrame parent;
 
-    private ImageIcon image;
+    private String sti;
 
     public RegistrerBoligPANEL(Personregister pregister,Boligregister bregister,Leilighetregister legister, MainFrame parent) {
         super(new BorderLayout());
@@ -447,6 +444,12 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             bregister.put(bolignr, enebolig);
 
             utleier.addBolig(enebolig);
+
+            try{
+                kopierbilde();}
+            catch (Exception e){
+                System.out.println("kopiermetode feilet");
+            }
         }
         else{
             visMelding("Vennligst fyll inn all informasjon");
@@ -493,10 +496,29 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
             legister.put(bolignr, leilighet);
             utleier.addBolig(leilighet);
+            try{
+                kopierbilde();}
+            catch (Exception e){
+                System.out.println("kopiermetode feilet");
+            }
         }
         else{
             visMelding("Venligst fyll inn all informasjon");
         }
+    }
+
+    public void kopierbilde() throws Exception{
+
+        FileInputStream source = new FileInputStream(sti);
+        FileOutputStream destination =
+                new FileOutputStream("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg");
+
+        FileChannel sourceFileChannel = source.getChannel();
+        FileChannel destinationFileChannel = destination.getChannel();
+
+        long size = sourceFileChannel.size();
+        sourceFileChannel.transferTo(0, size, destinationFileChannel);
+
     }
 
     public void lastOppBilde() throws IOException{
@@ -526,22 +548,13 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
         int resultat = filvelger.showOpenDialog( this );
 
-        String sti = filvelger.getSelectedFile().getCanonicalPath();
+        sti = filvelger.getSelectedFile().getCanonicalPath();
 
         if(resultat == JFileChooser.APPROVE_OPTION){
 
-            FileInputStream source = new FileInputStream(sti);
-            FileOutputStream destination =
-                    new FileOutputStream("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg");
+            bildeOk = true;
 
-            FileChannel sourceFileChannel = source.getChannel();
-            FileChannel destinationFileChannel = destination.getChannel();
-
-            long size = sourceFileChannel.size();
-            sourceFileChannel.transferTo(0, size, destinationFileChannel);
         }
-
-        bildeOk = true;
     }
 
     public void visMelding(String melding){
