@@ -27,7 +27,6 @@ public class TextPrompt extends JLabel
     private JTextComponent component;
     private Document document;
     private Show show;
-    private boolean showPromptOnce;
     private int focusLost;
 
     public TextPrompt(String text, JTextComponent component) {
@@ -71,48 +70,17 @@ public class TextPrompt extends JLabel
         super.setForeground(withAlpha);
     }
 
-
-    public void changeStyle(int style) {
-        setFont(getFont().deriveFont(style));
-    }
-
-
-    public Show getShow() {
-        return show;
-    }
-
     public void setShow(Show show) {
         this.show = show;
     }
 
 
-    public boolean getShowPromptOnce() {
-        return showPromptOnce;
-    }
-
-
-    public void setShowPromptOnce(boolean showPromptOnce) {
-        this.showPromptOnce = showPromptOnce;
-    }
-
-
     private void checkForPrompt() {
-        //  Text has been entered, remove the prompt
 
         if (document.getLength() > 0) {
             setVisible(false);
             return;
         }
-
-        //  Prompt has already been shown once, remove it
-
-        if (showPromptOnce && focusLost > 0) {
-            setVisible(false);
-            return;
-        }
-
-        //  Check the Show property and component focus to determine if the
-        //  prompt should be displayed.
 
         if (component.hasFocus()) {
             if (show == Show.ALWAYS

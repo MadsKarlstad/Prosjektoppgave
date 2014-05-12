@@ -20,8 +20,8 @@ public class Soker extends Person{
     private int minAreal;
     private int maksAreal;
 
-    private int minPris;
-    private int maksPris;
+    private int pris;
+
 
     private boolean røyk;
     private boolean husdyr;
@@ -43,7 +43,7 @@ public class Soker extends Person{
 
     public Soker(String FØDSELSNUMMER, String fornavn, String etternavn, String adresse, String mail, String telefonnummer,
                  String antallPersoner, String sivilstatus, String yrke, String arbeidsfohold_studiested, int minAreal,
-                 int maksAreal, int minPris, int maksPris,boolean røyk,boolean husdyr,boolean balkong,boolean terasse,
+                 int maksAreal, int pris,boolean røyk,boolean husdyr,boolean balkong,boolean terasse,
                  boolean TVinkludert,boolean Internetinkludert,boolean strøminkludert,boolean parkering,boolean kjeller,boolean heis,Boligregister eneboligregister, Leilighetregister leilighetregister) {
         super(FØDSELSNUMMER, fornavn, etternavn, adresse, mail, telefonnummer);
         this.antallPersoner = antallPersoner;
@@ -52,8 +52,8 @@ public class Soker extends Person{
         this.arbeidsfohold_studiested = arbeidsfohold_studiested;
         this.minAreal = minAreal;
         this.maksAreal = maksAreal;
-        this.minPris = minPris;
-        this.maksPris = maksPris;
+        this.pris = pris;
+
         this.røyk = røyk;
         this.husdyr = husdyr;
         this.balkong = balkong;
@@ -168,12 +168,8 @@ public class Soker extends Person{
         return maksAreal;
     }
 
-    public int getMinPris() {
-        return minPris;
-    }
-
-    public int getMaksPris() {
-        return maksPris;
+    public int getPris() {
+        return pris;
     }
 
     public boolean isRøyk() {

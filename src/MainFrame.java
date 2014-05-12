@@ -85,13 +85,6 @@ public class MainFrame extends JFrame implements ActionListener {
         writeList(LEILIGHET);
         readList(KONTRAKT);
         writeList(KONTRAKT);
-
-        try{
-            ImageIcon bilde = new ImageIcon(getClass().getResource("Bilder/Logoliten2.png"));
-            Image icon = bilde.getImage();
-            setIconImage(icon);
-        }
-        catch(NullPointerException npe){}
     }
 
     public void initialiser(){

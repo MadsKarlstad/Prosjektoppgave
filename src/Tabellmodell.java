@@ -178,9 +178,7 @@ class Sokermodell extends Tabellmodell<Soker> { //Tabellmodell for søker
                     return h;
                 }
             case MIN_PRIS:
-                return søker.getMinPris();
-            case MAKS_PRIS:
-                return søker.getMaksPris();
+                return søker.getPris();
             default:
                 return null;
         }

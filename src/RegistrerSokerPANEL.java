@@ -3,6 +3,8 @@
  */
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,9 +19,25 @@ import java.nio.file.Path;
 public class RegistrerSokerPANEL extends JPanel implements ActionListener {
     private JTextField[] felt;
     private final String[] feltnavn = {"Fødselsnummer", "Fornavn", "Etternavn", "Adresse","Mail","Telefonnr", "AntallPers", "Sivilstatus", "Yrke",
-            "Arbeidsforhold/Studiested","MinAreal","MaxAreal","MinPris","MaxPris"};
+            "Arbeidsforhold/Studiested"};
     private JCheckBox boligtype;
     private JComboBox<String> beliggenhet;
+
+    private JSlider pris;
+    private JSlider minsteareal;
+    private JSlider størsteareal;
+
+    private JLabel prislabel;
+    private JLabel minareal;
+    private JLabel maksareal;
+
+    private JLabel sliderstate_pris;
+    private JLabel sliderstate_minareal;
+    private JLabel sliderstate_maksareal;
+
+    private JLabel overskrift;
+
+
 
     String [] bydeler = { "Velg bydel", "Alna", "Bjerke", "Frogner", "Gamle Oslo", "Grorud",
             "Grünerløkka", "Nordre Aker", "Nordstrand", "Sagene", "St. Hanshaugen",
@@ -43,6 +61,10 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
     private JPanel feltpanel;
     private JPanel bokspanel;
     private JPanel knapppanel;
+    private JPanel toppanel;
+    private JPanel sliderpanel;
+
+    private JPanel overskriftpanel;
 
     private JCheckBox[] bokser;
     private final String[]boksnavn = {"røyker","husdyr","balkong","terasse","TVinkludert","internetInkludert","strømInkludert","parkering","kjeller","heis"};
@@ -91,12 +113,39 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
         feltpanel = new JPanel(new GridLayout(7, 2, 5, 5));
         knapppanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         bokspanel = new JPanel(new GridLayout(2,5));
+        toppanel = new JPanel(new BorderLayout());
+        sliderpanel = new JPanel(new GridLayout(4,3,5,5));
 
         felt = new JTextField[feltnavn.length];
         bokser = new JCheckBox[boksnavn.length];
 
 
         TextPrompt tp [] = new TextPrompt[felt.length];
+
+        pris = new JSlider(JSlider.HORIZONTAL,0,20000,0);
+        prislabel = new JLabel("pris");
+        minsteareal = new JSlider(JSlider.HORIZONTAL,0,600,0);
+        minareal = new JLabel("Minste areal");
+        størsteareal = new JSlider(JSlider.HORIZONTAL,0,600,0);
+        maksareal = new JLabel("Maks areal");
+
+
+        overskrift = new JLabel("Registrer søker");
+
+        overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+        pris.setMajorTickSpacing(pris.getMaximum()/40);
+        minsteareal.setMajorTickSpacing((minsteareal.getMaximum()/100)-1);
+        størsteareal.setMajorTickSpacing((størsteareal.getMaximum()/100)-1);
+
+        pris.setSnapToTicks(true);
+        minsteareal.setSnapToTicks(true);
+        størsteareal.setSnapToTicks(true);
+
+        sliderstate_pris = new JLabel(": 0");
+        sliderstate_minareal = new JLabel(": 0");
+        sliderstate_maksareal = new JLabel(": 0");
+
 
 
 
@@ -121,6 +170,11 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
 
         registrer.addActionListener(this);
         avbryt.addActionListener(this);
+
+        event e = new event();
+        pris.addChangeListener(e);
+        minsteareal.addChangeListener(e);
+        størsteareal.addChangeListener(e);
     }
 
     public void lagGUI() {
@@ -135,7 +189,24 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
         knapppanel.add(registrer);
         knapppanel.add(avbryt);
 
-        add(feltpanel, BorderLayout.PAGE_START);
+        sliderpanel.add(prislabel);
+        sliderpanel.add(sliderstate_pris);
+        sliderpanel.add(pris);
+        sliderpanel.add(minareal);
+        sliderpanel.add(sliderstate_minareal);
+        sliderpanel.add(minsteareal);
+        sliderpanel.add(maksareal);
+        sliderpanel.add(sliderstate_maksareal);
+        sliderpanel.add(størsteareal);
+
+        overskriftpanel.add(overskrift);
+
+
+        toppanel.add(overskriftpanel, BorderLayout.PAGE_START);
+        toppanel.add(feltpanel, BorderLayout.CENTER);
+        toppanel.add(sliderpanel,BorderLayout.PAGE_END);
+
+        add(toppanel, BorderLayout.PAGE_START);
         add(bokspanel,BorderLayout.CENTER);
         add(knapppanel, BorderLayout.PAGE_END);
     }
@@ -152,10 +223,10 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
         String yrke = felt[YRKE].getText();
         String arbeidsforhold = felt[ARBFORHOLD].getText();
 
-        int minareal = Integer.parseInt(felt[MINAREAL].getText());
-        int maxareal = Integer.parseInt(felt[MAXAREAL].getText());
-        int minpris = Integer.parseInt(felt[MINPRIS].getText());
-        int maxpris = Integer.parseInt(felt[MAXPRIS].getText());
+        int minareal = Integer.parseInt(sliderstate_pris.getText());
+        int maxareal = Integer.parseInt(sliderstate_minareal.getText());
+        int ønsketpris = Integer.parseInt(sliderstate_maksareal.getText());
+
 
         boolean røyke = bokser[RØYKER].isSelected();
         boolean dyr = bokser[DYR].isSelected();
@@ -170,7 +241,7 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
 
         if (fødselsnummer.length() != 0 || fornavn.length() != 0 || etternavn.length() != 0 || adresse.length() != 0 || mail.length() != 0 || telefonnummer.length() != 0) {
             Person søker = new Soker(fødselsnummer, fornavn, etternavn, adresse, mail, telefonnummer, antpers, sivilstatus, yrke,
-                    arbeidsforhold, minareal, maxareal, minpris, maxpris, røyke, dyr, balk, ter, tv, nett, strøm, parkering, kjeller, heis, eneboligregister, leilighetregister);
+                    arbeidsforhold, minareal, maxareal, ønsketpris, røyke, dyr, balk, ter, tv, nett, strøm, parkering, kjeller, heis, eneboligregister, leilighetregister);
 
             if (register.leggTil(søker)) {
                 //gå tilbake til mainframe
@@ -187,10 +258,6 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
 
     public void visMelding(String melding){
         JOptionPane.showMessageDialog(null,melding);
-    }
-
-    public static void copyFile( File from, File to ) throws IOException {
-        Files.copy( from.toPath(), to.toPath() );
     }
 
     @Override
@@ -223,5 +290,19 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
             parent.setSize(bredde/2, høyde-100);
             parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
         }
+    }
+
+
+    public class event implements ChangeListener{
+
+
+        @Override
+        public void stateChanged(ChangeEvent e) {
+            if(e.getSource() == pris){sliderstate_pris.setText(": " + String.valueOf(pris.getValue()));}
+            else if(e.getSource() == minsteareal){ sliderstate_minareal.setText(": " + String.valueOf(minsteareal.getValue()));}
+            else if(e.getSource() == størsteareal){ sliderstate_maksareal.setText(": " + String.valueOf(størsteareal.getValue()));}
+
+        }
+
     }
 }
