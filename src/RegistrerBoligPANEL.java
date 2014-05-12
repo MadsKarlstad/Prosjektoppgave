@@ -355,6 +355,10 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         isEnebolig=false;
         isLeilighet=false;
 
+        midtpanel.setBackground(Color.decode("#B3D5E3"));
+
+
+
     }
     public void visEneboligpanel(){
 
