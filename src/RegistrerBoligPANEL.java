@@ -418,7 +418,6 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         if(bolignr.length()!=0||pnr.length()!=0||adresse.length()!=0||beskrivelse.length()!=0||ledig.length()!=0){
             Enebolig enebolig = new Enebolig("Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
                     røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false,bydel);
-            System.out.println(bydel);
 
             bregister.put(bolignr, enebolig);
 
@@ -596,11 +595,10 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             }
             catch (IOException io){
 
-                System.out.println("feilen skjer her i catch");
 
             }
             catch(NullPointerException ne){
-                System.out.println("feil i filsti");
+                visMelding("Feil i filstien");
             }
         }
     }

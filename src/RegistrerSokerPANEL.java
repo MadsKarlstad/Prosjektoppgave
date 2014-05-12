@@ -234,9 +234,9 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
         String yrke = felt[YRKE].getText();
         String arbeidsforhold = felt[ARBFORHOLD].getText();
 
-        int minareal = Integer.parseInt(sliderstate_pris.getText());
-        int maxareal = Integer.parseInt(sliderstate_minareal.getText());
-        int ønsketpris = Integer.parseInt(sliderstate_maksareal.getText());
+        int minareal = minsteareal.getValue();
+        int maxareal = størsteareal.getValue();
+        int ønsketpris = pris.getValue();
 
 
         boolean røyke = bokser[RØYKER].isSelected();

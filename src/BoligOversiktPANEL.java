@@ -186,9 +186,6 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
 
             Enebolig enebolig = (Enebolig) it.next();
 
-            //String fødselsnummer = enebolig.getBoareal().toUpperCase();
-            //String fornavn = utleier.getFornavn().toUpperCase();
-            //String etternavn = utleier.getEtternavn().toUpperCase();
             String adresse = enebolig.getAdresse().toUpperCase();
             boolean røyke = enebolig.røyke();
             String ledigfra = enebolig.getLedigDato();
@@ -196,13 +193,10 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
             utleier = enebolig.getEier();
             String utleierfornavn = utleier.getFornavn().toUpperCase();
             String utleieretternavn = utleier.getEtternavn().toUpperCase();
-            /*String mail = utleier.getMail().toUpperCase();
-            String telfonnummer = utleier.getTelefonnummer().toUpperCase();
-            String firma = utleier.getFirma().toUpperCase();
-            String navn = utleier.getNavn().toUpperCase();*/
+            String bydel = enebolig.getBydel().toUpperCase();
 
             if(adresse.startsWith(søk) || bolignr.startsWith(søk) || utleierfornavn.startsWith(søk) || utleieretternavn.startsWith(søk)
-                    ){
+                    ||bydel.startsWith(søk)){
 
                 temp.add(enebolig);
             }

@@ -335,7 +335,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aEneboligUtleier = false;
 
         bildenavn = eneboligliste.get(index).getBildesti();
-        System.out.println(bildenavn);
 
         bildeikon = new ImageIcon(getClass().getResource(bildenavn));
         bildeikon.getImage().flush();
@@ -376,7 +375,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aEneboligUtleier = false;
 
         bildenavn = leilighetliste.get(index).getBildesti();
-        System.out.println(bildenavn);
 
         bildeikon = new ImageIcon(getClass().getResource(bildenavn));
         bildeikon.getImage().flush();
@@ -400,10 +398,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
     public void visEneboligUtleier(Utleier utleier, int index, int boligindex) throws IndexOutOfBoundsException{
 
-        System.out.println(boligindex+ "" + index);
 
         eneboligliste = utleier.getØnskedeEneboliger();
-        System.out.println(eneboligliste);
 
         Soker soker = (Soker) eneboligliste.get(boligindex).getSokere().get(index);
 
@@ -547,7 +543,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         }
         catch (IndexOutOfBoundsException io){
 
-            System.out.println("feil");
+
 
         }
     }
@@ -614,7 +610,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         }
 
         else{
-            System.out.println("ingen person med dette fødselsnummer registrert");
+            visMelding("Ingen person med dette fødselsnummeret registrert");
         }
     }
 

@@ -193,11 +193,12 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
             String byggår = String.valueOf(leilighet.getByggår());
             String pris = String.valueOf(leilighet.getPris());
             String ledig = leilighet.getLedigTekst();
+            String bydel = leilighet.getBydel().toUpperCase();
 
 
             if(adresse.startsWith(søk) || bolignr.startsWith(søk) || utleierfornavn.startsWith(søk) || utleieretternavn.startsWith(søk)
                     || ledigfra.startsWith(søk) || beskrivelse.startsWith(søk) || byggår.startsWith(søk) || pris.startsWith(søk)
-                    || ledig.startsWith(søk)
+                    || ledig.startsWith(søk) || bydel.startsWith(søk)
                     ){
                 temp.add(leilighet);
             }
