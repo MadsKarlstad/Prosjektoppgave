@@ -255,9 +255,19 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
     }
 
     public void opphørKontrakt(int rad){
-        Kontrakt kontrakt = modell.getValueAt(rad);
-        kontrakt.setAktiv(false);
-        kontrakt.getBolig().setUtleid(false);
+        try{Kontrakt kontrakt = modell.getValueAt(rad);
+            if(kontrakt.getAktiv()){
+            kontrakt.setAktiv(false);
+            kontrakt.getBolig().setUtleid(false);}
+
+        else{
+                JOptionPane.showMessageDialog(null,"Kontrakt inaktiv");
+            }}
+        catch(IndexOutOfBoundsException i){
+
+            JOptionPane.showMessageDialog(null,"Ingen kontrakter registrert");
+
+    }
     }
 
     @Override

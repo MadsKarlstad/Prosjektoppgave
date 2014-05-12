@@ -448,7 +448,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             try{
                 kopierbilde();}
             catch (Exception e){
-                System.out.println("kopiermetode feilet");
+
             }
         }
         else{
@@ -499,7 +499,6 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             try{
                 kopierbilde();}
             catch (Exception e){
-                System.out.println("kopiermetode feilet");
             }
         }
         else{
@@ -636,7 +635,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
             }
             catch(NullPointerException ne){
-                visMelding("Feil i filstien");
+
             }
         }
     }
