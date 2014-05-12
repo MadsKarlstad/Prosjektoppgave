@@ -23,6 +23,8 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
     private JCheckBox boligtype;
     private JComboBox<String> beliggenhet;
 
+    private JLabel[] boxlabels;
+
     private JSlider pris;
     private JSlider minsteareal;
     private JSlider størsteareal;
@@ -63,7 +65,7 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
     private JPanel overskriftpanel;
 
     private JCheckBox[] bokser;
-    private final String[]boksnavn = {"røyker","husdyr","balkong","terasse","TVinkludert","internetInkludert","strømInkludert","parkering","kjeller","heis"};
+    private final String[]boksnavn = {"Røyke","Husdyr","Balkong","Terasse","Tv","Internett","Strøm","Parkering","Kjeller","Heis"};
 
     private final int RØYKER = 0;
     private final int DYR = 1;
@@ -108,7 +110,7 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
 
         feltpanel = new JPanel(new GridLayout(7, 2, 5, 5));
         knapppanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        bokspanel = new JPanel(new GridLayout(2,5));
+        bokspanel = new JPanel(new GridLayout(2,10));
         toppanel = new JPanel(new BorderLayout());
         sliderpanel = new JPanel(new GridLayout(4,3,5,5));
         overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -116,11 +118,13 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
         felt = new JTextField[feltnavn.length];
         bokser = new JCheckBox[boksnavn.length];
 
+        boxlabels = new JLabel[boksnavn.length];
+
 
         TextPrompt tp [] = new TextPrompt[felt.length];
 
         pris = new JSlider(JSlider.HORIZONTAL,0,20000,0);
-        prislabel = new JLabel("pris");
+        prislabel = new JLabel("Pris");
         minsteareal = new JSlider(JSlider.HORIZONTAL,0,600,0);
         minareal = new JLabel("Minste areal");
         størsteareal = new JSlider(JSlider.HORIZONTAL,0,600,0);
@@ -137,9 +141,9 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
         minsteareal.setSnapToTicks(true);
         størsteareal.setSnapToTicks(true);
 
-        sliderstate_pris = new JLabel(": 0");
-        sliderstate_minareal = new JLabel(": 0");
-        sliderstate_maksareal = new JLabel(": 0");
+        sliderstate_pris = new JLabel("ønsket:         0");
+        sliderstate_minareal = new JLabel("ønsket:         0");
+        sliderstate_maksareal = new JLabel("ønsket:         0");
 
 
 
@@ -155,7 +159,7 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
 
         for (int i = 0; i < boksnavn.length; i++) {
             bokser[i] = new JCheckBox();
-            bokser[i].setText(boksnavn[i]);
+            boxlabels[i] = new JLabel(boksnavn[i]);
             bokser[i].setHorizontalAlignment(JCheckBox.CENTER);
         }
 
@@ -181,21 +185,23 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
             feltpanel.add(felt[i]);
         }
         for (int i = 0; i < boksnavn.length; i++) {
+            bokspanel.add(boxlabels[i]);
             bokspanel.add(bokser[i]);
+
         }
 
         knapppanel.add(registrer);
         knapppanel.add(avbryt);
 
         sliderpanel.add(prislabel);
-        sliderpanel.add(sliderstate_pris);
         sliderpanel.add(pris);
+        sliderpanel.add(sliderstate_pris);
         sliderpanel.add(minareal);
-        sliderpanel.add(sliderstate_minareal);
         sliderpanel.add(minsteareal);
+        sliderpanel.add(sliderstate_minareal);
         sliderpanel.add(maksareal);
-        sliderpanel.add(sliderstate_maksareal);
         sliderpanel.add(størsteareal);
+        sliderpanel.add(sliderstate_maksareal);
 
         overskriftpanel.add(overskrift);
 
@@ -210,8 +216,8 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
 
         feltpanel.setBackground(Color.decode("#B3D5E3"));
         toppanel.setBackground(Color.decode("#B3D5E3"));
-        knapppanel.setBackground(Color.decode("#DAEDF5"));
-        overskriftpanel.setBackground(Color.decode("#DAEDF5"));
+        knapppanel.setBackground(Color.decode("#B3D5E3"));
+        overskriftpanel.setBackground(Color.decode("#B3D5E3"));
         bokspanel.setBackground(Color.decode("#B3D5E3"));
         sliderpanel.setBackground(Color.decode("#B3D5E3"));
 
@@ -309,9 +315,9 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
 
         @Override
         public void stateChanged(ChangeEvent e) {
-            if(e.getSource() == pris){sliderstate_pris.setText(": " + String.valueOf(pris.getValue()));}
-            else if(e.getSource() == minsteareal){ sliderstate_minareal.setText(": " + String.valueOf(minsteareal.getValue()));}
-            else if(e.getSource() == størsteareal){ sliderstate_maksareal.setText(": " + String.valueOf(størsteareal.getValue()));}
+            if(e.getSource() == pris){sliderstate_pris.setText("ønsket:         " + String.valueOf(pris.getValue()));}
+            else if(e.getSource() == minsteareal){ sliderstate_minareal.setText("ønsket:         " + String.valueOf(minsteareal.getValue()));}
+            else if(e.getSource() == størsteareal){ sliderstate_maksareal.setText("ønsket:         " + String.valueOf(størsteareal.getValue()));}
 
         }
 

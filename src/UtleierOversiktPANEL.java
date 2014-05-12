@@ -152,11 +152,6 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
 
         søkpanel.add(søkfelt);
 
-
-
-
-
-
         tabellpanel.add(søkpanel, BorderLayout.PAGE_START);
         tabellpanel.add(scroll, BorderLayout.CENTER);
 
@@ -170,6 +165,14 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
         add(overskriftpanel, BorderLayout.PAGE_START);
         add(tabellpanel, BorderLayout.CENTER);
         add(knapppanel, BorderLayout.PAGE_END);
+
+
+
+        knapppanel.setBackground(Color.decode("#DAEDF5"));
+        overskriftpanel.setBackground(Color.decode("#B3D5E3"));
+        //tabellpanel.setBackground(Color.decode("#DAEDF5"));
+        søkpanel.setBackground(Color.decode("#DAEDF5"));
+        setBackground(Color.decode("#B3D5E3"));
 
 
 
