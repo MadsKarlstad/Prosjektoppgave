@@ -34,11 +34,6 @@ public class MainFrame extends JFrame implements ActionListener {
     private final int LEILIGHET = 3;
     private final int KONTRAKT = 4;
 
-    private String pnr;
-
-
-    //paneler for visning av leiligheter og eneboliger
-    private JPanel boligvinduer;
 
     public static final String MAIN_BOARD = "-1";
 
@@ -69,6 +64,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         vinduer = new JPanel(new CardLayout());
         vinduer.add(mainboard, MAIN_BOARD);
+        mainboard.setBackground(Color.decode("#B3D5E3"));
 
         add(vinduer, BorderLayout.CENTER);
 

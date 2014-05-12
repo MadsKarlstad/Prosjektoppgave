@@ -53,10 +53,6 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
     private final int SIVILSTATUS = 7;
     private final int YRKE = 8;
     private final int ARBFORHOLD = 9;
-    private final int MINAREAL = 10;
-    private final int MAXAREAL = 11;
-    private final int MINPRIS = 12;
-    private final int MAXPRIS = 13;
 
     private JPanel feltpanel;
     private JPanel bokspanel;
@@ -115,6 +111,7 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
         bokspanel = new JPanel(new GridLayout(2,5));
         toppanel = new JPanel(new BorderLayout());
         sliderpanel = new JPanel(new GridLayout(4,3,5,5));
+        overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         felt = new JTextField[feltnavn.length];
         bokser = new JCheckBox[boksnavn.length];
@@ -131,8 +128,6 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
 
 
         overskrift = new JLabel("Registrer søker");
-
-        overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         pris.setMajorTickSpacing(pris.getMaximum()/40);
         minsteareal.setMajorTickSpacing((minsteareal.getMaximum()/100)-1);
@@ -176,7 +171,8 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
         minsteareal.addChangeListener(e);
         størsteareal.addChangeListener(e);
 
-        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        setBorder(BorderFactory.createEmptyBorder(10/*top*/, 10/*left*/, 10/*bottom*/, 10/*right*/));
+        overskriftpanel.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));
     }
 
     public void lagGUI() {
@@ -211,6 +207,19 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
         add(toppanel, BorderLayout.PAGE_START);
         add(bokspanel,BorderLayout.CENTER);
         add(knapppanel, BorderLayout.PAGE_END);
+
+        feltpanel.setBackground(Color.decode("#B3D5E3"));
+        toppanel.setBackground(Color.decode("#B3D5E3"));
+        knapppanel.setBackground(Color.decode("#DAEDF5"));
+        overskriftpanel.setBackground(Color.decode("#DAEDF5"));
+        bokspanel.setBackground(Color.decode("#B3D5E3"));
+        sliderpanel.setBackground(Color.decode("#B3D5E3"));
+
+        setBackground(Color.decode("#B3D5E3"));
+        setBorder(BorderFactory.createEmptyBorder(10/*top*/, 10/*left*/, 10/*bottom*/, 10/*right*/));
+
+        overskriftpanel.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));
+        feltpanel.setBorder(BorderFactory.createEmptyBorder(20/*top*/, 0/*left*/, 0/*bottom*/, 0/*right*/));
     }
 
         public void registrer () {
