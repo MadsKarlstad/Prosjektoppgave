@@ -70,7 +70,6 @@ public class Soker extends Person{
         initialiserLister();
 
         df = new DecimalFormat("#.##");
-
     }
 
     public void oppdaterBoliger(Boligregister b, Leilighetregister l){
@@ -103,62 +102,6 @@ public class Soker extends Person{
     public String getArbeidsfohold_studiested() {
         return arbeidsfohold_studiested;
     }
-
-    /*public String getBeliggenhetsønske1() {
-        return beliggenhetsønske1;
-    }
-
-    public String getBeliggenhetsønske2() {
-        return beliggenhetsønske2;
-    }
-
-    public String getBeliggenhetsønske3() {
-        return beliggenhetsønske3;
-    }
-
-    public String getBeliggenhetsønske4() {
-        return beliggenhetsønske4;
-    }
-
-    public String getBeliggenhetsønske5() {
-        return beliggenhetsønske5;
-    }
-
-    public String getBeliggenhetsønske6() {
-        return beliggenhetsønske6;
-    }
-
-    public String getBeliggenhetsønske7() {
-        return beliggenhetsønske7;
-    }
-
-    public String getBeliggenhetsønske8() {
-        return beliggenhetsønske8;
-    }
-
-    public String getBeliggenhetsønske9() {
-        return beliggenhetsønske9;
-    }
-
-    public String getBeliggenhetsønske10() {
-        return beliggenhetsønske10;
-    }
-
-    public String getBeliggenhetsønske11() {
-        return beliggenhetsønske11;
-    }
-
-    public String getBeliggenhetsønske12() {
-        return beliggenhetsønske12;
-    }
-
-    public String getBolygtypeønske1() {
-        return bolygtypeønske1;
-    }
-
-    public String getBolygtypeønske2() {
-        return bolygtypeønske2;
-    }*/
 
     public int getMinAreal() {
         return minAreal;

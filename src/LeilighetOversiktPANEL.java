@@ -25,7 +25,7 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
     private JTable tabell;
     private JScrollPane scroll;
     private Leilighetmodell modell;
-    private final String[] kolonner = {"Adresse", "Boareal", "Antall rom", "Byggeår", "Beskrivelse", "Pris", "Ledig fra","Bolignr","Eier","Ledig"};
+    private final String[] kolonner = {"Adresse", "Boareal", "Antall rom", "Byggeår", "Beskrivelse", "Pris", "Ledig fra","Bolignr","Eier","Ledig","Bydel"};
 
     private JButton visInfo;
     private JButton endre;

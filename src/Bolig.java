@@ -9,6 +9,7 @@ import java.util.Date;
 
 public abstract class Bolig implements Hjem {
     private String adresse;
+    private String bydel;
     private int boareal;
     private int antallRom;
     private int byggeår;
@@ -36,11 +37,14 @@ public abstract class Bolig implements Hjem {
 
     private ImageIcon bilde;
 
+    String [] bydeler = { "Velg bydel", "Alna", "Bjerke", "Frogner", "Gamle Oslo", "Grorud",
+            "Grünerløkka", "Nordre Aker", "Nordstrand", "Sagene", "St. Hanshaugen",
+            "Stovner", "Søndre Nordstrand", "Ullern", "Vestre Aker", "Østensjø"};
 
     private Personregister register;
 
 
-    public Bolig(String bildesti, String adresse, int boareal, int antallRom, int byggeår, String beskrivelse, int pris, String ledigFra, String bolignummer, Utleier eier, boolean røyke, boolean husdyr, boolean balkong, boolean terasse, boolean tvInkludert, boolean internettInkludert, boolean strømInkludert, boolean parkering, boolean erØnsket, boolean erUtleid) {
+    public Bolig(String bildesti, String adresse, int boareal, int antallRom, int byggeår, String beskrivelse, int pris, String ledigFra, String bolignummer, Utleier eier, boolean røyke, boolean husdyr, boolean balkong, boolean terasse, boolean tvInkludert, boolean internettInkludert, boolean strømInkludert, boolean parkering, boolean erØnsket, boolean erUtleid,String bydel) {
         this.bildesti = bildesti;
         this.adresse = adresse;
         this.boareal = boareal;
@@ -61,12 +65,35 @@ public abstract class Bolig implements Hjem {
         this.parkering = parkering;
         this.erUtleid = erUtleid;
         this.erØnsket = erØnsket;
+        this.bydel=bydel;
+
+        final int VELG = 0;
+        final int ALNA = 1;
+        final int BJERKE = 2;
+        final int FROGNER = 3;
+        final int GAMLE_OSLO = 4;
+        final int GRORUD = 5;
+        final int LØKKA = 6;
+        final int NORDRE_AKER = 7;
+        final int NORDSTRAND = 8;
+        final int SAGENE = 9;
+        final int STHANSHAUGEN = 10;
+        final int STOVNER = 11;
+        final int SØNDRE_NORDSTRAND = 12;
+        final int ULLERN = 13;
+        final int VESTRE_AKER = 14;
+        final int ØSTENSJØ = 15;
+
     }
     public void setBilde(ImageIcon bilde){
         this.bilde = bilde;
     }
     public ImageIcon getBilde(){
         return bilde;
+    }
+
+    public String getBydel(){
+        return bydel;
     }
 
     @Override

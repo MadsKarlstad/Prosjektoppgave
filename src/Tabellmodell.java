@@ -202,6 +202,7 @@ class Eneboligmodell extends Tabellmodell<Enebolig> { //Tabellmodell for eneboli
     private final int RØYKER = 8;
     private final int EIER = 9;
     private final int LEDIG = 10;
+    private final int BYDEL = 11;
 
     public Eneboligmodell(String[] kolonnenavn, LinkedList<Enebolig> data) {
         super(kolonnenavn, data);
@@ -233,6 +234,8 @@ class Eneboligmodell extends Tabellmodell<Enebolig> { //Tabellmodell for eneboli
                 return enebolig.røyketekst();
             case LEDIG:
                 return enebolig.utleidTekst();
+            case BYDEL:
+                return enebolig.getBydel();
             default:
                 return null;
         }
@@ -256,6 +259,7 @@ class Leilighetmodell extends Tabellmodell<Leilighet> { //Tabellmodell for enebo
     private final int BOLIGNR = 7;
     private final int EIER = 8;
     private final int UTLEID = 9;
+    private final int BYDEL = 10;
 
     public Leilighetmodell(String[] kolonnenavn, LinkedList<Leilighet> data) {
         super(kolonnenavn, data);
@@ -285,6 +289,8 @@ class Leilighetmodell extends Tabellmodell<Leilighet> { //Tabellmodell for enebo
                 return leilighet.getLedigDato();
             case UTLEID:
                 return leilighet.getLedigTekst();
+            case BYDEL:
+                return leilighet.getBydel();
             default:
                 return null;
         }

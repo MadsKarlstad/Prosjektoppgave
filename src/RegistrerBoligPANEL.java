@@ -96,6 +96,23 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
     private final int ENEBOLIG = 1;
     private final int LEILIGHET = 2;
 
+    private final int VELG = 0;
+    private final int ALNA = 1;
+    private final int BJERKE = 2;
+    private final int FROGNER = 3;
+    private final int GAMLE_OSLO = 4;
+    private final int GRORUD = 5;
+    private final int LØKKA = 6;
+    private final int NORDRE_AKER = 7;
+    private final int NORDSTRAND = 8;
+    private final int SAGENE = 9;
+    private final int STHANSHAUGEN = 10;
+    private final int STOVNER = 11;
+    private final int SØNDRE_NORDSTRAND = 12;
+    private final int ULLERN = 13;
+    private final int VESTRE_AKER = 14;
+    private final int ØSTENSJØ = 15;
+
     private JTextArea utskriftsområde;
 
     private JLabel overskrift;
@@ -392,13 +409,16 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         boolean parkering = eneboligbokser[PARKERING].isSelected();
         boolean kjeller = eneboligbokser[KJELLER].isSelected();
 
+        String bydel = beliggenhet.getItemAt(beliggenhet.getSelectedIndex());
+
         if(!bildeOk){
             bildesti = 0;
         }
 
         if(bolignr.length()!=0||pnr.length()!=0||adresse.length()!=0||beskrivelse.length()!=0||ledig.length()!=0){
             Enebolig enebolig = new Enebolig("Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
-                    røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false);
+                    røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false,bydel);
+            System.out.println(bydel);
 
             bregister.put(bolignr, enebolig);
 
@@ -437,6 +457,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         boolean parkering = eneboligbokser[PARKERING].isSelected();
         boolean heis = leilighetbokser[HEIS].isSelected();
 
+        String bydel = beliggenhet.getItemAt(beliggenhet.getSelectedIndex());
 
         if(!bildeOk){
             bildesti = 0;
@@ -444,7 +465,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
         if(bolignr.length()!=0||pnr.length()!=0||adresse.length()!=0||beskrivelse.length()!=0||ledig.length()!=0){
             Leilighet leilighet = new Leilighet("Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
-                    røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antboder,etg,heis,false,false);
+                    røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antboder,etg,heis,false,false,bydel);
 
             legister.put(bolignr, leilighet);
             utleier.addBolig(leilighet);

@@ -25,7 +25,7 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
     private JTable tabell;
     private JScrollPane scroll;
     private Eneboligmodell modell;
-    private final String[] kolonner = {"Adresse", "Boareal", "Antall rom", "Byggeår", "Beskrivelse", "Pris", "Ledig fra","Bolignr","Røyker","Eier","Ledig"};
+    private final String[] kolonner = {"Adresse", "Boareal", "Antall rom", "Byggeår", "Beskrivelse", "Pris", "Ledig fra","Bolignr","Røyker","Eier","Ledig","Bydel"};
 
     private JButton visInfo;
     private JButton endre;
