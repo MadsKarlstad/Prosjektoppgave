@@ -149,6 +149,9 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         boligArea = new JTextArea();
 
+        bilde_info.setBorder(BorderFactory.createEmptyBorder(0/*top*/, 20/*left*/, 0/*bottom*/, 0/*right*/));
+        søkepanel.setBorder(BorderFactory.createEmptyBorder(10/*top*/, 10/*left*/, 20/*bottom*/, 10/*right*/));
+
 
         fødselsnummer = new JTextField(10);
         finn = new JButton("Finn person");
@@ -312,7 +315,28 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         int bredde = skjerm.width;
         int høyde = skjerm.height;
 
-        parent.setSize(bredde/2, høyde-400);
+        parent.setSize(bredde/2, høyde-300);
+
+
+        knappepanel.setBackground(Color.decode("#B3D5E3"));
+        knappepanel_søker.setBackground(Color.decode("#B3D5E3"));
+        knappepanel_utleier.setBackground(Color.decode("#B3D5E3"));
+
+        søkepanel.setBackground(Color.decode("#B3D5E3"));
+        infopanel_start_søker.setBackground(Color.decode("#B3D5E3"));
+        infopanel_søker.setBackground(Color.decode("#B3D5E3"));
+        midtpanel.setBackground(Color.decode("#B3D5E3"));
+        feltpanel_søker.setBackground(Color.decode("#B3D5E3"));
+        bilde_info.setBackground(Color.decode("#B3D5E3"));
+
+
+        infopanel_utleier.setBackground(Color.decode("#B3D5E3"));
+        feltpanel_utleier.setBackground(Color.decode("#B3D5E3"));
+        infopanel_start_utleier.setBackground(Color.decode("#B3D5E3"));
+
+        setBackground(Color.decode("#B3D5E3"));
+
+
     }
 
     public void visEneboliger(Soker soker) throws IOException {
