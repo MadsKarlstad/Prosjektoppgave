@@ -32,14 +32,11 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
     private JPanel feltpanel;
     private JPanel knapppanel;
 
-
     private JButton registrer;
     private JButton avbryt;
 
-
     private Personregister register;
     private MainFrame parent;
-
 
     public RegistrerUtleierPANEL(Personregister register, MainFrame parent) {
         super(new BorderLayout());
@@ -55,12 +52,9 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
         
         parent.setSize(bredde/2, høyde/2);
         parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
-
-
     }
 
     public void initialiser() {
-
 
         felt = new JTextField[feltnavn.length];
         TextPrompt tp [] = new TextPrompt[felt.length];
@@ -86,8 +80,6 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
 
     public void lagGUI() {
 
-
-
         for (int i = 0; i < felt.length; i++) {
             feltpanel.add(felt[i]);
         }
@@ -100,9 +92,6 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
         knapppanel.setBackground(Color.decode("#DAEDF5"));
         feltpanel.setBackground(Color.decode("#B3D5E3"));
         setBackground(Color.decode("#B3D5E3"));
-
-
-
     }
 
     public void registrer(){
