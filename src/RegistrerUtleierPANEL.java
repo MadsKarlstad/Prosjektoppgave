@@ -133,6 +133,7 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
             felt[i].getDocument().addDocumentListener(this);
 
         }
+
         felt[FØDSELSNUMMER].setEditable(false);
 
         felt[FØDSELSNUMMER].setText(utleier.getFødselsnummer());

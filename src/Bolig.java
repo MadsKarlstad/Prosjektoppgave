@@ -18,7 +18,7 @@ public abstract class Bolig implements Hjem {
     private String ledigFra;
     private String bolignummer;
     private Utleier eier;
-    private Soker soker;
+
 
     private boolean røyke;
     private boolean husdyr;
@@ -40,8 +40,6 @@ public abstract class Bolig implements Hjem {
     String [] bydeler = { "Velg bydel", "Alna", "Bjerke", "Frogner", "Gamle Oslo", "Grorud",
             "Grünerløkka", "Nordre Aker", "Nordstrand", "Sagene", "St. Hanshaugen",
             "Stovner", "Søndre Nordstrand", "Ullern", "Vestre Aker", "Østensjø"};
-
-    private Personregister register;
 
 
     public Bolig(String bildesti, String adresse, int boareal, int antallRom, int byggeår, String beskrivelse, int pris, String ledigFra, String bolignummer, Utleier eier, boolean røyke, boolean husdyr, boolean balkong, boolean terasse, boolean tvInkludert, boolean internettInkludert, boolean strømInkludert, boolean parkering, boolean erØnsket, boolean erUtleid,String bydel) {

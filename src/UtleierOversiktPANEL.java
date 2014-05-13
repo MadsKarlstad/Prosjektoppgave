@@ -345,9 +345,15 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
 
         Utleier utleier = register.get(sibling.getFødselnummer());
 
-        for(int i = 0; i<utleier.getEideBoliger().size(); i++){
+        for(int i = 0; i < utleier.getEideBoliger().size(); i++){
 
-            utleier.getEideBoliger().get(i).setEier(utleier);
+            Bolig bolig = (Bolig)utleier.getEideBoliger().toArray()[i];
+
+            bolig.setEier(utleier);
+
+            System.out.println(bolig.getEiersNavn());
+
+
         }
 
 
@@ -357,6 +363,8 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
         utleier.setAdresse(sibling.getAdresse());
         utleier.setMail(sibling.getMail());
         utleier.setTelefonnummer(sibling.getTelefonnummer());
+
+
 
         removeAll();
         revalidate();
