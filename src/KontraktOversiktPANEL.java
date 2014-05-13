@@ -283,9 +283,19 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
             visInfo(rad);
         }
         else if(e.getSource()==terminer){
+
             int rad = tabell.getSelectedRow();
-            opphørKontrakt(rad);
+            int svar = JOptionPane.showOptionDialog(null,"Vil du opphøre kontrakten?","Bekreft sletting",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
+            if(svar==JOptionPane.YES_OPTION){
+
+            opphørKontrakt(rad);}
+
+            if(svar==JOptionPane.NO_OPTION){
+                JOptionPane.showMessageDialog(null,"Handling avbrutt");
+            }
         }
+
+
     }
 
     @Override
