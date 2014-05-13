@@ -349,13 +349,11 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
 
         Utleier utleier = register.get(sibling.getFødselnummer());
 
-
         utleier.setFornavn(sibling.getFornavn());
         utleier.setEtternavn(sibling.getEtternavn());
         utleier.setAdresse(sibling.getAdresse());
         utleier.setMail(sibling.getMail());
         utleier.setTelefonnummer(sibling.getTelefonnummer());
-
 
         removeAll();
         revalidate();
