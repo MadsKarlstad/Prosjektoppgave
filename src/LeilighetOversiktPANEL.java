@@ -9,6 +9,7 @@ import javax.swing.text.html.HTMLDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -238,16 +239,23 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
         int svar = JOptionPane.showOptionDialog(null,"Vil du slette leiligheten?","Bekreft sletting",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
         if(svar==JOptionPane.YES_OPTION){
             rad = tabell.getSelectedRow();
-            Leilighet leilighet = modell.getValueAt(rad);
-            String bolignr = leilighet.getBolignr();
-            if(leilighet.erUtleid() == true){
-                JOptionPane.showMessageDialog(null,"Leiligheten er utleid og kan ikke slettes");
+            try{
+                Leilighet leilighet = modell.getValueAt(rad);
+                String bolignr = leilighet.getBolignr();
+                if(leilighet.erUtleid() == true){
+                    JOptionPane.showMessageDialog(null,"Leiligheten er utleid og kan ikke slettes");
+                }
+                else{
+                    modell.delRow(rad);
+                    register.fjern(bolignr);
+                    parent.skrivTilFil(leilighet);
+                }
             }
-            else{
-                modell.delRow(rad);
-                register.fjern(bolignr);
-                utleier.removeBolig(leilighet);
-                parent.skrivTilFil(leilighet);
+            catch(IndexOutOfBoundsException ioobe){
+                JOptionPane.showMessageDialog(null,"Ingen bolig markert/registrert");
+            }
+            catch (NullPointerException npe){
+
             }
         }
         if(svar==JOptionPane.NO_OPTION){

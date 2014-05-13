@@ -298,15 +298,20 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
         int svar = JOptionPane.showOptionDialog(null,"Vil du slette utleieren?","Bekreft sletting",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
         if(svar==JOptionPane.YES_OPTION){
             rad = tabell.getSelectedRow();
-            Utleier utleier = modell.getValueAt(rad);
-            eiersboliger = utleier.getEideBoliger();
-            if(eiersboliger.size()!=0){
-                JOptionPane.showMessageDialog(null,"Utleieren har boliger registrert og kan ikke slettes");
+            try{
+                Utleier utleier = modell.getValueAt(rad);
+                eiersboliger = utleier.getEideBoliger();
+                if(eiersboliger.size()!=0){
+                    JOptionPane.showMessageDialog(null,"Utleieren har boliger registrert og kan ikke slettes");
+                }
+                else if(eiersboliger.size()==0) {
+                    String persnr = utleier.getFødselsnummer();
+                    modell.delRow(rad);
+                    register.fjern(persnr);
+                }
             }
-            else if(eiersboliger.size()==0) {
-                String persnr = utleier.getFødselsnummer();
-                modell.delRow(rad);
-                register.fjern(persnr);
+            catch(IndexOutOfBoundsException ioobe){
+                JOptionPane.showMessageDialog(null,"Ingen utleier markert/registrert");
             }
         }
         if(svar==JOptionPane.NO_OPTION){

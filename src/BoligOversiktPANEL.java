@@ -2,6 +2,8 @@
  * Copyright (c) 2014. Gruppeoppgave for Erlend Westbye s193377 Mads Karlstad s193949 Christoffer Jønsberg s193674
  */
 
+import com.sun.codemodel.internal.JOp;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -9,6 +11,7 @@ import javax.swing.text.html.HTMLDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -237,23 +240,31 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
         if(svar==JOptionPane.YES_OPTION){
 
             rad = tabell.getSelectedRow();
-            Enebolig enebolig = modell.getValueAt(rad);
-            String bolignr = enebolig.getBolignr();
-            if(enebolig.erUtleid() == true){
-                JOptionPane.showMessageDialog(null,"Boligen er utleid og kan ikke slettes.");
+            try{
+                Enebolig enebolig = modell.getValueAt(rad);
+                String bolignr = enebolig.getBolignr();
+                    if(enebolig.erUtleid() == true){
+                        JOptionPane.showMessageDialog(null,"Boligen er utleid og kan ikke slettes.");
+                    }
+                    else {
+                        modell.delRow(rad);
+                        register.fjern(bolignr);
+                        parent.skrivTilFil(enebolig);
+                    }
+                }
+            catch (IndexOutOfBoundsException ioobe){
+                JOptionPane.showMessageDialog(null,"Ingen boliger markert/registrert");
             }
-            else {
-                modell.delRow(rad);
-                register.fjern(bolignr);
-                parent.skrivTilFil(enebolig);
-            }
+
         }
+
+
         if(svar==JOptionPane.NO_OPTION){
             JOptionPane.showMessageDialog(null,"Sletting avbrutt");
         }
     }
 
-    public void endreUtleier(){
+    public void endreBolig(){
         JOptionPane.showMessageDialog(null,"Not yet supported");
     }
 
@@ -274,12 +285,12 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
             parent.setSize(bredde/2, høyde-100);
             parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
         }
-        else if(e.getSource() == fjern){
+        else if(e.getSource() == fjern) {
             int rad = tabell.getSelectedRow();
             slettEnebolig(rad);
         }
         else if(e.getSource() == endre){
-            endreUtleier();
+            endreBolig();
         }
         else if(e.getSource() == visInfo){
             visInfo();

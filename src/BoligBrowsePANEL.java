@@ -843,7 +843,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 index = 0;
                 soker.oppdaterØnskedeBoliger();
                 visEneboliger(soker);
-
             }
             catch (IOException io){
 
@@ -858,7 +857,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 index = 0;
                 soker.oppdaterØnskedeBoliger();
                 visLeilighet(soker);
-
             }
             catch (IOException io){
 

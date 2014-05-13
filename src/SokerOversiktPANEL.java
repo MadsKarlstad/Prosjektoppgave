@@ -240,10 +240,16 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         int svar = JOptionPane.showOptionDialog(null,"Vil du slette søkeren?","Bekreft sletting",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
         if(svar==JOptionPane.YES_OPTION){
             rad = tabell.getSelectedRow();
-            Soker soker = modell.getValueAt(rad);
-            String persnr = soker.getFødselsnummer();
-            modell.delRow(rad);
-            pregister.fjern(persnr);
+            try{
+                Soker soker = modell.getValueAt(rad);
+                String persnr = soker.getFødselsnummer();
+                modell.delRow(rad);
+                pregister.fjern(persnr);
+            }
+            catch(IndexOutOfBoundsException ioobe){
+                JOptionPane.showMessageDialog(null,"Ingen søker markert/registrert");
+            }
+
         }
         if(svar==JOptionPane.NO_OPTION){
             JOptionPane.showMessageDialog(null,"Sletting avbrutt");
