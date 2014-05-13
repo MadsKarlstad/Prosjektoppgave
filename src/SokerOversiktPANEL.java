@@ -284,25 +284,30 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         int svar = JOptionPane.showOptionDialog(null,"Vil du endre denne søkeren?","Bekreft endring",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
 
         if(svar==JOptionPane.YES_OPTION){
+            try{
+                Toolkit kit = Toolkit.getDefaultToolkit();
+                Dimension skjerm = kit.getScreenSize();
+                int bredde = skjerm.width;
+                int høyde = skjerm.height;
 
-            Toolkit kit = Toolkit.getDefaultToolkit();
-            Dimension skjerm = kit.getScreenSize();
-            int bredde = skjerm.width;
-            int høyde = skjerm.height;
+                parent.setSize(bredde/2, høyde-200);
+                parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
 
-            parent.setSize(bredde/2, høyde-200);
-            parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
+                Soker soker = modell.getValueAt(rad);
 
-            Soker soker = modell.getValueAt(rad);
+                sibling.endreSoker(soker);
 
-            sibling.endreSoker(soker);
+                removeAll();
+                revalidate();
+                repaint();
 
-            removeAll();
-            revalidate();
-            repaint();
+                add(sibling, BorderLayout.CENTER);
+                add(oppdater,BorderLayout.PAGE_END);
+            }
+            catch(IndexOutOfBoundsException ioobe){
+                JOptionPane.showMessageDialog(null,"Ingen søker markert/registrert");
+            }
 
-            add(sibling, BorderLayout.CENTER);
-            add(oppdater,BorderLayout.PAGE_END);
 
 
         }
