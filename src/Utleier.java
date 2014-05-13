@@ -35,16 +35,10 @@ public class Utleier extends Person {
         return navn;
     }
 
-
-    /*public void leggInnØnsketEnebolig(Enebolig enebolig){
-
-        eneboligliste.add(enebolig);
-        }
-
-    public void leggInnØnsketLeilighet(Leilighet leilighet){
-
-        leilighetliste.add(leilighet);
-    }*/
+    public void oppdaterBoliger(Boligregister b, Leilighetregister l){
+        boligregister = b;
+        leilighetregister = l;
+    }
 
     public void addLeilighet(Leilighet leilighet){
         ønskedeleilighetListe.add(leilighet);
