@@ -373,6 +373,7 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
         try{
             Utleier utleier = modell.getValueAt(rad);
             utleier.oppdaterBoliger(bregister,legister);
+            utleier.oppdaterLister();
             JOptionPane.showMessageDialog(null, "Ønskede boliger: "+utleier.getØnskedeEneboliger() + "\n" + utleier.getØnskedeLeiligheter()
                     +"\nEide boliger: " + utleier.getEideBoliger());
         }

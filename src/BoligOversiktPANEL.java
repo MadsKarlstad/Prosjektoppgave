@@ -247,6 +247,7 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
                         register.fjern(bolignr);
                         Utleier eier = enebolig.getEier();
                         eier.removeBolig(enebolig);
+                        eier.oppdaterLister();
                         parent.skrivTilFil(enebolig);
 
                     }

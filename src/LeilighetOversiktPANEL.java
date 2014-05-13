@@ -246,6 +246,7 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
                     register.fjern(bolignr);
                     Utleier eier = leilighet.getEier();
                     eier.removeBolig(leilighet);
+                    eier.oppdaterLister();
                     parent.skrivTilFil(leilighet);
                 }
             }

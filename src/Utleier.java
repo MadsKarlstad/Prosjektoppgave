@@ -40,6 +40,34 @@ public class Utleier extends Person {
         leilighetregister = l;
     }
 
+    public void oppdaterLister(){
+
+        ønskedeeneboligliste.clear();
+        ønskedeleilighetListe.clear();
+        eideBoliger.clear();
+
+        Enebolig enebolig;
+
+
+        for(int i = 0; i < boligregister.size(); i++){
+            String key = (String) boligregister.keySet().toArray()[i];
+            Utleier eier = this;
+            enebolig = boligregister.get(key);
+
+            System.out.println(key);
+
+            if (boligregister.get(key).getEier().getNavn().equals(eier.getNavn())){
+
+                eideBoliger.add(enebolig);
+
+            }
+
+
+
+        }
+
+    }
+
     public void addLeilighet(Leilighet leilighet){
         ønskedeleilighetListe.add(leilighet);
     }
