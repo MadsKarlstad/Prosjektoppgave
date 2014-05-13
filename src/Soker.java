@@ -22,47 +22,6 @@ public class Soker extends Person{
 
     private int pris;
 
-
-    public void setRøyk(boolean røyk) {
-        this.røyk = røyk;
-    }
-
-    public void setHusdyr(boolean husdyr) {
-        this.husdyr = husdyr;
-    }
-
-    public void setBalkong(boolean balkong) {
-        this.balkong = balkong;
-    }
-
-    public void setTerasse(boolean terasse) {
-        this.terasse = terasse;
-    }
-
-    public void setTVinkludert(boolean TVinkludert) {
-        this.TVinkludert = TVinkludert;
-    }
-
-    public void setInternetinkludert(boolean internetinkludert) {
-        Internetinkludert = internetinkludert;
-    }
-
-    public void setStrøminkludert(boolean strøminkludert) {
-        this.strøminkludert = strøminkludert;
-    }
-
-    public void setParkering(boolean parkering) {
-        this.parkering = parkering;
-    }
-
-    public void setKjeller(boolean kjeller) {
-        this.kjeller = kjeller;
-    }
-
-    public void setHeis(boolean heis) {
-        this.heis = heis;
-    }
-
     private boolean røyk;
     private boolean husdyr;
     private boolean balkong;
@@ -341,6 +300,46 @@ public class Soker extends Person{
     public LinkedList<Leilighet> getLeilighetliste(){
 
         return leilighetliste;
+    }
+
+    public void setRøyk(boolean røyk) {
+        this.røyk = røyk;
+    }
+
+    public void setHusdyr(boolean husdyr) {
+        this.husdyr = husdyr;
+    }
+
+    public void setBalkong(boolean balkong) {
+        this.balkong = balkong;
+    }
+
+    public void setTerasse(boolean terasse) {
+        this.terasse = terasse;
+    }
+
+    public void setTVinkludert(boolean TVinkludert) {
+        this.TVinkludert = TVinkludert;
+    }
+
+    public void setInternetinkludert(boolean internetinkludert) {
+        Internetinkludert = internetinkludert;
+    }
+
+    public void setStrøminkludert(boolean strøminkludert) {
+        this.strøminkludert = strøminkludert;
+    }
+
+    public void setParkering(boolean parkering) {
+        this.parkering = parkering;
+    }
+
+    public void setKjeller(boolean kjeller) {
+        this.kjeller = kjeller;
+    }
+
+    public void setHeis(boolean heis) {
+        this.heis = heis;
     }
 
 

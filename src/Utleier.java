@@ -46,11 +46,6 @@ public class Utleier extends Person {
         leilighetliste.add(leilighet);
     }*/
 
-    public void oppdaterØnskedeBoliger(Boligregister b, Leilighetregister l){
-        boligregister = b;
-        leilighetregister = l;
-    }
-
     public void addLeilighet(Leilighet leilighet){
         ønskedeleilighetListe.add(leilighet);
     }
