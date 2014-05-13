@@ -245,6 +245,8 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
                     else {
                         modell.delRow(rad);
                         register.fjern(bolignr);
+                        Utleier eier = enebolig.getEier();
+                        eier.removeBolig(enebolig);
                         parent.skrivTilFil(enebolig);
                     }
                 }
