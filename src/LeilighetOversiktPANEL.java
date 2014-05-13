@@ -263,7 +263,7 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
         }
     }
 
-    public void endreUtleier(){
+    public void endreLeilighet(){
         JOptionPane.showMessageDialog(null,"Not yet supported");
     }
 
@@ -305,11 +305,9 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
         else if(e.getSource() == fjern){
             int rad = tabell.getSelectedRow();
             slettLeilighet(rad);
-
-
         }
         else if(e.getSource() == endre){
-            endreUtleier();
+            endreLeilighet();
         }
         else if(e.getSource() == visInfo){
             int rad = tabell.getSelectedRow();
