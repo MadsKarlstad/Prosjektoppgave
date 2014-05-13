@@ -127,6 +127,36 @@ public class Enebolig extends Bolig {
             return "Ja";
     }
 
+    public String husdyrTekst(){
+        String s = "";
+        if(husdyr()==true){
+            s="Ja";
+        }
+        else
+            s="Nei";
+        return s;
+    }
+
+    public String tvTekst(){
+        String s = "";
+        if(tvInkludert()==true){
+            s="Ja";
+        }
+        else
+            s="Nei";
+        return s;
+    }
+
+    public String strømTekst(){
+        String s = "";
+        if(strømInkludert()==true){
+            s="Ja";
+        }
+        else
+            s="Nei";
+        return s;
+    }
+
     public Enebolig getEnebolig(){
 
         return this;
@@ -141,58 +171,5 @@ public class Enebolig extends Bolig {
     public LinkedList getSokere(){
         return sokerliste;
     }
-
-    /*public void matcherEnebolig(){
-        for (Map.Entry<String, Soker> entry : sokerregister.entrySet()){
-            double prosent = 0;
-            double sum = 0;
-            if(røyke() == entry.getValue().isRøyk()){
-                sum+=1;
-            }
-            if(balkong() == entry.getValue().isBalkong()){
-                sum+=match;
-
-            }
-            if(husdyr() == entry.getValue().isHusdyr()){
-                sum+=match;
-
-            }
-            if(internettInkludert() == entry.getValue().isInternetinkludert()){
-                sum+=match;
-
-            }
-            if(tvInkludert() == entry.getValue().isTVinkludert()){
-                sum+=match;
-
-            }
-            if(isKjeller() == entry.getValue().isKjeller()){
-                sum+=match;
-
-            }
-            if(strømInkludert() == entry.getValue().isStrøminkludert()){
-                sum+=match;
-
-            }
-            if(parkering() == entry.getValue().isParkering()){
-                sum+=match;
-
-            }
-            if(terasse() == entry.getValue().isTerasse()){
-                sum+=match;
-            }
-
-            prosent = ((sum/9)*100);
-
-            if(prosent > 50 || erUtleid() == false){
-                //System.out.println("Prosentmatch: "+ df.format(prosent) +"% for bolignummer " + entry.getValue().getBolignr());
-                Soker soker = entry.getValue();
-                soker.addEneboligMatch(this);
-
-                setProsent(prosent);
-
-            }
-        }
-        //return eneboligliste;
-    }*/
 
 }

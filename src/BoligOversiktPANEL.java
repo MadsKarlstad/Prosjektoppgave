@@ -28,7 +28,7 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
     private JTable tabell;
     private JScrollPane scroll;
     private Eneboligmodell modell;
-    private final String[] kolonner = {"Adresse", "Boareal", "Antall rom", "Byggeår", "Beskrivelse", "Pris", "Ledig fra","Bolignr","Røyker","Eier","Ledig","Bydel"};
+    private final String[] kolonner = {"Adresse", "Boareal", "Antall rom", "Byggeår", "Beskrivelse", "Pris", "Ledig fra","Bolignr","Røyker","Eier","Ledig","Bydel","Husdyr","TV inkludert","Strøm inkludert"};
 
     private JButton visInfo;
     private JButton endre;
@@ -268,8 +268,29 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
         JOptionPane.showMessageDialog(null,"Not yet supported");
     }
 
-    public void visInfo(){
-        JOptionPane.showMessageDialog(null,"Not yet supported");
+    public void visInfo(int rad){
+        try{
+            Enebolig enebolig = modell.getValueAt(rad);
+            String s = "";
+            s+="Dette er en " + enebolig.getBeskrivelse()+" enebolig på "+enebolig.getBoareal() + " kvadratmeter" + ", som ligger i " + enebolig.getAdresse()+ ", " + enebolig.getBydel();
+            s+="\nEneboligen ble bygget i "+enebolig.getByggår();
+            s+="\n\nEneboligen har følgene fasiliteter:";
+            s+="\nAntall rom: "+enebolig.getAntallRom();
+            s+="\nAntall bad: "+enebolig.getAntallBad();
+            s+="\nAntall etasjer: "+enebolig.getAntallEtasjer();
+            s+="\nTV inkludert: " + enebolig.tvTekst();
+            s+="\nStrøm inkludert: " + enebolig.strømTekst();
+            s+="\nInternett inkludert: " + enebolig.internettInkludert();
+            s+="\nParkering: " + enebolig.parkering();
+            s+="\nTillater husdyr: " + enebolig.husdyrTekst();
+            s+="\nTillater røyking: " + enebolig.røyketekst();
+            s+="\n\nEneboligen er ledig fra og med " + enebolig.getLedigDato();
+            s+="\nKontakt eier, " + enebolig.getEiersNavn() + ", gjennom BoligBrowse for å registrere ønske om å leie denne eneboligen";
+            JOptionPane.showMessageDialog(null,s);
+        }
+        catch(IndexOutOfBoundsException ioobe){
+            JOptionPane.showMessageDialog(null,"Ingen bolig markert/registrert");
+        }
     }
 
     @Override
@@ -293,7 +314,8 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
             endreBolig();
         }
         else if(e.getSource() == visInfo){
-            visInfo();
+            int rad = tabell.getSelectedRow();
+            visInfo(rad);
         }
     }
 

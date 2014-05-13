@@ -267,8 +267,26 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
         JOptionPane.showMessageDialog(null,"Not yet supported");
     }
 
-    public void visInfo(){
-        JOptionPane.showMessageDialog(null,"Not yet supported");
+    public void visInfo(int rad){
+        try{
+            Leilighet leilighet = modell.getValueAt(rad);
+            String s = "";
+            s+="Dette er en " + leilighet.getBeskrivelse()+" leilighet på "+leilighet.getBoareal() + " kvadratmeter" + ", som ligger i " + leilighet.getAdresse()+ ", " + leilighet.getBydel();
+            s+="\nEneboligen ble bygget i "+leilighet.getByggår();
+            s+="\n\nEneboligen har følgene fasiliteter:";
+            s+="\nAntall rom: "+leilighet.getAntallRom();
+            s+="\nAntall boder: " + leilighet.getAntallBoder();
+            s+="\nEtasje: " + leilighet.getEtasje();
+            s+="\nParkering: " + leilighet.parkering();
+            s+="\nHeis: " + leilighet.isHeis();
+            s+="\nTillater røyking: " + leilighet.røyketekst();
+            s+="\n\nEneboligen er ledig fra og med " + leilighet.getLedigDato();
+            s+="\nKontakt eier, " + leilighet.getEiersNavn() + ", gjennom BoligBrowse for å registrere ønske om å leie denne eneboligen";
+            JOptionPane.showMessageDialog(null,s);
+        }
+        catch(IndexOutOfBoundsException ioobe){
+            JOptionPane.showMessageDialog(null,"Ingen bolig markert/registrert");
+        }
     }
 
     @Override
@@ -294,7 +312,8 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
             endreUtleier();
         }
         else if(e.getSource() == visInfo){
-            visInfo();
+            int rad = tabell.getSelectedRow();
+            visInfo(rad);
         }
     }
 
