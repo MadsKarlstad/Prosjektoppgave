@@ -350,6 +350,8 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
             utleier.getEideBoliger().get(i).setEier(utleier);
         }
 
+
+
         utleier.setFornavn(sibling.getFornavn());
         utleier.setEtternavn(sibling.getEtternavn());
         utleier.setAdresse(sibling.getAdresse());

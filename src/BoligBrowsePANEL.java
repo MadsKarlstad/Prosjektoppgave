@@ -346,7 +346,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         eneboligliste = soker.getEneboligliste();
 
         bolignummer.setText(eneboligliste.get(index).getBolignr());
-        eier.setText(eneboligliste.get(index).getEiersNavn());
+        eier.setText(eneboligliste.get(index).getEier().getNavn());
         pris.setText(String.valueOf(eneboligliste.get(index).getPris()));
         areal.setText(String.valueOf(eneboligliste.get(index).getBoareal()));
 
@@ -385,8 +385,9 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         soker.oppdaterØnskedeBoliger();
 
         leilighetliste = soker.getLeilighetliste();
+
         bolignummer.setText(leilighetliste.get(index).getBolignr());
-        eier.setText(leilighetliste.get(index).getEiersNavn());
+        eier.setText(eneboligliste.get(index).getEier().getNavn());
         pris.setText(String.valueOf(leilighetliste.get(index).getPris()));
         areal.setText(String.valueOf(leilighetliste.get(index).getBoareal()));
 
@@ -423,9 +424,12 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
     public void visEneboligUtleier(Utleier utleier, int index, int boligindex) throws IndexOutOfBoundsException{
 
 
+
         eneboligliste = utleier.getØnskedeEneboliger();
 
         Soker soker = (Soker) eneboligliste.get(boligindex).getSokere().get(index);
+
+
 
 
 

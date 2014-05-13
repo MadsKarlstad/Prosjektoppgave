@@ -42,8 +42,6 @@ public class Utleier extends Person {
 
     public void oppdaterLister(){
 
-        ønskedeeneboligliste.clear();
-        ønskedeleilighetListe.clear();
         eideBoliger.clear();
 
         Enebolig enebolig;
@@ -59,6 +57,7 @@ public class Utleier extends Person {
             if (boligregister.get(key).getEier().getNavn().equals(eier.getNavn())){
 
                 eideBoliger.add(enebolig);
+                enebolig.setEier(eier);
 
             }
 
