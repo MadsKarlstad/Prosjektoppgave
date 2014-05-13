@@ -11,8 +11,6 @@ public class Enebolig extends Bolig {
     private boolean kjeller;
     private double tomtareal;
     private int antallBad;
-    private int match;
-    private Soker soker;
     private Utleier eier;
 
     private LinkedList<Soker> sokerliste;
@@ -36,7 +34,6 @@ public class Enebolig extends Bolig {
 
         sokerliste = new LinkedList<Soker>();
         sokerregister= new Sokerregister();
-        match = 1;
 
         setBlidesti(super.getBildesti());
         setEier(eier);
