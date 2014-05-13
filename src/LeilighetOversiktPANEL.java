@@ -207,11 +207,6 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
             }
         }
 
-        if(temp.isEmpty()){
-
-            søkfelt.setBackground(Color.decode("#fd6d6d"));
-        }
-
         overskriftpanel.remove(overskrift);
         tabellpanel.remove(scroll);
         scroll.remove(tabell);

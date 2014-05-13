@@ -281,14 +281,12 @@ public class Soker extends Person{
     }
 
     public void oppdaterØnskedeBoliger(){
-
         eneboligliste.clear();
         leilighetliste.clear();
         initialiserLister();
 
         matcherEnebolig();
         matcherLeilighet();
-
     }
 
     public LinkedList<Enebolig> getEneboligliste(){

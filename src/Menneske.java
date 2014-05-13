@@ -7,6 +7,10 @@ import java.io.Serializable;
 import java.util.TreeMap;
 
 public interface Menneske extends Serializable {
+    /**
+     * get-metode for fødselsnummer til personen
+     * @return FØDSELSNUMMER - personens fødselsnummer
+     */
     public String getFødselsnummer();
     public String getNavn();
     public String getFornavn();
@@ -14,6 +18,11 @@ public interface Menneske extends Serializable {
     public String getAdresse();
     public String getMail();
     public String getTelefonnummer();
+
+    /**
+     * Set metode for å endre fornavn
+     * @param fornavn nytt fornavn til person
+     */
 
     public void setFornavn(String fornavn);
     public void setEtternavn(String etternavn);

@@ -222,11 +222,6 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
             }
         }
 
-        if(temp.isEmpty()){
-
-            søkfelt.setBackground(Color.decode("#fd6d6d"));
-        }
-
         overskriftpanel.remove(overskrift);
         tabellpanel.remove(scroll);
         scroll.remove(tabell);

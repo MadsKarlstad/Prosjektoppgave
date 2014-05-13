@@ -249,6 +249,8 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
         feltpanel.setBorder(BorderFactory.createEmptyBorder(20/*top*/, 0/*left*/, 0/*bottom*/, 0/*right*/));
     }
 
+
+
         public void registrer () {
         String fødselsnummer = felt[FØDSELSNUMMER].getText();
         String fornavn = felt[FORNAVN].getText();
@@ -286,9 +288,9 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
                 //gå tilbake til mainframe
                 parent.visPanel(MainFrame.MAIN_BOARD);
 
-            } else if (!register.leggTil(søker)) {
+            } /*else if (!register.leggTil(søker)) {
                 visMelding("Feil informasjon ble utfylt, venligst prøv igjen");
-            }
+            }*/
         } else {
             visMelding("Vennligst fyll ut all informasjon");
         }

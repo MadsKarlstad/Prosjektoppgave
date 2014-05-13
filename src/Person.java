@@ -14,6 +14,15 @@ public abstract class Person implements Menneske {
     private String telefonnummer;
 
 
+    /**
+     * konstruktør for abstract superklasse Person. Konstruktøren initialiserer datafeltene i personklassen
+     * @param FØDSELSNUMMER final String for fødselsnummer, brukes til å sette fødselsnummer til person, settes kun en gang
+     * @param fornavn personens fornavn
+     * @param etternavn personens etternavn
+     * @param adresse personens adresse
+     * @param mail personens email
+     * @param telefonnummer personens telefonnummer
+     */
 
     protected Person(String FØDSELSNUMMER, String fornavn, String etternavn, String adresse, String mail, String telefonnummer) {
         this.FØDSELSNUMMER = FØDSELSNUMMER;
@@ -24,6 +33,8 @@ public abstract class Person implements Menneske {
         this.telefonnummer = telefonnummer;
 
     }
+
+
 
     @Override
     public String getFødselsnummer() {

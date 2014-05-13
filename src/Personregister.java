@@ -12,6 +12,7 @@ public class Personregister extends TreeMap<String, Utleier> implements Register
         if(object instanceof Utleier){
             if(!finnes(((Utleier) object).getFødselsnummer())){
 
+
                 put(((Utleier) object).getFødselsnummer(),(Utleier) object);
                 return true;
 
