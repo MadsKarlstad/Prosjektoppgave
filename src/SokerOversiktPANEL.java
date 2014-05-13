@@ -345,11 +345,6 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         soker.setStrøminkludert(sibling.getStrøm());
         soker.setHeis(sibling.getHeis());
 
-
-
-
-
-
         removeAll();
         revalidate();
         repaint();
