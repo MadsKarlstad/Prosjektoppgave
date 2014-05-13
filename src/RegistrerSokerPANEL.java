@@ -40,6 +40,7 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
     private JLabel sliderstate_maksareal;
 
     private JLabel overskrift;
+    private JLabel endrelabel;
 
 
 
@@ -99,6 +100,11 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
     private String arbeidforhold ;
     private String yrke;
 
+    private int ønsket_pris;
+    private int ønsket_areal_min;
+    private int ønsket_areal_maks;
+
+
     public RegistrerSokerPANEL(Sokerregister register,Boligregister eneboligregister,Leilighetregister leilighetregister, MainFrame parent) {
         super(new BorderLayout());
         this.register = register;
@@ -145,6 +151,7 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
 
 
         overskrift = new JLabel("Registrer søker");
+        endrelabel = new JLabel("Endring av søker");
 
         pris.setMajorTickSpacing(pris.getMaximum()/40);
         minsteareal.setMajorTickSpacing((minsteareal.getMaximum()/100)-1);
@@ -190,6 +197,8 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
 
         setBorder(BorderFactory.createEmptyBorder(10/*top*/, 10/*left*/, 10/*bottom*/, 10/*right*/));
         overskriftpanel.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));
+
+
     }
 
     public void lagGUI() {
@@ -200,7 +209,6 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
         for (int i = 0; i < boksnavn.length; i++) {
             bokspanel.add(boxlabels[i]);
             bokspanel.add(bokser[i]);
-
         }
 
         knapppanel.add(registrer);
@@ -258,16 +266,17 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
         int ønsketpris = pris.getValue();
 
 
-        boolean røyke = bokser[RØYKER].isSelected();
-        boolean dyr = bokser[DYR].isSelected();
-        boolean balk = bokser[BALKONG].isSelected();
-        boolean ter = bokser[TERASSE].isSelected();
-        boolean tv = bokser[TV].isSelected();
-        boolean nett = bokser[NETT].isSelected();
-        boolean strøm = bokser[STRØM].isSelected();
-        boolean parkering = bokser[PARKERING].isSelected();
-        boolean kjeller = bokser[KJELLER].isSelected();
-        boolean heis = bokser[HEIS].isSelected();
+            boolean røyke = bokser[RØYKER].isSelected();
+            boolean dyr = bokser[DYR].isSelected();
+            boolean balk = bokser[BALKONG].isSelected();
+            boolean ter = bokser[TERASSE].isSelected();
+            boolean tv = bokser[TV].isSelected();
+            boolean nett = bokser[NETT].isSelected();
+            boolean strøm = bokser[STRØM].isSelected();
+            boolean parkering = bokser[PARKERING].isSelected();
+            boolean kjeller = bokser[KJELLER].isSelected();
+            boolean heis = bokser[HEIS].isSelected();
+
 
         if (fødselsnummer.length() != 0 || fornavn.length() != 0 || etternavn.length() != 0 || adresse.length() != 0 || mail.length() != 0 || telefonnummer.length() != 0) {
             Person søker = new Soker(fødselsnummer, fornavn, etternavn, adresse, mail, telefonnummer, antpers, sivilstatus, yrke,
@@ -330,12 +339,19 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
 
         knapppanel.removeAll();
 
+        overskriftpanel.removeAll();
+
+        overskriftpanel.add(endrelabel);
+
         for (int i = 0; i < feltnavn.length; i++) {
             felt[i] = new JTextField(10);
             feltpanel.add(felt[i]);
             felt[i].getDocument().addDocumentListener(this);
 
         }
+
+
+
         felt[FØDSELSNUMMER].setEditable(false);
 
         felt[FØDSELSNUMMER].setText(soker.getFødselsnummer());
@@ -344,8 +360,34 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
         felt[ADRESSE].setText(soker.getAdresse());
         felt[MAIL].setText(soker.getMail());
         felt[TELEFONNUMMER].setText(soker.getTelefonnummer());
+        felt[SIVILSTATUS].setText(soker.getSivilstatus());
+        felt[YRKE].setText(soker.getYrke());
+        felt[ARBFORHOLD].setText(soker.getArbeidsfohold_studiested());
+        felt[ANTPERS].setText(soker.getAntallPersoner());
 
-        add(feltpanel);
+        bokser[RØYKER].setSelected(soker.isRøyk());
+        bokser[DYR].setSelected(soker.isHusdyr());
+        bokser[BALKONG].setSelected(soker.isBalkong());
+        bokser[TERASSE].setSelected(soker.isTerasse());
+        bokser[TV].setSelected(soker.isTVinkludert());
+        bokser[NETT].setSelected(soker.isInternetinkludert());
+        bokser[STRØM].setSelected(soker.isStrøminkludert());
+        bokser[PARKERING].setSelected(soker.isParkering());
+        bokser[HEIS].setSelected(soker.isHeis());
+        bokser[KJELLER].setSelected(soker.isKjeller());
+
+
+
+
+        toppanel.add(overskriftpanel, BorderLayout.PAGE_START);
+        toppanel.add(feltpanel, BorderLayout.CENTER);
+        toppanel.add(sliderpanel, BorderLayout.PAGE_END);
+
+        pris.setValue(soker.getPris());
+        minsteareal.setValue(soker.getMinAreal());
+        størsteareal.setValue(soker.getMaksAreal());
+
+
 
     }
 
@@ -360,6 +402,21 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
     public void setYRKE(String s){yrke = s;}
     public void setARBFORHOLD(String s){arbeidforhold = s;}
 
+    public void setPris(int p ){ønsket_pris = p;}
+    public void setØnsket_areal_min(int p ){ønsket_areal_min = p;}
+    public void setØnsket_areal_maks(int p ){ønsket_areal_maks = p;}
+
+    public boolean getRøyke(){return bokser[RØYKER].isSelected();}
+    public boolean getHusdyr(){return bokser[DYR].isSelected();}
+    public boolean getBalkong(){return bokser[BALKONG].isSelected();}
+    public boolean getTerasse(){return bokser[TERASSE].isSelected();}
+    public boolean getTv(){return bokser[TV].isSelected();}
+    public boolean getInternett(){return bokser[NETT].isSelected();}
+    public boolean getStrøm(){return bokser[STRØM].isSelected();}
+    public boolean getParkering(){return bokser[PARKERING].isSelected();}
+    public boolean getKjeller(){return bokser[KJELLER].isSelected();}
+    public boolean getHeis(){return bokser[HEIS].isSelected();}
+
     public String getFødselnummer(){return fødselnummer;}
     public String getFornavn(){return fornavn;}
     public String getEtternavn(){return etternavn;}
@@ -370,6 +427,10 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
     public String getSIVILSTATUS(){return sivistatus;}
     public String getYRKE(){return yrke;}
     public String getARBFORHOLD(){return arbeidforhold;}
+    public int getPris(){return ønsket_pris;}
+    public int getØnsket_areal_min(){return ønsket_areal_min;}
+    public int getØnsket_areal_maks(){return ønsket_areal_maks;}
+
 
     public void oppdaterinfo(){
 
@@ -383,6 +444,13 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
         setSIVILSTATUS(felt[SIVILSTATUS].getText());
         setYRKE(felt[YRKE].getText());
         setARBFORHOLD(felt[ARBFORHOLD].getText());
+
+        setØnsket_areal_min(minsteareal.getValue());
+        setØnsket_areal_maks(størsteareal.getValue());
+        setPris(pris.getValue());
+
+
+
     }
 
     @Override
@@ -406,9 +474,9 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
 
         @Override
         public void stateChanged(ChangeEvent e) {
-            if(e.getSource() == pris){sliderstate_pris.setText("ønsket:         " + String.valueOf(pris.getValue()));}
-            else if(e.getSource() == minsteareal){ sliderstate_minareal.setText("ønsket:         " + String.valueOf(minsteareal.getValue()));}
-            else if(e.getSource() == størsteareal){ sliderstate_maksareal.setText("ønsket:         " + String.valueOf(størsteareal.getValue()));}
+            if(e.getSource() == pris){sliderstate_pris.setText("ønsket:         " + String.valueOf(pris.getValue())); setPris(pris.getValue());}
+            else if(e.getSource() == minsteareal){ sliderstate_minareal.setText("ønsket:         " + String.valueOf(minsteareal.getValue()));setØnsket_areal_min(minsteareal.getValue());}
+            else if(e.getSource() == størsteareal){ sliderstate_maksareal.setText("ønsket:         " + String.valueOf(størsteareal.getValue()));setØnsket_areal_maks(størsteareal.getValue());}
 
         }
 

@@ -88,11 +88,13 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         endre = new JButton("Endre");
         fjern = new JButton("Slett");
         tilbake = new JButton("Tilbake");
+        oppdater = new JButton("Oppdater");
 
         visInfo.addActionListener(this);
         endre.addActionListener(this);
         fjern.addActionListener(this);
         tilbake.addActionListener(this);
+        oppdater.addActionListener(this);
 
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
@@ -283,6 +285,14 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
 
         if(svar==JOptionPane.YES_OPTION){
 
+            Toolkit kit = Toolkit.getDefaultToolkit();
+            Dimension skjerm = kit.getScreenSize();
+            int bredde = skjerm.width;
+            int høyde = skjerm.height;
+
+            parent.setSize(bredde/2, høyde-200);
+            parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
+
             Soker soker = modell.getValueAt(rad);
 
             sibling.endreSoker(soker);
@@ -312,6 +322,27 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         soker.setTelefonnummer(sibling.getTelefonnummer());
         soker.setAntallPersoner(sibling.getANTPERS());
         soker.setYrke(sibling.getYRKE());
+        soker.setArbeidsfohold_studiested(sibling.getARBFORHOLD());
+        soker.setSivilstatus(sibling.getSIVILSTATUS());
+
+        soker.setPris(sibling.getPris());
+        soker.setMinAreal(sibling.getØnsket_areal_min());
+        soker.setMaksAreal(sibling.getØnsket_areal_maks());
+
+        soker.setRøyk(sibling.getRøyke());
+        soker.setHusdyr(sibling.getHusdyr());
+        soker.setBalkong(sibling.getBalkong());
+        soker.setTerasse(sibling.getTerasse());
+        soker.setTVinkludert(sibling.getTv());
+        soker.setInternetinkludert(sibling.getInternett());
+        soker.setKjeller(sibling.getKjeller());
+        soker.setParkering(sibling.getParkering());
+        soker.setStrøminkludert(sibling.getStrøm());
+        soker.setHeis(sibling.getHeis());
+
+
+
+
 
 
         removeAll();
@@ -349,6 +380,12 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
             int rad = tabell.getSelectedRow();
             Soker soker = modell.getValueAt(rad);
             visInfo(soker);
+        }
+
+        else if(e.getSource() == oppdater){
+
+            oppdater();
+
         }
     }
 

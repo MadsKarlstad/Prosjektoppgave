@@ -23,6 +23,46 @@ public class Soker extends Person{
     private int pris;
 
 
+    public void setRøyk(boolean røyk) {
+        this.røyk = røyk;
+    }
+
+    public void setHusdyr(boolean husdyr) {
+        this.husdyr = husdyr;
+    }
+
+    public void setBalkong(boolean balkong) {
+        this.balkong = balkong;
+    }
+
+    public void setTerasse(boolean terasse) {
+        this.terasse = terasse;
+    }
+
+    public void setTVinkludert(boolean TVinkludert) {
+        this.TVinkludert = TVinkludert;
+    }
+
+    public void setInternetinkludert(boolean internetinkludert) {
+        Internetinkludert = internetinkludert;
+    }
+
+    public void setStrøminkludert(boolean strøminkludert) {
+        this.strøminkludert = strøminkludert;
+    }
+
+    public void setParkering(boolean parkering) {
+        this.parkering = parkering;
+    }
+
+    public void setKjeller(boolean kjeller) {
+        this.kjeller = kjeller;
+    }
+
+    public void setHeis(boolean heis) {
+        this.heis = heis;
+    }
+
     private boolean røyk;
     private boolean husdyr;
     private boolean balkong;
@@ -84,6 +124,10 @@ public class Soker extends Person{
         yrke = s;
     }
     public void setSivilstatus(String s){sivilstatus = s;}
+    public void setArbeidsfohold_studiested(String s){arbeidsfohold_studiested = s;}
+    public void setPris(int p){pris = p;}
+    public void setMinAreal(int p){minAreal = p;}
+    public void setMaksAreal(int p){maksAreal = p;}
 
     public void initialiserLister(){
         eneboligliste = new LinkedList<Enebolig>();
