@@ -31,7 +31,6 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
     private final String[] kolonner = {"Adresse", "Boareal", "Antall rom", "Byggeår", "Beskrivelse", "Pris", "Ledig fra","Bolignr","Røyker","Eier","Ledig","Bydel","Husdyr","TV inkludert","Strøm inkludert"};
 
     private JButton visInfo;
-    private JButton endre;
     private JButton fjern;
     private JButton tilbake;
 
@@ -81,12 +80,10 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
         scroll = new JScrollPane(tabell);
 
         visInfo = new JButton("Vis info");
-        endre = new JButton("Endre");
         fjern = new JButton("Slett");
         tilbake = new JButton("Tilbake");
 
         visInfo.addActionListener(this);
-        endre.addActionListener(this);
         fjern.addActionListener(this);
         tilbake.addActionListener(this);
 
@@ -125,7 +122,6 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
         knapppanel.add(visInfo);
         knapppanel.add(fjern);
         knapppanel.add(tilbake);
-        knapppanel.add(endre);
 
         add(overskriftpanel, BorderLayout.PAGE_START);
         add(tabellpanel, BorderLayout.CENTER);
@@ -264,17 +260,14 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
         }
     }
 
-    public void endreBolig(){
-        JOptionPane.showMessageDialog(null,"Not yet supported");
-    }
-
     public void visInfo(int rad){
         try{
             Enebolig enebolig = modell.getValueAt(rad);
             String s = "";
             s+="Dette er en " + enebolig.getBeskrivelse()+" enebolig på "+enebolig.getBoareal() + " kvadratmeter" + ", som ligger i " + enebolig.getAdresse()+ ", " + enebolig.getBydel();
+            s+="\nBolignummer: " + enebolig.getBolignr();
             s+="\nEneboligen ble bygget i "+enebolig.getByggår();
-            s+="\n\nEneboligen har følgene fasiliteter:";
+            s+="\n\nLeiligheten har følgene fasiliteter:";
             s+="\nAntall rom: "+enebolig.getAntallRom();
             s+="\nAntall bad: "+enebolig.getAntallBad();
             s+="\nAntall etasjer: "+enebolig.getAntallEtasjer();
@@ -309,9 +302,6 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
         else if(e.getSource() == fjern) {
             int rad = tabell.getSelectedRow();
             slettEnebolig(rad);
-        }
-        else if(e.getSource() == endre){
-            endreBolig();
         }
         else if(e.getSource() == visInfo){
             int rad = tabell.getSelectedRow();

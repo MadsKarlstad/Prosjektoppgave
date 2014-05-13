@@ -29,7 +29,6 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
     private final String[] kolonner = {"Adresse", "Boareal", "Antall rom", "Byggeår", "Beskrivelse", "Pris", "Ledig fra","Bolignr","Eier","Ledig","Bydel"};
 
     private JButton visInfo;
-    private JButton endre;
     private JButton fjern;
     private JButton tilbake;
 
@@ -78,12 +77,10 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
         scroll = new JScrollPane(tabell);
 
         visInfo = new JButton("Vis info");
-        endre = new JButton("Endre");
         fjern = new JButton("Slett");
         tilbake = new JButton("Tilbake");
 
         visInfo.addActionListener(this);
-        endre.addActionListener(this);
         fjern.addActionListener(this);
         tilbake.addActionListener(this);
 
@@ -121,7 +118,6 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
         knapppanel.add(visInfo);
         knapppanel.add(fjern);
         knapppanel.add(tilbake);
-        knapppanel.add(endre);
 
         add(overskriftpanel, BorderLayout.PAGE_START);
         add(tabellpanel, BorderLayout.CENTER);
@@ -272,6 +268,7 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
             Leilighet leilighet = modell.getValueAt(rad);
             String s = "";
             s+="Dette er en " + leilighet.getBeskrivelse()+" leilighet på "+leilighet.getBoareal() + " kvadratmeter" + ", som ligger i " + leilighet.getAdresse()+ ", " + leilighet.getBydel();
+            s+="\nBolignummer: " + leilighet.getBolignr();
             s+="\nEneboligen ble bygget i "+leilighet.getByggår();
             s+="\n\nEneboligen har følgene fasiliteter:";
             s+="\nAntall rom: "+leilighet.getAntallRom();
@@ -279,7 +276,12 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
             s+="\nEtasje: " + leilighet.getEtasje();
             s+="\nParkering: " + leilighet.parkering();
             s+="\nHeis: " + leilighet.isHeis();
+            s+="\nTerasse: " + leilighet.terasse();
+            s+="\nBalkong: " + leilighet.balkong();
             s+="\nTillater røyking: " + leilighet.røyketekst();
+            s+="\nTV inkludert: " + leilighet.tvInkludert();
+            s+="\nInternett inkludert: " + leilighet.internettInkludert();
+            s+="\nStrøm inkludert: " + leilighet.strømInkludert();
             s+="\n\nEneboligen er ledig fra og med " + leilighet.getLedigDato();
             s+="\nKontakt eier, " + leilighet.getEiersNavn() + ", gjennom BoligBrowse for å registrere ønske om å leie denne eneboligen";
             JOptionPane.showMessageDialog(null,s);
@@ -305,9 +307,6 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
         else if(e.getSource() == fjern){
             int rad = tabell.getSelectedRow();
             slettLeilighet(rad);
-        }
-        else if(e.getSource() == endre){
-            endreLeilighet();
         }
         else if(e.getSource() == visInfo){
             int rad = tabell.getSelectedRow();
