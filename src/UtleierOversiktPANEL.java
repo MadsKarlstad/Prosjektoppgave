@@ -324,20 +324,23 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
         int svar = JOptionPane.showOptionDialog(null,"Vil du endre denne utleier?","Bekreft endring",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
 
         if(svar==JOptionPane.YES_OPTION){
+            try{
 
-            Utleier utleier = modell.getValueAt(rad);
+                Utleier utleier = modell.getValueAt(rad);
 
-            sibling.endreUtleier(utleier);
+                sibling.endreUtleier(utleier);
 
-            removeAll();
-            revalidate();
-            repaint();
+                removeAll();
+                revalidate();
+                repaint();
 
-            add(sibling, BorderLayout.CENTER);
-            add(oppdater,BorderLayout.PAGE_END);
-
-
-             }
+                add(sibling, BorderLayout.CENTER);
+                add(oppdater,BorderLayout.PAGE_END);
+            }
+            catch(IndexOutOfBoundsException ioobe){
+                JOptionPane.showMessageDialog(null,"Ingen utleier markert/registrert");
+            }
+        }
         if(svar==JOptionPane.NO_OPTION){
             JOptionPane.showMessageDialog(null,"endring avbrutt");
         }}
@@ -346,13 +349,11 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
 
         Utleier utleier = register.get(sibling.getFødselnummer());
 
-
         utleier.setFornavn(sibling.getFornavn());
         utleier.setEtternavn(sibling.getEtternavn());
         utleier.setAdresse(sibling.getAdresse());
         utleier.setMail(sibling.getMail());
         utleier.setTelefonnummer(sibling.getTelefonnummer());
-
 
         removeAll();
         revalidate();
@@ -363,9 +364,15 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
     }
 
     public void visInfo(int rad){
-        Utleier utleier = modell.getValueAt(rad);
-        JOptionPane.showMessageDialog(null, "Ønskede boliger: "+utleier.getØnskedeEneboliger() + "\n" + utleier.getØnskedeLeiligheter()
-        +"\nEide boliger: " + utleier.getEideBoliger());
+        try{
+            Utleier utleier = modell.getValueAt(rad);
+            JOptionPane.showMessageDialog(null, "Ønskede boliger: "+utleier.getØnskedeEneboliger() + "\n" + utleier.getØnskedeLeiligheter()
+                    +"\nEide boliger: " + utleier.getEideBoliger());
+        }
+        catch(IndexOutOfBoundsException ioobe){
+            JOptionPane.showMessageDialog(null,"Ingen utleier markert/registrert");
+        }
+
     }
 
     @Override
