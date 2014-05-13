@@ -5,6 +5,8 @@
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +18,7 @@ import java.nio.file.Path;
 /**
  * Created by Erlend on 22/04/14.
  */
-public class RegistrerSokerPANEL extends JPanel implements ActionListener {
+public class RegistrerSokerPANEL extends JPanel implements ActionListener, DocumentListener {
     private JTextField[] felt;
     private final String[] feltnavn = {"Fødselsnummer", "Fornavn", "Etternavn", "Adresse","Mail","Telefonnr", "AntallPers", "Sivilstatus", "Yrke",
             "Arbeidsforhold/Studiested"};
@@ -85,6 +87,17 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
     private Boligregister eneboligregister;
     private Leilighetregister leilighetregister;
     private MainFrame parent;
+
+    private String fødselnummer;
+    private String fornavn;
+    private String etternavn;
+    private String adresse;
+    private String mail;
+    private String telefonnummer ;
+    private String antpersoner; ;
+    private String sivistatus ;
+    private String arbeidforhold ;
+    private String yrke;
 
     public RegistrerSokerPANEL(Sokerregister register,Boligregister eneboligregister,Leilighetregister leilighetregister, MainFrame parent) {
         super(new BorderLayout());
@@ -307,6 +320,84 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener {
             parent.setSize(bredde/2, høyde-100);
             parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
         }
+    }
+
+    public void endreSoker(Soker soker){
+
+        feltpanel.removeAll();
+        feltpanel.revalidate();
+        feltpanel.repaint();
+
+        knapppanel.removeAll();
+
+        for (int i = 0; i < feltnavn.length; i++) {
+            felt[i] = new JTextField(10);
+            feltpanel.add(felt[i]);
+            felt[i].getDocument().addDocumentListener(this);
+
+        }
+        felt[FØDSELSNUMMER].setEditable(false);
+
+        felt[FØDSELSNUMMER].setText(soker.getFødselsnummer());
+        felt[FORNAVN].setText(soker.getFornavn());
+        felt[ETTERNAVN].setText(soker.getEtternavn());
+        felt[ADRESSE].setText(soker.getAdresse());
+        felt[MAIL].setText(soker.getMail());
+        felt[TELEFONNUMMER].setText(soker.getTelefonnummer());
+
+        add(feltpanel);
+
+    }
+
+    public void setFødselsnummer(String s){fødselnummer = s;}
+    public void setFornavn(String s){fornavn = s;}
+    public void setETTERNAVN(String s){etternavn = s;}
+    public void setADRESSE(String s){adresse = s;}
+    public void setMAIL(String s){mail = s;}
+    public void setTELEFONUMMER(String s){telefonnummer = s;}
+    public void setANTPERS(String s){antpersoner = s;}
+    public void setSIVILSTATUS(String s){sivistatus = s;}
+    public void setYRKE(String s){yrke = s;}
+    public void setARBFORHOLD(String s){arbeidforhold = s;}
+
+    public String getFødselnummer(){return fødselnummer;}
+    public String getFornavn(){return fornavn;}
+    public String getEtternavn(){return etternavn;}
+    public String getAdresse(){return adresse;}
+    public String getMail(){return mail;}
+    public String getTelefonnummer(){return telefonnummer;}
+    public String getANTPERS(){return antpersoner;}
+    public String getSIVILSTATUS(){return sivistatus;}
+    public String getYRKE(){return yrke;}
+    public String getARBFORHOLD(){return arbeidforhold;}
+
+    public void oppdaterinfo(){
+
+        setFødselsnummer(felt[FØDSELSNUMMER].getText());
+        setFornavn(felt[FORNAVN].getText());
+        setETTERNAVN(felt[ETTERNAVN].getText());
+        setADRESSE(felt[ADRESSE].getText());
+        setMAIL(felt[MAIL].getText());
+        setTELEFONUMMER(felt[TELEFONNUMMER].getText());
+        setANTPERS(felt[ANTPERS].getText());
+        setSIVILSTATUS(felt[SIVILSTATUS].getText());
+        setYRKE(felt[YRKE].getText());
+        setARBFORHOLD(felt[ARBFORHOLD].getText());
+    }
+
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        oppdaterinfo();
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        oppdaterinfo();
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        oppdaterinfo();
     }
 
 
