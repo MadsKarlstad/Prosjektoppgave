@@ -80,6 +80,10 @@ public class Soker extends Person{
     public void setAntallPersoner(String s){
         antallPersoner = s;
     }
+    public void setYrke(String s){
+        yrke = s;
+    }
+    public void setSivilstatus(String s){sivilstatus = s;}
 
     public void initialiserLister(){
         eneboligliste = new LinkedList<Enebolig>();

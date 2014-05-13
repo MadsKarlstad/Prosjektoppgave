@@ -39,14 +39,17 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
     private LinkedList<Soker> temp;//listen som omfatter søket vårt
 
 
-    private Sokerregister pregister;
+    private Sokerregister sregister;
+    private Boligregister bregister;
+    private Leilighetregister legister;
     private MainFrame parent;
-    private RegistrerUtleierPANEL sibling;
 
-    public SokerOversiktPANEL(Sokerregister register, MainFrame parent) {
+    private RegistrerSokerPANEL sibling;
+
+    public SokerOversiktPANEL(Sokerregister sregister, MainFrame parent) {
 
         super(new BorderLayout());
-        this.pregister = register;
+        this.sregister = sregister;
         this.parent = parent;
 
         initialiser();
@@ -61,17 +64,17 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         tabellpanel = new JPanel(new BorderLayout());
         knapppanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        overskrift = new JLabel("Antall søkere: " + pregister.size());
+        overskrift = new JLabel("Antall søkere: " + sregister.size());
         søkfelt = new JTextField(10);
         tabell = new JTable();
 
         søkfelt.getDocument().addDocumentListener(this);
 
-        Iterator it = pregister.entrySet().iterator();
+        Iterator it = sregister.entrySet().iterator();
 
         søkerliste = new LinkedList<Soker>();
 
-        for(Map.Entry<String,Soker> entry : pregister.entrySet()) {
+        for(Map.Entry<String,Soker> entry : sregister.entrySet()) {
             søkerliste.add((Soker) entry.getValue());
         }
 
@@ -92,6 +95,11 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         tilbake.addActionListener(this);
 
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        legister = new Leilighetregister();
+        bregister = new Boligregister();
+
+        sibling = new RegistrerSokerPANEL(sregister,bregister,legister,parent);
     }
 
     public void visAlle(){
@@ -153,7 +161,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
 
                 String fødselsnummer = søk.substring(0,søk.length() - 1);
 
-                Soker søker = (Soker) pregister.getObject(fødselsnummer);
+                Soker søker = (Soker) sregister.getObject(fødselsnummer);
 
                 if(søker != null){
 
@@ -244,7 +252,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
                 Soker soker = modell.getValueAt(rad);
                 String persnr = soker.getFødselsnummer();
                 modell.delRow(rad);
-                pregister.fjern(persnr);
+                sregister.fjern(persnr);
             }
             catch(IndexOutOfBoundsException ioobe){
                 JOptionPane.showMessageDialog(null,"Ingen søker markert/registrert");
@@ -267,6 +275,53 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         }
     }
 
+
+
+    public void endreSoker(int rad){
+
+        int svar = JOptionPane.showOptionDialog(null,"Vil du endre denne søkeren?","Bekreft endring",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
+
+        if(svar==JOptionPane.YES_OPTION){
+
+            Soker soker = modell.getValueAt(rad);
+
+            sibling.endreSoker(soker);
+
+            removeAll();
+            revalidate();
+            repaint();
+
+            add(sibling, BorderLayout.CENTER);
+            add(oppdater,BorderLayout.PAGE_END);
+
+
+        }
+        if(svar==JOptionPane.NO_OPTION){
+            JOptionPane.showMessageDialog(null,"endring avbrutt");
+        }}
+
+    public void oppdater(){
+
+        Soker soker = sregister.get(sibling.getFødselnummer());
+
+
+        soker.setFornavn(sibling.getFornavn());
+        soker.setEtternavn(sibling.getEtternavn());
+        soker.setAdresse(sibling.getAdresse());
+        soker.setMail(sibling.getMail());
+        soker.setTelefonnummer(sibling.getTelefonnummer());
+        soker.setAntallPersoner(sibling.getANTPERS());
+        soker.setYrke(sibling.getYRKE());
+
+
+        removeAll();
+        revalidate();
+        repaint();
+
+        initialiser();
+        lagGUI();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == tilbake){
@@ -287,8 +342,8 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         }
         else if(e.getSource() == endre){
             int rad = tabell.getSelectedRow();
-            //endreSoker(rad);
-            JOptionPane.showMessageDialog(null,"Not yet supported");
+            endreSoker(rad);
+
         }
         else if(e.getSource() == visInfo){
             int rad = tabell.getSelectedRow();
