@@ -46,6 +46,16 @@ public class Utleier extends Person {
 
         Enebolig enebolig;
 
+        for(int i = 0; i < ønskedeeneboligliste.size(); i++){
+
+
+            if(ønskedeeneboligliste.get(i).erUtleid()){
+                ønskedeeneboligliste.remove(i);
+            }
+
+
+        }
+
 
         for(int i = 0; i < boligregister.size(); i++){
             String key = (String) boligregister.keySet().toArray()[i];

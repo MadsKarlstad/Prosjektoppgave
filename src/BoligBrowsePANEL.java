@@ -424,6 +424,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
     public void visEneboligUtleier(Utleier utleier, int index, int boligindex) throws IndexOutOfBoundsException{
 
 
+        utleier.oppdaterLister();
 
         eneboligliste = utleier.getØnskedeEneboliger();
 
