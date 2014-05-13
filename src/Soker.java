@@ -37,13 +37,10 @@ public class Soker extends Person{
     private LinkedList<Leilighet> leilighetliste;
     private LinkedList<Bolig> ønskedeboliger;
 
-    private Boligregister eneboligregister;
-    private Leilighetregister leilighetregister;
-
     public Soker(String FØDSELSNUMMER, String fornavn, String etternavn, String adresse, String mail, String telefonnummer,
                  String antallPersoner, String sivilstatus, String yrke, String arbeidsfohold_studiested, int minAreal,
                  int maksAreal, int pris,boolean røyk,boolean husdyr,boolean balkong,boolean terasse,
-                 boolean TVinkludert,boolean Internetinkludert,boolean strøminkludert,boolean parkering,boolean kjeller,boolean heis,Boligregister eneboligregister, Leilighetregister leilighetregister) {
+                 boolean TVinkludert,boolean Internetinkludert,boolean strøminkludert,boolean parkering,boolean kjeller,boolean heis) {
         super(FØDSELSNUMMER, fornavn, etternavn, adresse, mail, telefonnummer);
         this.antallPersoner = antallPersoner;
         this.sivilstatus = sivilstatus;
@@ -63,17 +60,10 @@ public class Soker extends Person{
         this.parkering = parkering;
         this.kjeller = kjeller;
         this.heis = heis;
-        this.eneboligregister = eneboligregister;
-        this.leilighetregister = leilighetregister;
 
         initialiserLister();
 
         df = new DecimalFormat("#.##");
-    }
-
-    public void oppdaterBoliger(Boligregister b, Leilighetregister l){
-        eneboligregister = b;
-        leilighetregister = l;
     }
 
     public void setAntallPersoner(String s){
@@ -162,7 +152,10 @@ public class Soker extends Person{
         return heis;
     }
 
-    public void matcherEnebolig(){
+
+
+
+    public void matcherEnebolig(Boligregister eneboligregister ){
         for (Map.Entry<String, Enebolig> entry : eneboligregister.entrySet()) {
             double prosent = 0;
             double sum = 0;
@@ -213,7 +206,7 @@ public class Soker extends Person{
         }
     }
 
-    public void matcherLeilighet(){
+    public void matcherLeilighet(Leilighetregister leilighetregister){
         for (Map.Entry<String, Leilighet> entry : leilighetregister.entrySet()){
             double prosent = 0;
             double sum = 0;
@@ -278,15 +271,6 @@ public class Soker extends Person{
 
     public LinkedList getØnskedeBolgier(){
         return ønskedeboliger;
-    }
-
-    public void oppdaterØnskedeBoliger(){
-        eneboligliste.clear();
-        leilighetliste.clear();
-        initialiserLister();
-
-        matcherEnebolig();
-        matcherLeilighet();
     }
 
     public LinkedList<Enebolig> getEneboligliste(){

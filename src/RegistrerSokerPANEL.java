@@ -282,7 +282,7 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
 
         if (fødselsnummer.length() != 0 || fornavn.length() != 0 || etternavn.length() != 0 || adresse.length() != 0 || mail.length() != 0 || telefonnummer.length() != 0) {
             Person søker = new Soker(fødselsnummer, fornavn, etternavn, adresse, mail, telefonnummer, antpers, sivilstatus, yrke,
-                    arbeidsforhold, minareal, maxareal, ønsketpris, røyke, dyr, balk, ter, tv, nett, strøm, parkering, kjeller, heis, eneboligregister, leilighetregister);
+                    arbeidsforhold, minareal, maxareal, ønsketpris, røyke, dyr, balk, ter, tv, nett, strøm, parkering, kjeller, heis);
 
             if (register.leggTil(søker)) {
                 //gå tilbake til mainframe

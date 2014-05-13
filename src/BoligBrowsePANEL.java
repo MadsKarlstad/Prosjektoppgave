@@ -341,7 +341,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
     public void visEneboliger(Soker soker) throws IOException {
 
-        soker.oppdaterØnskedeBoliger();
+        soker.matcherEnebolig(bregister);
 
         eneboligliste = soker.getEneboligliste();
 
@@ -382,7 +382,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
     public void visLeilighet(Soker soker) throws IOException {
 
-        soker.oppdaterØnskedeBoliger();
+        soker.matcherLeilighet(legister);
 
         leilighetliste = soker.getLeilighetliste();
 
@@ -424,7 +424,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
     public void visEneboligUtleier(Utleier utleier, int index, int boligindex) throws IndexOutOfBoundsException{
 
 
-        utleier.oppdaterLister();
+        utleier.oppdaterLister(bregister);
 
         eneboligliste = utleier.getØnskedeEneboliger();
 
@@ -628,8 +628,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
             visStartPANELsøker();
             Soker soker = sregister.get(fnr);
-            soker.oppdaterBoliger(bregister,legister);
-            soker.oppdaterØnskedeBoliger();
+
+            
 
             søkepanel.removeAll();
             søkepanel.revalidate();
@@ -846,7 +846,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             try
             {
                 index = 0;
-                soker.oppdaterØnskedeBoliger();
+
                 visEneboliger(soker);
             }
             catch (IOException io){
@@ -860,7 +860,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             try
             {
                 index = 0;
-                soker.oppdaterØnskedeBoliger();
+
                 visLeilighet(soker);
             }
             catch (IOException io){

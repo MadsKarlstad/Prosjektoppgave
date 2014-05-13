@@ -7,8 +7,6 @@ import java.util.Map;
 
 public class Utleier extends Person {
     private String firma;
-    private Boligregister boligregister;
-    private Leilighetregister leilighetregister;
 
 
     private LinkedList<Bolig> eideBoliger;
@@ -18,8 +16,6 @@ public class Utleier extends Person {
     public Utleier(String FØDSELSNUMMER, String fornavn, String etternavn, String adresse, String mail, String telefonnummer, String firma) {
         super(FØDSELSNUMMER, fornavn, etternavn, adresse, mail, telefonnummer);
         this.firma = firma;
-        boligregister = new Boligregister();
-        leilighetregister = new Leilighetregister();
 
         ønskedeeneboligliste = new LinkedList<Enebolig>();
         ønskedeleilighetListe = new LinkedList<Leilighet>();
@@ -35,12 +31,9 @@ public class Utleier extends Person {
         return navn;
     }
 
-    public void oppdaterBoliger(Boligregister b, Leilighetregister l){
-        boligregister = b;
-        leilighetregister = l;
-    }
 
-    public void oppdaterLister(){
+
+    public void oppdaterLister(Boligregister boligregister){
 
         eideBoliger.clear();
 
@@ -108,10 +101,6 @@ public class Utleier extends Person {
 
     public LinkedList<Bolig> getEideBoliger(){
         return eideBoliger;
-    }
-
-    public Boligregister getBoligregister() {
-        return boligregister;
     }
 
 
