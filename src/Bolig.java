@@ -3,9 +3,6 @@
  */
 
 import javax.swing.*;
-import java.awt.*;
-import java.io.Serializable;
-import java.util.Date;
 
 public abstract class Bolig implements Hjem {
     private String adresse;

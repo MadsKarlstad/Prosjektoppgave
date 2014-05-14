@@ -237,8 +237,7 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
                         Utleier eier = enebolig.getEier();
                         eier.removeBolig(enebolig);
                         eier.oppdaterLister(register);
-                        parent.skrivTilFil(enebolig);
-
+                        modell.fireTableDataChanged();
                     }
                 }
             catch (IndexOutOfBoundsException ioobe){

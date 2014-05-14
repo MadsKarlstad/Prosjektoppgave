@@ -2,27 +2,29 @@
  * Copyright (c) 2014. Gruppeoppgave for Erlend Westbye s193377 Mads Karlstad s193949 Christoffer Jønsberg s193674
  */
 
-import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
-import sun.jvm.hotspot.oops.Instance;
-
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Random;
 import java.awt.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.NotSerializableException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import javax.swing.*;
 
 public class BoligBrowse {
-    public static void main(String[] args){
-        Personregister register = new Personregister();
-        Sokerregister sregister = new Sokerregister();
-        Boligregister bregister = new Boligregister();
-        Leilighetregister legister = new Leilighetregister();
-        Kontraktregister kregister = new Kontraktregister();
+
+    private static Personregister register;
+    private static Sokerregister sregister;
+    private static Boligregister bregister;
+    private static Leilighetregister legister;
+    private static Kontraktregister kregister;
+
+    public static void main(String[] args) {
 
         String erwindows = System.getProperty("os.name");
-
-        System.out.println(erwindows);
-
 
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -40,184 +42,184 @@ public class BoligBrowse {
             }
         }
 
+        lesAlle();
+
         final MainFrame frame;
-        frame = new MainFrame(register,bregister,sregister,legister,kregister);
+        frame = new MainFrame(register, bregister, sregister, legister, kregister);
+        //<editor-fold desc="BULLSHIT!!">
+        String[] fornavns = {"Ole", "Vetle", "Simen", "Karl", "Nils", "Trine", "Kari", "Tina", "Hamed", "Per-Arne", "Mads", "Erlend", "Christoffer"};
 
+        String[] etternavns = {"Larsen", "Moradi", "Thommasen", "Kulterud", "Bror", "McFlurry", "Olsen", "Pettersen", "Baggins", "Lannister", "Targaryen"};
 
-        String[] fornavns = {"Ole", "Vetle","Simen","Karl", "Nils","Trine", "Kari", "Tina", "Hamed","Per-Arne","Mads","Erlend","Christoffer"};
+        String adresses[] = {"Tollbodgata 18", "Pilestredet 45", "Storgata 65", "Ingesteder 12", "Andeby City", "Eventyrdalen 762", "King's Landing, The Red Keep", "The Shire 43B"};
 
-        String[] etternavns = {"Larsen", "Moradi", "Thommasen", "Kulterud", "Bror", "McFlurry", "Olsen", "Pettersen","Baggins","Lannister","Targaryen"};
+        String[] firma = {"", "Illuminati", "Monstermasten", "Überkul A/S", "Pilen Dytt og Flytt Inc."};
 
-        String adresses[] = {"Tollbodgata 18", "Pilestredet 45", "Storgata 65", "Ingesteder 12", "Andeby City", "Eventyrdalen 762","King's Landing, The Red Keep","The Shire 43B"};
+        String[] antPersoner = {"0", "1", "2", "3", "4", "5"};
 
-        String[] firma = {"","Illuminati","Monstermasten","Überkul A/S","Pilen Dytt og Flytt Inc."};
+        String[] sivilstatus = {"Gift", "Samboer", "Singel"};
 
-        String[] antPersoner = {"0","1","2","3","4","5"};
+        String[] yrke = {"Snekker", "Ingeniør", "Sykepleier", "Lege", "Advokat", "Økonom", "Freakonom", "Hobbyelektriker/brannstarter", "Sosionom", "Arbeidsledig", "Student"};
 
-        String[] sivilstatus = {"Gift","Samboer","Singel"};
+        String[] arbeidsforhold = {"UIO", "HIOA", "UIB", "NTNU", "Aker Solutions", "Microsoft", "Apple Inc.", "Monstermasten", "Illuminati"};
 
-        String[] yrke = {"Snekker","Ingeniør","Sykepleier","Lege","Advokat","Økonom","Freakonom","Hobbyelektriker/brannstarter","Sosionom","Arbeidsledig","Student"};
+        String[] domene = {"hotmail.com", "me.com", "gmail.com", "yahoo.com", "live.no", "hotmail.no"};
 
-        String[] arbeidsforhold = {"UIO","HIOA","UIB","NTNU","Aker Solutions","Microsoft","Apple Inc.","Monstermasten","Illuminati"};
+        String[] fradato = {"01.06.14", "01.07.14", "01.08.14"};
 
-        String[] domene = {"hotmail.com","me.com","gmail.com","yahoo.com","live.no","hotmail.no"};
+        String[] tildato = {"01.06.19", "01.07.19", "01.08.19"};
 
-        String[] fradato = {"01.06.14","01.07.14","01.08.14"};
-
-        String[] tildato = {"01.06.19","01.07.19","01.08.19"};
-
-
-        int[] boareal = {20,30,40,50,60,70,80};
-        int[] antrom = {1,2,3,4,5,6};
-        int[] byggår = {1970,1980,1990,2000,2010};
-        String[] beskrivelse = {"Flott enebolig!","Nyoppusset enebolig","Lys og fin enebolig","Gammel herskapelig enebolig"};
-        String[] beskrivLeil = {"Nyoppusset leilighet","Penthouse suite","Lys og fin leilighet"};
-        int[] pris = {5000,6000,6500,7000,7499,7999,8750,10899};
-        String[] ledigfra = {"Snarest","01.08.14","01.07.14","01.09.14","01.10.14","01.11.14"};
-        boolean[] røyke = {true,false};
-        boolean[] husdyr ={true,false};
-        boolean[] balkong ={true,false};
-        boolean[] terasse ={true,false};
-        boolean[] tv ={true,false};
-        boolean[] nett ={true,false};
-        boolean[] strøm ={true,false};
-        boolean[] parkering ={true,false};
-        boolean[] heis = {true,false};
-        int[] antetg = {1,2,3,4,5,6};
-        boolean[] kjeller ={true,false};
-        double[] tomt = {90,100,110,120,130,140,150};
-        int[] antbad = {1,2,3,4};
-        int[] etgleil = {1,2,3,4,5,6,7,8,9,10,11,12,13};
-        int[] boder = {1,2,3};
+        int[] boareal = {20, 30, 40, 50, 60, 70, 80};
+        int[] antrom = {1, 2, 3, 4, 5, 6};
+        int[] byggår = {1970, 1980, 1990, 2000, 2010};
+        String[] beskrivelse = {"Flott enebolig!", "Nyoppusset enebolig", "Lys og fin enebolig", "Gammel herskapelig enebolig"};
+        String[] beskrivLeil = {"Nyoppusset leilighet", "Penthouse suite", "Lys og fin leilighet"};
+        int[] pris = {5000, 6000, 6500, 7000, 7499, 7999, 8750, 10899};
+        String[] ledigfra = {"Snarest", "01.08.14", "01.07.14", "01.09.14", "01.10.14", "01.11.14"};
+        boolean[] røyke = {true, false};
+        boolean[] husdyr = {true, false};
+        boolean[] balkong = {true, false};
+        boolean[] terasse = {true, false};
+        boolean[] tv = {true, false};
+        boolean[] nett = {true, false};
+        boolean[] strøm = {true, false};
+        boolean[] parkering = {true, false};
+        boolean[] heis = {true, false};
+        int[] antetg = {1, 2, 3, 4, 5, 6};
+        boolean[] kjeller = {true, false};
+        double[] tomt = {90, 100, 110, 120, 130, 140, 150};
+        int[] antbad = {1, 2, 3, 4};
+        int[] etgleil = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+        int[] boder = {1, 2, 3};
 
         int minareal = 0;
         int maksareal = 100;
         int minpris = 0;
-        int[] makspris = {1000,2000,3000,4000,5000,6000,7000,8000,9000,10000,11000,12000,13000,14000,15000};
+        int[] makspris = {1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000};
 
         Random r = new Random();
 
         /*for(int i = 0; i < 1000; i++){
-            String fornavn = fornavns[r.nextInt(fornavns.length)];
-            String etternavn = etternavns[r.nextInt(etternavns.length)];
-            String adresse = adresses[r.nextInt(adresses.length)];
-            String mail = fornavn.toLowerCase() + "."+etternavn.toLowerCase()+ "@" + domene[r.nextInt(domene.length)];
-            String firm = firma[r.nextInt(firma.length)];
+         String fornavn = fornavns[r.nextInt(fornavns.length)];
+         String etternavn = etternavns[r.nextInt(etternavns.length)];
+         String adresse = adresses[r.nextInt(adresses.length)];
+         String mail = fornavn.toLowerCase() + "."+etternavn.toLowerCase()+ "@" + domene[r.nextInt(domene.length)];
+         String firm = firma[r.nextInt(firma.length)];
 
-            Utleier utleier = new Utleier(String.valueOf(i+1), fornavn, etternavn, adresse, mail, String.valueOf(i+100), firm);
-            register.leggTil(utleier);
-        }
+         Utleier utleier = new Utleier(String.valueOf(i+1), fornavn, etternavn, adresse, mail, String.valueOf(i+100), firm);
+         register.leggTil(utleier);
+         }
 
-        for(int i=1000;i<2000; i++){
-            String fornavn = fornavns[r.nextInt(fornavns.length)];
-            String etternavn = etternavns[r.nextInt(etternavns.length)];
-            String adresse = adresses[r.nextInt(adresses.length)];
-            String mail = fornavn.toLowerCase() + "." + etternavn.toLowerCase() + "@" + domene[r.nextInt(domene.length)];
-            String antpersoner = antPersoner[r.nextInt(antPersoner.length)];
-            String sivstat = sivilstatus[r.nextInt(sivilstatus.length)];
-            String work = yrke[r.nextInt(yrke.length)];
-            String arbforhold = arbeidsforhold[r.nextInt(arbeidsforhold.length)];
-            boolean røykeinn = røyke[r.nextInt(røyke.length)];
-            boolean husdyrinn = husdyr[r.nextInt(husdyr.length)];
-            boolean balkonginn = balkong[r.nextInt(balkong.length)];
-            boolean terasseinn = terasse[r.nextInt(terasse.length)];
-            boolean TVinn = tv[r.nextInt(tv.length)];
-            boolean internetinn = nett[r.nextInt(nett.length)];
-            boolean strøminn = strøm[r.nextInt(strøm.length)];
-            boolean parkeringinn = parkering[r.nextInt(parkering.length)];
-            boolean kjellerinn = kjeller[r.nextInt(kjeller.length)];
-            boolean heisinn = kjeller[r.nextInt(kjeller.length)];
-            int mpris = makspris[r.nextInt(makspris.length)];
+         for(int i=1000;i<2000; i++){
+         String fornavn = fornavns[r.nextInt(fornavns.length)];
+         String etternavn = etternavns[r.nextInt(etternavns.length)];
+         String adresse = adresses[r.nextInt(adresses.length)];
+         String mail = fornavn.toLowerCase() + "." + etternavn.toLowerCase() + "@" + domene[r.nextInt(domene.length)];
+         String antpersoner = antPersoner[r.nextInt(antPersoner.length)];
+         String sivstat = sivilstatus[r.nextInt(sivilstatus.length)];
+         String work = yrke[r.nextInt(yrke.length)];
+         String arbforhold = arbeidsforhold[r.nextInt(arbeidsforhold.length)];
+         boolean røykeinn = røyke[r.nextInt(røyke.length)];
+         boolean husdyrinn = husdyr[r.nextInt(husdyr.length)];
+         boolean balkonginn = balkong[r.nextInt(balkong.length)];
+         boolean terasseinn = terasse[r.nextInt(terasse.length)];
+         boolean TVinn = tv[r.nextInt(tv.length)];
+         boolean internetinn = nett[r.nextInt(nett.length)];
+         boolean strøminn = strøm[r.nextInt(strøm.length)];
+         boolean parkeringinn = parkering[r.nextInt(parkering.length)];
+         boolean kjellerinn = kjeller[r.nextInt(kjeller.length)];
+         boolean heisinn = kjeller[r.nextInt(kjeller.length)];
+         int mpris = makspris[r.nextInt(makspris.length)];
 
-            Soker soker = new Soker(String.valueOf(i+1),fornavn,etternavn,adresse,mail,String.valueOf(i+100),antpersoner,sivstat,work,arbforhold,minareal,maksareal,minpris,mpris,
-                    røykeinn,husdyrinn,balkonginn,terasseinn,TVinn,internetinn,strøminn,parkeringinn,kjellerinn,heisinn,bregister,legister);
-            sregister.leggTil(soker);
-        }
+         Soker soker = new Soker(String.valueOf(i+1),fornavn,etternavn,adresse,mail,String.valueOf(i+100),antpersoner,sivstat,work,arbforhold,minareal,maksareal,minpris,mpris,
+         røykeinn,husdyrinn,balkonginn,terasseinn,TVinn,internetinn,strøminn,parkeringinn,kjellerinn,heisinn,bregister,legister);
+         sregister.leggTil(soker);
+         }
 
-        for(int i=500;i<1000; i++){
-            int bareal = boareal[r.nextInt(boareal.length)];
-            String adresse = adresses[r.nextInt(adresses.length)];
-            int rom = antrom[r.nextInt(antrom.length)];
-            int år = byggår[r.nextInt(byggår.length)];
-            int price = pris[r.nextInt(pris.length)];
-            String pnr = String.valueOf(i+1);
-            Utleier utleier = register.get(pnr);
-            boolean smoke = røyke[r.nextInt(røyke.length)];
-            boolean dyr = husdyr[r.nextInt(husdyr.length)];
-            boolean balk = balkong[r.nextInt(balkong.length)];
-            boolean ter = terasse[r.nextInt(terasse.length)];
-            boolean TV = tv[r.nextInt(tv.length)];
-            boolean internet = nett[r.nextInt(nett.length)];
-            boolean s = strøm[r.nextInt(strøm.length)];
-            boolean park = parkering[r.nextInt(parkering.length)];
-            int etg = antetg[r.nextInt(antetg.length)];
-            boolean kj = kjeller[r.nextInt(kjeller.length)];
-            boolean erønsket = husdyr[r.nextInt(husdyr.length)];
-            double tmt = tomt[r.nextInt(tomt.length)];
-            int bad = antbad[r.nextInt(antbad.length)];
-            String ledig = ledigfra[r.nextInt(ledigfra.length)];
-            String beskriv = beskrivelse[r.nextInt(beskrivelse.length)];
-            String bildesti = "Bilder/boligbilder/"+ String.valueOf((1 + r.nextInt(46))) + ".jpg";
+         for(int i=500;i<1000; i++){
+         int bareal = boareal[r.nextInt(boareal.length)];
+         String adresse = adresses[r.nextInt(adresses.length)];
+         int rom = antrom[r.nextInt(antrom.length)];
+         int år = byggår[r.nextInt(byggår.length)];
+         int price = pris[r.nextInt(pris.length)];
+         String pnr = String.valueOf(i+1);
+         Utleier utleier = register.get(pnr);
+         boolean smoke = røyke[r.nextInt(røyke.length)];
+         boolean dyr = husdyr[r.nextInt(husdyr.length)];
+         boolean balk = balkong[r.nextInt(balkong.length)];
+         boolean ter = terasse[r.nextInt(terasse.length)];
+         boolean TV = tv[r.nextInt(tv.length)];
+         boolean internet = nett[r.nextInt(nett.length)];
+         boolean s = strøm[r.nextInt(strøm.length)];
+         boolean park = parkering[r.nextInt(parkering.length)];
+         int etg = antetg[r.nextInt(antetg.length)];
+         boolean kj = kjeller[r.nextInt(kjeller.length)];
+         boolean erønsket = husdyr[r.nextInt(husdyr.length)];
+         double tmt = tomt[r.nextInt(tomt.length)];
+         int bad = antbad[r.nextInt(antbad.length)];
+         String ledig = ledigfra[r.nextInt(ledigfra.length)];
+         String beskriv = beskrivelse[r.nextInt(beskrivelse.length)];
+         String bildesti = "Bilder/boligbilder/"+ String.valueOf((1 + r.nextInt(46))) + ".jpg";
 
-            Enebolig enebolig = new Enebolig(bildesti,adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
-                    TV,internet,s,park,etg,kj,tmt,bad,erønsket,false);
-            bregister.leggTil(enebolig);
-            utleier.addBolig(enebolig);
-        }
+         Enebolig enebolig = new Enebolig(bildesti,adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
+         TV,internet,s,park,etg,kj,tmt,bad,erønsket,false);
+         bregister.leggTil(enebolig);
+         utleier.addBolig(enebolig);
+         }
 
-        for(int i=0;i<500; i++){
-            int bareal = boareal[r.nextInt(boareal.length)];
-            String adresse = adresses[r.nextInt(adresses.length)];
-            int rom = antrom[r.nextInt(antrom.length)];
-            int år = byggår[r.nextInt(byggår.length)];
-            int price = pris[r.nextInt(pris.length)];
-            String pnr = String.valueOf(i+1);
-            Utleier utleier = register.get(pnr);
-            boolean smoke = røyke[r.nextInt(røyke.length)];
-            boolean dyr = husdyr[r.nextInt(husdyr.length)];
-            boolean balk = balkong[r.nextInt(balkong.length)];
-            boolean ter = terasse[r.nextInt(terasse.length)];
-            boolean TV = tv[r.nextInt(tv.length)];
-            boolean internet = nett[r.nextInt(nett.length)];
-            boolean s = strøm[r.nextInt(strøm.length)];
-            boolean park = parkering[r.nextInt(parkering.length)];
-            String ledig = ledigfra[r.nextInt(ledigfra.length)];
-            String beskriv = beskrivLeil[r.nextInt(beskrivLeil.length)];
-            int antboder = boder[r.nextInt(boder.length)];
-            int etasje = etgleil[r.nextInt(etgleil.length)];
-            boolean elevator = heis[r.nextInt(heis.length)];
-            String bildesti = "Bilder/boligbilder/"+ String.valueOf((1 + r.nextInt(46))) + ".jpg";
+         for(int i=0;i<500; i++){
+         int bareal = boareal[r.nextInt(boareal.length)];
+         String adresse = adresses[r.nextInt(adresses.length)];
+         int rom = antrom[r.nextInt(antrom.length)];
+         int år = byggår[r.nextInt(byggår.length)];
+         int price = pris[r.nextInt(pris.length)];
+         String pnr = String.valueOf(i+1);
+         Utleier utleier = register.get(pnr);
+         boolean smoke = røyke[r.nextInt(røyke.length)];
+         boolean dyr = husdyr[r.nextInt(husdyr.length)];
+         boolean balk = balkong[r.nextInt(balkong.length)];
+         boolean ter = terasse[r.nextInt(terasse.length)];
+         boolean TV = tv[r.nextInt(tv.length)];
+         boolean internet = nett[r.nextInt(nett.length)];
+         boolean s = strøm[r.nextInt(strøm.length)];
+         boolean park = parkering[r.nextInt(parkering.length)];
+         String ledig = ledigfra[r.nextInt(ledigfra.length)];
+         String beskriv = beskrivLeil[r.nextInt(beskrivLeil.length)];
+         int antboder = boder[r.nextInt(boder.length)];
+         int etasje = etgleil[r.nextInt(etgleil.length)];
+         boolean elevator = heis[r.nextInt(heis.length)];
+         String bildesti = "Bilder/boligbilder/"+ String.valueOf((1 + r.nextInt(46))) + ".jpg";
 
 
-            Leilighet leilighet = new Leilighet(bildesti,adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
-                    TV,internet,s,park,antboder,etasje,elevator,false,false);
-            legister.leggTil(leilighet);
-            utleier.addBolig(leilighet);
-        }
+         Leilighet leilighet = new Leilighet(bildesti,adresse,bareal,rom,år,beskriv,price,ledig,String.valueOf(i+1),utleier,smoke,dyr,balk,ter,
+         TV,internet,s,park,antboder,etasje,elevator,false,false);
+         legister.leggTil(leilighet);
+         utleier.addBolig(leilighet);
+         }
 
-        for(int i = 0; i < 10; i++){
-            String eierpnr = String.valueOf(i+1);
-            String sokerpnr = String.valueOf(i+1001);
-            String bolignr = String.valueOf(i+1);
-            Utleier eier = register.get(eierpnr);
-            Soker soker = sregister.get(sokerpnr);
-            Bolig bolig = legister.get(bolignr);
-            int p = pris[r.nextInt(pris.length)];
-            String fra = fradato[r.nextInt(fradato.length)];
-            String til = tildato[r.nextInt(tildato.length)];
+         for(int i = 0; i < 10; i++){
+         String eierpnr = String.valueOf(i+1);
+         String sokerpnr = String.valueOf(i+1001);
+         String bolignr = String.valueOf(i+1);
+         Utleier eier = register.get(eierpnr);
+         Soker soker = sregister.get(sokerpnr);
+         Bolig bolig = legister.get(bolignr);
+         int p = pris[r.nextInt(pris.length)];
+         String fra = fradato[r.nextInt(fradato.length)];
+         String til = tildato[r.nextInt(tildato.length)];
 
-            Kontrakt kontrakt = new Kontrakt(String.valueOf(i+1), bolig, eier, soker,p,fra,til);
-            if(bolig instanceof Leilighet){
-                Leilighet leilighet = legister.get(bolig.getBolignr());
-                leilighet.setUtleid(true);
-            }
-            else if(bolig instanceof Enebolig){
-                Enebolig enebolig = bregister.get(bolig.getBolignr());
-                enebolig.setUtleid(true);
-            }
-            kregister.leggTil(kontrakt);
+         Kontrakt kontrakt = new Kontrakt(String.valueOf(i+1), bolig, eier, soker,p,fra,til);
+         if(bolig instanceof Leilighet){
+         Leilighet leilighet = legister.get(bolig.getBolignr());
+         leilighet.setUtleid(true);
+         }
+         else if(bolig instanceof Enebolig){
+         Enebolig enebolig = bregister.get(bolig.getBolignr());
+         enebolig.setUtleid(true);
+         }
+         kregister.leggTil(kontrakt);
 
-        }*/
+         }*/
         final int UTLEIER = 0;
         final int SOKER = 1;
         final int ENEBOLIG = 2;
@@ -228,12 +230,11 @@ public class BoligBrowse {
         Dimension skjerm = kit.getScreenSize();
         int bredde = skjerm.width;
         int høyde = skjerm.height;
-        
+
+        //</editor-fold>
         frame.setVisible(true);
 
-
-        frame.setSize(bredde/2, høyde-100);
-
+        frame.setSize(bredde / 2, høyde - 100);
 
         frame.setLocation(skjerm.width / 2 - frame.getSize().width / 2, skjerm.height / 2 - frame.getSize().height / 2);
 
@@ -241,16 +242,132 @@ public class BoligBrowse {
                 new WindowAdapter() {
                     @Override
                     public void windowClosing(WindowEvent e) {
-                        frame.writeList(UTLEIER);
-                        frame.writeList(SOKER);
-                        frame.writeList(ENEBOLIG);
-                        frame.writeList(LEILIGHET);
-                        frame.writeList(KONTRAKT);
+                        skrivAlle();
                         System.exit(0);
                     }
                 }
         );
     }
 
+    public static void lesPersonregister() {
+        try (ObjectInputStream innfil = new ObjectInputStream(new FileInputStream("utleierliste.data"))) {
+            register = (Personregister) innfil.readObject();
+            System.out.println("Personregister ble lastet!");
+        } catch (ClassNotFoundException ce) {
 
+            register = new Personregister();
+            System.out.println("Nytt personregister ble opprettet!");
+        } catch (IOException ioe) {
+            register = new Personregister();
+            System.out.println("Nytt personregister ble opprettet!");
+        }
+    }
+
+    public static void lesSokerregister() {
+        try (ObjectInputStream innfil = new ObjectInputStream(new FileInputStream("sokerliste.data"))) {
+            sregister = (Sokerregister) innfil.readObject();
+            System.out.println("Søkerregister ble lastet!");
+        } catch (ClassNotFoundException ce) {
+            System.out.println("Søkerregister ble ikke funnet, opppretter nytt register!");
+            sregister = new Sokerregister();
+        } catch (IOException ioe) {
+
+            sregister = new Sokerregister();
+            System.out.println("Fant ikke filen sokerliste.data, oppretter nytt register!");
+        }
+    }
+
+    public static void lesBoligregistrer() {
+        try (ObjectInputStream innfil = new ObjectInputStream(new FileInputStream("eneboligliste.data"))) {
+            bregister = (Boligregister) innfil.readObject();
+            System.out.println("Boligregister ble lastet!");
+        } catch (ClassNotFoundException ce) {
+            System.out.println("Boligregister ble ikke funnet! Oppretter nytt register!");
+            bregister = new Boligregister();
+        } catch (IOException ioe) {
+            System.out.println("Fant ikke filen eneboligliste.data, oppretter nytt register!");
+            bregister = new Boligregister();
+        }
+    }
+
+    public static void lesLeilighhetsregister() {
+        try (ObjectInputStream innfil = new ObjectInputStream(new FileInputStream("leilighetliste.data"))) {
+            legister = (Leilighetregister) innfil.readObject();
+            System.out.println("Leilighetsliste ble lastet!");
+        } catch (ClassNotFoundException ce) {
+            legister = new Leilighetregister();
+        } catch (IOException ioe) {
+            legister = new Leilighetregister();
+        }
+    }
+
+    public static void lesKontraktregister() {
+        try (ObjectInputStream innfil = new ObjectInputStream(new FileInputStream("kontraktliste.data"))) {
+            kregister = (Kontraktregister) innfil.readObject();
+            System.out.println("Kontraktregister ble lastet!");
+        } catch (ClassNotFoundException ce) {
+            kregister = new Kontraktregister();
+        } catch (IOException ioe) {
+            kregister = new Kontraktregister();
+        }
+    }
+
+    public static void skrivPersonregister() {
+        try (ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("utleierliste.data"))) {
+            utfil.writeObject(register);
+            System.out.println("Personregister ble lagret!");
+        } catch (IOException ioe) {
+            System.out.println("Personregister ble ikke lagret!");
+        }
+    }
+
+    public static void skrivSokerregister() {
+        try (ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("sokerliste.data"))) {
+            utfil.writeObject(sregister);
+            System.out.println("Søkerliste ble lagret!");
+        } catch (IOException ioe) {
+
+        }
+    }
+
+    public static void skrivBoligregister() {
+        try (ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("eneboligliste.data"))) {
+            utfil.writeObject(bregister);
+            System.out.println("Boligregisre ble lagret!");
+        } catch (IOException ioe) {
+        }
+    }
+
+    public static void skrivLeilighetregister() {
+        try (ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("leilighetliste.data"))) {
+            utfil.writeObject(legister);
+            System.out.println("Leilighetsregister ble lagret!!!");
+        } catch (IOException ioe) {
+        }
+    }
+
+    public static void skrivKontraktregister() {
+        try (ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("kontraktliste.data"))) {
+            utfil.writeObject(kregister);
+            System.out.println("Kontraktregister ble lagret!");
+        } catch (IOException ioe) {
+
+        }
+    }
+
+    public static void lesAlle() {
+        lesPersonregister();
+        lesSokerregister();
+        lesBoligregistrer();
+        lesLeilighhetsregister();
+        lesKontraktregister();
+    }
+
+    public static void skrivAlle() {
+        skrivPersonregister();
+        skrivSokerregister();
+        skrivBoligregister();
+        skrivLeilighetregister();
+        skrivKontraktregister();
+    }
 }

@@ -241,7 +241,8 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
                     register.fjern(bolignr);
                     Utleier eier = leilighet.getEier();
                     eier.removeBolig(leilighet);
-                    parent.skrivTilFil(leilighet);
+                    modell.fireTableDataChanged();
+                    
                 }
             }
             catch(IndexOutOfBoundsException ioobe){
