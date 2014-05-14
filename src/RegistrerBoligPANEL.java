@@ -541,11 +541,11 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             }
         });
 
-        URL url = getClass().getResource("0.jpg");
+        URL url = getClass().getResource("Bilder/boligbilder/");
 
         System.out.println(url.getPath());
 
-        //bildesti = new File(url.getPath()).listFiles().length-1;
+        bildesti = new File(url.getPath()).listFiles().length-1;
 
 
         filvelger.setCurrentDirectory(new File(System.getProperty("user.home")));
