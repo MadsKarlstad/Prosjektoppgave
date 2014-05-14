@@ -213,7 +213,7 @@ public class BoligBrowse {
 
         frame.setSize(bredde/2, høyde-100);
 
-        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
         frame.setLocation(skjerm.width / 2 - frame.getSize().width / 2, skjerm.height / 2 - frame.getSize().height / 2);
 
         frame.addWindowListener(

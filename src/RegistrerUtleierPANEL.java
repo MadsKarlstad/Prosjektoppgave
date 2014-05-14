@@ -44,20 +44,14 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
         this.parent = parent;
         initialiser();
         lagGUI();
-        
-        Toolkit kit = Toolkit.getDefaultToolkit();
-        Dimension skjerm = kit.getScreenSize();
-        int bredde = skjerm.width;
-        int høyde = skjerm.height;
-        
-        parent.setSize(bredde/2, høyde/2);
-        parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
+
+        parent.Size();
     }
 
     public void initialiser() {
 
         felt = new JTextField[feltnavn.length];
-        TextPrompt tp [] = new TextPrompt[felt.length];
+        TekstFyller tp [] = new TekstFyller[felt.length];
 
         feltpanel = new JPanel(new GridLayout(7, 1, 5, 5));
         knapppanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -65,7 +59,7 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
 
         for (int i = 0; i < feltnavn.length; i++) {
             felt[i] = new JTextField(10);
-            tp[i] = new TextPrompt(feltnavn[i], felt[i]);
+            tp[i] = new TekstFyller(feltnavn[i], felt[i]);
             tp[i].changeAlpha(0.7f);
 
         }
@@ -186,25 +180,13 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
 
             registrer();
             parent.visPanel(MainFrame.MAIN_BOARD);
-            
-            Toolkit kit = Toolkit.getDefaultToolkit();
-            Dimension skjerm = kit.getScreenSize();
-            int bredde = skjerm.width;
-            int høyde = skjerm.height;
-        
-            parent.setSize(bredde/2, høyde - 100);
-            parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
+
+            parent.Size();
 
         }else if(e.getSource() == avbryt){
             parent.visPanel(MainFrame.MAIN_BOARD);
-            
-            Toolkit kit = Toolkit.getDefaultToolkit();
-            Dimension skjerm = kit.getScreenSize();
-            int bredde = skjerm.width;
-            int høyde = skjerm.height;
-        
-            parent.setSize(bredde/2, høyde-100);
-            parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
+
+            parent.Size();
         }
     }
 

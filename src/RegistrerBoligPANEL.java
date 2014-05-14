@@ -216,9 +216,9 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         feltpanelLeilighet = new JPanel(new GridLayout(1,2,5,5));
         bokspanelLeilighet = new JPanel(new GridLayout(5,2,5,5));
 
-        TextPrompt tp [] = new TextPrompt[standardfelter.length];
-        TextPrompt tp1 [] = new TextPrompt[eneboligfelt.length];
-        TextPrompt tp2 [] = new TextPrompt[leilighetfelt.length];
+        TekstFyller tp [] = new TekstFyller[standardfelter.length];
+        TekstFyller tp1 [] = new TekstFyller[eneboligfelt.length];
+        TekstFyller tp2 [] = new TekstFyller[leilighetfelt.length];
 
         bildeOk = false;
 
@@ -227,19 +227,19 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
         for (int i = 0; i < feltnavn.length; i++) {
             standardfelter[i] = new JTextField(10);
-            tp[i] = new TextPrompt(feltnavn[i], standardfelter[i]);
+            tp[i] = new TekstFyller(feltnavn[i], standardfelter[i]);
             tp[i].changeAlpha(0.7f);
         }
         for (int i = 0; i < eneboligfeltnavn.length; i++) {
             eneboligfelt[i] = new JTextField(10);
-            tp1[i] = new TextPrompt(eneboligfeltnavn[i],eneboligfelt[i]);
+            tp1[i] = new TekstFyller(eneboligfeltnavn[i],eneboligfelt[i]);
             tp1[i].changeAlpha(0.7f);
             feltpanelEnebolig.add(eneboligfelt[i]);
         }
 
         for (int i = 0; i < leilighetfeltnavn.length; i++) {
             leilighetfelt[i] = new JTextField(10);
-            tp2[i] = new TextPrompt(leilighetfeltnavn[i],leilighetfelt[i]);
+            tp2[i] = new TekstFyller(leilighetfeltnavn[i],leilighetfelt[i]);
             tp2[i].changeAlpha(0.7f);
             feltpanelLeilighet.add(leilighetfelt[i]);
 
@@ -453,6 +453,9 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
                     catch (Exception e){
 
                     }
+
+                    parent.visPanel(MainFrame.MAIN_BOARD);
+                    parent.Size();
                 }
                 else if(bregister.finnes(bolignr)){
                     visMelding("En bolig med dette bolignummeret er allerede registrert i våre systemer");
@@ -510,10 +513,14 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
                     legister.put(bolignr, leilighet);
                     utleier.addBolig(leilighet);
+
                     try{
                         kopierbilde();}
                     catch (Exception e){
                     }
+
+                    parent.visPanel(MainFrame.MAIN_BOARD);
+                    parent.Size();
                 }
                 else if(bregister.finnes(bolignr)){
                     visMelding("En bolig med dette bolignummeret er allerede registrert i våre systemer");
@@ -606,14 +613,8 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
                 catch (NumberFormatException nfe){
                     JOptionPane.showMessageDialog(null,"Venligst fyll inn tall for feltene som krever det");
                 }
-                Toolkit kit = Toolkit.getDefaultToolkit();
-                Dimension skjerm = kit.getScreenSize();
-                int bredde = skjerm.width;
-                int høyde = skjerm.height;
 
-                parent.setSize(bredde/2, høyde-100);
-                parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
-                parent.visPanel(MainFrame.MAIN_BOARD);
+
             }else if(boligtype.getSelectedIndex() == LEILIGHET){
                 try{
                     registrerLeilighet();
@@ -626,24 +627,12 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
                 catch (NumberFormatException nfe){
                     JOptionPane.showMessageDialog(null,"Venligst fyll inn tall for feltene som krever det");
                 }
-                Toolkit kit = Toolkit.getDefaultToolkit();
-                Dimension skjerm = kit.getScreenSize();
-                int bredde = skjerm.width;
-                int høyde = skjerm.height;
 
-                parent.setSize(bredde/2, høyde-100);
-                parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
-                parent.visPanel(MainFrame.MAIN_BOARD);
+
             }
         }else if(e.getSource() == avbryt){
             parent.visPanel(MainFrame.MAIN_BOARD);
-            Toolkit kit = Toolkit.getDefaultToolkit();
-            Dimension skjerm = kit.getScreenSize();
-            int bredde = skjerm.width;
-            int høyde = skjerm.height;
-
-            parent.setSize(bredde/2, høyde-100);
-            parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
+            parent.Size();
         }
 
         else if(e.getSource() == bilde){

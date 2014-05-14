@@ -280,13 +280,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
 
         if(svar==JOptionPane.YES_OPTION){
             try{
-                Toolkit kit = Toolkit.getDefaultToolkit();
-                Dimension skjerm = kit.getScreenSize();
-                int bredde = skjerm.width;
-                int høyde = skjerm.height;
-
-                parent.setSize(bredde/2, høyde-200);
-                parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
+                parent.Size();
 
                 Soker soker = modell.getValueAt(rad);
 
@@ -352,14 +346,8 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == tilbake){
             parent.visPanel(MainFrame.MAIN_BOARD);
-            
-            Toolkit kit = Toolkit.getDefaultToolkit();
-            Dimension skjerm = kit.getScreenSize();
-            int bredde = skjerm.width;
-            int høyde = skjerm.height;
-        
-            parent.setSize(bredde/2, høyde-100);
-            parent.setLocation(skjerm.width / 2 - parent.getSize().width / 2, skjerm.height / 2 - parent.getSize().height / 2);
+
+            parent.Size();
         }
         else if(e.getSource() == fjern){
             int rad = tabell.getSelectedRow();

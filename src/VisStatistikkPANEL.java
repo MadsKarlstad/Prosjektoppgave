@@ -93,6 +93,7 @@ public class VisStatistikkPANEL extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == tilbake){
             parent.visPanel(MainFrame.MAIN_BOARD);
+            parent.Size();
         }
     }
 }

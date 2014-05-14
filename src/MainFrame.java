@@ -288,6 +288,17 @@ public class MainFrame extends JFrame implements ActionListener {
 
     }
 
+    public void Size(){
+
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension skjerm = kit.getScreenSize();
+        int bredde = skjerm.width;
+        int høyde = skjerm.height;
+
+        setSize(bredde/2, høyde-100);
+        setLocation(skjerm.width / 2 - getSize().width / 2, skjerm.height / 2 - getSize().height / 2);
+    }
+
     public void writeList(int n){
         if(n==UTLEIER){
             try(ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("src/utleierliste.data"))){

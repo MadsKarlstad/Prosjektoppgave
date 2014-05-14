@@ -15,7 +15,7 @@ import java.awt.event.FocusListener;
 /**
  * Created by Erlend on 04/05/14.
  */
-public class TextPrompt extends JLabel
+public class TekstFyller extends JLabel
         implements FocusListener, DocumentListener {
 
     public enum Show {
@@ -27,13 +27,12 @@ public class TextPrompt extends JLabel
     private JTextComponent component;
     private Document document;
     private Show show;
-    private int focusLost;
 
-    public TextPrompt(String text, JTextComponent component) {
+    public TekstFyller(String text, JTextComponent component) {
         this(text, component, Show.ALWAYS);
     }
 
-    public TextPrompt(String text, JTextComponent component, Show show) {
+    public TekstFyller(String text, JTextComponent component, Show show) {
         this.component = component;
         setShow(show);
         document = component.getDocument();
@@ -99,17 +98,13 @@ public class TextPrompt extends JLabel
         }
     }
 
-    //  Implement FocusListener
     public void focusGained(FocusEvent e) {
         checkForPrompt();
     }
 
     public void focusLost(FocusEvent e) {
-        focusLost++;
         checkForPrompt();
     }
-
-    //  Implement DocumentListener
     public void insertUpdate(DocumentEvent e) {
         checkForPrompt();
     }
