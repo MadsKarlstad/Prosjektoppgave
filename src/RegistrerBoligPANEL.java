@@ -439,18 +439,29 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         }
 
         if(bolignr.length()!=0||pnr.length()!=0||adresse.length()!=0||beskrivelse.length()!=0||ledig.length()!=0){
-            Enebolig enebolig = new Enebolig("Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
-                    røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false,bydel);
+            if(pregister.finnes(pnr)){
+                if(!bregister.finnes(bolignr)){
+                    Enebolig enebolig = new Enebolig("Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
+                            røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false,bydel);
 
-            bregister.put(bolignr, enebolig);
+                    bregister.put(bolignr, enebolig);
 
-            utleier.addBolig(enebolig);
+                    utleier.addBolig(enebolig);
 
-            try{
-                kopierbilde();}
-            catch (Exception e){
+                    try{
+                        kopierbilde();}
+                    catch (Exception e){
 
+                    }
+                }
+                else if(bregister.finnes(bolignr)){
+                    visMelding("En bolig med dette bolignummeret er allerede registrert i våre systemer");
+                }
             }
+            else if(!pregister.finnes(pnr)){
+                visMelding("Ingen utleier funnet med dette personnummeret er allerede registrert i våre systemer");
+            }
+
         }
         else{
             visMelding("Vennligst fyll inn all informasjon");
@@ -492,15 +503,26 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         }
 
         if(bolignr.length()!=0||pnr.length()!=0||adresse.length()!=0||beskrivelse.length()!=0||ledig.length()!=0){
-            Leilighet leilighet = new Leilighet("Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
-                    røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antboder,etg,heis,false,false,bydel);
+            if(pregister.finnes(pnr)){
+                if(!bregister.finnes(bolignr)){
+                    Leilighet leilighet = new Leilighet("Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
+                            røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antboder,etg,heis,false,false,bydel);
 
-            legister.put(bolignr, leilighet);
-            utleier.addBolig(leilighet);
-            try{
-                kopierbilde();}
-            catch (Exception e){
+                    legister.put(bolignr, leilighet);
+                    utleier.addBolig(leilighet);
+                    try{
+                        kopierbilde();}
+                    catch (Exception e){
+                    }
+                }
+                else if(bregister.finnes(bolignr)){
+                    visMelding("En bolig med dette bolignummeret er allerede registrert i våre systemer");
+                }
             }
+            else if(!pregister.finnes(pnr)){
+                visMelding("Ingen utleier funnet med dette personnummeret er allerede registrert i våre systemer")
+            }
+
         }
         else{
             visMelding("Venligst fyll inn all informasjon");
