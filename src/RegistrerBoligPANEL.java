@@ -520,7 +520,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
                 }
             }
             else if(!pregister.finnes(pnr)){
-                visMelding("Ingen utleier funnet med dette personnummeret er allerede registrert i våre systemer")
+                visMelding("Ingen utleier funnet med dette personnummeret er allerede registrert i våre systemer");
             }
 
         }
