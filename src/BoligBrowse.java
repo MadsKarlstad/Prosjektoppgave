@@ -19,6 +19,27 @@ public class BoligBrowse {
         Leilighetregister legister = new Leilighetregister();
         Kontraktregister kregister = new Kontraktregister();
 
+        String erwindows = System.getProperty("os.name");
+
+        System.out.println(erwindows);
+
+
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            // If Nimbus is not available, fall back to cross-platform
+            try {
+                UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+            } catch (Exception ex) {
+                // not worth my time
+            }
+        }
+
         final MainFrame frame;
         frame = new MainFrame(register,bregister,sregister,legister,kregister);
 
