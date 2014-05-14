@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.net.URL;
 import java.nio.channels.FileChannel;
 
 /**
@@ -540,7 +541,11 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             }
         });
 
-        bildesti = new File("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/").listFiles().length-1;
+        URL url = getClass().getResource("0.jpg");
+
+        System.out.println(url.getPath());
+
+        //bildesti = new File(url.getPath()).listFiles().length-1;
 
 
         filvelger.setCurrentDirectory(new File(System.getProperty("user.home")));
