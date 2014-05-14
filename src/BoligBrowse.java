@@ -26,6 +26,9 @@ public class BoligBrowse {
 
         String erwindows = System.getProperty("os.name");
 
+        System.out.println(erwindows);
+
+        if(!erwindows.equals("Mac OS X")){
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -40,7 +43,7 @@ public class BoligBrowse {
             } catch (Exception ex) {
                 // not worth my time
             }
-        }
+        }}
 
         lesAlle();
 
