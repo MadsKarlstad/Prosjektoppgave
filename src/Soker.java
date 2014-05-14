@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
-public class Soker extends Person{
+public class Soker extends Person/*nye lister*/{
     private String antallPersoner;
     private String sivilstatus;
     private String yrke;
