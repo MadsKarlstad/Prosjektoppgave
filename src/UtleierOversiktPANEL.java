@@ -169,10 +169,9 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
 
 
         knapppanel.setBackground(Color.decode("#DAEDF5"));
-        overskriftpanel.setBackground(Color.decode("#B3D5E3"));
-        //tabellpanel.setBackground(Color.decode("#DAEDF5"));
+        overskriftpanel.setBackground(Color.decode("#DAEDF5"));
         søkpanel.setBackground(Color.decode("#DAEDF5"));
-        setBackground(Color.decode("#B3D5E3"));
+        setBackground(Color.decode("#DAEDF5"));
 
 
 

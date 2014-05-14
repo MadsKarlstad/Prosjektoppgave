@@ -61,6 +61,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
     private JPanel feltpanel_utleier;
     private JPanel infopanel_start_utleier;
 
+    private JPanel meldingpanel;
+
     private JTextField finnboligfelt;
     private JTextField bolignummer;
     private JTextField eier;
@@ -86,6 +88,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
     private JLabel søkerbolignrLabel;
     private JLabel søkerpersnrLabel;
     private JLabel utleidLabel;
+
+    private JLabel meldinglabel;
 
 
     private JTextArea boligArea;
@@ -148,6 +152,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         bilde_info = new JPanel(new BorderLayout());
 
         boligArea = new JTextArea();
+
+        meldingpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         bilde_info.setBorder(BorderFactory.createEmptyBorder(0/*top*/, 20/*left*/, 0/*bottom*/, 0/*right*/));
         søkepanel.setBorder(BorderFactory.createEmptyBorder(10/*top*/, 10/*left*/, 20/*bottom*/, 10/*right*/));
@@ -245,6 +251,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         søkerbolignrLabel = new JLabel("Boligens bolignummer");
         søkerpersnrLabel = new JLabel("Søkerens personnummer");
         utleidLabel = new JLabel("Du kan sjekke kontraktregisteret for når leieforholdet for denne boligen opphører");
+        meldinglabel = new JLabel();
 
 
         boligArea.setLineWrap(true);
@@ -303,6 +310,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         infopanel_start_utleier.add(eneboligUtleier);
         infopanel_start_utleier.add(leilighetUtleier);
 
+        meldingpanel.add(meldinglabel);
+
         add(knappepanel, BorderLayout.PAGE_END);
         add(søkepanel, BorderLayout.PAGE_START);
 
@@ -328,6 +337,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         midtpanel.setBackground(Color.decode("#B3D5E3"));
         feltpanel_søker.setBackground(Color.decode("#B3D5E3"));
         bilde_info.setBackground(Color.decode("#B3D5E3"));
+        meldingpanel.setBackground(Color.decode("#B3D5E3"));
 
 
         infopanel_utleier.setBackground(Color.decode("#B3D5E3"));
@@ -344,6 +354,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         soker.matcherEnebolig(bregister);
 
         eneboligliste = soker.getEneboligliste();
+
+        if(eneboligliste.size()!= 0){
 
         bolignummer.setText(eneboligliste.get(index).getBolignr());
         eier.setText(eneboligliste.get(index).getEier().getNavn());
@@ -375,16 +387,33 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             knappepanel_søker.revalidate();
             knappepanel_søker.repaint();
             knappepanel_søker.add(utleidLabel);
+        }}
+
+        else{
+            visMelding("ingen leiligheter registrert eller matchet","<html><p>Hvis kunden har sett en enebolig av interesse i vis boliger, <br> kan du fortsatt søke opp eneboligen via boligens nummer</p></html>");
+
+            removeAll();
+            revalidate();
+            repaint();
+
+
+            add(søkepanel,BorderLayout.PAGE_START);
+
+            add(meldingpanel, BorderLayout.CENTER);
+
+            add(knappepanel,BorderLayout.PAGE_END);
         }
 
         visSøkerPANEL();
     }
 
-    public void visLeilighet(Soker soker) throws IOException {
+    public void visLeilighet(Soker soker) throws IOException, IndexOutOfBoundsException {
 
         soker.matcherLeilighet(legister);
 
         leilighetliste = soker.getLeilighetliste();
+
+        if(leilighetliste.size()!=0){
 
         bolignummer.setText(leilighetliste.get(index).getBolignr());
         eier.setText(eneboligliste.get(index).getEier().getNavn());
@@ -416,6 +445,22 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             knappepanel_søker.revalidate();
             knappepanel_søker.repaint();
             knappepanel_søker.add(utleidLabel);
+        }
+        }
+
+        else{
+        visMelding("ingen leiligheter registrert eller matchet","<html><p>Hvis kunden har sett en leilighet av interesse i vis boliger, <br> kan du fortsatt søke opp leiligheten via boligens nummer</p></html>");
+
+            removeAll();
+            revalidate();
+            repaint();
+
+
+            add(søkepanel,BorderLayout.PAGE_START);
+
+            add(meldingpanel, BorderLayout.CENTER);
+
+            add(knappepanel,BorderLayout.PAGE_END);
         }
 
         visSøkerPANEL();
@@ -629,7 +674,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             visStartPANELsøker();
             Soker soker = sregister.get(fnr);
 
-            
+
 
             søkepanel.removeAll();
             søkepanel.revalidate();
@@ -648,7 +693,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         else{
 
-            visMelding("Ingen person med dette fødselsnummeret registrert");
+            visMelding("Ingen person med dette fødselsnummeret registrert",null);
 
         }
     }
@@ -683,7 +728,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
             }
             else if(kontraktregister.finnes(kontraktnr)) {
-                visMelding("Kontrakt med kontraktnummer: " + kontraktnr +" finnes allerede");
+                visMelding("Kontrakt med kontraktnummer: " + kontraktnr +" finnes allerede",null);
 
             }
         }
@@ -698,7 +743,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 kontrakt.setAktiv(true);
             }
             else if(kontraktregister.finnes(kontraktnr)){
-                visMelding("Kontrakt med kontraktnummer: " + kontraktnr +" finnes allerede");
+                visMelding("Kontrakt med kontraktnummer: " + kontraktnr +" finnes allerede",null);
             }
         }
     }
@@ -787,8 +832,11 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         }
     }
 
-    public void visMelding(String melding){
-        JOptionPane.showMessageDialog(null,melding);
+    public void visMelding(String meldingjoption,String melding){
+        JOptionPane.showMessageDialog(null,meldingjoption);
+
+        meldinglabel.setText(melding);
+
     }
 
     @Override
@@ -815,7 +863,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 soker.addØnskedBolig(enebolig);
                 eier.addEnebolig(enebolig);
 
-                visMelding("Kunde har vist interesse\n venligst kontakt utleier");
+                visMelding("Kunde har vist interesse\n venligst kontakt utleier",null);
 
                 enebolig.setØnsket(true);
                 enebolig.addSoker(soker);
@@ -833,7 +881,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 soker.addØnskedBolig(leilighet);
                 eier.addLeilighet(leilighet);
 
-                visMelding("Kunde har vist interesse\n venligst kontakt utleier");
+                visMelding("Kunde har vist interesse\n venligst kontakt utleier",null);
 
                 leilighet.setØnsket(true);
                 leilighet.addSoker(soker);
@@ -879,11 +927,11 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
             catch (NoSuchElementException ne){
                 visStartPANELutleier();
-                visMelding("Ingen ønsker registrert, venligst gå tilbake");
+                visMelding("Ingen ønsker registrert, venligst gå tilbake",null);
             }
             catch(IndexOutOfBoundsException ie){
                 visStartPANELutleier();
-                visMelding("Ingen ønsker registrert, venligst gå tilbake");
+                visMelding("Ingen ønsker registrert, venligst gå tilbake",null);
             }
         }
 
@@ -898,11 +946,11 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             }
             catch(NoSuchElementException ne){
                 visStartPANELutleier();
-                visMelding("Ingen ønsker registrert, venligst gå tilbake");
+                visMelding("Ingen ønsker registrert, venligst gå tilbake",null);
             }
             catch(IndexOutOfBoundsException ie){
                 visStartPANELutleier();
-                visMelding("Ingen ønsker registrert, venligst gå tilbake");
+                visMelding("Ingen ønsker registrert, venligst gå tilbake",null);
 
             }
 
@@ -922,7 +970,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
             }
         }
-        catch(IOException io){
+        catch(Exception ex){
 
         }
 
@@ -933,7 +981,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
             godkjennkontrakt(leilighet);
 
-            visMelding("Kontrakt er generert, finnes i kontraktregisteret");
+            visMelding("Kontrakt er generert, finnes i kontraktregisteret",null);
         }
 
         else if(e.getSource() == ønsketLeietakerEnebolig){
@@ -942,7 +990,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
             godkjennkontrakt(enebolig);
 
-            visMelding("Kontrakt er generert, finnes i kontraktregisteret");
+            visMelding("Kontrakt er generert, finnes i kontraktregisteret",null);
         }
 
         else if(e.getSource() == finnbolig){

@@ -285,7 +285,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         else if(e.getSource()==terminer){
 
             int rad = tabell.getSelectedRow();
-            int svar = JOptionPane.showOptionDialog(null,"Vil du opphøre kontrakten?","Bekreft sletting",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
+            int svar = JOptionPane.showOptionDialog(null,"Vil du opphøre kontrakten6                                                        5?","Bekreft sletting",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
             if(svar==JOptionPane.YES_OPTION){
 
             opphørKontrakt(rad);}

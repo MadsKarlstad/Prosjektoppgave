@@ -79,6 +79,7 @@ public class Soker extends Person{
     public void setMaksAreal(int p){maksAreal = p;}
 
     public void initialiserLister(){
+
         eneboligliste = new LinkedList<Enebolig>();
         leilighetliste = new LinkedList<Leilighet>();
         ønskedeboliger = new LinkedList<Bolig>();
@@ -156,6 +157,9 @@ public class Soker extends Person{
 
 
     public void matcherEnebolig(Boligregister eneboligregister ){
+
+        eneboligliste.clear();
+
         for (Map.Entry<String, Enebolig> entry : eneboligregister.entrySet()) {
             double prosent = 0;
             double sum = 0;
@@ -197,7 +201,7 @@ public class Soker extends Person{
             prosent = ((sum / 9) * 100);
 
             if (prosent > 50) {
-                //System.out.println("Prosentmatch: "+ df.format(prosent) +"% for bolignummer " + entry.getValue().getBolignr());
+
                 eneboligliste.add((Enebolig) entry.getValue());
 
                 entry.getValue().setProsent(prosent);
@@ -207,6 +211,9 @@ public class Soker extends Person{
     }
 
     public void matcherLeilighet(Leilighetregister leilighetregister){
+
+        leilighetliste.clear();
+
         for (Map.Entry<String, Leilighet> entry : leilighetregister.entrySet()){
             double prosent = 0;
             double sum = 0;
@@ -248,7 +255,7 @@ public class Soker extends Person{
             prosent = ((sum/9)*100);
 
             if(prosent > 50){
-                //System.out.println("Prosentmatch: "+ df.format(prosent) +"% for bolignummer " + entry.getValue().getBolignr());
+
                 leilighetliste.add((Leilighet) entry.getValue());
                 entry.getValue().setProsent(prosent);
             }

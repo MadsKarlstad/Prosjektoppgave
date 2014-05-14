@@ -89,7 +89,7 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
         add(feltpanel, BorderLayout.CENTER);
         add(knapppanel, BorderLayout.SOUTH);
 
-        knapppanel.setBackground(Color.decode("#DAEDF5"));
+        knapppanel.setBackground(Color.decode("#B3D5E3"));
         feltpanel.setBackground(Color.decode("#B3D5E3"));
         setBackground(Color.decode("#B3D5E3"));
     }
