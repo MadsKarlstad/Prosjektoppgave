@@ -6,6 +6,11 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Map;
 
+/*
+ * Objekt av typen Enebolig, arver datafelter fra superklassen Bolig og definerer informasjon som er unikt for enebolig
+ * Skrevet av Mads Karlstad. Sist oppdatert 10.04.14
+ */
+
 public class Enebolig extends Bolig {
     private int antallEtasjer;
     private boolean kjeller;
@@ -39,6 +44,7 @@ public class Enebolig extends Bolig {
         setEier(eier);
     }
 
+    //Set- og Get-metoder
     public void setEier(Utleier utleier){
         eier = utleier;
     }
