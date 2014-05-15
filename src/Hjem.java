@@ -5,6 +5,10 @@
 import java.io.Serializable;
 import java.util.Date;
 
+/*
+ * Interface Hjem, brukes av Bolig, som igjen arves av Enebolig og Leilighet
+ * Skrevet av Mads Karlstad og Erlend Westbye. Sist oppdatert 10.04.14
+ */
 public interface Hjem extends Serializable {
 
 
