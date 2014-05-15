@@ -14,6 +14,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import javax.swing.*;
 
+/*
+ *Driverklassen for programmet. Skrevet av Mads Karlstad og Erlend Westbye. Sist oppdatert 14.05.14
+ */
+
 public class BoligBrowse {
 
     private static Personregister register;
