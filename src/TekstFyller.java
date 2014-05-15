@@ -13,7 +13,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 /**
- * Created by Erlend on 04/05/14.
+ * Klasse som setter tekst i feltene i programmet og fjerner teksten når brukeren begynner å fylle ut informasjon
+ * Skrevet av Erlend Westbye. Sist endret 02.05.14
  */
 public class TekstFyller extends JLabel
         implements FocusListener, DocumentListener {
@@ -51,7 +52,7 @@ public class TekstFyller extends JLabel
         checkForPrompt();
     }
 
-
+    
     public void changeAlpha(float alpha) {
         changeAlpha((int) (alpha * 255));
     }
