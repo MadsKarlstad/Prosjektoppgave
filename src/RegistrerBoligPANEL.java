@@ -12,8 +12,8 @@ import java.net.URL;
 import java.nio.channels.FileChannel;
 
 /**
- * Created by Erlend on 22/04/14.
- * http://stackoverflow.com/questions/5388146/copy-and-rename-file-on-different-location til image uploader
+ * Panel for å registrere boliger. Med valgmulighet mellom de to boligtypene
+ * Skrevet av Erlend Westbye, Christoffer Jønsberg og Mads Karlstad. Sist oppdatert 10.05.14
  */
 public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
@@ -46,6 +46,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
     private JLabel[] boxlabels;
 
+    //Bydeler
     String[] boligtypevalg = {"Velg boligtype","Enebolig","Leilighet"};
     String [] bydeler = { "Velg bydel", "Alna", "Bjerke", "Frogner", "Gamle Oslo", "Grorud",
             "Grünerløkka", "Nordre Aker", "Nordstrand", "Sagene", "St. Hanshaugen",
@@ -167,6 +168,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
     }
 
+    //Initialiserer utskriftsområdet,feltene,boksene,labels,paneler,tekstfylleren osv
     public void initialiser() {
 
         setLayout(new BorderLayout());
@@ -295,7 +297,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
 
     }
-
+    //Oppretter brukergrensesnittet
     public void lagGUI() {
         for (int i = 0; i < standardfelter.length; i++) {
             feltpanel.add(standardfelter[i]);
@@ -344,6 +346,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
 
     }
+    //Metode som viser panel for når brukeren ikke har spesifisert hvilken boligtype som skal registreres
     public void visTomtpanel(){
         midtpanel.removeAll();
         midtpanel.revalidate();
@@ -358,6 +361,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
 
     }
+    //Metode som viser panel for når brukeren har valgt å registrere en enebolig
     public void visEneboligpanel(){
 
 
@@ -382,6 +386,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
 
     }
+    //Metode som viser panel for når brukeren har spesifisert at det er leilighet som skal registreres
     public void visLeilighetpanel(){
         remove(midtpanel);
         revalidate();
@@ -403,6 +408,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         add(midtpanel, BorderLayout.CENTER);
 
     }
+    //Metode for å registrere en enebolig, henter informasjon fra de utfylte feltene og boksene
     public void registrerEnebolig() throws IOException{
 
         int boareal = Integer.parseInt(standardfelter[BOAREAL].getText());
@@ -471,6 +477,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         }
 
     }
+    //Metode for å registrere leilighet, henter informasjon fra feltene og boksene
     public void registrerLeilighet() throws IOException {
 
         int boareal = Integer.parseInt(standardfelter[BOAREAL].getText());
@@ -536,6 +543,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         }
     }
 
+    //Metode som kopierer valgt boligbilde til brukerens mappestruktur
     public void kopierbilde() throws Exception{
 
         FileInputStream source = new FileInputStream(sti);
@@ -549,7 +557,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         sourceFileChannel.transferTo(0, size, destinationFileChannel);
 
     }
-
+    //Metode som lar brukeren laste opp et boligbilde for boligen
     public void lastOppBilde() throws IOException{
 
         JFileChooser filvelger = new JFileChooser();
@@ -589,7 +597,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
         }
     }
-
+    //Metode for å vise pop.up-meldinger i programmet
     public void visMelding(String melding){
         JOptionPane.showMessageDialog(null,melding);
     }
