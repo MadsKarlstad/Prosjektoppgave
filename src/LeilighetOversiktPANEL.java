@@ -15,6 +15,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
+/*
+ * Panel som viser oversikt over alle Leiligheter registrert i systemet.
+ * Skrevet av Mads Karlstad. Sist oppdatert 08.05.14
+ */
 public class LeilighetOversiktPANEL extends JPanel implements ActionListener, DocumentListener {
     private JPanel overskriftpanel;
     private JPanel tabellpanel;
@@ -49,7 +53,8 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
         initialiser();
         lagGUI();
     }
-
+    
+    //Initialiserer alle felter,knapper,iterator,paneler,osv
     public void initialiser() {
         overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         søkpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -87,6 +92,7 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     }
 
+    //Viser alle leiligheter i registeret
     public void visAlle(){
         overskriftpanel.remove(overskrift);
         tabellpanel.remove(scroll);
@@ -107,6 +113,7 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
         repaint();
     }
 
+    //Oppretter brukergrensesnittet
     public void lagGUI(){
         overskriftpanel.add(overskrift);
 
@@ -130,6 +137,7 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
         setBackground(Color.decode("#DAEDF5"));
     }
 
+    //Metode som søker gjennom listen av leiligheter og viser leiligheter som matcher brukerens input
     public void søk(){
 
         temp = new LinkedList<Leilighet>();
@@ -226,6 +234,7 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
         repaint();
     }
 
+    //Metode for å slette en leilighet. Tar parameter int Rad, som er raden brukeren har markert, som igjen gir tilgang til riktig objekt
     public void slettLeilighet(int rad){
         int svar = JOptionPane.showOptionDialog(null,"Vil du slette leiligheten?","Bekreft sletting",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
         if(svar==JOptionPane.YES_OPTION){
@@ -261,6 +270,7 @@ public class LeilighetOversiktPANEL extends JPanel implements ActionListener, Do
         JOptionPane.showMessageDialog(null,"Not yet supported");
     }
 
+    //Metode som viser mer informasjon om leiligheten. Tar int rad som parameter, som gir oss tilgang til objektet ut ifra tabellen
     public void visInfo(int rad){
         try{
             Leilighet leilighet = modell.getValueAt(rad);
