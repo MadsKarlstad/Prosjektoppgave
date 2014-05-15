@@ -14,7 +14,8 @@ import java.util.Random;
 
 
 /**
- * Created by Erlend on 22/04/14.test
+ * Panel for visning av boliger som matcher leietagers ønsker, samt leieforespørsler for utleier.
+ * Skrevet av Erlend Westbye og Christoffer Jønsberg. Sist oppdatert 10.05.14.
  */
 public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
@@ -125,7 +126,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         initialiser();
         lagGui();
     }
-
+    //Intialiserer paneler,knapper, felter osv.
     public void initialiser(){
 
         index = 0;
@@ -271,7 +272,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     }
-
+    //Oppretter brukergrensesnittet.
     public void lagGui(){
         knappepanel.add(forrige);
         knappepanel.add(neste);
@@ -348,7 +349,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
 
     }
-
+    
+    //Viser eneboliger som matcher søkerenes kriterier.
     public void visEneboliger(Soker soker) throws IOException {
 
         soker.matcherEnebolig(bregister);
@@ -406,7 +408,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         visSøkerPANEL();
     }
-
+    
+    //Viser leiligheter som matcher søkerens kriterier.
     public void visLeilighet(Soker soker) throws IOException, IndexOutOfBoundsException {
 
         soker.matcherLeilighet(legister);
@@ -466,6 +469,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         visSøkerPANEL();
     }
 
+    //Viser utleiers eneboliger som noen ønsker å leie.
     public void visEneboligUtleier(Utleier utleier, int index, int boligindex) throws IndexOutOfBoundsException{
 
 
@@ -494,6 +498,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         knappepanel_utleier.add(ønsketLeietakerEnebolig);
     }
 
+    //Viser utleiers leiligheter som noen ønsker å leie
     public void visLeilighetUtleier(Utleier utleier,int index,int boligindex) throws IndexOutOfBoundsException{
 
 
@@ -578,7 +583,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         midtpanel.add(infopanel_utleier);
     }
-
+    
+    //Metode som fanger opp om det har blitt trykketfor å bla til neste bolig, og finner neste bolig i listen.
     public void nextVasClicked(String pnr) throws IOException {
 
         try{
@@ -622,6 +628,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         }
     }
 
+    //Metode som fanger opp om det har blitt trykket for å bla til neste bolig, og finner neste bolig i listen.
     public void previousVasClicked(String pnr) throws IOException {
 
         try {
@@ -666,7 +673,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         }
     }
-
+    
+    //Metode som tar inn innskrevet fødselsnummer fra input og finner ut om brukeren er en utleier eller søker og viser respektivt panel
     public void toggle(String fnr){
 
         if(sregister.finnes(fnr)){
@@ -697,7 +705,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         }
     }
-
+    
     public void godkjennkontrakt(Bolig b){
 
         String eierspersnr = fødselsnummer.getText();
