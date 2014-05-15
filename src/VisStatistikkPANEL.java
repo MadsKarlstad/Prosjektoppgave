@@ -9,6 +9,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Panel som viser statistikk 
+ * Skrevet av Mads Karlstad. Sist oppdatert 01.05.14
+ */
+
 public class VisStatistikkPANEL extends JPanel implements ActionListener {
 
     private JPanel tilbakepanel;
@@ -44,7 +49,7 @@ public class VisStatistikkPANEL extends JPanel implements ActionListener {
         lagGUI();
     }
 
-
+    //Initialiserer komponentene
     public void initialiser() {
 
         setLayout(new BorderLayout());
@@ -76,7 +81,8 @@ public class VisStatistikkPANEL extends JPanel implements ActionListener {
 
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     }
-
+    
+    //Oppretter brukergrensesnittet
     public void lagGUI(){
 
         tilbakepanel.add(tilbake);
