@@ -9,6 +9,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*
+ * Panel for som viser de forskjellige typene boliger man kan velge å vise i BoligBrowsePANEL.
+ *  Skrevet av Erlend Westbye. Sist oppdatert 01.05.14
+ */
 public class BoligPromptPANEL extends JPanel implements ActionListener {
 
     private JPanel knappanel;
@@ -36,7 +40,7 @@ public class BoligPromptPANEL extends JPanel implements ActionListener {
         lagGUI();
     }
 
-
+    //Initialiserer paneler,knapper,felter,ImageIcon,ActionListener, osv.
     public void initialiser() {
 
         setLayout(new BorderLayout());
@@ -66,6 +70,7 @@ public class BoligPromptPANEL extends JPanel implements ActionListener {
 
     }
 
+    //Lager brukergrensesnittet
     public void lagGUI(){
 
         knappanel.add(visEnebolig);
@@ -77,6 +82,7 @@ public class BoligPromptPANEL extends JPanel implements ActionListener {
 
     }
 
+    //actionPerformed-metode. Inneholder kall på MainFrame sin doClick-metode som aktiverer paneler i MainFrame
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == tilbake){
