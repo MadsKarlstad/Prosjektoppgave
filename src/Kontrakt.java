@@ -6,11 +6,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Kontrakt implements Serializable{
-    /*utleieboligen
-utleier
-leietager
-leiepris pr måned
-leieavtalens varighet (tidrom)*/
+
+/*
+ *Kontrakt objekt. Opprettes kun ved inngåelse av et leieforhold mellom Utleier, Søker og en gitt Bolig.
+ * Skrevet av Erlend Westbye. Sist oppdatert 10.04.14
+ */
     private String kontraktnr;
     private Bolig bolig;
     private Utleier utleier;
@@ -31,7 +31,8 @@ leieavtalens varighet (tidrom)*/
         this.til = til;
 
     }
-
+    
+    //Set- og Get-metoder
     public String getKontraktnr(){
         return kontraktnr;
     }
