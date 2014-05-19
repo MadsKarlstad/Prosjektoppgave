@@ -29,7 +29,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
     private int tilbake;
 
     private int boligindex;
-    private int sisteindex;
 
     private JTextField fødselsnummer;
     private JButton finn;
@@ -192,6 +191,9 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
             eneboligUtleier = new JButton("vis enebolig");
         }
 
+        /*enebolig = new JButton();
+        leilighet = new JButton();*/
+
         neste.addActionListener(this);
         tilbakeknapp.addActionListener(this);
         forrige.addActionListener(this);
@@ -270,7 +272,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     }
-    //Oppretter brukergrensesnittet
+    //Oppretter brukergrensesnittet.
     public void lagGui(){
         knappepanel.add(forrige);
         knappepanel.add(neste);
@@ -347,7 +349,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
 
     }
-    //Viser eneboliger som matcher søkerens kriterier
+    
+    //Viser eneboliger som matcher søkerenes kriterier.
     public void visEneboliger(Soker soker) throws IOException {
 
         soker.matcherEnebolig(bregister);
@@ -370,10 +373,8 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aEneboligUtleier = false;
 
         bildenavn = eneboligliste.get(index).getBildesti();
-        
-           
 
-        bildeikon = new ImageIcon(bildenavn);
+        bildeikon = new ImageIcon(getClass().getResource(bildenavn));
         bildeikon.getImage().flush();
         bildeLabel.setIcon( bildeikon );
 
@@ -407,6 +408,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         visSøkerPANEL();
     }
+    
     //Viser leiligheter som matcher søkerens kriterier.
     public void visLeilighet(Soker soker) throws IOException, IndexOutOfBoundsException {
 
@@ -417,7 +419,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         if(leilighetliste.size()!=0){
 
         bolignummer.setText(leilighetliste.get(index).getBolignr());
-        eier.setText(leilighetliste.get(index).getEier().getNavn());
+        eier.setText(eneboligliste.get(index).getEier().getNavn());
         pris.setText(String.valueOf(leilighetliste.get(index).getPris()));
         areal.setText(String.valueOf(leilighetliste.get(index).getBoareal()));
 
@@ -431,7 +433,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         bildenavn = leilighetliste.get(index).getBildesti();
 
-        bildeikon = new ImageIcon(bildenavn);
+        bildeikon = new ImageIcon(getClass().getResource(bildenavn));
         bildeikon.getImage().flush();
         bildeLabel.setIcon(bildeikon);
 
@@ -466,25 +468,14 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         visSøkerPANEL();
     }
-    //Viser utleiers eneboliger som noen ønsker å leie
+
+    //Viser utleiers eneboliger som noen ønsker å leie.
     public void visEneboligUtleier(Utleier utleier, int index, int boligindex) throws IndexOutOfBoundsException{
 
-        eneboligliste.clear();
 
-        utleier.oppdaterLister(bregister,legister);
+        utleier.oppdaterLister(bregister);
 
-        for(int i = 0; i < utleier.getEideBoliger().size(); i++){
-        
-            if(utleier.getEideBoliger().get(i) instanceof Enebolig){
-            
-                eneboligliste.add((Enebolig) utleier.getEideBoliger().get(i));
-                
-                
-                
-            }
-        }
-        
-       
+        eneboligliste = utleier.getØnskedeEneboliger();
 
         Soker soker = (Soker) eneboligliste.get(boligindex).getSokere().get(index);
 
@@ -503,35 +494,17 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aEneboligSøker = false;
         aLeilighetUtleier = false;
         aEneboligUtleier = true;
-        
-                        knappepanel.removeAll();
-                knappepanel.revalidate();
-                knappepanel.repaint();
-                
-                knappepanel.add(neste);
-                knappepanel.add(tilbakeknapp);
 
         knappepanel_utleier.add(ønsketLeietakerEnebolig);
     }
+
     //Viser utleiers leiligheter som noen ønsker å leie
     public void visLeilighetUtleier(Utleier utleier,int index,int boligindex) throws IndexOutOfBoundsException{
 
 
-       utleier.oppdaterLister(bregister,legister);
-       
-            for(int i = 0; i < utleier.getEideBoliger().size(); i++){
-        
-            if(utleier.getEideBoliger().get(i) instanceof Leilighet){
-            
-                leilighetliste.add((Leilighet) utleier.getEideBoliger().get(i));
-                
-                
-                
-            }
-        }
+        leilighetliste = utleier.getØnskedeLeiligheter();
 
         Soker soker = (Soker) leilighetliste.get(boligindex).getSokere().get(index);
-        
 
         søkernavn.setText(soker.getNavn());
         søkeradresse.setText(soker.getAdresse());
@@ -545,16 +518,9 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         aLeilighetUtleier = true;
         aEneboligUtleier = false;
 
-                knappepanel.removeAll();
-                knappepanel.revalidate();
-                knappepanel.repaint();
-                
-                knappepanel.add(neste);
-                knappepanel.add(tilbakeknapp);
-                
         knappepanel_utleier.add(ønsketLeietakerLeilighet);
     }
-    //Viser startpanelet når man logger inn som søker
+
     public void visStartPANELsøker(){
 
         midtpanel.removeAll();
@@ -563,7 +529,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         midtpanel.add(infopanel_start_søker, BorderLayout.CENTER);
     }
-    //Viser startpanelet for når man logger inn som utleier
+
     public void visStartPANELutleier(){
 
         midtpanel.removeAll();
@@ -572,7 +538,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         midtpanel.add(infopanel_start_utleier, BorderLayout.CENTER);
     }
-    //Viser panel for søker
+
     public void visSøkerPANEL() throws IOException {
 
         midtpanel.removeAll();
@@ -597,7 +563,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         midtpanel.add(infopanel_søker);
     }
-    //Viser panel for utleier
+
     public void visUtleierpanel(){
 
         midtpanel.removeAll();
@@ -617,169 +583,96 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         midtpanel.add(infopanel_utleier);
     }
+    
     //Metode som fanger opp om det har blitt trykketfor å bla til neste bolig, og finner neste bolig i listen.
     public void nextVasClicked(String pnr) throws IOException {
 
         try{
 
             index+=frem;
-            boligindex += 0;
-            
             Soker soker = sregister.get(pnr);
             Utleier eier = pregister.get(fødselsnummer.getText());
 
 
             if(aEneboligSøker){
-                
-                System.out.println(index);
-                
-                try{visEneboliger(soker);}
-                
-                catch (IndexOutOfBoundsException ie){
-                    index = soker.getEneboligliste().size()-1;
-                }
+                visEneboliger(soker);
             }
 
             else if(aLeilighetSøker){
-                try{visLeilighet(soker);}
-                
-                catch (IndexOutOfBoundsException ie){
-                    index = soker.getLeilighetliste().size()-1;
-                }
+                visLeilighet(soker);
             }
 
             else if(aEneboligUtleier){
-                
-                
-    
-                try{
-                    
-                    visEneboligUtleier(eier,index, boligindex);
-                    sisteindex = index;
-                
-                }
-                catch(IndexOutOfBoundsException ie){
-                    
-                    boligindex += 1;
+                try{visEneboligUtleier(eier,index,boligindex);}
+                catch (IndexOutOfBoundsException ie){
+                    boligindex++;
                     index = 0;
-                    
-                    if(boligindex > eneboligliste.size()){
-                    
-                        System.out.println("ikke fler boliger");
-                        boligindex = eneboligliste.size();
-                        index = sisteindex;//siste før exeption, denne vi vil så på
-                        
-                        
-                        
-                        int svar = JOptionPane.showOptionDialog(null,"Vil du starte listen på nytt?","Restart liste",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
-                        if(svar==JOptionPane.YES_OPTION){
-                       boligindex =0;
-                       index = 0;
-                       
-                       
-                        }
-                        if(svar==JOptionPane.NO_OPTION){
-                        tilbakeknapp.doClick();
-        }
-                       
-                    }
-                   
-                    
-                    System.out.println("index : " + index + " boligindex " + boligindex);
-                 
-                    visEneboligUtleier(eier,index, boligindex);
-                    
+                    visEneboligUtleier(eier,index,boligindex);
                 }
             }
 
             else if (aLeilighetUtleier){
-                
-                try{
-                    
-                    visLeilighetUtleier(eier,index, boligindex);
-                    sisteindex = index;
-                
-                }
-                catch(IndexOutOfBoundsException ie){
-                    
-                    boligindex += 1;
-                    index = 0;
-                    
-                    if(boligindex > leilighetliste.size()){
-                    
-                        System.out.println("ikke fler boliger");
-                        boligindex = leilighetliste.size();
-                        index = sisteindex;//siste før exeption, denne vi vil så på
-                        
-                        
-                        
-                        int svar = JOptionPane.showOptionDialog(null,"Vil du starte listen på nytt?","Restart liste",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
-                        if(svar==JOptionPane.YES_OPTION){
-                       boligindex =0;
-                       index = 0;
-                       
-                       
-                        }
-                        if(svar==JOptionPane.NO_OPTION){
-                        tilbakeknapp.doClick();
-        }
-                       
-                    }
-                   
-                    
-                    System.out.println("index : " + index + " boligindex " + boligindex);
-                 
-                    visLeilighetUtleier(eier,index, boligindex);
-                    
-                }
-            
 
-   
+                try{visLeilighetUtleier(eier,index,boligindex);}
+                catch (IndexOutOfBoundsException ie){
+                    boligindex++;
+                    index = 0;
+                    visLeilighetUtleier(eier,index,boligindex);
+                }
             }
-    }
+        }
         catch (IndexOutOfBoundsException io){
 
-               index = 0;
+
 
         }
     }
+
     //Metode som fanger opp om det har blitt trykket for å bla til neste bolig, og finner neste bolig i listen.
     public void previousVasClicked(String pnr) throws IOException {
 
         try {
-            
             index -= tilbake;
-            
             Soker soker = sregister.get(pnr);
             Utleier eier = pregister.get(fødselsnummer.getText());
             String bnr = bolignummer.getText();
 
             if (aEneboligSøker) {
-                try{visEneboliger(soker);}
-                catch(IndexOutOfBoundsException io){
-                index = 0;
-                }
+                visEneboliger(soker);
             } else if (aLeilighetSøker) {
-                                try{visLeilighet(soker);}
-                catch(IndexOutOfBoundsException io){
-                index = 0;
+                visLeilighet(soker);
+            } else if (aEneboligUtleier) {
+                try {
+                    visEneboligUtleier(eier, index, boligindex);
+                } catch (IndexOutOfBoundsException ie) {
+                    if (boligindex != 0) {
+                        boligindex--;
+                    } else {
+                        boligindex = 0;
+                    }
+                    index = 0;
+                    visEneboligUtleier(eier, index, boligindex);
+
                 }
-                                
-                               
-            
+            } else if (aLeilighetUtleier) {
+
+                try {
+                    visLeilighetUtleier(eier, index, boligindex);
+                } catch (IndexOutOfBoundsException ie) {
+                    if (boligindex != 0) {
+                        boligindex--;
+                    } else {
+                        boligindex = 0;
+                    }
+                    index = 0;
+                    visLeilighetUtleier(eier, index, boligindex);
+                }
             }
-
-            
-            
-        
         }
-                catch (IndexOutOfBoundsException io){
+        catch (IndexOutOfBoundsException io){
 
-}
-        
-        
-
-}
+        }
+    }
     
     //Metode som tar inn innskrevet fødselsnummer fra input og finner ut om brukeren er en utleier eller søker og viser respektivt panel
     public void toggle(String fnr){
@@ -812,7 +705,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         }
     }
-    //Metode for å godkjenne en kontrakt
+    
     public void godkjennkontrakt(Bolig b){
 
         String eierspersnr = fødselsnummer.getText();
@@ -822,7 +715,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
         Enebolig enebolig = bregister.get(bolignr);
         Utleier eier = pregister.get(eierspersnr);
         Soker soker = sregister.get(leierspersnr);
-       
 
         int pris = b.getPris();
         String fra = b.getLedigDato();
@@ -840,7 +732,6 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 kontraktregister.put(kontrakt.getKontraktnr(), kontrakt);
                 enebolig.setUtleid(true);
                 kontrakt.setAktiv(true);
-                parent.doClick(6);
 
 
             }
@@ -858,25 +749,13 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
                 kontraktregister.put(kontrakt.getKontraktnr(), kontrakt);
                 leilighet.setUtleid(true);
                 kontrakt.setAktiv(true);
-                parent.doClick(6);
-                
             }
             else if(kontraktregister.finnes(kontraktnr)){
                 visMelding("Kontrakt med kontraktnummer: " + kontraktnr +" finnes allerede",null);
             }
         }
-        
-        for(int i = 0; i < sregister.size(); i++){
-        String key = (String) sregister.keySet().toArray()[i];
-        
-        sregister.get(key).checkØnsketlist();
-        
-        }
-        
-        eier.oppdaterLister(bregister,legister);
-        
     }
-    //Metode som finner en bolig utifra innkommen parameter bnr
+
     public void finnBolig(String bnr)  throws Exception{
 
         finnboligfelt.setText("");
@@ -960,7 +839,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
         }
     }
-    //Metode som viser pop-meldinger som skal forekomme i programmet
+
     public void visMelding(String meldingjoption,String melding){
         JOptionPane.showMessageDialog(null,meldingjoption);
 
@@ -1050,11 +929,11 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
             catch (NoSuchElementException ne){
                 visStartPANELutleier();
-                visMelding("Ingen nye ønsker registrert, venligst gå tilbake",null);
+                visMelding("Ingen ønsker registrert, venligst gå tilbake",null);
             }
             catch(IndexOutOfBoundsException ie){
                 visStartPANELutleier();
-                visMelding("Ingen nye ønsker registrert, venligst gå tilbake",null);
+                visMelding("Ingen ønsker registrert, venligst gå tilbake",null);
             }
         }
 
@@ -1104,7 +983,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
             godkjennkontrakt(leilighet);
 
-            
+            visMelding("Kontrakt er generert, finnes i kontraktregisteret",null);
         }
 
         else if(e.getSource() == ønsketLeietakerEnebolig){
@@ -1113,7 +992,7 @@ public class BoligBrowsePANEL extends JPanel implements ActionListener{
 
             godkjennkontrakt(enebolig);
 
-            
+            visMelding("Kontrakt er generert, finnes i kontraktregisteret",null);
         }
 
         else if(e.getSource() == finnbolig){

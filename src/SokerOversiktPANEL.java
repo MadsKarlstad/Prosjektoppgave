@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
+
 /**
  * Panel som viser alle søkere som er registrert i systemet
  * Skrevet av Mads KArlstad og Erlend Westbye. Sist oppdatert 05.05.14
@@ -57,6 +58,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         
         parent.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
+    
     //Initialiserer alle komponentene
     public void initialiser() {
         overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -103,6 +105,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
 
         sibling = new RegistrerSokerPANEL(sregister,bregister,legister,parent);
     }
+
     //Metode som viser alle søkerene i registeret
     public void visAlle(){
         overskriftpanel.remove(overskrift);
@@ -123,6 +126,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         revalidate();
         repaint();
     }
+    
     //Oppretter brukergrensesnittet
     public void lagGUI(){
         overskriftpanel.add(overskrift);
@@ -148,6 +152,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         søkpanel.setBackground(Color.decode("#B3D5E3"));
         setBackground(Color.decode("#B3D5E3"));
     }
+    
     //Metode som søker gjennom registeret, og viser søkerene som matcher søket til brukeren
     public void søk(){
 
@@ -240,6 +245,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         revalidate();
         repaint();
     }
+    
     //Metode for å slette en søker fra registeret. Tar int rad som parameter, som gir tilgang til objektet som skal slettes
     public void slettSoker(int rad) {
         int svar = JOptionPane.showOptionDialog(null,"Vil du slette søkeren?","Bekreft sletting",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
@@ -261,13 +267,12 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
         }
 
     }
+
     //Metode for å vise informasjon om en søker.
     public void visInfo(Soker soker){
-        
-        
+        System.out.println("hello " + soker.getEneboligliste());
         if(soker.getØnskedeBolgier().size()>0) {
-            String ønskedee = soker.getØnskedeBolgier().toString().replace("[", "").replace("]", "");
-            JOptionPane.showMessageDialog(null, ønskedee);
+            JOptionPane.showMessageDialog(null, soker.getØnskedeBolgier());
         }
         else if(soker.getØnskedeBolgier().size()==0){
             JOptionPane.showMessageDialog(null,"Søkeren har ingen ønskede boliger for øyeblikket");
@@ -275,7 +280,7 @@ public class SokerOversiktPANEL extends JPanel implements ActionListener, Docume
     }
 
 
-    //Metode for å endre en søker. Sender deg til panelet for registrering av søker og lar brukeren endre informasjon
+    //Metode for å andre en søker. Sender deg til panelet for registrering av søker og lar brukeren endre informasjon
     public void endreSoker(int rad){
 
         int svar = JOptionPane.showOptionDialog(null,"Vil du endre denne søkeren?","Bekreft endring",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);

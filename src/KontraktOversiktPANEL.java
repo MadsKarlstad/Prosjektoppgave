@@ -57,6 +57,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         
         parent.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
+
     //Initialiserer panelene,knappene,utskriftsområdet,iterator,listen,osv.
     public void initialiser() {
         overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -97,6 +98,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
     }
+
     //Metode som viser alle objektene som ligger i registeret.
     public void visAlle(){
         overskriftpanel.remove(overskrift);
@@ -117,6 +119,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         revalidate();
         repaint();
     }
+
     //Oppretter brukergrensesnittet
     public void lagGUI(){
         overskriftpanel.add(overskrift);
@@ -140,6 +143,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         søkpanel.setBackground(Color.decode("#B3D5E3"));
         setBackground(Color.decode("#B3D5E3"));
     }
+
     //Metode som søker gjennom listen, og viser objeketene som matcher bruker-inputen.
     public void søk(){
 
@@ -196,18 +200,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         while(it.hasNext()){
 
             Kontrakt kontrakt = (Kontrakt) it.next();
-
-            //String fødselsnummer = enebolig.getBoareal().toUpperCase();
-            //String fornavn = utleier.getFornavn().toUpperCase();
-            //String etternavn = utleier.getEtternavn().toUpperCase();
-            //boolean røyke = enebolig.røyke();
-            //String ledigfra = leilighet.getLedigDato();
             String kontraktnr = kontrakt.getBolignr().toUpperCase();
-
-            /*String mail = utleier.getMail().toUpperCase();
-            String telfonnummer = utleier.getTelefonnummer().toUpperCase();
-            String firma = utleier.getFirma().toUpperCase();
-            String navn = utleier.getNavn().toUpperCase();*/
 
             if(kontraktnr.startsWith(søk)
                     ){
@@ -233,6 +226,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
         revalidate();
         repaint();
     }
+
     //Metode som viser kontraktinformasjonen. Her kan det ved senere tidspunkt implementeres en metode for å skrive ut kontrakten
     public void visInfo(int rad){
         Kontrakt kontraktobjekt = modell.getValueAt(rad);
@@ -249,6 +243,7 @@ public class KontraktOversiktPANEL extends JPanel implements ActionListener, Doc
 
         JOptionPane.showMessageDialog(null,kontrakt);
     }
+
     //Metode for å opphøre et leieforhold. Setter boligen til ledig, men sletter ikke kontrakten, men setter den til inaktiv
     public void opphørKontrakt(int rad){
         try{Kontrakt kontrakt = modell.getValueAt(rad);

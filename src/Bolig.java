@@ -3,6 +3,8 @@
  */
 
 import javax.swing.*;
+
+
 /*Superklasse for boliger, som implementerer interfacet Hjem. Inneholder alle felter som er felles for Enebolig og Leilighet
  *Skrevet av Mads Karlstad. Sist oppdatert 20.04.14
  */
@@ -82,7 +84,6 @@ public abstract class Bolig implements Hjem {
         final int ØSTENSJØ = 15;
 
     }
-    //Set- og Get-metoder
     public void setBilde(ImageIcon bilde){
         this.bilde = bilde;
     }

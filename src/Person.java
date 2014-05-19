@@ -4,10 +4,12 @@
 
 import java.io.Serializable;
 import java.util.TreeMap;
+
 /*
  * Personklasse. Superklasse som arves av Utleier og Søker. Definerer datafelter som er felles for de begge.
  * Skrevet av Mads Karlstad. Sist endret 04.04.14
  */
+
 public abstract class Person implements Menneske {
     private final String FØDSELSNUMMER;
     private String fornavn;

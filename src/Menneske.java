@@ -5,10 +5,12 @@
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.TreeMap;
+
 /*
  * Interface Menneske. Brukes av superklassen Person, som igjen arves av Utleier og Søker
  * Skrevet av Erlend Westbye, Mads Karlstad og Christoffer Jønsberg. Sist oppdatert 26.04.14
  */
+
 public interface Menneske extends Serializable {
     /**
      * get-metode for fødselsnummer til personen

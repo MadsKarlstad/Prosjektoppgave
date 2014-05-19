@@ -4,10 +4,12 @@
 
 import javax.swing.table.AbstractTableModel;
 import java.util.LinkedList;
+
 /**
  * Tabellmodell, super, definerer metoder som er felles for undermodellene for utleiere,søkere,eneboliger,leiligheter,kontrakter
  * Skrevet av Mads Karlstad. Sist oppdatert 02.05.14
  */
+
 public abstract class Tabellmodell<T> extends AbstractTableModel {
 
     private String[] kolonnenavn;
@@ -17,6 +19,7 @@ public abstract class Tabellmodell<T> extends AbstractTableModel {
         this.kolonnenavn = kolonnenavn;
         this.data = data;
     }
+    
     //Set- og Get-metoder for tabellene
     public String getColumnName(int kol) {
         return kolonnenavn[kol];
@@ -80,7 +83,7 @@ public abstract class Tabellmodell<T> extends AbstractTableModel {
         this.fireTableDataChanged();
     }
 
-}//tabellModell klasse feridg
+}//end of Tabellmodell
 
 //Modell for utleiere. Arver fra Tabellmodell
 class Utleiermodell extends Tabellmodell<Utleier> {
@@ -96,6 +99,7 @@ class Utleiermodell extends Tabellmodell<Utleier> {
     public Utleiermodell(String[] kolonnenavn, LinkedList<Utleier> data) {
         super(kolonnenavn, data);
     }
+    
     //Setter inn informasjon om den gitte utleieren til sin respektive kollonne
     public Object getValueAt(int rad, int kol) {
         Utleier utleier = (Utleier) super.getData().get(rad);
@@ -143,7 +147,7 @@ class Sokermodell extends Tabellmodell<Soker> { //Tabellmodell for søker
     public Sokermodell(String[] kolonnenavn, LinkedList<Soker> data) {
         super(kolonnenavn, data);
     }
-    //Setter inn informasjon om den gitte søkeren til sin respektive kollonne
+    //Setter inn informasjon om den gitte utleieren til sin respektive kollonne
     public Object getValueAt(int rad, int kol) {
         Soker søker = (Soker) super.getData().get(rad);
 
@@ -215,6 +219,7 @@ class Eneboligmodell extends Tabellmodell<Enebolig> { //Tabellmodell for eneboli
         super(kolonnenavn, data);
     }
     //Setter inn informasjon om den gitte eneboligen til sin respektive kollonne
+
     public Object getValueAt(int rad, int kol) {
         Enebolig enebolig = (Enebolig) super.getData().get(rad);
 
@@ -278,6 +283,7 @@ class Leilighetmodell extends Tabellmodell<Leilighet> { //Tabellmodell for enebo
         super(kolonnenavn, data);
     }
     //Setter inn informasjon om den gitte leiligheten til sin respektive kollonne
+
     public Object getValueAt(int rad, int kol) {
         Leilighet leilighet = (Leilighet) super.getData().get(rad);
 
@@ -329,6 +335,7 @@ class Kontraktmodell extends Tabellmodell<Kontrakt> {
         super(kolonnenavn, data);
     }
     //Setter inn informasjon om den gitte kontrakten til sin respektive kollonne
+
     public Object getValueAt(int rad, int kol) {
         Kontrakt kontrakt = (Kontrakt) super.getData().get(rad);
 
