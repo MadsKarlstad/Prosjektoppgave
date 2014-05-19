@@ -2,14 +2,15 @@
  * Copyright (c) 2014. Gruppeoppgave for Erlend Westbye s193377 Mads Karlstad s193949 Christoffer Jønsberg s193674
  */
 
-import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.nio.channels.FileChannel;
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 
 /**
  * Panel for å registrere boliger. Med valgmulighet mellom de to boligtypene
@@ -46,7 +47,6 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
     private JLabel[] boxlabels;
 
-    //Bydeler
     String[] boligtypevalg = {"Velg boligtype","Enebolig","Leilighet"};
     String [] bydeler = { "Velg bydel", "Alna", "Bjerke", "Frogner", "Gamle Oslo", "Grorud",
             "Grünerløkka", "Nordre Aker", "Nordstrand", "Sagene", "St. Hanshaugen",
@@ -146,6 +146,8 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
     private MainFrame parent;
 
     private String sti;
+    
+    private  String path;
 
     public RegistrerBoligPANEL(Personregister pregister,Boligregister bregister,Leilighetregister legister, MainFrame parent) {
         super(new BorderLayout());
@@ -167,7 +169,6 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
     }
-
     //Initialiserer utskriftsområdet,feltene,boksene,labels,paneler,tekstfylleren osv
     public void initialiser() {
 
@@ -256,6 +257,11 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             leilighetbokser[i] = new JCheckBox();
             boxlabels[i] = new JLabel((boksnavn[i]));
 
+        }
+        
+        try{
+            initialiserCurrentDirectory();}
+        catch(Exception x){
         }
 
 
@@ -346,7 +352,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
 
     }
-    //Metode som viser panel for når brukeren ikke har spesifisert hvilken boligtype som skal registreres
+        //Metode som viser panel for når brukeren ikke har spesifisert hvilken boligtype som skal registreres
     public void visTomtpanel(){
         midtpanel.removeAll();
         midtpanel.revalidate();
@@ -357,11 +363,8 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         isLeilighet=false;
 
         midtpanel.setBackground(Color.decode("#B3D5E3"));
-
-
-
     }
-    //Metode som viser panel for når brukeren har valgt å registrere en enebolig
+        //Metode som viser panel for når brukeren har valgt å registrere en enebolig
     public void visEneboligpanel(){
 
 
@@ -386,7 +389,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
 
     }
-    //Metode som viser panel for når brukeren har spesifisert at det er leilighet som skal registreres
+        //Metode som viser panel for når brukeren har spesifisert at det er leilighet som skal registreres
     public void visLeilighetpanel(){
         remove(midtpanel);
         revalidate();
@@ -408,7 +411,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         add(midtpanel, BorderLayout.CENTER);
 
     }
-    //Metode for å registrere en enebolig, henter informasjon fra de utfylte feltene og boksene
+        //Metode for å registrere en enebolig, henter informasjon fra de utfylte feltene og boksene
     public void registrerEnebolig() throws IOException{
 
         int boareal = Integer.parseInt(standardfelter[BOAREAL].getText());
@@ -442,19 +445,21 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
 
         if(!bildeOk){
             bildesti = 0;
+            
         }
 
         if(bolignr.length()!=0||pnr.length()!=0||adresse.length()!=0||beskrivelse.length()!=0||ledig.length()!=0){
             if(pregister.finnes(pnr)){
                 if(!bregister.finnes(bolignr)){
-                    Enebolig enebolig = new Enebolig("Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
+                    Enebolig enebolig = new Enebolig(path + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
                             røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antetg,kjeller,tomta,antbad,false,false,bydel);
 
                     bregister.put(bolignr, enebolig);
 
                     utleier.addBolig(enebolig);
+                    
 
-                    try{
+                   try{
                         kopierbilde();}
                     catch (Exception e){
 
@@ -477,7 +482,7 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         }
 
     }
-    //Metode for å registrere leilighet, henter informasjon fra feltene og boksene
+        //Metode for å registrere leilighet, henter informasjon fra feltene og boksene
     public void registrerLeilighet() throws IOException {
 
         int boareal = Integer.parseInt(standardfelter[BOAREAL].getText());
@@ -515,13 +520,13 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
         if(bolignr.length()!=0||pnr.length()!=0||adresse.length()!=0||beskrivelse.length()!=0||ledig.length()!=0){
             if(pregister.finnes(pnr)){
                 if(!bregister.finnes(bolignr)){
-                    Leilighet leilighet = new Leilighet("Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
+                    Leilighet leilighet = new Leilighet(path + String.valueOf(bildesti) + ".jpg",adresse,boareal,antrom,byggår,beskrivelse,pris,ledig,bolignr,utleier,
                             røyker,husdyr,balkong,terasse,tv,internet,strøm,parkering,antboder,etg,heis,false,false,bydel);
 
                     legister.put(bolignr, leilighet);
                     utleier.addBolig(leilighet);
 
-                    try{
+                   try{
                         kopierbilde();}
                     catch (Exception e){
                     }
@@ -542,26 +547,18 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             visMelding("Venligst fyll inn all informasjon");
         }
     }
-
-    //Metode som kopierer valgt boligbilde til brukerens mappestruktur
-    public void kopierbilde() throws Exception{
-
-        FileInputStream source = new FileInputStream(sti);
-        FileOutputStream destination =
-                new FileOutputStream("/Users/Erlend/IdeaProjects/Prosjektoppgave/out/production/Prosjektoppgave/Bilder/boligbilder/" + String.valueOf(bildesti) + ".jpg");
-
-        FileChannel sourceFileChannel = source.getChannel();
-        FileChannel destinationFileChannel = destination.getChannel();
-
-        long size = sourceFileChannel.size();
-        sourceFileChannel.transferTo(0, size, destinationFileChannel);
-
+        //Metode som kopierer valgt boligbilde til brukerens mappestruktur
+        public void initialiserCurrentDirectory() throws Exception{
+    
+            File f = new File(RegistrerBoligPANEL.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        
+            path = URLDecoder.decode(f.getParent()+"/boligbilder/", "UTF-8");
+    
     }
-    //Metode som lar brukeren laste opp et boligbilde for boligen
-    public void lastOppBilde() throws IOException{
+        //Metode som lar brukeren laste opp et boligbilde for boligen
+        public void lastOppBilde() throws IOException{
 
-        JFileChooser filvelger = new JFileChooser();
-        filvelger.setCurrentDirectory( new File( "." ) );
+        JFileChooser filvelger = new JFileChooser("app");
         filvelger.setAcceptAllFileFilterUsed(false);
         filvelger.addChoosableFileFilter(new FileFilter() {
 
@@ -577,12 +574,12 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
                 }
             }
         });
+            
+            JOptionPane.showMessageDialog(null,path);
 
-        URL url = getClass().getResource("Bilder/boligbilder/");
+        
 
-        System.out.println(url.getPath());
-
-        bildesti = new File(url.getPath()).listFiles().length-1;
+        bildesti = new File(path).listFiles().length-1;
 
 
         filvelger.setCurrentDirectory(new File(System.getProperty("user.home")));
@@ -596,6 +593,26 @@ public class RegistrerBoligPANEL extends JPanel implements ActionListener {
             bildeOk = true;
 
         }
+    }
+
+    public void kopierbilde() throws Exception{
+
+        FileInputStream source = new FileInputStream(sti);
+        FileOutputStream destination =
+                new FileOutputStream(path + String.valueOf(bildesti) + ".jpg");
+
+        FileChannel sourceFileChannel = source.getChannel();
+        FileChannel destinationFileChannel = destination.getChannel();
+
+        long size = sourceFileChannel.size();
+        sourceFileChannel.transferTo(0, size, destinationFileChannel);
+        
+        destinationFileChannel.close();
+        sourceFileChannel.close();
+        
+        source.close();
+        destination.close();
+
     }
     //Metode for å vise pop.up-meldinger i programmet
     public void visMelding(String melding){

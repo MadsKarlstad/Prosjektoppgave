@@ -61,9 +61,9 @@ public class MainFrame extends JFrame implements ActionListener {
 
         setVisible(true);
         pack();
+        
 
     }
-
     //Initialiserer panelene,knappene,ImageIcons,ActionListeners og legger alt inn i sine respektive paneler.
     public void initialiser() {
 
@@ -133,20 +133,26 @@ public class MainFrame extends JFrame implements ActionListener {
 
         visUtleierBrowse.addActionListener(this);
         visLeietakerBrowse.addActionListener(this);
+        
+        try{
+            ImageIcon bilde = new ImageIcon(getClass().getResource("Bilder/Logoliten2.png"));
+            Image icon = bilde.getImage();
+            setIconImage(icon);
+        }
+        catch(NullPointerException npe){}
+        
+         mainboard.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
     }
-
     //Metode for å vise panel med innkommen parameter
     public void visPanel(String st) {
         CardLayout cl = (CardLayout) vinduer.getLayout();
         cl.show(vinduer, st);
     }
-
     //Metode for å vise pop-up-meldinger i programmet
     public void visMelding(String melding) {
         JOptionPane.showMessageDialog(null, melding);
     }
-
     //Metode som switcher mellom hvilke paneler som skal vises. Brukes kun i "under-paneler".
     public void doClick(int i) {//generer actionevent fra ved kall
 
@@ -165,12 +171,14 @@ public class MainFrame extends JFrame implements ActionListener {
 
             case 5:
                 regUt.doClick();
+            case 6: 
+                visKon.doClick();
                 break;
         }
 
     }
 
-   //Metode som finner skjermstørrelse og setter størrelsen på programmets vindu relativt til skjermstørrelsen
+      //Metode som finner skjermstørrelse og setter størrelsen på programmets vindu relativt til skjermstørrelsen
     public void Size() {
 
         Toolkit kit = Toolkit.getDefaultToolkit();
@@ -182,7 +190,7 @@ public class MainFrame extends JFrame implements ActionListener {
         setLocation(skjerm.width / 2 - getSize().width / 2, skjerm.height / 2 - getSize().height / 2);
     }
 
-    //ActionPerformed-metode for å bytte mellom de ni underpanelene
+     //ActionPerformed-metode for å bytte mellom de ni underpanelene
     @Override
     public void actionPerformed(ActionEvent e) {
 

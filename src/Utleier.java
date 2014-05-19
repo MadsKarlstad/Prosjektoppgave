@@ -4,7 +4,6 @@
 
 import java.util.LinkedList;
 import java.util.Map;
-
 /**
  * Utleierklasse, arver datafelter fra superklassen Person, definerer unik data for sin egen klasse
  * Skrevet av Christoffer Jønsberg. Sist endret 10.04.14
@@ -27,6 +26,7 @@ public class Utleier extends Person {
 
     }
     //Set- og Get-metoder
+
     public String getFirma() {
         return firma;
     }
@@ -37,41 +37,72 @@ public class Utleier extends Person {
 
 
     //Metode som oppdaterer boliglistene
-    public void oppdaterLister(Boligregister boligregister){
+    public void oppdaterLister(Boligregister boligregister, Leilighetregister leilighetregister){
 
         eideBoliger.clear();
+       
+        
 
         Enebolig enebolig;
-
-        for(int i = 0; i < ønskedeeneboligliste.size(); i++){
-
-
-            if(ønskedeeneboligliste.get(i).erUtleid()){
-                ønskedeeneboligliste.remove(i);
-            }
+        Leilighet leilighet;
 
 
-        }
+      
 
 
-        for(int i = 0; i < boligregister.size(); i++){
+        if(boligregister!=null)for(int i = 0; i < boligregister.size(); i++){
             String key = (String) boligregister.keySet().toArray()[i];
             Utleier eier = this;
             enebolig = boligregister.get(key);
-
-            System.out.println(key);
 
             if (boligregister.get(key).getEier().getNavn().equals(eier.getNavn())){
 
                 eideBoliger.add(enebolig);
                 enebolig.setEier(eier);
 
+
             }
 
 
 
         }
+        
+        if(leilighetregister!=null)for(int i = 0; i < leilighetregister.size(); i++){
+            String key = (String) leilighetregister.keySet().toArray()[i];
+            Utleier eier = this;
+            leilighet = leilighetregister.get(key);
 
+
+            
+
+            if (leilighetregister.get(key).getEier().getNavn().equals(eier.getNavn())){
+
+                eideBoliger.add(leilighet);
+                leilighet.setEier(eier);
+
+            }}
+
+
+
+        for(int i = 0; i < ønskedeeneboligliste.size(); i++){
+
+            
+
+            if(ønskedeeneboligliste.get(i).erUtleid()){
+                System.out.println("aktiveres");
+                ønskedeeneboligliste.remove(i);
+            }
+            
+     for(int j = 0; i < ønskedeleilighetListe.size(); i++){
+
+            if(ønskedeleilighetListe.get(j).erUtleid()){
+                ønskedeleilighetListe.remove(j);
+            }
+
+
+        }
+
+    }
     }
     //Metode som legger inn leilighet i listen over leiligheter som er ønsket å leie
     public void addLeilighet(Leilighet leilighet){
@@ -83,10 +114,8 @@ public class Utleier extends Person {
     }
     //Fjerner en leilighet fra ønskedeleiligheter
     public void removeLeilighet(Leilighet leilighet){ ønskedeleilighetListe.remove(leilighet);}
-    
     //Fjerner en enebolig fra ønskedeeneboliger
     public void removeEnebolig(Enebolig enebolig){ ønskedeeneboligliste.remove(enebolig);}
-
     //Returnerer ønskedeeneboligliste
     public LinkedList<Enebolig> getØnskedeEneboliger(){
 
@@ -104,8 +133,8 @@ public class Utleier extends Person {
     }
     //Metode som fjerner en bolig fra listen over boliger utleieren eier
     public void removeBolig(Bolig bolig){eideBoliger.remove(bolig);}
-    
     //returnerer listen over eide boliger
+
     public LinkedList<Bolig> getEideBoliger(){
         return eideBoliger;
     }

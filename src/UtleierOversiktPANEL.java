@@ -13,12 +13,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
-
 /**
  * Panel som viser alle utleiere som er registrert i systemet
  * Skrevet av Mads KArlstad og Erlend Westbye. Sist endret 06.05.14
  */
-
 public class UtleierOversiktPANEL extends JPanel implements ActionListener, DocumentListener {
     private JPanel overskriftpanel;
     private JPanel tabellpanel;
@@ -82,12 +80,21 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
 
         Iterator it = register.entrySet().iterator();
 
+
         utleierliste = new LinkedList<Utleier>();
+
+
 
         for(Map.Entry<String,Utleier> entry : register.entrySet()) {
             utleierliste.add((Utleier) entry.getValue());
 
         }
+
+
+
+
+
+
 
         modell = new Utleiermodell(kolonner, utleierliste);
 
@@ -168,12 +175,6 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
         overskriftpanel.setBackground(Color.decode("#DAEDF5"));
         søkpanel.setBackground(Color.decode("#DAEDF5"));
         setBackground(Color.decode("#DAEDF5"));
-
-
-
-
-
-
 
     }
     //metode som søker gjennom listen og viser objektene som matcher brukerens søk
@@ -283,7 +284,6 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
 
 
     }
-    
     //Metode som sletter en utleier, tar int rad som parameter, som gir tilgang til objektet
     public void slettUtleier(int rad){
         int svar = JOptionPane.showOptionDialog(null,"Vil du slette utleieren?","Bekreft sletting",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
@@ -310,7 +310,6 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
             JOptionPane.showMessageDialog(null,"Sletting avbrutt");
         }
     }
-    
     //Metode for å endre en utleier, tar int rad som parameter, som gir tilgang til objektet
     public void endreUtleier(int rad){
 
@@ -370,17 +369,21 @@ public class UtleierOversiktPANEL extends JPanel implements ActionListener, Docu
         initialiser();
         lagGUI();
     }
-    
     //Metode som viser informasjon om utleier, tar int rad som parameter, som gir tilgang til objektet
     public void visInfo(int rad){
         try{
             Utleier utleier = modell.getValueAt(rad);
 
-            utleier.oppdaterLister(bregister);
-            JOptionPane.showMessageDialog(null, "Ønskede boliger: "+utleier.getØnskedeEneboliger() + "\n" + utleier.getØnskedeLeiligheter()
-                    +"\nEide boliger: " + utleier.getEideBoliger());
+            utleier.oppdaterLister(bregister,legister);
+            
+            String ønskedee = utleier.getØnskedeEneboliger().toString().replace("[", "").replace("]", "");
+            String ønskedel = utleier.getØnskedeLeiligheter().toString().replace("[", "").replace("]", "");
+            String eide = utleier.getEideBoliger().toString().replace("[", "").replace("]", "");
+            
+            JOptionPane.showMessageDialog(null, "Ønskede boliger: "+ ønskedee + "\n" + ønskedel
+                    +"\nEide boliger: " + eide);
         }
-        catch(IndexOutOfBoundsException ioobe){
+        catch(IndexOutOfBoundsException ibe){
             JOptionPane.showMessageDialog(null,"Ingen utleier markert/registrert");
         }
 

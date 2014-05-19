@@ -1,10 +1,6 @@
 import java.util.Map;
 import java.util.TreeMap;
 
-/**
- SLANGEDREAM COPYRIGHT
- */
- 
 /*
  * Register over registrerte Eneboliger i systemet.
  * Skrevet av Mads Karlstad. Sist oppdatert 15.04.14
@@ -30,7 +26,6 @@ public class Boligregister extends TreeMap<String, Enebolig> implements Register
     public boolean finnes(String nr) {
         return containsKey(nr);
     }
-
     //Metode for å slette en enebolig fra registeret
     @Override
     public boolean fjern(String nr) {
@@ -40,7 +35,6 @@ public class Boligregister extends TreeMap<String, Enebolig> implements Register
         }
         return false;
     }
-
     //Metode som returnerer objektet
     @Override
     public Object getObject(String nr) {
@@ -49,7 +43,6 @@ public class Boligregister extends TreeMap<String, Enebolig> implements Register
         }
         return null;
     }
-
     //Metode som returnerer dette registeret
     @Override
     public Map getMap() {
