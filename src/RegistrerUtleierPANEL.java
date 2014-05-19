@@ -8,7 +8,11 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * Panel for registrering av utleier.
+ * Skrevet av Erlend Westbye. Sist oppdatert 10.05.14
+ * 
+ */
 public class RegistrerUtleierPANEL extends JPanel implements ActionListener, DocumentListener{
     private JTextField[] felt;
     private final String[] feltnavn = {"Fødselsnummer", "Fornavn", "Etternavn", "Adresse", "Mail", "Telefonnummer", "Firma"};
@@ -44,10 +48,20 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
         this.parent = parent;
         initialiser();
         lagGUI();
+        
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension skjerm = kit.getScreenSize();
+        int bredde = skjerm.width;
+        int høyde = skjerm.height;
+         
+        parent.setSize(bredde/2, høyde-200);
+        parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
+    
 
-        parent.Size();
+        //setLocation(skjerm.width / 2 - getSize().width / 2, skjerm.height / 2 - getSize().height / 2);
+    
     }
-
+    //Initialiserer alle felter,paneler,tekstfyller,knapper osv
     public void initialiser() {
 
         felt = new JTextField[feltnavn.length];
@@ -70,8 +84,10 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
         avbryt.addActionListener(this);
 
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+      
+        
     }
-
+    //Oppretter brukergrensesnittet
     public void lagGUI() {
 
         for (int i = 0; i < felt.length; i++) {
@@ -87,21 +103,34 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
         feltpanel.setBackground(Color.decode("#B3D5E3"));
         setBackground(Color.decode("#B3D5E3"));
     }
-
+    //Metode for å registrere en utleier. tar informasjon fra hva brukeren har fylt inn i feltene
     public void registrer(){
-        String fødselsnummer = felt[FØDSELSNUMMER].getText();
+        String fødselsnummer = felt[FØDSELSNUMMER].getText();//navsjekk skal egentlig legges inn her
 
-         fornavn = felt[FORNAVN].getText();
-         etternavn = felt[ETTERNAVN].getText();
+         fornavn = Navnsjekker.getGyldigStringNavn(felt[FORNAVN].getText());
+         etternavn = Navnsjekker.getGyldigStringNavn(felt[ETTERNAVN].getText());
          adresse = felt[ADRESSE].getText();
          mail = felt[MAIL].getText();
          telefonnummer = felt[TELEFONUMMER].getText();
         firma = felt[FIRMA].getText();
+        
+        if(fornavn == null || etternavn == null){
+            visMelding("Skriv inn gydlige verdier!");
+            return;
+            
+        }
+        
+        
 
         if(fødselsnummer.length()!=0||fornavn.length()!=0||etternavn.length()!=0||adresse.length()!=0||mail.length()!=0||telefonnummer.length()!=0){
                 Person utleier = new Utleier(fødselsnummer,fornavn,etternavn,adresse, mail, telefonnummer, firma);
             if(register.leggTil(utleier)){
                 //gå tilbake til mainframe
+                parent.visPanel(MainFrame.MAIN_BOARD);
+                parent.Size();
+                
+                   
+                
                 return;
             }
             else if(!register.leggTil(utleier)){
@@ -112,7 +141,7 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
             visMelding("Venligst fyll ut all informasjon");
         }
     }
-
+    //Metode for å endre informasjon om en utleier. Hit sendes man via UtleierOversiktPANEL
     public void endreUtleier(Utleier utleier){
 
         feltpanel.removeAll();
@@ -141,7 +170,7 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
         add(feltpanel);
 
     }
-
+    //Metode som oppdaterer informasjonen til det som nå er fyllt ut av brukeren
     public void oppdaterinfo(){
 
         setFødselsnummer(felt[FØDSELSNUMMER].getText());
@@ -169,7 +198,8 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
     public String getMail(){return mail;}
     public String getTelefonnummer(){return telefonnummer;}
     public String getFirma(){return firma;}
-
+    
+    //metode som viser pop-meldingene i programmet
     public void visMelding(String melding){
         JOptionPane.showMessageDialog(null,melding);
     }
@@ -179,9 +209,7 @@ public class RegistrerUtleierPANEL extends JPanel implements ActionListener, Doc
         if(e.getSource() == registrer){
 
             registrer();
-            parent.visPanel(MainFrame.MAIN_BOARD);
-
-            parent.Size();
+           
 
         }else if(e.getSource() == avbryt){
             parent.visPanel(MainFrame.MAIN_BOARD);

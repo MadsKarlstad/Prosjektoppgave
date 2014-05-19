@@ -11,7 +11,10 @@ import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
-
+/*
+ * Panel for visning av registrerte boliger i systemet.
+ * Skrevet av Mads Karlstad. Sist oppdatert 15.04.14
+ */
 public class BoligOversiktPANEL extends JPanel implements ActionListener, DocumentListener {
     private JPanel overskriftpanel;
     private JPanel tabellpanel;
@@ -47,7 +50,7 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
         initialiser();
         lagGUI();
     }
-
+    //Initialiserer alle kompononentene
     public void initialiser() {
         overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         søkpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -84,7 +87,7 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
 
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     }
-
+    //Metode som viser alle eneboliger i registeret
     public void visAlle(){
         overskriftpanel.remove(overskrift);
         tabellpanel.remove(scroll);
@@ -105,7 +108,7 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
         repaint();
     }
 
-
+    //Lager brukergrensesnittet
     public void lagGUI(){
         overskriftpanel.add(overskrift);
 
@@ -127,7 +130,7 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
         søkpanel.setBackground(Color.decode("#DAEDF5"));
         setBackground(Color.decode("#DAEDF5"));
     }
-
+    //Metode for å søke gjennom listen, samt vise objektene som matcher inputen fra brukeren.
     public void søk(){
 
         temp = new LinkedList<Enebolig>();
@@ -219,7 +222,8 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
         revalidate();
         repaint();
     }
-
+    
+    //Metode for å slette en valgt enebolig. Tar inn parameter int rad, som er raden som brukeren har valgt/markert.
     public void slettEnebolig(int rad){
         int svar = JOptionPane.showOptionDialog(null,"Vil du slette eneboligen?","Bekreft sletting",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
         if(svar==JOptionPane.YES_OPTION){
@@ -236,7 +240,7 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
                         register.fjern(bolignr);
                         Utleier eier = enebolig.getEier();
                         eier.removeBolig(enebolig);
-                        eier.oppdaterLister(register);
+                        eier.oppdaterLister(register,null);
                         modell.fireTableDataChanged();
                     }
                 }
@@ -252,6 +256,7 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
         }
     }
 
+    //Metode for å vise informasjon om en enebolig, tar inn parameteren int rad, som er raden brukeren har valgt/markert.
     public void visInfo(int rad){
         try{
             Enebolig enebolig = modell.getValueAt(rad);
@@ -281,8 +286,9 @@ public class BoligOversiktPANEL extends JPanel implements ActionListener, Docume
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == tilbake){
-            parent.visPanel("VIS PROMPT");
+                        parent.visPanel(MainFrame.MAIN_BOARD);
             parent.Size();
+            
         }
         else if(e.getSource() == fjern) {
             int rad = tabell.getSelectedRow();

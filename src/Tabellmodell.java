@@ -4,7 +4,10 @@
 
 import javax.swing.table.AbstractTableModel;
 import java.util.LinkedList;
-
+/**
+ * Tabellmodell, super, definerer metoder som er felles for undermodellene for utleiere,søkere,eneboliger,leiligheter,kontrakter
+ * Skrevet av Mads Karlstad. Sist oppdatert 02.05.14
+ */
 public abstract class Tabellmodell<T> extends AbstractTableModel {
 
     private String[] kolonnenavn;
@@ -14,7 +17,7 @@ public abstract class Tabellmodell<T> extends AbstractTableModel {
         this.kolonnenavn = kolonnenavn;
         this.data = data;
     }
-
+    //Set- og Get-metoder for tabellene
     public String getColumnName(int kol) {
         return kolonnenavn[kol];
     }
@@ -79,6 +82,7 @@ public abstract class Tabellmodell<T> extends AbstractTableModel {
 
 }//tabellModell klasse feridg
 
+//Modell for utleiere. Arver fra Tabellmodell
 class Utleiermodell extends Tabellmodell<Utleier> {
 
     private final int FØDSELSNUMMER = 0;
@@ -92,7 +96,7 @@ class Utleiermodell extends Tabellmodell<Utleier> {
     public Utleiermodell(String[] kolonnenavn, LinkedList<Utleier> data) {
         super(kolonnenavn, data);
     }
-
+    //Setter inn informasjon om den gitte utleieren til sin respektive kollonne
     public Object getValueAt(int rad, int kol) {
         Utleier utleier = (Utleier) super.getData().get(rad);
 
@@ -116,7 +120,7 @@ class Utleiermodell extends Tabellmodell<Utleier> {
         }
 
     }
-
+    //Metode som returnerer valgt utleier i tabellen
     public Utleier getValueAt(int rad) {
         return (Utleier) super.getData().get(rad);
 
@@ -139,7 +143,7 @@ class Sokermodell extends Tabellmodell<Soker> { //Tabellmodell for søker
     public Sokermodell(String[] kolonnenavn, LinkedList<Soker> data) {
         super(kolonnenavn, data);
     }
-
+    //Setter inn informasjon om den gitte søkeren til sin respektive kollonne
     public Object getValueAt(int rad, int kol) {
         Soker søker = (Soker) super.getData().get(rad);
 
@@ -184,7 +188,7 @@ class Sokermodell extends Tabellmodell<Soker> { //Tabellmodell for søker
         }
 
     }
-
+    //Returnerer et søkerobjekt fra valgt rad i tabellen
     public Soker getValueAt(int rad) {
         return (Soker) super.getData().get(rad);
     }
@@ -210,7 +214,7 @@ class Eneboligmodell extends Tabellmodell<Enebolig> { //Tabellmodell for eneboli
     public Eneboligmodell(String[] kolonnenavn, LinkedList<Enebolig> data) {
         super(kolonnenavn, data);
     }
-
+    //Setter inn informasjon om den gitte eneboligen til sin respektive kollonne
     public Object getValueAt(int rad, int kol) {
         Enebolig enebolig = (Enebolig) super.getData().get(rad);
 
@@ -250,7 +254,7 @@ class Eneboligmodell extends Tabellmodell<Enebolig> { //Tabellmodell for eneboli
         }
 
     }
-
+    //returnerer en enebolig fra tabellen
     public Enebolig getValueAt(int rad) {
         return (Enebolig) super.getData().get(rad);
     }
@@ -273,7 +277,7 @@ class Leilighetmodell extends Tabellmodell<Leilighet> { //Tabellmodell for enebo
     public Leilighetmodell(String[] kolonnenavn, LinkedList<Leilighet> data) {
         super(kolonnenavn, data);
     }
-
+    //Setter inn informasjon om den gitte leiligheten til sin respektive kollonne
     public Object getValueAt(int rad, int kol) {
         Leilighet leilighet = (Leilighet) super.getData().get(rad);
 
@@ -304,7 +308,7 @@ class Leilighetmodell extends Tabellmodell<Leilighet> { //Tabellmodell for enebo
                 return null;
         }
     }
-
+    //returnerer en valgt leilighet fra tabellen
     public Leilighet getValueAt(int rad) {
         return (Leilighet) super.getData().get(rad);
     }
@@ -324,7 +328,7 @@ class Kontraktmodell extends Tabellmodell<Kontrakt> {
     public Kontraktmodell(String[] kolonnenavn, LinkedList<Kontrakt> data) {
         super(kolonnenavn, data);
     }
-
+    //Setter inn informasjon om den gitte kontrakten til sin respektive kollonne
     public Object getValueAt(int rad, int kol) {
         Kontrakt kontrakt = (Kontrakt) super.getData().get(rad);
 
@@ -350,7 +354,7 @@ class Kontraktmodell extends Tabellmodell<Kontrakt> {
         }
 
     }
-
+    //returnerer en kontrakt fra valgt objekt i tabellem
     public Kontrakt getValueAt(int rad) {
         return (Kontrakt) super.getData().get(rad);
 

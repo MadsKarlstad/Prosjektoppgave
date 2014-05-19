@@ -16,9 +16,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * Created by Erlend on 22/04/14.
+ * Panel for å registrere en søker
+ * Skrevet av Erlend Westbye. Sist oppdatert 06.05.14
  */
 public class RegistrerSokerPANEL extends JPanel implements ActionListener, DocumentListener {
+        //Definerer felter,komboboks,sliders,labels og bydeler
     private JTextField[] felt;
     private final String[] feltnavn = {"Fødselsnummer", "Fornavn", "Etternavn", "Adresse","Mail","Telefonnr", "AntallPers", "Sivilstatus", "Yrke",
             "Arbeidsforhold/Studiested"};
@@ -122,7 +124,7 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
         parent.setSize(bredde/2, høyde-175);
         parent.setLocation(skjerm.width/2-parent.getSize().width/2, skjerm.height/2-parent.getSize().height/2);
     }
-
+    //Initialiserer feltene,panelene,bokser,labels osv
     public void initialiser() {
 
         setLayout(new BorderLayout());
@@ -200,7 +202,7 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
 
 
     }
-
+    //Oppretter brukergrensesnittet
     public void lagGUI() {
 
         for (int i = 0; i < felt.length; i++) {
@@ -250,11 +252,11 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
     }
 
 
-
+    //Metode for å registrere en søker. Henter informasjon fra hva brukeren har skrvet inn i feltene og check-boksene
         public void registrer () {
         String fødselsnummer = felt[FØDSELSNUMMER].getText();
-        String fornavn = felt[FORNAVN].getText();
-        String etternavn = felt[ETTERNAVN].getText();
+        String fornavn = Navnsjekker.getGyldigStringNavn(felt[FORNAVN].getText());
+        String etternavn = Navnsjekker.getGyldigStringNavn(felt[ETTERNAVN].getText());
         String adresse = felt[ADRESSE].getText();
         String mail = felt[MAIL].getText();
         String telefonnummer = felt[TELEFONNUMMER].getText();
@@ -266,6 +268,15 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
         int minareal = minsteareal.getValue();
         int maxareal = størsteareal.getValue();
         int ønsketpris = pris.getValue();
+        
+        boolean gyldigPnr = Navnsjekker.gyldigPersonnummer(fødselsnummer);
+        
+        if(!gyldigPnr || fornavn == null || etternavn == null){
+            visMelding("Skriv inn gydlige verdier!");
+            return;
+            
+        }
+        
 
 
             boolean røyke = bokser[RØYKER].isSelected();
@@ -287,6 +298,7 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
             if (register.leggTil(søker)) {
                 //gå tilbake til mainframe
                 parent.visPanel(MainFrame.MAIN_BOARD);
+                parent.Size();
 
             } /*else if (!register.leggTil(søker)) {
                 visMelding("Feil informasjon ble utfylt, venligst prøv igjen");
@@ -296,7 +308,7 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
         }
     }
 
-
+    //Metode for å vise pop-up-meldingene i programmet
     public void visMelding(String melding){
         JOptionPane.showMessageDialog(null,melding);
     }
@@ -312,14 +324,14 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
             catch (NumberFormatException nfe){
                 visMelding("Vennligst fyll inn tall ved feltene for areal og pris");
             }
-            parent.Size();
+          
         }
         else if(e.getSource() == avbryt){
             parent.visPanel(MainFrame.MAIN_BOARD);
             parent.Size();
         }
     }
-
+    //Metode for å endre informasjon hos et søkerobjekt. man sendes hit via SøkerOversiktPANEL
     public void endreSoker(Soker soker){
 
         feltpanel.removeAll();
@@ -420,7 +432,7 @@ public class RegistrerSokerPANEL extends JPanel implements ActionListener, Docum
     public int getØnsket_areal_min(){return ønsket_areal_min;}
     public int getØnsket_areal_maks(){return ønsket_areal_maks;}
 
-
+    //Oppdaterer informasjonen til det som nå er utfylt av brukeren
     public void oppdaterinfo(){
 
         setFødselsnummer(felt[FØDSELSNUMMER].getText());

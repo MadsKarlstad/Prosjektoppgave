@@ -4,7 +4,10 @@
 
 import java.util.Date;
 import java.util.LinkedList;
-
+/*
+ * Leilighetklasse. Arver datafelter fra Bolig og definerer unike datafelter som gjelder kun for Leilighet
+ * Skrevet av Christoffer Jønsberg. Sist oppdatert 10.04.14
+ */
 public class Leilighet extends Bolig {
     private int antallBoder;
     private int etasje;
@@ -25,7 +28,7 @@ public class Leilighet extends Bolig {
         sokerliste = new LinkedList<Soker>();
 
     }
-
+    //Set- og Get-metoder
     public int getAntallBoder() {
         return antallBoder;
     }

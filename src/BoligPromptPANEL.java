@@ -8,11 +8,15 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/*
+ * Panel for som viser de forskjellige typene boliger man kan velge å vise i BoligBrowsePANEL.
+ *  Skrevet av Erlend Westbye. Sist oppdatert 01.05.14
+ */
 public class BoligPromptPANEL extends JPanel implements ActionListener {
 
     private JPanel knappanel;
     private JPanel tilbakepanel;
+    private JPanel overskriftpanel;
     private JButton visLeil;
     private JButton visEnebolig;
     private JButton tilbake;
@@ -36,13 +40,14 @@ public class BoligPromptPANEL extends JPanel implements ActionListener {
         lagGUI();
     }
 
-
+    //Initialiserer paneler,knapper,felter,ImageIcon,ActionListener, osv.
     public void initialiser() {
 
         setLayout(new BorderLayout());
 
         knappanel = new JPanel(new GridLayout(1,2,5,5));
         tilbakepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         try{
         leilighetIkon = new ImageIcon(getClass().getResource("Bilder/Leilighet.png"));
@@ -63,24 +68,47 @@ public class BoligPromptPANEL extends JPanel implements ActionListener {
         tilbake.addActionListener(this);
         visLeil.addActionListener(this);
         visEnebolig.addActionListener(this);
+        
 
     }
-
+    //Lager brukergrensesnittet
     public void lagGUI(){
 
         knappanel.add(visEnebolig);
         knappanel.add(visLeil);
         tilbakepanel.add(tilbake);
-        add(overskrift,BorderLayout.PAGE_START);
+        overskriftpanel.add(overskrift);
+        
+        
+        add(overskriftpanel,BorderLayout.PAGE_START);
         add(knappanel, BorderLayout.CENTER);
         add(tilbakepanel,BorderLayout.PAGE_END);
+        
+        knappanel.setBackground(Color.decode("#B3D5E3"));
+        tilbakepanel.setBackground(Color.decode("#B3D5E3"));
+        overskriftpanel.setBackground(Color.decode("#B3D5E3"));
+        
+        setBackground(Color.decode("#B3D5E3"));
+        
+        setBorder(BorderFactory.createEmptyBorder(0/*top*/, 20/*left*/, 0/*bottom*/, 20/*right*/));
 
+                Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension skjerm = kit.getScreenSize();
+        int bredde = skjerm.width;
+        int høyde = skjerm.height;
+        
+
+       parent.setSize(bredde/2, høyde/2);
+       //Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+       //this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
-
+    
+    //actionPerformed-metode. Inneholder kall på MainFrame sin doClick-metode som aktiverer paneler i MainFrame
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == tilbake){
             parent.visPanel(MainFrame.MAIN_BOARD);
+            parent.Size();
         }
         else if(e.getSource() == visEnebolig){
             parent.doClick(2);

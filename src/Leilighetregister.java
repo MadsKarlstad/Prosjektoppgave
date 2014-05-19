@@ -4,10 +4,13 @@
 
 import java.util.Map;
 import java.util.TreeMap;
-
+/*
+ * Register over leiligheter som er registrert i systemet
+ * Skrevet av Mads Karlstad. sist oppdatert 29.04.14
+ */
 public class Leilighetregister extends TreeMap<String, Leilighet> implements Register{
 
-
+    //Metode som legger inn en leilighet i registeret. Sjekker om det finnes en leilighet med gitt Key-verdi fra før i registeret
     @Override
     public boolean leggTil(Object object) {
         if(object instanceof Leilighet){
@@ -21,12 +24,12 @@ public class Leilighetregister extends TreeMap<String, Leilighet> implements Reg
         return false;
     }
 
-
+    //Metode som sjekker om det finnes et objekt med samme Key-verdi i registeret fra før
     @Override
     public boolean finnes(String nr) {
         return containsKey(nr);
     }
-
+    //Fjerner en leilighet med innkommen parameter(Key-verdi)
     @Override
     public boolean fjern(String nr) {
         if(finnes(nr)){
@@ -35,7 +38,7 @@ public class Leilighetregister extends TreeMap<String, Leilighet> implements Reg
         }
         return false;
     }
-
+    //Returnerer en leilighet med innkommen parameter(Key-verdi)
     @Override
     public Object getObject(String nr) {
         if(finnes(nr)){
@@ -43,7 +46,7 @@ public class Leilighetregister extends TreeMap<String, Leilighet> implements Reg
         }
         return null;
     }
-
+    //returnerer registeret
     @Override
     public Map getMap() {
         return this;

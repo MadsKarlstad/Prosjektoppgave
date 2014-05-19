@@ -6,7 +6,10 @@ import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
-
+/**
+ * Sokerobjekt. arver datafelter fra Person, definerer unik informasjon som kun gjelder for søker
+ * Skrevet av Mads KArlstad og Erlend Westbye. Sist oppdatert 10.04.14
+ */
 public class Soker extends Person{
     private String antallPersoner;
     private String sivilstatus;
@@ -65,7 +68,7 @@ public class Soker extends Person{
 
         df = new DecimalFormat("#.##");
     }
-
+    //Set- og Get-metoder
     public void setAntallPersoner(String s){
         antallPersoner = s;
     }
@@ -152,10 +155,23 @@ public class Soker extends Person{
     public boolean isHeis() {
         return heis;
     }
+    
+    public void checkØnsketlist(){
+    
+        for(int i = 0; i < ønskedeboliger.size();i++){
+        
+            if(ønskedeboliger.get(i).erUtleid()){
+                ønskedeboliger.remove(ønskedeboliger.get(i));
+            }
+        }
+    }
 
 
 
-
+   /**
+     * Metode som løper gjennom eneboligregisteret og legger alle boliger som oppnår en match score på 50% eller 
+     * mer inn i en liste over boliger som tilfredstiller søkerens krav
+     */
     public void matcherEnebolig(Boligregister eneboligregister ){
 
         eneboligliste.clear();
@@ -209,7 +225,10 @@ public class Soker extends Person{
             }
         }
     }
-
+    /**
+     * Metode som løper gjennom leiligehtregisteret og legger alle boliger som oppnår en match score på 50% eller 
+     * mer inn i en liste over boliger som tilfredstiller søkerens krav
+     */
     public void matcherLeilighet(Leilighetregister leilighetregister){
 
         leilighetliste.clear();
@@ -261,7 +280,7 @@ public class Soker extends Person{
             }
         }
     }
-
+    //Set- og Get-metoder
     public Soker getSoker(){
         return this;
     }
